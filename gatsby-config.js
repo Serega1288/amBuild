@@ -69,24 +69,25 @@ module.exports = {
       }
     },
     "gatsby-plugin-image",
-    {
-      resolve: `gatsby-plugin-sharp`,
-      options: {
-        defaults: {
-          formats: [`auto`, `webp`],
-          placeholder: `dominantColor`,
-          quality: 100,
-          breakpoints: [800, 1400, 1920],
-          backgroundColor: `transparent`,
-          tracedSVGOptions: {},
-          blurredOptions: {},
-          jpgOptions: {},
-          pngOptions: {},
-          webpOptions: {},
-          avifOptions: {},
-        }
-      }
-    },
+    "gatsby-plugin-sharp",
+    // {
+    //   resolve: `gatsby-plugin-sharp`,
+    //   options: {
+    //     defaults: {
+    //       formats: [`auto`, `webp`],
+    //       placeholder: `dominantColor`,
+    //       quality: 100,
+    //       breakpoints: [800, 1400, 1920],
+    //       backgroundColor: `transparent`,
+    //       tracedSVGOptions: {},
+    //       blurredOptions: {},
+    //       jpgOptions: {},
+    //       pngOptions: {},
+    //       webpOptions: {},
+    //       avifOptions: {},
+    //     }
+    //   }
+    // },
     "gatsby-transformer-sharp",
     "gatsby-plugin-styled-components",
     {
@@ -102,10 +103,11 @@ module.exports = {
         name: `American Builds`,
         short_name: `American Builds`,
         start_url: '/',
-        background_color: `#F5F5F7`,
-        theme_color: `#FCC0F7`,
+        background_color: `#000000`,
+        theme_color: `#F5F5F7`,
         display: `standalone`,
-        icon: `src/assets/img/favicon.png`,
+        icon: `src/assets/img/iconStat.png`,
+        // icon: `src/assets/img/favicon.png`,
       },
     },
     "gatsby-plugin-mdx",
