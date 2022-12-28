@@ -27,11 +27,11 @@ const PageCheckout = (props) => {
     const CartBuy = localStoreService.getLocal('CartBuy');
     const ServicePrice = 45;
 
-    if ( CartBuy === null ) {
-
-    } else {
-        navigate('/');
-    }
+    // if ( CartBuy === null ) {
+    //
+    // } else {
+    //     navigate('/');
+    // }
 
     // console.log('CartBuy >>', CartBuy[0])
 

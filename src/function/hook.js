@@ -5,7 +5,7 @@ class Hook {
     }
 
     getLocal = (KEY) => {
-        return typeof window !== 'undefined' && JSON.parse( localStorage.getItem(KEY) ) || null
+        return typeof window !== 'undefined' && JSON.parse( localStorage.getItem(KEY) )
     }
 
     localStoreClear = () => {
