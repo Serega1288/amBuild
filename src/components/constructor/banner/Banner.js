@@ -6,7 +6,7 @@ import {minCol, maxCol} from "../../../function/SizeCol";
 const Banner = ( {item} ) => {
 
 
-    const imgUrl = item.banner.localFile.publicURL;
+    const imgUrl = item.banner?.localFile?.publicURL;
     //const imgUrlMobile = item.bannerMobile.localFile.publicURL;
 
     //console.log('item >>>', item);

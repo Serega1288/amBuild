@@ -14,7 +14,7 @@ import BlockCollapse from "./blockcollapse/BlockCollapse";
 
 const Const = ( { item, href, type } ) => {
     const typeName = `${type === 'GlobalProductConst' ? 'ThemeGeneralSettings_Acfoptionthemes' : ''}${type === 'ProductD' ? 'ProductD_Acfconstructor' : ''}${type === 'page' ? 'Page_Acfconstructor' : ''}`;
-    //console.log('typeName >>', typeName );
+    console.log('typeName >>', typeName );
     // ${type ? 'ProductD_Acfconstructor' : 'Page_Acfconstructor'} ThemeGeneralSettings_Acfoptionthemes_Const_Content
 
     return (
@@ -23,7 +23,7 @@ const Const = ( { item, href, type } ) => {
             { item.fieldGroupName ?
                 (
                 <>
-                    { item.fieldGroupName === `${typeName}_Const_Const_Banner` ? ( <Banner item={item} /> ) : null }
+                    { item.fieldGroupName === `${typeName}_Const_Banner` ? ( <Banner item={item} /> ) : null }
                     { item.fieldGroupName === `${typeName}_Const_BannerLite` ? ( <BannerLite item={item} /> ) : null }
                     { item.fieldGroupName === `${typeName}_Const_Content` ? ( <Content item={item} /> ) : null }
                     { item.fieldGroupName === `${typeName}_Const_BlockTabs` ? ( <BlockTabs item={item} /> ) : null }
