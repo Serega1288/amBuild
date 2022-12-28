@@ -73,11 +73,11 @@ const PageCheckout = (props) => {
                                         <strong>Attention:</strong>
                                     </div>
                                     <div className="attentions">
-                                        {CartBuy[0]?.order.attention?.map( (item, index) => (
-                                            <div className="attention">
-                                                { item.text }
-                                            </div>
-                                        ))}
+                                        {/*{CartBuy[0]?.order.attention?.map( (item, index) => (*/}
+                                        {/*    <div className="attention">*/}
+                                        {/*        { item.text }*/}
+                                        {/*    </div>*/}
+                                        {/*))}*/}
                                     </div>
                                 </div>
 
