@@ -200,6 +200,19 @@ ul {
             color: #000;
         }
     }
+      &.style-4 {
+        font-size: 1.6rem;
+        border: 1px solid #000;
+        color: #000;
+        text-align: center;
+        border-radius: 5rem;
+        padding: 1.6rem 2.4rem;
+        background-color: rgba(0,0,0,0);
+        &:hover, &:focus {
+          color: #fff;
+          background-color: #000;
+        }
+      }
 } 
       
 .garbage {
@@ -238,7 +251,15 @@ ul {
                 padding-left: 8rem;
                 padding-right: 8rem;
             } 
-        } 
+        }
+
+        &.section-pad-min { 
+          .container { 
+            padding-left: 2rem;
+            padding-right: 2rem;
+          }
+        }
+      
     }
 }
  .icon-info {

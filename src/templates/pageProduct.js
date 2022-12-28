@@ -9,8 +9,8 @@ import GlobalConst from '../components/constructor/GlobalConstructor'
 import iconStat from '../assets/img/iconStat.png'
 import {maxCol} from "../function/SizeCol"
 import IconInfo from '../function/IconInfo'
-import {SwiperSlide} from "swiper/react";
-import ListProductItem from "../components/constructor/products/ListProductItem";
+// import {SwiperSlide} from "swiper/react";
+// import ListProductItem from "../components/constructor/products/ListProductItem";
 
 
 
@@ -246,47 +246,54 @@ const PageProduct = (props) => {
 
     const ACFdescription = props.pageContext.ACFdescription;
     const ACFpageProductsTopDetails = props.pageContext.ACFpageProductsTopDetails;
+    const price = props.pageContext.ACFpageProductsTopDetails.price;
     //console.log('GlobalConst', list, GlobalConst)
-    console.log('product', props.pageContext)
+    console.log('product', props.pageContext.ACFpageProductsTopDetails)
 
     const [step, setStep ] = useState(1);
-    // const [count, setCount ] = useState(1);
     const [result, setResult ] = useState(1);
 
     const stepFun = (s) => {
         setStep(s);
-        console.log('step', step)
     };
 
     const stepPlus = (s) => {
         if (result < s) {
             setResult(1)
         } else if(result === 0) {
+        } else if(result === 1) {
             setResult(1)
         } else {
             setResult(result - s)
         }
-        console.log('stepPlus', s)
     };
     const stepMinus = (s) => {
         setResult(result + s)
-        console.log('stepMinus', s)
     };
 
     const onBuy = (step, Img, category, title) => {
-        console.log('onBuy step', step * 10 )
-        console.log('onBuy Img', Img)
-        console.log('onBuy category', category)
-        console.log('onBuy title', title)
-    };
+        const Arr = [
+            {
+                Img: Img,
+                title: title,
+                category: category,
+                step: step,
+                price: +price,
+                url: props.uri,
+                order: props.pageContext.ACForderDateProduct
+            },
+        ];
+        localStoreService.saveLocal('CartBuy', Arr );
 
+        navigate('/checkout');
+    };
 
     return (
         <>
             <Layout customClass="section-pad" title={ title } desc={ generalTitle } >
 
+                {/*{console.log('CartBuy >>>', localStoreService.getLocal('CartBuy') )}*/}
                 {/*{localStoreService.localStoreClear()}*/}
-
                 {/*{localStoreService.saveLocal('ProductSave', props.pageContext)}*/}
 
                 <Section className="product-page">
@@ -317,7 +324,7 @@ const PageProduct = (props) => {
                                             <div className="WrapPrice">
 
                                                 <span className="WrapIconInfo">
-                                                     <strong>$ 281.52</strong>
+                                                     <strong>$ {(price*result).toFixed(2)}</strong>
                                                      <IconInfo  position="left" style="1" text='text' />
                                                 </span>
                                             </div>
@@ -361,7 +368,6 @@ const PageProduct = (props) => {
                                         </div>
                                     </div>
 
-
                                     <div className="WrapBoxProduct">
                                         <div className="title"><span>Miner Model</span></div>
                                         <div className="WrapAttr">
@@ -375,7 +381,6 @@ const PageProduct = (props) => {
                                             </div>
                                         </div>
                                     </div>
-
                                     <div className="WrapBoxProductOption">
                                         <div className="row">
                                             {ACFpageProductsTopDetails.options?.map( (item, index) => (
@@ -388,13 +393,11 @@ const PageProduct = (props) => {
                                             ))}
                                         </div>
                                     </div>
-
                                     <div className="row WrapButtonBuy">
                                         <div className="col-6">
-                                            <a onClick={() => onBuy(result, Img, props.pageContext.productCategories, props.pageContext.title)}
-                                               dataStep={step} dataResult={result} className="btn w100 style-3" href="#">
+                                            <span onClick={() => onBuy(result, Img, props.pageContext.productCategories, props.pageContext.title)} className="btn w100 style-3">
                                                 Buy Now
-                                            </a>
+                                            </span>
                                         </div>
                                         <div className="col-6 d-flex align-items-center">
                                             <div className="text" dangerouslySetInnerHTML={{__html: props.pageContext.ACFpageProductsTopDetails.textInfo}} />
@@ -654,7 +657,13 @@ const WrapStat = styled.section`
 `
 
 const Section = styled.section`
-      padding: 1.4rem 2.4rem;
+      padding-left: 2.4rem;
+      padding-right: 2.4rem;
+      @media (max-width: ${maxCol.sm}) {
+        padding-top: 3rem;
+        padding-left: 0rem;
+        padding-right: 0rem;
+      }
       padding-top: 6rem;
       padding-bottom: 6rem;
       font-weight: 700; 
@@ -752,9 +761,10 @@ const Section = styled.section`
         background-size: contain;
         background-position: center bottom;
         background-repeat: no-repeat;
+        margin-bottom: 2rem;
       }
       .WrapContent {
-        
+        padding-bottom: 2rem;
         padding-left: 1rem;
         h1 {
             margin: 0;

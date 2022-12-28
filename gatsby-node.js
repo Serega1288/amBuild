@@ -51,7 +51,7 @@ exports.createPages = ({graphql, actions}) => {
                   localFile {
                     publicURL
                   }
-                }
+                } 
               }
               staticOutputRatio {
                 staticOutputRatioInfo
@@ -88,26 +88,37 @@ exports.createPages = ({graphql, actions}) => {
                   desc4
                   desc5
               } 
-              
-              
-            ACFpageProductsTopDetails {
-              fieldGroupName
-              minerModel
-              textInfo
-              pricedesc
-              price
-              power
-              options {
-                valuevalue
-                title
+                 
+              ACForderDateProduct {
+                  serviceFee
+                  hashrateFee
+                  days
+                  chooseMiningPool {
+                    title
+                    option
+                  }
+                  attention { 
+                    text
+                  }
               } 
-              wraptopdescriptionlist {
-                value
-                title
-                infoListDesc
-                infoListActiveTop
-              }
-            }
+                 
+              ACFpageProductsTopDetails {
+                  minerModel
+                  textInfo
+                  pricedesc
+                  price
+                  power
+                  options {
+                    valuevalue
+                    title
+                  } 
+                  wraptopdescriptionlist {
+                    value
+                    title
+                    infoListDesc
+                    infoListActiveTop
+                  }
+              }  
               
               ACFconstructor {
                   const { 
