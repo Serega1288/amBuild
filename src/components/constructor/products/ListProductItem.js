@@ -6,14 +6,19 @@ import IconInfo from "../../../function/IconInfo";
 
 const ListProductItem = ( {item} ) => {
 
-    const days = item.ACForderDateProduct?.days;
-    const hashrateFee = item.ACForderDateProduct?.hashrateFee;
-    const priceResult = ( hashrateFee * days * 10 );
+    //console.log('item > days', item.ACForderDateProduct );
+    // console.log('item > hashrateFee', item.ACForderDateProduct.hashrateFee );
+    // console.log('item > days', item.ACForderDateProduct.days );
 
-    console.log('item >1', item.ACForderDateProduct?.hashrateFee, item.ACForderDateProduct?.days, priceResult );
+    // const days = item.ACForderDateProduct.days;
+    // const hashrateFee = item.ACForderDateProduct.hashrateFee;
+    const priceResult = 10;
+
+
 
     return (
         <ProductItem>
+            {console.log('item > days', item.ACForderDateProduct.attention )}
             <div className="a" style={{backgroundImage: `url(${item.featuredImage.node.localFile.publicURL})`}}>
                 <Link
                     // style={{backgroundImage: `url(${item.icon.localFile.publicURL})` }}

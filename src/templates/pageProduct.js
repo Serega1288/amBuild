@@ -299,6 +299,7 @@ const PageProduct = (props) => {
                 {/*{console.log('CartBuy >>>', localStoreService.getLocal('CartBuy') )}*/}
                 {/*{localStoreService.localStoreClear()}*/}
                 {/*{localStoreService.saveLocal('ProductSave', props.pageContext)}*/}
+                {/*{localStorage.clear()}*/}
 
                 <Section className="product-page">
                     <div className="container">
