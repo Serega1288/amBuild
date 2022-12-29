@@ -25,7 +25,6 @@ const PageCheckout = (props) => {
 
 
     const CartBuy = localStoreService.getLocal('CartBuy');
-    const ServicePrice = 45;
 
     // if ( CartBuy === null ) {
     //

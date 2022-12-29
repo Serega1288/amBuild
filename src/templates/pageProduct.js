@@ -246,9 +246,13 @@ const PageProduct = (props) => {
 
     const ACFdescription = props.pageContext.ACFdescription;
     const ACFpageProductsTopDetails = props.pageContext.ACFpageProductsTopDetails;
-    const price = props.pageContext.ACFpageProductsTopDetails.price;
+
+    const days = props.pageContext.ACForderDateProduct.days;
+    const hashrateFee = props.pageContext.ACForderDateProduct.hashrateFee;
+    const price = hashrateFee * days * 10;
+
     //console.log('GlobalConst', list, GlobalConst)
-    console.log('product', props.pageContext.ACFpageProductsTopDetails)
+    console.log('product', props.pageContext.ACForderDateProduct)
 
     const [step, setStep ] = useState(1);
     const [result, setResult ] = useState(1);
@@ -327,6 +331,7 @@ const PageProduct = (props) => {
                                                      <strong>$ {(price*result).toFixed(2)}</strong>
                                                      <IconInfo  position="left" style="1" text='text' />
                                                 </span>
+
                                             </div>
                                         </div>
                                     </div>
@@ -684,7 +689,11 @@ const Section = styled.section`
         .item {
             border: 1px solid #C3C3CF;
             border-radius: 1.8rem; 
-            padding: 1.5rem; 
+            padding: 1.5rem;
+            @media (max-width: ${maxCol.sm}) {
+              padding: 1rem;
+              font-size: 1.1rem;
+            }
         }
         .row {
           margin-left: -0.7rem;
@@ -788,7 +797,14 @@ const Section = styled.section`
             font-size: 1.2rem;
             margin-right: 1.6rem; 
             border: 1px solid #C3C3CF; 
-            width: 7.6rem; 
+            width: 7.6rem;
+            &:last-child {
+              margin-right: 0rem !important;
+            } 
+            @media (max-width: ${maxCol.sm}) {
+              width: 6rem;
+              margin-right: 1rem;
+            }
             &.active {
                 background: #000000;
                 color: #FFFFFF; 

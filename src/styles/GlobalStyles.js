@@ -306,6 +306,9 @@ ul {
         transform: translate(0px, calc(-50% + 0.7rem) );
         top: 0;
         width: 25rem;
+        @media (max-width: ${maxCol.sm}) {
+          width: 20rem;
+        }
         font-size: 1.4rem;
         padding: 1rem; 
         background: #000;

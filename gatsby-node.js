@@ -101,12 +101,11 @@ exports.createPages = ({graphql, actions}) => {
                     text
                   }
               } 
-                 
+                  
               ACFpageProductsTopDetails {
                   minerModel
                   textInfo
                   pricedesc
-                  price
                   power
                   options {
                     valuevalue
