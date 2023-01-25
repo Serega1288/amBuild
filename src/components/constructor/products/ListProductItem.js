@@ -6,19 +6,19 @@ import IconInfo from "../../../function/IconInfo";
 
 const ListProductItem = ( {item} ) => {
 
-    //console.log('item > days', item.ACForderDateProduct );
+    // console.log('item > days', item );
     // console.log('item > hashrateFee', item.ACForderDateProduct.hashrateFee );
     // console.log('item > days', item.ACForderDateProduct.days );
 
-    // const days = item.ACForderDateProduct.days;
-    // const hashrateFee = item.ACForderDateProduct.hashrateFee;
-    const priceResult = 10;
+    const days = item.ACForderDateProduct?.days;
+    const hashrateFee = item.ACForderDateProduct?.hashrateFee;
+    const priceResult = hashrateFee * days * 10;
 
 
 
     return (
         <ProductItem>
-            {console.log('item > days', item.ACForderDateProduct.attention )}
+            {/*{console.log('item > days', item.ACForderDateProduct?.attention )}*/}
             <div className="a" style={{backgroundImage: `url(${item.featuredImage.node.localFile.publicURL})`}}>
                 <Link
                     // style={{backgroundImage: `url(${item.icon.localFile.publicURL})` }}
@@ -49,7 +49,7 @@ const ListProductItem = ( {item} ) => {
                         </div>
                         <div className="col-6">
                             <Link to={item.uri} className="BtnWrap d-block">
-                                <span className='anim price'>$ {priceResult}</span>
+                                <span className='anim price'>$ {(priceResult).toFixed(2)}</span>
                                 <span className='anim textBtn'>Details</span>
                             </Link>
                         </div>

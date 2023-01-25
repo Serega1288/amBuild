@@ -36,7 +36,7 @@ const SearchPage = () => {
     //             <h1>SearchPage</h1>
     //             {instanceAuthService.isLogined()}
     //
-    //             {/*{ typeof window !== 'undefined' && localStorage.getItem('user') }*/}
+    //             { typeof window !== 'undefined' && localStorage.getItem('user') }
     //
     //             {/*{console.log('instanceAuthService.isLogined', instanceAuthService.isLogined)}*/}
     //             {/*<Formik*/}
@@ -61,6 +61,8 @@ const SearchPage = () => {
     // );
 };
 export default SearchPage;
+
+
 
 // const Search = styled.section`
 //     text-align: center;

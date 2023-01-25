@@ -12,5 +12,20 @@ class Hook {
         typeof window !== 'undefined' && localStorage.clear()
     }
 
+    getCode = (d) => {
+        if (d) {
+            const ms = (Date.parse( new Date(d) )).toString()
+            const m = ms[9] + ms[7] + ms[8] + ms[6]
+            return m
+            //console.log( ms, m )
+        } else {
+            const ms = (Date.parse( new Date() )).toString()
+            const m = ms[9] + ms[7] + ms[8] + ms[6]
+            return m
+            //console.log( ms, m )
+        }
+
+    }
+
 };
 export const localStoreService = new Hook();

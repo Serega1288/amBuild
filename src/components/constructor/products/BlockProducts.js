@@ -95,11 +95,13 @@ const BlockProducts = ( {item} ) => {
                             </svg>
                         </div>
 
-                        {item.products?.map( (item, index) => (
+                        {item.products?.map( (item, index) => {
+                            // console.log('products item', item)
+                            return (
                             <SwiperSlide key={index}>
                                 <ListProductItem item={item} />
                             </SwiperSlide>
-                        ))}
+                        )})}
 
                     </Swiper>
                 </div>

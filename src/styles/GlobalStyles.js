@@ -23,7 +23,7 @@ img {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #86644B;
+  background: #862DCD;
 }
 
 .grey { 
@@ -47,7 +47,13 @@ img {
 } 
 .h50 {
     height: 50%;
-} 
+}
+.mh100 {
+  min-height: 100%;
+}
+.mh50 {
+  min-height: 50%;
+}
 .w100 {
     width: 100%;
 }
@@ -70,6 +76,9 @@ img {
 .text-center {
     text-align: center;
 }
+.text-right {
+  text-align: right;
+}
 
 .body {
     overflow: hidden;   
@@ -81,7 +90,11 @@ p {
     @media (max-width: ${maxCol.sm} ) {
         margin: 0 0 1rem;
     }
-} 
+}
+
+* {
+  outline: none;
+}
 
 strong {
    font-weight: 700;

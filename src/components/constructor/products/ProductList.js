@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 
 const ListProduct = ( {item} ) => {
-    //console.log('ListProduct >>', item)
+    // console.log('ListProduct >>', item)
     return (
     <WrapProducts className="row row-cols-sm-2 row-cols-md-3 row-cols-lg-2 row-cols-xl-3">
         {item.map( (item, index) => (

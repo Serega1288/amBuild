@@ -88,7 +88,7 @@ exports.createPages = ({graphql, actions}) => {
                   desc4
                   desc5
               } 
-                 
+                  
               ACForderDateProduct {
                   serviceFee
                   hashrateFee
@@ -312,6 +312,18 @@ exports.createPages = ({graphql, actions}) => {
                               name
                             }
                           }
+                          ACForderDateProduct {
+                              serviceFee
+                              hashrateFee
+                              days
+                              chooseMiningPool {
+                                title
+                                option
+                              }
+                              attention { 
+                                text
+                              }
+                          }
                 }
               }
               bannerLite {
@@ -481,6 +493,18 @@ exports.createPages = ({graphql, actions}) => {
                               name
                             }
                           }
+                          ACForderDateProduct {
+                              serviceFee
+                              hashrateFee
+                              days
+                              chooseMiningPool {
+                                title
+                                option
+                              }
+                              attention { 
+                                text
+                              }
+                          } 
                         }
                       }
                     }
@@ -532,7 +556,7 @@ exports.createPages = ({graphql, actions}) => {
 
         // categoty  categoryTemplate
 
-        results.data.products.nodes.forEach(product => {
+        results.data?.products.nodes.forEach(product => {
 
             createPage({
                 path: product.uri,
@@ -542,7 +566,7 @@ exports.createPages = ({graphql, actions}) => {
 
         });
 
-        results.data.allWpProductCategory.nodes.forEach(category => {
+        results.data?.allWpProductCategory.nodes.forEach(category => {
 
             createPage({
                 path: category.uri,
@@ -553,7 +577,7 @@ exports.createPages = ({graphql, actions}) => {
         });
 
 
-        results.data.page.nodes.forEach(item => {
+        results.data?.page.nodes.forEach(item => {
 
             if ( item.isFrontPage === true ) {
 
@@ -574,7 +598,7 @@ exports.createPages = ({graphql, actions}) => {
 
             } else {
 
-                console.log('templateName >>', item.template.templateName)
+                // console.log('templateName >>', item.template.templateName)
 
                 if ( item.template.templateName === 'Constructor') {
                     createPage({

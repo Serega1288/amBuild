@@ -55,7 +55,7 @@ exports.handler = async (event, context) => {
   if (body.garbage) {
     return {
       statusCode: 400,
-      body: JSON.stringify({ message: 'Спам !!!' }),
+      body: JSON.stringify({ message: 'Spam !!!' }),
     };
   }
 

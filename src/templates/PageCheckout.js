@@ -4,6 +4,7 @@ import {graphql, navigate, useStaticQuery} from "gatsby"
 import {localStoreService} from "../function/hook"
 import BannerLite from '../components/constructor/banner/BannerLite'
 import styled from "styled-components";
+import {AuthLayout} from "../function/AuthLayout";
 
 const PageCheckout = (props) => {
 
@@ -277,8 +278,11 @@ const PageCheckout = (props) => {
     );
 
 };
-export default PageCheckout;
-
+export default () => (
+    <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout' >
+        <PageCheckout />
+    </AuthLayout>
+);
 
 const Section = styled.section`
     background-color: #F5F5F7;

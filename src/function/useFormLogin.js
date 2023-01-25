@@ -2,14 +2,14 @@ import {useState} from "react";
 import {instanceAuthService} from "./auth";
 import {navigate} from "gatsby";
 
-const useForm = () => {
+const useForm = (RedirectPage) => {
     const [values, setValues] = useState({password: '', email: '', garbage: ''});
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [message, setMessage] = useState(null);
 
 
-    //console.log('values !!!', values)
+    console.log('user !!!', RedirectPage);
 
 
     const captureInput = e => {
@@ -37,7 +37,7 @@ const useForm = () => {
 
         const responseText = JSON.parse(await res.text() );
 
-        console.log('responseText >>>', responseText);
+
 
         // const handleLogin =  async () => {
         //     //request to natify
@@ -50,11 +50,15 @@ const useForm = () => {
         //     navigate('/search')
         // }
 
+        // console.log('responseText >>>', responseText.result.status );
 
         // 2. перевіряємо відповідь від сервера
-        if (res.status >= 400 && res.status < 600 ) {
+        if ( responseText.result.status >= 400 && responseText.result.status < 600 ) {
             setIsLoading(false);
-            setError(responseText.message);
+            setError( responseText?.result?.message );
+            // setMessage( responseText?.result?.message );
+            // console.log('setError', responseText?.result?.message )
+
         } else {
             // 3. емайл успішно відправлений
             setIsLoading(false);
@@ -66,7 +70,7 @@ const useForm = () => {
             });
             setMessage(responseText);
 
-            console.log('ddd', responseText.result )
+            // console.log('ddd', responseText.result.message )
 
             if ( responseText.result[0] + responseText?.result[1] === '1_' ) {
 
@@ -74,7 +78,7 @@ const useForm = () => {
                     name: responseText?.result
                 }
                 instanceAuthService.saveUser(user)
-                navigate('/search')
+                navigate(RedirectPage)
 
             }
 
