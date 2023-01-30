@@ -2,8 +2,9 @@ import {useState} from "react";
 import {instanceAuthService} from "./auth";
 import {navigate} from "gatsby";
 
-const useForm = (date, email) => {
-    const [values, setValues] = useState({code: '', email: email, garbage: '', date: date});
+
+const useForm = (d, email, type) => {
+    const [values, setValues] = useState({code: '', email: email, garbage: '', d: d, type: type});
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [message, setMessage] = useState(null);
@@ -27,7 +28,7 @@ const useForm = (date, email) => {
         setMessage(null); 
         setError(null);
 
-        const res = await fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendReg`, {
+        const res = await fetch( `${process.env.GATSBY_SERVERLESS_URL}/sendReg`, {
             method: 'POST',
             headers: {
                 'content-Type': 'application/json',
@@ -51,7 +52,7 @@ const useForm = (date, email) => {
         // console.log('responseText >>>', responseText.result.status );
 
         // 2. перевіряємо відповідь від сервера
-        if ( responseText.result.status >= 400 && responseText.result.status < 600 ) {
+        if ( responseText.result >= 400 && responseText.result < 600 ) {
             setIsLoading(false);
             setError( responseText?.result );
             // setMessage( responseText?.result?.message );
@@ -69,15 +70,15 @@ const useForm = (date, email) => {
 
             // console.log('ddd', responseText.result.message )
 
-            if ( responseText.result[0] + responseText?.result[1] === '1_' ) {
-
-                const user = {
-                    name: responseText?.result
-                }
-                //instanceAuthService.saveUser(user)
-                //navigate(RedirectPage)
-
-            }
+            // if ( responseText.result[0] + responseText?.result[1] === '1_' ) {
+            //
+            //     const user = {
+            //         name: responseText?.result
+            //     }
+            //     //instanceAuthService.saveUser(user)
+            //     //navigate(RedirectPage)
+            //
+            // }
 
 
         }

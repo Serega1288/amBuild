@@ -1,38 +1,38 @@
 import React from "react"
 import {Link} from "gatsby"
-import useFormReg from "../../../function/useFormReg"
+import userFormResPass from "../../../function/userFormResPass"
 
 const BlockFormSend = (d, email, type) => {
-    const { values, captureInput, submitForm, isLoading, error, message} = useFormReg(d, email, type);
+    const { values, captureInput, submitForm, isLoading, error, message} = userFormResPass(d, email, type);
     return (
         <form onSubmit={submitForm}>
             {/*{console.log('ee', email, d)}*/}
             { message?.result !== '1_' ? (
-            <>
-                <input type="garbage"
-                       name="garbage"
-                       disabled={isLoading}
-                       value={values.garbage}
-                       onChange={captureInput}
-                       isLoading={isLoading}
-                       className="garbage"
-                />
-                <label>
-                    <input type="text"
-                           required="required"
-                           name="code"
+                <>
+                    <input type="garbage"
+                           name="garbage"
                            disabled={isLoading}
-                           value={values.code}
+                           value={values.garbage}
                            onChange={captureInput}
                            isLoading={isLoading}
-                           placeholder="Your code"
-                        //className={ message?.result === '03' ? ' error' : '' }
+                           className="garbage"
                     />
-                </label>
-                <button disabled={isLoading} type="submit" className="style-3 btn w100">
-                    { isLoading ? 'Sign In...' :  'Sign In' }
-                </button>
-            </>
+                    <label>
+                        <input type="text"
+                               required="required"
+                               name="code"
+                               disabled={isLoading}
+                               value={values.code}
+                               onChange={captureInput}
+                               isLoading={isLoading}
+                               placeholder="Your code"
+                            //className={ message?.result === '03' ? ' error' : '' }
+                        />
+                    </label>
+                    <button disabled={isLoading} type="submit" className="style-3 btn w100">
+                        { isLoading ? 'Reset password...' :  'Reset password' }
+                    </button>
+                </>
             ) : ''}
             <div className="Boxlink">
                 <span>Already have an account?</span>

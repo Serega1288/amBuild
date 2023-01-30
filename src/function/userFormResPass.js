@@ -1,15 +1,16 @@
-import React, {useState} from "react";
-// import {instanceAuthService} from "./auth";
-// import {navigate} from "gatsby";
+import {useState} from "react";
+import {instanceAuthService} from "./auth";
+import {navigate} from "gatsby";
 
-const useFormCode = (d, t) => {
-    const [values, setValues] = useState({email: '', garbage: '', date: d, type: t  });
+
+const useForm = (d, email, type) => {
+    const [values, setValues] = useState({code: '', email: email, garbage: '', d: d, type: type});
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [message, setMessage] = useState(null);
 
 
-    // console.log('user !!!', localStoreService.getCode(d) );
+    // console.log('user !!!', RedirectPage);
 
 
     const captureInput = e => {
@@ -27,7 +28,13 @@ const useFormCode = (d, t) => {
         setMessage(null);
         setError(null);
 
-        const res = await fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendCodeEmail`, {
+
+
+        // type === 'sing-up' ? ( urlSend = `${process.env.GATSBY_SERVERLESS_URL}/sendReg` ) : ( '' )
+        // type === 'rest-pass' ? ( urlSend = `${process.env.GATSBY_SERVERLESS_URL}/resetPass` ) : ( '' )
+
+
+        const res = await fetch( `${process.env.GATSBY_SERVERLESS_URL}/resetPass`, {
             method: 'POST',
             headers: {
                 'content-Type': 'application/json',
@@ -48,12 +55,12 @@ const useFormCode = (d, t) => {
         //     navigate('/search')
         // }
 
-        console.log('responseText >>>', responseText );
+        // console.log('responseText >>>', responseText.result.status );
 
         // 2. перевіряємо відповідь від сервера
         if ( responseText.result >= 400 && responseText.result < 600 ) {
             setIsLoading(false);
-            setError( responseText?.result?.message );
+            setError( responseText?.result );
             // setMessage( responseText?.result?.message );
             // console.log('setError', responseText?.result?.message )
 
@@ -62,6 +69,7 @@ const useFormCode = (d, t) => {
             setIsLoading(false);
             setValues({
                 ...values,
+                code: '',
                 garbage: ''
             });
             setMessage(responseText);
@@ -69,13 +77,13 @@ const useFormCode = (d, t) => {
             // console.log('ddd', responseText.result.message )
 
             // if ( responseText.result[0] + responseText?.result[1] === '1_' ) {
-
-                // const user = {
-                //     name: responseText?.result
-                // }
-                // instanceAuthService.saveUser(user)
-                // navigate(RedirectPage)
-
+            //
+            //     const user = {
+            //         name: responseText?.result
+            //     }
+            //     //instanceAuthService.saveUser(user)
+            //     //navigate(RedirectPage)
+            //
             // }
 
 
@@ -86,31 +94,14 @@ const useFormCode = (d, t) => {
 
     //console.log('error', error);
 
-    // const valuesCode = values,
-    //     captureInputCode = captureInput,
-    //     submitFormCode = submitForm,
-    //     isLoadingCode = isLoading,
-    //     errorCode = error,
-    //     messageCode = message
-    //
-    // return {
-    //     valuesCode,
-    //     captureInputCode,
-    //     submitFormCode,
-    //     isLoadingCode,
-    //     errorCode,
-    //     messageCode
-    // }
-
     return {
         values,
         captureInput,
         submitForm,
         isLoading,
         error,
-        message,
-        setMessage,
+        message
     }
 }
 
-export default useFormCode;
+export default useForm;

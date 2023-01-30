@@ -1,5 +1,19 @@
 //const nodemailer = require('nodemailer');
 const axios = require('axios')
+getCode = (d) => {
+    if (d) {
+        const ms = (Date.parse( new Date(d) )).toString()
+        const m = ms[9] + ms[7] + ms[8] + ms[6]
+        return m
+        //console.log( ms, m )
+    } else {
+        const ms = (Date.parse( new Date() )).toString()
+        const m = ms[9] + ms[7] + ms[8] + ms[6]
+        return m
+        //console.log( ms, m )
+    }
+
+}
 
 // const transporter = nodemailer.createTransport({
 //   host: process.env.MAIL_HOST,
@@ -77,6 +91,19 @@ exports.handler = async (event, context) => {
         }
     }
 
+    console.log('>>>>>', body.code, body, getCode(body.d.d) )
+
+    if ( body.code === getCode(body.d.d) ) {
+
+    } else {
+        return {
+            statusCode: 400,
+            body: JSON.stringify({
+                message: `The code is invalid`,
+            }),
+        };
+    }
+
 
 
     let msg = ''
@@ -130,7 +157,7 @@ exports.handler = async (event, context) => {
 
     axios({
         method: 'get',
-        url: `${process.env.URL_AJAX}?action=sendCodeEmail&token=${process.env.AUTH_TOKEN}&email=${body.email}&code=${body.code}`,
+        url: `${process.env.URL_AJAX}?action=sendReg&token=${process.env.AUTH_TOKEN}&email=${body.d.email}&type=${body.d.type}`,
     })
         .then(function (response) {
             date = response.data.split('{')[1].split('}')[0];
@@ -139,11 +166,11 @@ exports.handler = async (event, context) => {
 
 
             if ( date === '01' || date === '02' ) {
-                m = 'Sorry, but an error has occurred, please contact technical support. Error code:' . date;
+                m = `Sorry, but an error has occurred, please contact technical support. Error code: ${date}`;
             }
 
-            if ( date == '03' ) {
-                m = 'Sorry, but an error has occurred, please contact technical support. Error code:' . date;
+            if ( date === '03_1' || date === '03_2' ) {
+                m = `Sorry, but an error has occurred, please contact technical support. Error code: ${date}`;
             }
 
             // if ( date === '04' ) {
@@ -151,7 +178,7 @@ exports.handler = async (event, context) => {
             // }
 
             if ( date[0] + date[1] === '1_' ) {
-                m = 'Message sent...';
+                m = 'You are successfully registered, your password has been sent to your mail.';
             }
 
             console.log('Mail >>', m);

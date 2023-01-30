@@ -1,6 +1,5 @@
 //const nodemailer = require('nodemailer');
 const axios = require('axios')
-
 getCode = (d) => {
     if (d) {
         const ms = (Date.parse( new Date(d) )).toString()
@@ -78,7 +77,7 @@ exports.handler = async (event, context) => {
 
     //console.log('!!!>> s', body)
 
-    const fieldsRequired = ['email', 'date', 'type'];
+    const fieldsRequired = ['email','code'];
 
     // Email - обязательное поле
     for (const field of fieldsRequired) {
@@ -90,6 +89,19 @@ exports.handler = async (event, context) => {
                 }),
             };
         }
+    }
+
+    console.log('>>>>>', body.code, body, getCode(body.d.d) )
+
+    if ( body.code === getCode(body.d.d) ) {
+
+    } else {
+        return {
+            statusCode: 400,
+            body: JSON.stringify({
+                message: `The code is invalid`,
+            }),
+        };
     }
 
 
@@ -145,7 +157,7 @@ exports.handler = async (event, context) => {
 
     axios({
         method: 'get',
-        url: `${process.env.URL_AJAX}?action=sendCodeEmail&token=${process.env.AUTH_TOKEN}&email=${body.email}&code=${getCode(body.date)}&type=${body.type}`,
+        url: `${process.env.URL_AJAX}?action=resetPass&token=${process.env.AUTH_TOKEN}&email=${body.d.email}&type=${body.d.type}`,
     })
         .then(function (response) {
             date = response.data.split('{')[1].split('}')[0];
@@ -153,26 +165,20 @@ exports.handler = async (event, context) => {
 
 
 
-            if ( date === '01' || date === '02' || date === '04' ) {
+            if ( date === '01' || date === '02' ) {
                 m = `Sorry, but an error has occurred, please contact technical support. Error code: ${date}`;
             }
 
-            if ( date === '03' ) {
-                if ( body.type === 'sing-up') {
-                    m = 'Email is already registered, please log in.';
-                }
-                if ( body.type === '') {
-                    m = 'Password recovery is not possible, e-mail is missing.';
-                }
+            if ( date === '03_1' || date === '03_2' ) {
+                m = `Sorry, but an error has occurred, please contact technical support. Error code: ${date}`;
             }
-
 
             // if ( date === '04' ) {
             //     m = 'Invalid password.';
             // }
 
             if ( date[0] + date[1] === '1_' ) {
-                m = 'Message sent...';
+                m = 'You are successfully registered, your password has been sent to your mail.';
             }
 
             console.log('Mail >>', m);
