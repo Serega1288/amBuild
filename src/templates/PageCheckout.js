@@ -294,6 +294,10 @@ export default () => {
                 <PageCheckout/>
             </AuthLayout>
         )
+    } else {
+        return (
+            <PageCheckout/>
+        )
     }
 };
 

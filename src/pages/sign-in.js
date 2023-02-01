@@ -114,6 +114,10 @@ export default () => {
                 <LoginPage/>
             </AuthLayout>
         )
+    } else {
+        return (
+            <LoginPage/>
+        )
     }
 };
 

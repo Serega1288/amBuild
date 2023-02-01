@@ -117,5 +117,9 @@ export default () => {
                 <ResetPass/>
             </AuthLayout>
         )
+    } else {
+        return (
+            <ResetPass/>
+        )
     }
 };

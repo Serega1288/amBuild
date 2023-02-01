@@ -33,6 +33,10 @@ export default () => {
                 <LoginAccount/>
             </AuthLayout>
         )
+    } else {
+        return (
+            <LoginAccount/>
+        )
     }
 };
 

@@ -129,6 +129,10 @@ export default () => {
                 <RegPage/>
             </AuthLayout>
         )
+    } else {
+        return (
+            <RegPage/>
+        )
     }
 };
 
