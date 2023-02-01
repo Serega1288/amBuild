@@ -74,9 +74,9 @@ const Header = ( props ) => {
 
                         <div className="col-auto d-flex align-items-center justify-content-end z-in-1">
 
-                            {
-                                console.log('instanceAuthService.isLogined()', instanceAuthService.isLogined())
-                            }
+                            {/*{*/}
+                            {/*    // console.log('instanceAuthService.isLogined()', instanceAuthService.isLogined())*/}
+                            {/*}*/}
 
                             {
                                 instanceAuthService.isLogined() ?

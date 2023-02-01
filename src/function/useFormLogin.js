@@ -50,10 +50,10 @@ const useForm = (RedirectPage) => {
         //     navigate('/search')
         // }
 
-        // console.log('responseText >>>', responseText.result.status );
+        console.log('responseText >>>', responseText.result.status );
 
         // 2. перевіряємо відповідь від сервера
-        if ( responseText.result.status >= 400 && responseText.result.status < 600 ) {
+        if ( responseText.result >= 400 && responseText.result < 600 ) {
             setIsLoading(false);
             setError( responseText?.result?.message );
             // setMessage( responseText?.result?.message );

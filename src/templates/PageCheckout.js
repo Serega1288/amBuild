@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import Layout from '../components/Layout'
-import {graphql, useStaticQuery} from "gatsby"
-// import {localStoreService} from "../function/hook"
+import {graphql, navigate, useStaticQuery} from "gatsby"
+import {localStoreService} from "../function/hook"
 import BannerLite from '../components/constructor/banner/BannerLite'
 import styled from "styled-components";
 import {AuthLayout} from "../function/AuthLayout";
@@ -26,15 +26,13 @@ const PageCheckout = (props) => {
     //console.log('pageCheckout >>>', props)
 
 
-    // const CartBuy = localStoreService.getLocal('CartBuy');
+    const CartBuy = localStoreService.getLocal('CartBuy');
 
-    // if ( CartBuy === null ) {
-    //
-    // } else {
-    //     navigate('/');
-    // }
+    if ( CartBuy === null ) {
+        navigate('/shop');
+    }
 
-    // console.log('CartBuy >>', CartBuy[0])
+    console.log('CartBuy >>', CartBuy[0])
 
     const [choose, setChoose ] = useState(null);
     const chooseMiningPool = (s) => {
@@ -42,7 +40,7 @@ const PageCheckout = (props) => {
     };
 
     return (
-        <>
+        <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout'>
             <Layout customClass="section-pad-min" title={ title } desc={ generalTitle } >
                 <BannerLite title={ title } item={{ item: '' , title: `Confirm <br /> order`, style : 'title' }} />
                 <Section>
@@ -55,21 +53,21 @@ const PageCheckout = (props) => {
                                         Mining Pool <br />
                                         Payment
                                     </div>
-                                    {/*<div className="WrapPool row">*/}
-                                    {/*    <div className="col d-flex align-items-center">*/}
-                                    {/*        <strong>Choose Mining Pool:</strong>*/}
-                                    {/*    </div>*/}
-                                    {/*    <div className="col-auto">*/}
-                                    {/*        <div className="WrapPoolBtn">*/}
-                                    {/*            {CartBuy[0]?.order.chooseMiningPool?.map( (item, index) => (*/}
-                                    {/*                <span onClick={() => chooseMiningPool(item.option) }*/}
-                                    {/*                      className={`btn style-4 ${ choose === item.option ? 'active' : '' }`}>*/}
-                                    {/*                { item.title }*/}
-                                    {/*                </span>*/}
-                                    {/*            ))}*/}
-                                    {/*        </div>*/}
-                                    {/*    </div>*/}
-                                    {/*</div>*/}
+                                    <div className="WrapPool row">
+                                        <div className="col d-flex align-items-center">
+                                            <strong>Choose Mining Pool:</strong>
+                                        </div>
+                                        <div className="col-auto">
+                                            <div className="WrapPoolBtn">
+                                                {/*{CartBuy[0]?.order.chooseMiningPool?.map( (item, index) => (*/}
+                                                {/*    <span onClick={() => chooseMiningPool(item.option) }*/}
+                                                {/*          className={`btn style-4 ${ choose === item.option ? 'active' : '' }`}>*/}
+                                                {/*    { item.title }*/}
+                                                {/*    </span>*/}
+                                                {/*))}*/}
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div className="subTitle">
                                         <strong>Attention:</strong>
                                     </div>
@@ -274,32 +272,18 @@ const PageCheckout = (props) => {
                     </div>
                 </Section>
             </Layout>
-
-        </>
+        </AuthLayout>
     );
 
 };
-// export default PageCheckout;
+export default PageCheckout;
 // export default () => (
 //     <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout' >
 //         <PageCheckout />
 //     </AuthLayout>
 // );
 
-const isBrowser = typeof window !== "undefined"
-export default () => {
-    if( isBrowser ) {
-        return (
-            <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout'>
-                <PageCheckout/>
-            </AuthLayout>
-        )
-    } else {
-        return (
-            <PageCheckout/>
-        )
-    }
-};
+
 
 const Section = styled.section`
     background-color: #F5F5F7;

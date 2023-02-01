@@ -1,9 +1,19 @@
 import { instanceAuthService } from './auth'
 import { navigate } from 'gatsby'
 
-export const AuthLayout = ({children, page, go, logIn, redirectGoLogIn}) => {
+export const AuthLayout = ({children, page, go, logIn, redirectGoLogIn, href}) => {
 
     // console.log('isLogined', instanceAuthService.isLogined(), page, go, redirectGoLogIn );
+
+    // const [c, setC] = useState(href)
+    // useEffect(() => {
+    //
+    //     const x = href.split('?tabs=')[1]?.split('#')[0];
+    //     // console.log('href >>>',  x )
+    //     setC(x)
+    // })
+    //
+    // console.log('url', )
 
     if ( instanceAuthService.isLogined() === logIn ) {
 

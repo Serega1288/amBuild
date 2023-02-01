@@ -6,7 +6,7 @@ import useFormCode from "../function/userFormCode"
 import BlockFormResPassSend from "../components/constructor/sign/BlockFormResPassSend"
 import {Link} from "gatsby"
 
-const ResetPass = () => {
+const ResetPass = (props) => {
 
     const maxTime = 20;
     const t = 'rest-pass';
@@ -22,9 +22,11 @@ const ResetPass = () => {
             setTimeSend(0)
         }, maxTime * 1000);
     }
+    const location = props.location.search?.split('=');
 
     return (
-        <Layout title="Reset password" desc="desc">
+        <AuthLayout logIn={true} page='reset-pass' go='account'>
+            <Layout title="Reset password" desc="desc">
             <Section className="pageLogin d-flex align-items-center">
                 <div className="Login container">
                     <div className="box">
@@ -37,7 +39,7 @@ const ResetPass = () => {
                                 message?.result === '1_' ?
                                     <>
                                         <span className="link-form sendcode anim text-center" style={{display: 'block'}} onClick={()=>SendCode()}> &lt; Resend the code</span>
-                                        <BlockFormResPassSend d={d} email={values.email} type={t} />
+                                        <BlockFormResPassSend location={location} d={d} email={values.email} type={t} />
                                     </>
                                     :
                                     <>
@@ -76,7 +78,7 @@ const ResetPass = () => {
 
                                             <div className="Boxlink">
                                                 <span>Already have an account?</span>
-                                                <Link to="/sign-in/">Sign In</Link>
+                                                <Link to={`/sign-in/${location[0] === '?r' ? ( `?r=` + location[1]) : '' }`}>Sign In</Link>
                                             </div>
                                             <h3 className={` statusInfo text-center 
                                         ${error || message ?  ' active '  : ''}
@@ -100,26 +102,13 @@ const ResetPass = () => {
                 </div>
             </Section>
         </Layout>
+        </AuthLayout>
     )
 }
-// export default ResetPass;
+export default ResetPass;
 // export default () => (
 //     <AuthLayout logIn={true} page='reset-pass' go='account'>
 //         <ResetPass />
 //     </AuthLayout>
 // );
 
-const isBrowser = typeof window !== "undefined"
-export default () => {
-    if( isBrowser ) {
-        return (
-            <AuthLayout logIn={true} page='reset-pass' go='account'>
-                <ResetPass/>
-            </AuthLayout>
-        )
-    } else {
-        return (
-            <ResetPass/>
-        )
-    }
-};

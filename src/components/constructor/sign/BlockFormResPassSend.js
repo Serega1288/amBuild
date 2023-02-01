@@ -2,7 +2,7 @@ import React from "react"
 import {Link} from "gatsby"
 import userFormResPass from "../../../function/userFormResPass"
 
-const BlockFormSend = (d, email, type) => {
+const BlockFormSend = (d, email, type, location) => {
     const { values, captureInput, submitForm, isLoading, error, message} = userFormResPass(d, email, type);
     return (
         <form onSubmit={submitForm}>
@@ -36,10 +36,10 @@ const BlockFormSend = (d, email, type) => {
             ) : ''}
             <div className="Boxlink">
                 <span>Already have an account?</span>
-                <Link to="/sign-in/">Sign In</Link>
+                <Link to={`/sign-in/${location[0] === '?r' ? ( `?r=` + location[1]) : '' }`}>Sign In</Link>
             </div>
             <h3 className={` statusInfo text-center 
-            ${error || message ?  ' active '  : ''}
+            ${error || message ?  ' active '  : ''} 
             ${error ?  ' error '  : ''}
             ${
                 message?.result === '01' ||

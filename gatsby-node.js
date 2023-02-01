@@ -6,6 +6,9 @@ const pageTemplate = path.resolve(`./src/templates/Page.js`)
 const pageTemplateConstructor = path.resolve(`./src/templates/PageConstructor.js`)
 const categoriesProduct = path.resolve(`./src/templates/Categories.js`)
 const pageProduct = path.resolve(`./src/templates/pageProduct.js`)
+// const SignUp = path.resolve(`./src/templates/PageSignUp.js`)
+// const SignIn = path.resolve(`./src/templates/PageSignIn.js`)
+// const ResetPass = path.resolve(`./src/templates/ResetPass.js`)
 
 //const frontTemplate = path.resolve('./src/templates/FrontPage.js')
 //const postTemplate = path.resolve(`./src/templates/post.js`)
@@ -598,7 +601,7 @@ exports.createPages = ({graphql, actions}) => {
 
             } else {
 
-                // console.log('templateName >>', item.template.templateName)
+                console.log('templateName >>', item.template.templateName)
 
                 if ( item.template.templateName === 'Constructor') {
                     createPage({
@@ -612,7 +615,27 @@ exports.createPages = ({graphql, actions}) => {
                         component: pageCheckout,
                         context: item,
                     })
-                } else {
+                }
+                // else if ( item.template.templateName === 'Sign-up') {
+                //     createPage({
+                //         path: `${item.slug}`,
+                //         component: SignUp,
+                //         context: item,
+                //     })
+                // } else if ( item.template.templateName === 'Sign-in') {
+                //     createPage({
+                //         path: `${item.slug}`,
+                //         component: SignIn,
+                //         context: item,
+                //     })
+                // } else if ( item.template.templateName === 'Reset-pass') {
+                //     createPage({
+                //         path: `${item.slug}`,
+                //         component: ResetPass,
+                //         context: item,
+                //     })
+                // }
+                else {
                     createPage({
                         path: `${item.slug}`,
                         component:  pageTemplate,
