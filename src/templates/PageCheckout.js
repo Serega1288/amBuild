@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
 import Layout from '../components/Layout'
-import {graphql, navigate, useStaticQuery} from "gatsby"
+import {graphql, useStaticQuery} from "gatsby"
 import {localStoreService} from "../function/hook"
 import BannerLite from '../components/constructor/banner/BannerLite'
 import styled from "styled-components";
 import {AuthLayout} from "../function/AuthLayout";
+import RegPage from "../pages/sign-up";
 
 const PageCheckout = (props) => {
 
@@ -25,7 +26,7 @@ const PageCheckout = (props) => {
     //console.log('pageCheckout >>>', props)
 
 
-    const CartBuy = localStoreService.getLocal('CartBuy');
+    // const CartBuy = localStoreService.getLocal('CartBuy');
 
     // if ( CartBuy === null ) {
     //
@@ -278,11 +279,23 @@ const PageCheckout = (props) => {
     );
 
 };
-export default () => (
-    <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout' >
-        <PageCheckout />
-    </AuthLayout>
-);
+// export default PageCheckout;
+// export default () => (
+//     <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout' >
+//         <PageCheckout />
+//     </AuthLayout>
+// );
+
+const isBrowser = typeof window !== "undefined"
+export default () => {
+    if( isBrowser ) {
+        return (
+            <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout' >
+                <PageCheckout/>
+            </AuthLayout>
+        )
+    }
+};
 
 const Section = styled.section`
     background-color: #F5F5F7;

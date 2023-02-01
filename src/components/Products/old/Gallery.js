@@ -32,9 +32,9 @@ const Gallery = (prop) => {
         //     // access to player in all event handlers via event.target
         //     event.target.pauseVideo();
         // }
-      console.log('>>>', swiper)
-        console.log('>>> prev', swiper.previousIndex)
-        console.log('>>> active', swiper.activeIndex)
+      // console.log('>>>', swiper)
+      //   console.log('>>> prev', swiper.previousIndex)
+      //   console.log('>>> active', swiper.activeIndex)
         const prevId = 'stepIframe' + swiper.previousIndex
         const activeId = 'stepIframe' + swiper.activeIndex
 
@@ -73,7 +73,7 @@ const Gallery = (prop) => {
     };
 
     function onReady(s) {
-        console.log('s>>', s)
+        // console.log('s>>', s)
     }
 
     // const addExternalScript = (url, callback) => {
@@ -178,7 +178,7 @@ const Gallery = (prop) => {
                     <SwiperSlide key={index}>
                         {
                             prop.listVideo?.map( (item, index) => {
-                                console.log('>>>>>', item.video.split('?v=')[1].split('&'));
+                                // console.log('>>>>>', item.video.split('?v=')[1].split('&'));
                                 return (
                                     step === item.numberStep && (
                                         <div  key={index} className="WrapIframe">

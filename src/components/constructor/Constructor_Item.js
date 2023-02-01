@@ -14,7 +14,7 @@ import BlockCollapse from "./blockcollapse/BlockCollapse";
 
 const Const = ( { item, href, type } ) => {
     const typeName = `${type === 'GlobalProductConst' ? 'ThemeGeneralSettings_Acfoptionthemes' : ''}${type === 'ProductD' ? 'ProductD_Acfconstructor' : ''}${type === 'page' ? 'Page_Acfconstructor' : ''}`;
-    console.log('typeName >>', typeName );
+    // console.log('typeName >>', typeName );
     // ${type ? 'ProductD_Acfconstructor' : 'Page_Acfconstructor'} ThemeGeneralSettings_Acfoptionthemes_Const_Content
 
     return (

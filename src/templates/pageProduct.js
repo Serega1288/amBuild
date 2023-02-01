@@ -192,9 +192,10 @@ const PageProduct = (props) => {
     // const list = props.pageContext.ACFconstructor.const;
     const title = props.pageContext.title;
     const generalTitle = data.wp.allSettings.generalSettingsTitle;
-    const generalDescription = data.wp.allSettings.generalSettingsDescription;
+    // const generalDescription = data.wp.allSettings.generalSettingsDescription;
 
-    const [d, setData] = useState([]);
+    // const [d, setData] = useState([]);
+    const [d] = useState([]);
     useEffect(() => {
 
         const get = localStoreService.getLocal('ProductSave');
@@ -219,7 +220,7 @@ const PageProduct = (props) => {
             // });
 
             // !!! не працює !!!
-            get.filter(el => el.title != '180 days')
+            get.filter(el => el.title !== '180 days')
 
             //console.log('get > get', get );
 
@@ -252,7 +253,7 @@ const PageProduct = (props) => {
     const price = hashrateFee * days * 10;
 
     //console.log('GlobalConst', list, GlobalConst)
-    console.log('product', props.pageContext.ACForderDateProduct)
+    // console.log('product', props.pageContext.ACForderDateProduct)
 
     const [step, setStep ] = useState(1);
     const [result, setResult ] = useState(1);

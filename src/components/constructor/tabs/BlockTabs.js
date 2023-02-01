@@ -4,7 +4,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 //import {maxCol} from "../../../function/SizeCol";
 
 const Content = ( { item } ) => {
-    console.log('Content block tabs >>>', item);
+    // console.log('Content block tabs >>>', item);
     return (
         <Section className={`section tabs`}>
             <div className="container">

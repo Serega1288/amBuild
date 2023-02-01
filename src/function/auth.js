@@ -10,7 +10,7 @@ class Auth {
     }
      */
     isLogined = () => {
-        //true | false
+        // true | false
         const data = typeof window !== 'undefined' && localStorage.getItem(LOCAL_STORAGE_KEY)
         if (data) {
             // try {
@@ -31,7 +31,7 @@ class Auth {
 
     logout = () => {
         if(typeof window !== 'undefined') {
-            localStorage.removeItem(LOCAL_STORAGE_KEY)
+            typeof window !== 'undefined' && localStorage.removeItem(LOCAL_STORAGE_KEY)
             navigate('/')
         }
 

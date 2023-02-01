@@ -9,7 +9,7 @@ const useForm = (RedirectPage) => {
     const [message, setMessage] = useState(null);
 
 
-    console.log('user !!!', RedirectPage);
+    // console.log('user !!!', RedirectPage);
 
 
     const captureInput = e => {

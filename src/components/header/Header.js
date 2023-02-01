@@ -9,7 +9,7 @@ import LoginSignUp from '../../assets/img/svg/sign-up.svg'
 
 import LoginSvgBlack from '../../assets/img/svg/login-black.svg'
 import LoginSignUpBlack from '../../assets/img/svg/sign-up-black.svg'
-import {instanceAuthService} from "../../function/auth";
+// import {instanceAuthService} from "../../function/auth";
 
 const Header = ( props ) => {
 
@@ -52,9 +52,9 @@ const Header = ( props ) => {
         }
     };
 
-    const LogoutUser = () => {
-        instanceAuthService.logout()
-    }
+    // const LogoutUser = () => {
+    //     instanceAuthService.logout()
+    // }
 
     return (
         <>
@@ -78,17 +78,17 @@ const Header = ( props ) => {
                             {/*    console.log('instanceAuthService.isLogined()', instanceAuthService.isLogined())*/}
                             {/*}*/}
 
-                            {
-                                instanceAuthService.isLogined() ?
-                                    <>
-                                        <Link className="btn style-1 login" to="/account/">Account</Link>
-                                        <span className="btn style-1 sign-up" onClick={()=>LogoutUser()}>Logout</span>
-                                    </> :
-                                    <>
-                                        <Link className="btn style-1 login" to="/sign-in/">Login</Link>
-                                        <Link className="btn style-1 sign-up" to="/sign-up/">Sign Up</Link> 
-                                    </>
-                            }
+                            {/*{*/}
+                            {/*    instanceAuthService.isLogined() ?*/}
+                            {/*        <>*/}
+                            {/*            <Link className="btn style-1 login" to="/account/">Account</Link>*/}
+                            {/*            <span className="btn style-1 sign-up" onClick={()=>LogoutUser()}>Logout</span>*/}
+                            {/*        </> :*/}
+                            {/*        <>*/}
+                            {/*            <Link className="btn style-1 login" to="/sign-in/">Login</Link>*/}
+                            {/*            <Link className="btn style-1 sign-up" to="/sign-up/">Sign Up</Link> */}
+                            {/*        </>*/}
+                            {/*}*/}
 
                             <div className='d-inline-block d-xl-none menu-wrapper jsMenuOpen' onClick={clickHandler}>
                                 <span className={'hamburger-menu jsMenuOpen' + (open ? ' open animate' : '')} ></span>

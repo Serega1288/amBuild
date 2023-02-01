@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {maxCol, minCol} from "../function/SizeCol";
+import {maxCol} from "../function/SizeCol";
 
 
 

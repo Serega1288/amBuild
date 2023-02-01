@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {maxCol, minCol} from "../../../function/SizeCol";
+import {maxCol} from "../../../function/SizeCol";
 import {Link} from "gatsby";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";

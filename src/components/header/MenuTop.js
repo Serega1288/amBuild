@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { graphql, useStaticQuery, Link } from "gatsby";
 
 
@@ -24,7 +24,8 @@ const MenuTop = () => {
         }
     `);
 
-    const { allWpMenu, allWpMenuItem } = data;
+    // const { allWpMenu, allWpMenuItem } = data;
+    const { allWpMenuItem } = data;
 
     return (
         <>

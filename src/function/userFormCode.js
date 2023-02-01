@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {useState} from "react";
 // import {instanceAuthService} from "./auth";
 // import {navigate} from "gatsby";
 
@@ -48,7 +48,7 @@ const useFormCode = (d, t) => {
         //     navigate('/search')
         // }
 
-        console.log('responseText >>>', responseText );
+        // console.log('responseText >>>', responseText );
 
         // 2. перевіряємо відповідь від сервера
         if ( responseText.result >= 400 && responseText.result < 600 ) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import {graphql, Link, useStaticQuery} from "gatsby";
 import styled from "styled-components";
-import {maxCol, minCol} from "../../function/SizeCol";
+import {maxCol} from "../../function/SizeCol";
 
 const FilterBox = (props) => {
 

@@ -10,6 +10,9 @@ module.exports = {
     title: `American Builds`,
     siteUrl: `https://americanbuilds.awbs.dev`
   },
+  flags: {
+    DEV_SSR: true
+  },
   plugins: [
     {
       resolve: `gatsby-plugin-hotjar`,

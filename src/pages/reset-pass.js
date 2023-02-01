@@ -10,7 +10,8 @@ const ResetPass = () => {
 
     const maxTime = 20;
     const t = 'rest-pass';
-    const [d, setD] = useState( new Date() );
+    // const [d, setD] = useState( new Date() );
+    const [d] = useState( new Date() );
     const [timeSend, setTimeSend] = useState(0);
     const { values, captureInput, submitForm, isLoading, error, message, setMessage} = useFormCode(d, t);
 
@@ -101,8 +102,20 @@ const ResetPass = () => {
         </Layout>
     )
 }
-export default () => (
-    <AuthLayout logIn={true} page='reset-pass' go='account'>
-        <ResetPass />
-    </AuthLayout>
-);
+// export default ResetPass;
+// export default () => (
+//     <AuthLayout logIn={true} page='reset-pass' go='account'>
+//         <ResetPass />
+//     </AuthLayout>
+// );
+
+const isBrowser = typeof window !== "undefined"
+export default () => {
+    if( isBrowser ) {
+        return (
+            <AuthLayout logIn={true} page='reset-pass' go='account'>
+                <ResetPass/>
+            </AuthLayout>
+        )
+    }
+};

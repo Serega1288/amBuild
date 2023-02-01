@@ -1,6 +1,6 @@
 import {useState} from "react";
-import {instanceAuthService} from "./auth";
-import {navigate} from "gatsby";
+// import {instanceAuthService} from "./auth";
+// import {navigate} from "gatsby";
 
 
 const useForm = (d, email, type) => {

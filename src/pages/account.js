@@ -17,20 +17,27 @@ const LoginAccount = () => {
                         <h1 className="title">
                             Account
                         </h1>
-
-                        {/*{ typeof window !== 'undefined' && localStorage.getItem('name') }*/}
                     </div>
                 </div>
             </Section>
         </Layout>
     );
 };
-// export default LoginPage;
-export default () => (
-    <AuthLayout logIn={false} page='account' go='sign-in' >
-        <LoginAccount />
-    </AuthLayout>
-);
+// export default LoginAccount;
+
+const isBrowser = typeof window !== "undefined"
+export default () => {
+    if( isBrowser ) {
+        return (
+            <AuthLayout logIn={false} page='account' go='sign-in'>
+                <LoginAccount/>
+            </AuthLayout>
+        )
+    }
+};
+
+
+
 
 const Section = styled.section`
   min-height: calc(100vh - 8rem);

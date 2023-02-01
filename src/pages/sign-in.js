@@ -3,11 +3,11 @@ import Layout from "../components/Layout";
 //import React, {useEffect} from 'react';
 //import Layout from '../components/Layout';
 import useForm from "../function/useFormLogin";
-import styled from 'styled-components';
+// import styled from 'styled-components';
 //import Title from '../components/constructor/Title'
-import {minCol, maxCol} from "../function/SizeCol";
+// import {minCol, maxCol} from "../function/SizeCol";
 //import {Link, navigate} from "gatsby";
-import Bg from '../assets/img/gradient.jpg';
+// import Bg from '../assets/img/gradient.jpg';
 import {Link} from "gatsby";
 import {AuthLayout} from "../function/AuthLayout";
 import { BoxForm, Section } from '../styles/formSign'
@@ -100,10 +100,21 @@ const LoginPage = () => {
     );
 };
 // export default LoginPage;
-export default () => (
-    <AuthLayout logIn={true} page='sign-in' go='account'>
-        <LoginPage />
-    </AuthLayout>
-);
+// export default () => (
+//     <AuthLayout logIn={true} page='sign-in' go='account'>
+//         <LoginPage />
+//     </AuthLayout>
+// );
+
+const isBrowser = typeof window !== "undefined"
+export default () => {
+    if( isBrowser ) {
+        return (
+            <AuthLayout logIn={true} page='sign-in' go='account'>
+                <LoginPage/>
+            </AuthLayout>
+        )
+    }
+};
 
 

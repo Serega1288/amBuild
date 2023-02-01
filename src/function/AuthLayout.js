@@ -3,7 +3,7 @@ import { navigate } from 'gatsby'
 
 export const AuthLayout = ({children, page, go, logIn, redirectGoLogIn}) => {
 
-    console.log('isLogined', instanceAuthService.isLogined(), page, go, redirectGoLogIn );
+    // console.log('isLogined', instanceAuthService.isLogined(), page, go, redirectGoLogIn );
 
     if ( instanceAuthService.isLogined() === logIn ) {
 

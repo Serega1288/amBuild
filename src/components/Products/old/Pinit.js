@@ -13,8 +13,8 @@ function MyPage() {
             src="https://assets.pinterest.com/js/pinit.js"
             strategy={ScriptStrategy.postHydrate}
             forward={[`dataLayer.push`]}
-            onLoad={() => console.log("success")}
-            onError={() => console.log("sadness")}
+            // onLoad={() => console.log("success")}
+            // onError={() => console.log("sadness")}
         />
     )
 }

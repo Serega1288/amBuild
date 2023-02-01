@@ -1,5 +1,5 @@
 import {createGlobalStyle} from "styled-components";
-import {minCol, maxCol} from "../function/SizeCol";
+import {maxCol} from "../function/SizeCol";
 import Inter from '../assets/fonts/Inter/Inter-Regular.woff2';
 import InterBold from '../assets/fonts/Inter/Inter-Bold.woff2';
 import InterMedium from '../assets/fonts/Inter/Inter-Medium.woff2';

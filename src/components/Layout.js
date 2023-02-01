@@ -6,7 +6,7 @@ import  GlobalStyles from '../styles/GlobalStyles';
 import  Header from './header/Header';
 import  Footer from './footer/Footer';
 import styled from "styled-components";
-import {maxCol} from "../function/SizeCol";
+// import {maxCol} from "../function/SizeCol";
 
 const Layout = ( {children, title, desc, customClass } ) => {
     return (

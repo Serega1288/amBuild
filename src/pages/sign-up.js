@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react"
 import Layout from "../components/Layout"
 import useFormCode from "../function/userFormCode"
-import styled from 'styled-components'
-import {minCol, maxCol} from "../function/SizeCol"
-import Bg from '../assets/img/gradient.jpg'
+// import styled from 'styled-components'
+// import {minCol, maxCol} from "../function/SizeCol"
+// import Bg from '../assets/img/gradient.jpg'
 import {Link} from "gatsby"
 import {AuthLayout} from "../function/AuthLayout"
 import BlockFormSend from "../components/constructor/sign/BlockFormSend"
@@ -15,7 +15,8 @@ import {BoxForm , Section } from '../styles/formSign'
 const RegPage = () => {
     const maxTime = 20;
     const t = 'sing-up';
-    const [d, setD] = useState( new Date() );
+    // const [d, setD] = useState( new Date() );
+    const [d] = useState( new Date() );
     const [timeSend, setTimeSend] = useState(0);
     const { values, captureInput, submitForm, isLoading, error, message, setMessage} = useFormCode(d, t);
 
@@ -113,11 +114,23 @@ const RegPage = () => {
         </Layout>
     );
 };
-export default () => (
-    <AuthLayout logIn={true} page='sign-up' go='account'>
-        <RegPage />
-    </AuthLayout>
-);
+// export default RegPage;
+// export default () => (
+//     <AuthLayout logIn={true} page='sign-up' go='account'>
+//         <RegPage />
+//     </AuthLayout>
+// );
+
+const isBrowser = typeof window !== "undefined"
+export default () => {
+    if( isBrowser ) {
+        return (
+            <AuthLayout logIn={true} page='sign-up' go='account'>
+                <RegPage/>
+            </AuthLayout>
+        )
+    }
+};
 
 
 

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import {minCol} from "../../../function/SizeCol";
 
 const LikeProductItem = ({item}) => {
-    console.log('categoryItem', item.featuredImage);
+    // console.log('categoryItem', item.featuredImage);
 
     const ImageBG = styled.div`  
         background-size: cover;

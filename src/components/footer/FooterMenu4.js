@@ -28,7 +28,7 @@ const FooterMenu = () => {
 
         }
     `);
-    const title = Menu.menuTitle.nodes[0].name;
+    // const title = Menu.menuTitle.nodes[0].name;
     const menu = Menu.menu.nodes;
     return (
         <>
