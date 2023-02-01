@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
 import Layout from '../components/Layout'
 import {graphql, useStaticQuery} from "gatsby"
-import {localStoreService} from "../function/hook"
+// import {localStoreService} from "../function/hook"
 import BannerLite from '../components/constructor/banner/BannerLite'
 import styled from "styled-components";
 import {AuthLayout} from "../function/AuthLayout";
-import RegPage from "../pages/sign-up";
+// import RegPage from "../pages/sign-up";
 
 const PageCheckout = (props) => {
 
@@ -20,7 +20,7 @@ const PageCheckout = (props) => {
         }
     `);
 
-    const title = props.pageContext.title;
+    const title = props?.pageContext?.title;
     const generalTitle = data?.wp?.allSettings?.generalSettingsTitle;
 
     //console.log('pageCheckout >>>', props)
@@ -290,7 +290,7 @@ const isBrowser = typeof window !== "undefined"
 export default () => {
     if( isBrowser ) {
         return (
-            <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout' >
+            <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout'>
                 <PageCheckout/>
             </AuthLayout>
         )
