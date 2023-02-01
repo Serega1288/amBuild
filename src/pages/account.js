@@ -1,16 +1,8 @@
 import React from 'react';
 import Layout from "../components/Layout";
-//import React, {useEffect} from 'react';
-//import Layout from '../components/Layout';
-import useForm from "../function/useFormLogin";
 import styled from 'styled-components';
-//import Title from '../components/constructor/Title'
-import {minCol, maxCol} from "../function/SizeCol";
-//import {Link, navigate} from "gatsby";
 import Bg from '../assets/img/gradient.jpg';
-import {Link} from "gatsby";
 import {AuthLayout} from "../function/AuthLayout";
-import {instanceAuthService} from "../function/auth";
 
 
 const LoginAccount = () => {
@@ -26,7 +18,7 @@ const LoginAccount = () => {
                             Account
                         </h1>
 
-                        { typeof window !== 'undefined' && localStorage.getItem('name') }
+                        {/*{ typeof window !== 'undefined' && localStorage.getItem('name') }*/}
                     </div>
                 </div>
             </Section>
