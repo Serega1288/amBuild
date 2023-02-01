@@ -8,12 +8,14 @@ import {Link} from "gatsby"
 import {AuthLayout} from "../function/AuthLayout"
 import BlockFormSend from "../components/constructor/sign/BlockFormSend"
 import {BoxForm , Section } from '../styles/formSign'
-const isBrowser = typeof window !== "undefined"
+
 // import BtnResetCode from "../components/constructor/sign/BtnResetCode";
 
 // import BlockFormSend from ''
 
 const RegPage = (props) => {
+    const isBrowser = typeof window !== "undefined"
+
     const maxTime = 20;
     const t = 'sing-up';
     // const [d, setD] = useState( new Date() );
@@ -34,6 +36,10 @@ const RegPage = (props) => {
     // }, []);
     const location = props.location.search?.split('=');
     // console.log('page sign up >>', props)
+
+    if (!isBrowser) {
+        return;
+    }
 
     return (
         <AuthLayout logIn={true} page='sign-up' go='account'>

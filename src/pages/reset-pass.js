@@ -7,6 +7,7 @@ import BlockFormResPassSend from "../components/constructor/sign/BlockFormResPas
 import {Link} from "gatsby"
 
 const ResetPass = (props) => {
+    const isBrowser = typeof window !== "undefined"
 
     const maxTime = 20;
     const t = 'rest-pass';
@@ -23,6 +24,10 @@ const ResetPass = (props) => {
         }, maxTime * 1000);
     }
     const location = props.location.search?.split('=');
+
+    if (!isBrowser) {
+        return;
+    }
 
     return (
         <AuthLayout logIn={true} page='reset-pass' go='account'>

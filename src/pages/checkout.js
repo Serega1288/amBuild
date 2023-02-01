@@ -7,7 +7,8 @@ import styled from "styled-components";
 import {AuthLayout} from "../function/AuthLayout";
 // import RegPage from "../pages/sign-up";
 
-const Checkout = (props) => {
+const PageCheckout = (props) => {
+    const isBrowser = typeof window !== "undefined"
 
     const data = useStaticQuery(graphql`
         {
@@ -40,6 +41,10 @@ const Checkout = (props) => {
         setChoose(s)
     };
 
+    if (!isBrowser) {
+        return;
+    }
+
     return (
         <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout'>
             <Layout customClass="section-pad-min" title='checkout'  desc={ generalTitle } >
@@ -60,12 +65,12 @@ const Checkout = (props) => {
                                         </div>
                                         <div className="col-auto">
                                             <div className="WrapPoolBtn">
-                                                {/*{CartBuy[0]?.order.chooseMiningPool?.map( (item, index) => (*/}
-                                                {/*    <span onClick={() => chooseMiningPool(item.option) }*/}
-                                                {/*          className={`btn style-4 ${ choose === item.option ? 'active' : '' }`}>*/}
-                                                {/*    { item.title }*/}
-                                                {/*    </span>*/}
-                                                {/*))}*/}
+                                                {CartBuy[0]?.order.chooseMiningPool?.map( (item, index) => (
+                                                    <span onClick={() => chooseMiningPool(item.option) }
+                                                          className={`btn style-4 ${ choose === item.option ? 'active' : '' }`}>
+                                                    { item.title }
+                                                    </span>
+                                                ))}
                                             </div>
                                         </div>
                                     </div>
@@ -73,11 +78,11 @@ const Checkout = (props) => {
                                         <strong>Attention:</strong>
                                     </div>
                                     <div className="attentions">
-                                        {/*{CartBuy[0]?.order.attention?.map( (item, index) => (*/}
-                                        {/*    <div className="attention">*/}
-                                        {/*        { item.text }*/}
-                                        {/*    </div>*/}
-                                        {/*))}*/}
+                                        {CartBuy[0]?.order.attention?.map( (item, index) => (
+                                            <div className="attention">
+                                                { item.text }
+                                            </div>
+                                        ))}
                                     </div>
                                 </div>
 
@@ -87,106 +92,106 @@ const Checkout = (props) => {
                                     </div>
                                     <div className="table">
 
-                                        {/*<div className="tableItem tableTitle">*/}
-                                        {/*    <div className="row">*/}
-                                        {/*        <div className="col">*/}
-                                        {/*            <div className="productTitle">*/}
-                                        {/*                Service/Product*/}
-                                        {/*            </div>*/}
-                                        {/*        </div>*/}
-                                        {/*        <div className="col">*/}
-                                        {/*            <div className="price">*/}
-                                        {/*                Price*/}
-                                        {/*            </div>*/}
-                                        {/*        </div>*/}
-                                        {/*        <div className="col-auto">*/}
-                                        {/*            <div className="amount">*/}
-                                        {/*                Amount*/}
-                                        {/*            </div>*/}
-                                        {/*        </div>*/}
-                                        {/*        <div className="col-auto">*/}
-                                        {/*            <div className="day">*/}
-                                        {/*                Days*/}
-                                        {/*            </div>*/}
-                                        {/*        </div>*/}
-                                        {/*        <div className="col-auto">*/}
-                                        {/*            <div className="total">*/}
-                                        {/*                Total*/}
-                                        {/*            </div>*/}
-                                        {/*        </div>*/}
-                                        {/*    </div>*/}
-                                        {/*</div>*/}
-                                        {/*<div className="tableItem">*/}
-                                        {/*    <div className="row">*/}
-                                        {/*        <div className="col">*/}
-                                        {/*            <div className="productTitle">*/}
-                                        {/*                {CartBuy[0]?.category.nodes?.map( (item, index) => (*/}
-                                        {/*                    <>*/}
-                                        {/*                        {*/}
-                                        {/*                            item.name === 'Cloud mining' ? '' : item.name*/}
-                                        {/*                        }*/}
-                                        {/*                    </>*/}
-                                        {/*                ))}&nbsp;*/}
-                                        {/*                {CartBuy[0]?.title}*/}
-                                        {/*            </div>*/}
-                                        {/*        </div>*/}
-                                        {/*        <div className="col">*/}
-                                        {/*            <div className="price">*/}
-                                        {/*                $ {CartBuy[0]?.order.hashrateFee}/T/Days*/}
-                                        {/*            </div>*/}
-                                        {/*        </div>*/}
-                                        {/*        <div className="col-auto">*/}
-                                        {/*            <div className="amount">*/}
-                                        {/*                OT*/}
-                                        {/*            </div>*/}
-                                        {/*        </div>*/}
-                                        {/*        <div className="col-auto">*/}
-                                        {/*            <div className="day">*/}
-                                        {/*                {CartBuy[0]?.order.days}*/}
-                                        {/*            </div>*/}
-                                        {/*        </div>*/}
-                                        {/*        <div className="col-auto">*/}
-                                        {/*            <div className="total">*/}
-                                        {/*                <div>$&nbsp;*/}
-                                        {/*                    <span>{CartBuy[0]?.order.hashrateFee * CartBuy[0]?.order.days * CartBuy[0]?.step * 10 }</span>*/}
-                                        {/*                </div>*/}
-                                        {/*            </div>*/}
-                                        {/*        </div>*/}
-                                        {/*    </div>*/}
-                                        {/*</div>*/}
-                                        {/*<div className="tableItem">*/}
-                                        {/*    <div className="row">*/}
-                                        {/*        <div className="col">*/}
-                                        {/*            <div className="productTitle">*/}
-                                        {/*                Service Fee*/}
-                                        {/*            </div>*/}
-                                        {/*        </div>*/}
-                                        {/*        <div className="col">*/}
-                                        {/*            <div className="price">*/}
-                                        {/*                $ {CartBuy[0]?.order.serviceFee}/T/Days*/}
-                                        {/*            </div>*/}
-                                        {/*        </div>*/}
-                                        {/*        <div className="col-auto">*/}
-                                        {/*            <div className="amount">*/}
-                                        {/*                OT*/}
-                                        {/*            </div>*/}
-                                        {/*        </div>*/}
-                                        {/*        <div className="col-auto">*/}
-                                        {/*            <div className="day">*/}
-                                        {/*                {CartBuy[0]?.order.days}*/}
-                                        {/*            </div>*/}
-                                        {/*        </div>*/}
-                                        {/*        <div className="col-auto">*/}
-                                        {/*            <div className="total">*/}
-                                        {/*                <div>$&nbsp;*/}
-                                        {/*                    <span>*/}
-                                        {/*                        {CartBuy[0]?.order.serviceFee * CartBuy[0]?.order.days * CartBuy[0]?.step * 10 }*/}
-                                        {/*                    </span>*/}
-                                        {/*                </div>*/}
-                                        {/*            </div>*/}
-                                        {/*        </div>*/}
-                                        {/*    </div>*/}
-                                        {/*</div>*/}
+                                        <div className="tableItem tableTitle">
+                                            <div className="row">
+                                                <div className="col">
+                                                    <div className="productTitle">
+                                                        Service/Product
+                                                    </div>
+                                                </div>
+                                                <div className="col">
+                                                    <div className="price">
+                                                        Price
+                                                    </div>
+                                                </div>
+                                                <div className="col-auto">
+                                                    <div className="amount">
+                                                        Amount
+                                                    </div>
+                                                </div>
+                                                <div className="col-auto">
+                                                    <div className="day">
+                                                        Days
+                                                    </div>
+                                                </div>
+                                                <div className="col-auto">
+                                                    <div className="total">
+                                                        Total
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="tableItem">
+                                            <div className="row">
+                                                <div className="col">
+                                                    <div className="productTitle">
+                                                        {CartBuy[0]?.category.nodes?.map( (item, index) => (
+                                                            <>
+                                                                {
+                                                                    item.name === 'Cloud mining' ? '' : item.name
+                                                                }
+                                                            </>
+                                                        ))}&nbsp;
+                                                        {CartBuy[0]?.title}
+                                                    </div>
+                                                </div>
+                                                <div className="col">
+                                                    <div className="price">
+                                                        $ {CartBuy[0]?.order.hashrateFee}/T/Days
+                                                    </div>
+                                                </div>
+                                                <div className="col-auto">
+                                                    <div className="amount">
+                                                        OT
+                                                    </div>
+                                                </div>
+                                                <div className="col-auto">
+                                                    <div className="day">
+                                                        {CartBuy[0]?.order.days}
+                                                    </div>
+                                                </div>
+                                                <div className="col-auto">
+                                                    <div className="total">
+                                                        <div>$&nbsp;
+                                                            <span>{CartBuy[0]?.order.hashrateFee * CartBuy[0]?.order.days * CartBuy[0]?.step * 10 }</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="tableItem">
+                                            <div className="row">
+                                                <div className="col">
+                                                    <div className="productTitle">
+                                                        Service Fee
+                                                    </div>
+                                                </div>
+                                                <div className="col">
+                                                    <div className="price">
+                                                        $ {CartBuy[0]?.order.serviceFee}/T/Days
+                                                    </div>
+                                                </div>
+                                                <div className="col-auto">
+                                                    <div className="amount">
+                                                        OT
+                                                    </div>
+                                                </div>
+                                                <div className="col-auto">
+                                                    <div className="day">
+                                                        {CartBuy[0]?.order.days}
+                                                    </div>
+                                                </div>
+                                                <div className="col-auto">
+                                                    <div className="total">
+                                                        <div>$&nbsp;
+                                                            <span>
+                                                                {CartBuy[0]?.order.serviceFee * CartBuy[0]?.order.days * CartBuy[0]?.step * 10 }
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                     </div>
                                     <p>
@@ -198,68 +203,68 @@ const Checkout = (props) => {
                             <div className="col-auto">
                                 <div className="blocks formOrder">
 
-                                    {/*<a href={CartBuy[0]?.url} className="itemProduct d-block">*/}
-                                    {/*    <div className="row">*/}
-                                    {/*        <div className="col-auto">*/}
-                                    {/*            <div  style={{width: '14rem'}} className="img">*/}
-                                    {/*                <img src={CartBuy[0]?.Img} alt=""/>*/}
-                                    {/*            </div>*/}
-                                    {/*        </div>*/}
-                                    {/*        <div className="col d-flex flex-column justify-content-center">*/}
-                                    {/*            <div className="cat">*/}
-                                    {/*                {CartBuy[0]?.category.nodes?.map( (item, index) => (*/}
-                                    {/*                    <>*/}
-                                    {/*                        {*/}
-                                    {/*                            item.name === 'Cloud mining' ? '' : item.name*/}
-                                    {/*                        }*/}
-                                    {/*                    </>*/}
-                                    {/*                ))}*/}
-                                    {/*            </div>*/}
-                                    {/*            <div className="title">*/}
-                                    {/*                {CartBuy[0]?.title}*/}
-                                    {/*            </div>*/}
-                                    {/*        </div>*/}
-                                    {/*    </div>*/}
-                                    {/*</a>*/}
+                                    <a href={CartBuy[0]?.url} className="itemProduct d-block">
+                                        <div className="row">
+                                            <div className="col-auto">
+                                                <div  style={{width: '14rem'}} className="img">
+                                                    <img src={CartBuy[0]?.Img} alt=""/>
+                                                </div>
+                                            </div>
+                                            <div className="col d-flex flex-column justify-content-center">
+                                                <div className="cat">
+                                                    {CartBuy[0]?.category.nodes?.map( (item, index) => (
+                                                        <>
+                                                            {
+                                                                item.name === 'Cloud mining' ? '' : item.name
+                                                            }
+                                                        </>
+                                                    ))}
+                                                </div>
+                                                <div className="title">
+                                                    {CartBuy[0]?.title}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
 
-                                    {/*<div className="WrapOrder">*/}
-                                    {/*    <div className="row">*/}
-                                    {/*        <div className="col">*/}
-                                    {/*            <div className="WrapOrderTitle">*/}
-                                    {/*                Hashrate Fee:*/}
-                                    {/*            </div>*/}
-                                    {/*        </div>*/}
-                                    {/*        <div className="col-auto">*/}
-                                    {/*            <div className="WrapOrderValue">*/}
-                                    {/*                <strong>$ <span>{(CartBuy[0]?.price*CartBuy[0]?.step).toFixed(2)}</span></strong>*/}
-                                    {/*            </div>*/}
-                                    {/*        </div>*/}
-                                    {/*    </div>*/}
-                                    {/*</div>*/}
+                                    <div className="WrapOrder">
+                                        <div className="row">
+                                            <div className="col">
+                                                <div className="WrapOrderTitle">
+                                                    Hashrate Fee:
+                                                </div>
+                                            </div>
+                                            <div className="col-auto">
+                                                <div className="WrapOrderValue">
+                                                    <strong>$ <span>{(CartBuy[0]?.price*CartBuy[0]?.step).toFixed(2)}</span></strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                    {/*<div className="WrapOrder">*/}
-                                    {/*    <div className="row">*/}
-                                    {/*        <div className="col">*/}
-                                    {/*            <div className="WrapOrderTitle">*/}
-                                    {/*                Service Fee:*/}
-                                    {/*            </div>*/}
-                                    {/*        </div>*/}
-                                    {/*        <div className="col-auto">*/}
-                                    {/*            <div className="WrapOrderValue">*/}
-                                    {/*                <strong>$ <span>{CartBuy[0]?.order.serviceFee * CartBuy[0]?.order.days * CartBuy[0]?.step * 10 }</span></strong>*/}
-                                    {/*            </div>*/}
-                                    {/*        </div>*/}
-                                    {/*    </div>*/}
-                                    {/*</div>*/}
+                                    <div className="WrapOrder">
+                                        <div className="row">
+                                            <div className="col">
+                                                <div className="WrapOrderTitle">
+                                                    Service Fee:
+                                                </div>
+                                            </div>
+                                            <div className="col-auto">
+                                                <div className="WrapOrderValue">
+                                                    <strong>$ <span>{CartBuy[0]?.order.serviceFee * CartBuy[0]?.order.days * CartBuy[0]?.step * 10 }</span></strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                    {/*<div className="WrapOrderTotalValue">*/}
-                                    {/*    Order Total:*/}
-                                    {/*    <strong>$&nbsp;*/}
-                                    {/*        <span>*/}
-                                    {/*            {(CartBuy[0]?.price*CartBuy[0]?.step + ( CartBuy[0]?.order.serviceFee * CartBuy[0]?.order.days * CartBuy[0]?.step * 10 )).toFixed(2) }*/}
-                                    {/*        </span>*/}
-                                    {/*    </strong>*/}
-                                    {/*</div>*/}
+                                    <div className="WrapOrderTotalValue">
+                                        Order Total:
+                                        <strong>$&nbsp;
+                                            <span>
+                                                {(CartBuy[0]?.price*CartBuy[0]?.step + ( CartBuy[0]?.order.serviceFee * CartBuy[0]?.order.days * CartBuy[0]?.step * 10 )).toFixed(2) }
+                                            </span>
+                                        </strong>
+                                    </div>
                                     
                                     <div className="WrapBtnBuy">
                                         <span className="BtnBuy btn style-3 w100">Submit</span>
@@ -277,7 +282,7 @@ const Checkout = (props) => {
     );
 
 };
-export default Checkout;
+export default PageCheckout;
 // export default () => (
 //     <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout' >
 //         <PageCheckout />

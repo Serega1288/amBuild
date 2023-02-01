@@ -11,7 +11,10 @@ import useForm from "../function/useFormLogin";
 import {Link} from "gatsby";
 import {AuthLayout} from "../function/AuthLayout";
 import { BoxForm, Section } from '../styles/formSign'
+
+
 const LoginPage = (props) => {
+    const isBrowser = typeof window !== "undefined"
 
     const RedirectPage = '/account/';
 
@@ -25,6 +28,11 @@ const LoginPage = (props) => {
  
     const location = props.location.search?.split('=');
     // console.log('page sign in >> 1', location );
+
+    if (!isBrowser) {
+        return;
+    }
+
     return (
         <AuthLayout logIn={true} page='sign-in' go={location[0] === '?r' ? (location[1]) : 'account' }>
             <Layout title="Login" desc="desc">
