@@ -33,7 +33,7 @@ const RegPage = (props) => {
     //
     // }, []);
     const location = props.location.search?.split('=');
-    console.log('page sign up >>', props)
+    // console.log('page sign up >>', props)
 
     return (
         <AuthLayout logIn={true} page='sign-up' go='account'>

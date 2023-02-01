@@ -6,6 +6,7 @@ const pageTemplate = path.resolve(`./src/templates/Page.js`)
 const pageTemplateConstructor = path.resolve(`./src/templates/PageConstructor.js`)
 const categoriesProduct = path.resolve(`./src/templates/Categories.js`)
 const pageProduct = path.resolve(`./src/templates/pageProduct.js`)
+
 // const SignUp = path.resolve(`./src/templates/PageSignUp.js`)
 // const SignIn = path.resolve(`./src/templates/PageSignIn.js`)
 // const ResetPass = path.resolve(`./src/templates/ResetPass.js`)

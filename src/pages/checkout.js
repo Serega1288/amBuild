@@ -7,7 +7,7 @@ import styled from "styled-components";
 import {AuthLayout} from "../function/AuthLayout";
 // import RegPage from "../pages/sign-up";
 
-const PageCheckout = (props) => {
+const Checkout = (props) => {
 
     const data = useStaticQuery(graphql`
         {
@@ -20,19 +20,20 @@ const PageCheckout = (props) => {
         }
     `);
 
-    const title = props?.pageContext?.title;
+    // const title = props?.pageContext?.title;
     const generalTitle = data?.wp?.allSettings?.generalSettingsTitle;
 
     //console.log('pageCheckout >>>', props)
 
 
     const CartBuy = localStoreService.getLocal('CartBuy');
+    console.log('CartBuy >>', CartBuy)
 
-    if ( CartBuy === null ) {
-        navigate('/shop');
-    }
+    // if ( CartBuy === null ) {
+    //     navigate('/shop');
+    // }
 
-    console.log('CartBuy >>', CartBuy[0])
+
 
     const [choose, setChoose ] = useState(null);
     const chooseMiningPool = (s) => {
@@ -41,8 +42,8 @@ const PageCheckout = (props) => {
 
     return (
         <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout'>
-            <Layout customClass="section-pad-min" title={ title } desc={ generalTitle } >
-                <BannerLite title={ title } item={{ item: '' , title: `Confirm <br /> order`, style : 'title' }} />
+            <Layout customClass="section-pad-min" title='checkout'  desc={ generalTitle } >
+                <BannerLite title='checkout' item={{ item: '' , title: `Confirm <br /> order`, style : 'title' }} />
                 <Section>
                     <div className="container">
                         <div className="row">
@@ -276,7 +277,7 @@ const PageCheckout = (props) => {
     );
 
 };
-export default PageCheckout;
+export default Checkout;
 // export default () => (
 //     <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout' >
 //         <PageCheckout />
