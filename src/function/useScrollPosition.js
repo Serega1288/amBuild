@@ -30,9 +30,12 @@ export const useScrollPosition = (effect, deps, element, useWindow, wait) => {
             if (wait && !throttleTimeout) throttleTimeout = setTimeout(callBack, wait);
             else callBack();
         };
+        if ( isBrowser ) {
+            window.addEventListener(`scroll`, handleScroll);
+        }
 
-        window.addEventListener(`scroll`, handleScroll);
 
-        return () => window.removeEventListener(`scroll`, handleScroll);
+        return () => {if( isBrowser ) {window.removeEventListener(`scroll`, handleScroll)}};
+
     }, deps);
 };

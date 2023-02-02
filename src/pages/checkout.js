@@ -6,7 +6,7 @@ import BannerLite from '../components/constructor/banner/BannerLite'
 import styled from "styled-components";
 import {AuthLayout} from "../function/AuthLayout";
 // import RegPage from "../pages/sign-up";
-import useForm from "../function/useFormCheckout";
+// import useForm from "../function/useFormCheckout";
 
 const PageCheckout = (props) => {
     // const isBrowser = typeof window !== "undefined"
