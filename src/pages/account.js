@@ -10,29 +10,31 @@ const LoginAccount = () => {
 
 
     return (
-        <Layout title="Account" desc="desc">
-            <Section className="pageLogin d-flex align-items-center">
-                <div className="Login container">
-                    <div className="box">
-                        <h1 className="title">
-                            Account
-                        </h1>
+        <AuthLayout logIn={false} page='account' go='sign-in'>
+            <Layout title="Account" desc="desc">
+                <Section className="pageLogin d-flex align-items-center">
+                    <div className="Login container">
+                        <div className="box">
+                            <h1 className="title">
+                                Account
+                            </h1>
+                        </div>
                     </div>
-                </div>
-            </Section>
-        </Layout>
+                </Section>
+            </Layout>
+        </AuthLayout>
     );
 };
-// export default LoginAccount;
+export default LoginAccount;
 
 
-export default () => {
-    return (
-        <AuthLayout logIn={false} page='account' go='sign-in'>
-            <LoginAccount/>
-        </AuthLayout>
-    )
-};
+// export default () => {
+//     return (
+//         <AuthLayout logIn={false} page='account' go='sign-in'>
+//             <LoginAccount/>
+//         </AuthLayout>
+//     )
+// };
 
 
 

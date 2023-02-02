@@ -8,30 +8,30 @@ import InterSemiBold from '../assets/fonts/Inter/Inter-SemiBold.woff2';
 
 
 const GlobalFonts = createGlobalStyle`
-@font-face {
-    font-family: 'Inter';
-    font-style: normal; 
-    font-weight: 400; 
-    src: url("${Inter}") format("woff2");
-}
-@font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;  
-    src: url("${InterMedium}") format("woff2");
-} 
-@font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;   
-    src: url("${InterSemiBold}") format("woff2");
-}
-@font-face {
-    font-family: 'Inter'; 
-    font-style: normal;
-    font-weight: 700; 
-    src: url("${InterBold}") format("woff2");
-} 
+    @font-face {
+        font-family: 'Inter';
+        font-style: normal; 
+        font-weight: 400; 
+        src: url("${Inter}") format("woff2");
+    }
+    @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;  
+        src: url("${InterMedium}") format("woff2");
+    } 
+    @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 600;   
+        src: url("${InterSemiBold}") format("woff2");
+    }
+    @font-face {
+        font-family: 'Inter'; 
+        font-style: normal;
+        font-weight: 700; 
+        src: url("${InterBold}") format("woff2");
+    } 
 
         h1, h2, h3, h4 {
              
@@ -104,5 +104,6 @@ const GlobalFontsWrap  = memo(() => {
 })
 
 export default GlobalFontsWrap;
+// export default GlobalFonts;
 
 
