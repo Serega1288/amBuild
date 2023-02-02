@@ -14,7 +14,7 @@ import { BoxForm, Section } from '../styles/formSign'
 
 
 const LoginPage = (props) => {
-    const isBrowser = typeof window !== "undefined"
+    // const isBrowser = typeof window !== "undefined"
 
     const RedirectPage = '/account/';
 
@@ -29,12 +29,9 @@ const LoginPage = (props) => {
     const location = props.location.search?.split('=');
     // console.log('page sign in >> 1', location );
 
-    if (!isBrowser) {
-        return;
-    }
 
     return (
-        <AuthLayout logIn={true} page='sign-in' go={location[0] === '?r' ? (location[1]) : 'account' }>
+        <AuthLayout logIn={true} page='sign-in' go={location[0] === '?r' ? (location[1]) : 'account'}>
             <Layout title="Login" desc="desc">
                 <Section className="pageLogin d-flex align-items-center">
                     <div className="Login container">
@@ -51,7 +48,7 @@ const LoginPage = (props) => {
                                            disabled={isLoading}
                                            value={values.garbage}
                                            onChange={captureInput}
-                                           isLoading={isLoading}
+                                           // isLoading={isLoading}
                                            className="garbage"
                                     />
                                     <label>
@@ -61,7 +58,7 @@ const LoginPage = (props) => {
                                                disabled={isLoading}
                                                value={values.email}
                                                onChange={captureInput}
-                                               isLoading={isLoading}
+                                               // isLoading={isLoading}
                                                placeholder="Your email address"
                                             //className={ message?.result === '03' ? ' error' : '' }
                                         />
@@ -73,35 +70,37 @@ const LoginPage = (props) => {
                                                disabled={isLoading}
                                                value={values.password}
                                                onChange={captureInput}
-                                               isLoading={isLoading}
+                                               // isLoading={isLoading}
                                                placeholder="Password"
                                             //className={ message?.result === '04' ? ' error' : '' }
                                         />
                                         <span className="text-right d-block">
-                                        <Link className="link-form" to={`/reset-pass/${location[0] === '?r' ? ( `?r=` + location[1]) : '' }`} >Lost Password?</Link>
-                                    </span>
+                                            <Link className="link-form"
+                                                  to={`/reset-pass/${location[0] === '?r' ? (`?r=` + location[1]) : ''}`}>Lost Password?</Link>
+                                        </span>
 
                                     </label>
                                     <button disabled={isLoading} type="submit" className="style-3 btn w100">
-                                        { isLoading ? 'Sign In...' :  'Sign In'  }
+                                        {isLoading ? 'Sign In...' : 'Sign In'}
                                     </button>
                                     <div className="Boxlink">
                                         <span>Don’t have an account?</span>
-                                        <Link to={`/sign-up/${location[0] === '?r' ? ( `?r=` + location[1]) : '' }`}>Sign Up</Link>
+                                        <Link to={`/sign-up/${location[0] === '?r' ? (`?r=` + location[1]) : ''}`}>Sign
+                                            Up</Link>
                                     </div>
                                     <h3 className={` statusInfo text-center 
-                                    ${error || message ?  ' active '  : ''}
-                                    ${error ?  ' error '  : ''}
-                                    ${
+                                        ${error || message ? ' active ' : ''}
+                                        ${error ? ' error ' : ''}
+                                        ${
                                         message?.result === '01' ||
                                         message?.result === '02' ||
                                         message?.result === '03' ||
                                         message?.result?.status === 400 ||
-                                        message?.result === '04' ?  'error'  : 'done'
+                                        message?.result === '04' ? 'error' : 'done'
                                     }
-                                `}>
-                                        {error ?  error  : ''}
-                                        {message ? message?.message  : ''}
+                                    `}>
+                                        {error ? error : ''}
+                                        {message ? message?.message : ''}
                                     </h3>
                                 </form>
                             </BoxForm>

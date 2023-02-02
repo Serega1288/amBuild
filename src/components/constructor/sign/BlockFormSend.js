@@ -14,7 +14,7 @@ const BlockFormSend = (d, email, type, location) => {
                        disabled={isLoading}
                        value={values.garbage}
                        onChange={captureInput}
-                       isLoading={isLoading}
+                       // isLoading={isLoading}
                        className="garbage"
                 />
                 <label>
@@ -24,7 +24,7 @@ const BlockFormSend = (d, email, type, location) => {
                            disabled={isLoading}
                            value={values.code}
                            onChange={captureInput}
-                           isLoading={isLoading}
+                           // isLoading={isLoading}
                            placeholder="Your code"
                         //className={ message?.result === '03' ? ' error' : '' }
                     />

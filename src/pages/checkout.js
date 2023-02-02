@@ -124,7 +124,7 @@ const PageCheckout = (props) => {
 
     if (isBrowser) {
         return (
-            <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout'>
+            // <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout'>
 
                 <Layout customClass="section-pad-min" title='checkout'  desc={ generalTitle } >
                     <BannerLite title='checkout' item={{ item: '' , title: `Confirm <br /> order`, style : 'title' }} />
@@ -152,7 +152,7 @@ const PageCheckout = (props) => {
                                        disabled={isLoading}
                                        value={values.garbage}
                                        onChange={captureInput}
-                                       isLoading={isLoading}
+                                       // isLoading={isLoading}
                                        className="garbage"
                                 />
                                 <div className="col">
@@ -178,7 +178,7 @@ const PageCheckout = (props) => {
                                                                    disabled={isLoading}
                                                                    value={values.pool}
                                                                    onChange={captureInput}
-                                                                   isLoading={isLoading}
+                                                                   // isLoading={isLoading}
                                                                    className="hidden-radio" />
                                                             <label for={`chooseMiningPool-${index}`} onClick={() => chooseMiningPool(item.option) }
                                                                   className={`btn style-4 ${ choose === item.option ? 'active' : '' }`}>
@@ -409,7 +409,7 @@ const PageCheckout = (props) => {
                         </div>
                     </Section>
                 </Layout>
-            </AuthLayout>
+            // </AuthLayout>
         );
     }
 };

@@ -25,15 +25,13 @@ const LoginAccount = () => {
 };
 // export default LoginAccount;
 
-const isBrowser = typeof window !== "undefined"
+
 export default () => {
-    if( isBrowser ) {
-        return (
-            <AuthLayout logIn={false} page='account' go='sign-in'>
-                <LoginAccount/>
-            </AuthLayout>
-        )
-    }
+    return (
+        <AuthLayout logIn={false} page='account' go='sign-in'>
+            <LoginAccount/>
+        </AuthLayout>
+    )
 };
 
 

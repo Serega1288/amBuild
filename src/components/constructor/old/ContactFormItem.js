@@ -67,7 +67,7 @@ const ContactFormItem = ( { item, ind, c } ) => {
                                 disabled={isLoading}
                                 values={values}
                                 onChange={captureInput}
-                                isLoading={isLoading}
+                                // isLoading={isLoading}
                             />
                         ))}
                     </form>
