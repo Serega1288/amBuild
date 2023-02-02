@@ -221,7 +221,7 @@ ul {
         border-radius: 5rem;
         padding: 1.6rem 2.4rem;
         background-color: rgba(0,0,0,0);
-        &:hover, &:focus {
+        &:hover, &:focus, &.active {
           color: #fff;
           background-color: #000;
         }
