@@ -14,7 +14,7 @@ const Layout = ( {children, title, desc, customClass } ) => {
             <Helmet>
                 <title>{ title } | { desc }</title>
             </Helmet>
-            <GlobalFonts />
+
             <GlobalCols />
             <GlobalStyles />
             <Header/> 

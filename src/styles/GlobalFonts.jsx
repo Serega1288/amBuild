@@ -1,3 +1,4 @@
+import React, {memo} from 'react'
 import {createGlobalStyle} from "styled-components";
 import {maxCol} from "../function/SizeCol";
 import Inter from '../assets/fonts/Inter/Inter-Regular.woff2';
@@ -22,7 +23,7 @@ const GlobalFonts = createGlobalStyle`
 @font-face {
     font-family: 'Inter';
     font-style: normal;
-    font-weight: 600;  
+    font-weight: 600;   
     src: url("${InterSemiBold}") format("woff2");
 }
 @font-face {
@@ -94,4 +95,14 @@ const GlobalFonts = createGlobalStyle`
          }
 
 `;
-export default GlobalFonts;
+
+
+
+const GlobalFontsWrap  = memo(() => {
+    console.log('>>')
+    return <GlobalFonts />
+})
+
+export default GlobalFontsWrap;
+
+

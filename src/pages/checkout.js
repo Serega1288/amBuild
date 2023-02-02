@@ -6,6 +6,7 @@ import BannerLite from '../components/constructor/banner/BannerLite'
 import styled from "styled-components";
 import {AuthLayout} from "../function/AuthLayout";
 // import RegPage from "../pages/sign-up";
+import useForm from "../function/useFormCheckout";
 
 const PageCheckout = (props) => {
     const isBrowser = typeof window !== "undefined"
@@ -62,7 +63,7 @@ const PageCheckout = (props) => {
 
 
     const buy = (choose) => {
-        console.log('buy >', choose)
+        // console.log('buy >', choose)
         // if(choose === null) {
         //     setPoolValid(0)
         // } else {
@@ -119,269 +120,298 @@ const PageCheckout = (props) => {
         // console.log('step end >>' , step)
     }
 
+    const { values, captureInput, submitForm, isLoading, error, message} = useForm(Cart);
 
-    if (!isBrowser) {
-        return;
-    }
-    return (
-        <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout'>
+    if (isBrowser) {
+        return (
+            <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout'>
 
-            <Layout customClass="section-pad-min" title='checkout'  desc={ generalTitle } >
-                <BannerLite title='checkout' item={{ item: '' , title: `Confirm <br /> order`, style : 'title' }} />
-                <Section>
-                    <div className="container">
-                        <form className="form-checkout row">
-                            <input type="hidden" value={Cart} name='product'/>
-                            <div className="col">
+                <Layout customClass="section-pad-min" title='checkout'  desc={ generalTitle } >
+                    <BannerLite title='checkout' item={{ item: '' , title: `Confirm <br /> order`, style : 'title' }} />
+                    <Section>
+                        <div className="container">
 
-                                <div className="blocks itemOrder">
-                                    <div className="title">
-                                        Mining Pool <br />
-                                        Payment
-                                    </div>
-                                    <div className="WrapPool row">
-                                        <div className="col d-flex align-items-center">
-                                            <strong>
-                                                Choose Mining Pool:
-                                            </strong>
+                            <h3 className={` statusInfo text-center 
+                                    ${error || message ?  ' active '  : ''}
+                                    ${error ?  ' error '  : ''}
+                                    ${
+                                message?.result === '01' ||
+                                message?.result === '02' ||
+                                message?.result === '03' ||
+                                message?.result?.status === 400 ||
+                                message?.result === '04' ?  'error'  : 'done'
+                            } 
+                                `}>
+                                {error ?  error  : ''}
+                                {message ? message?.message  : ''}
+                            </h3>
+
+                            <form  onSubmit={submitForm} className="form-checkout row">
+                                <input type="garbage"
+                                       name="garbage"
+                                       disabled={isLoading}
+                                       value={values.garbage}
+                                       onChange={captureInput}
+                                       isLoading={isLoading}
+                                       className="garbage"
+                                />
+                                <div className="col">
+
+                                    <div className="blocks itemOrder">
+                                        <div className="title">
+                                            Mining Pool <br />
+                                            Payment
                                         </div>
-                                        <div className="col-auto">
-                                            <div className="WrapPoolBtn">
-                                                {Cart[0]?.order.chooseMiningPool?.map( (item, index) => (
-                                                    <span key={index}>
-                                                        <input required name="chooseMiningPool" id={`chooseMiningPool-${index}`} type="radio" className="hidden-radio" />
-                                                        <label for={`chooseMiningPool-${index}`} onClick={() => chooseMiningPool(item.option) }
-                                                              className={`btn style-4 ${ choose === item.option ? 'active' : '' }`}>
-                                                            { item.title }
-                                                        </label>
-                                                    </span>
-                                                    
-                                                ))}
+                                        <div className="WrapPool row">
+                                            <div className="col d-flex align-items-center">
+                                                <strong>
+                                                    Choose Mining Pool:
+                                                </strong>
+                                            </div>
+                                            <div className="col-auto">
+                                                <div className="WrapPoolBtn">
+                                                    {Cart[0]?.order.chooseMiningPool?.map( (item, index) => (
+                                                        <span key={index}>
+                                                            <input required name="chooseMiningPool"
+                                                                   id={`chooseMiningPool-${index}`}
+                                                                   type="radio"
+                                                                   disabled={isLoading}
+                                                                   value={values.pool}
+                                                                   onChange={captureInput}
+                                                                   isLoading={isLoading}
+                                                                   className="hidden-radio" />
+                                                            <label for={`chooseMiningPool-${index}`} onClick={() => chooseMiningPool(item.option) }
+                                                                  className={`btn style-4 ${ choose === item.option ? 'active' : '' }`}>
+                                                                { item.title }
+                                                            </label>
+                                                        </span>
+
+                                                    ))}
+                                                </div>
                                             </div>
                                         </div>
+                                        <div className="subTitle">
+                                            <strong>Attention:</strong>
+                                        </div>
+                                        <div className="attentions">
+                                            {Cart[0]?.order.attention?.map( (item, index) => (
+                                                <div className="attention">
+                                                    { item.text }
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
-                                    <div className="subTitle">
-                                        <strong>Attention:</strong>
-                                    </div>
-                                    <div className="attentions">
-                                        {Cart[0]?.order.attention?.map( (item, index) => (
-                                            <div className="attention">
-                                                { item.text }
+
+                                    <div className="blocks itemOrder">
+                                        <div className="title">
+                                            Order Information
+                                        </div>
+                                        <div className="table">
+
+                                            <div className="tableItem tableTitle">
+                                                <div className="row">
+                                                    <div className="col">
+                                                        <div className="productTitle">
+                                                            Service/Product
+                                                        </div>
+                                                    </div>
+                                                    <div className="col">
+                                                        <div className="price">
+                                                            Price
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-auto">
+                                                        <div className="amount">
+                                                            Amount
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-auto">
+                                                        <div className="day">
+                                                            Days
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-auto">
+                                                        <div className="total">
+                                                            Total
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        ))}
+                                            <div className="tableItem">
+                                                <div className="row">
+                                                    <div className="col">
+                                                        <div className="productTitle">
+                                                            {Cart[0]?.category.nodes?.map( (item, index) => (
+                                                                <>
+                                                                    {
+                                                                        item.name === 'Cloud mining' ? '' : item.name
+                                                                    }
+                                                                </>
+                                                            ))}&nbsp;
+                                                            {Cart[0]?.title}
+                                                        </div>
+                                                    </div>
+                                                    <div className="col">
+                                                        <div className="price">
+                                                            $ {Cart[0]?.order.hashrateFee}/T/Days
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-auto">
+                                                        <div className="amount">
+                                                            <span onClick={() => ClickAmount('min')}>-</span>
+                                                            <div>
+                                                                {
+                                                                    Cart[0].step * 10 + 'T'
+                                                                }
+                                                                {/*{*/}
+                                                                {/*    console.log('-->', Cart[0])*/}
+                                                                {/*}*/}
+                                                            </div>
+                                                            <span onClick={() => ClickAmount('plus')}>+</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-auto">
+                                                        <div className="day">
+                                                            {Cart[0]?.order.days}
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-auto">
+                                                        <div className="total">
+                                                            <div>$&nbsp;
+                                                                <span>{ (Cart[0]?.order.hashrateFee * Cart[0]?.order.days * Cart[0]?.step * 10).toFixed(2) }</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="tableItem">
+                                                <div className="row">
+                                                    <div className="col">
+                                                        <div className="productTitle">
+                                                            Service Fee
+                                                        </div>
+                                                    </div>
+                                                    <div className="col">
+                                                        <div className="price">
+                                                            $ {Cart[0]?.order.serviceFee}/T/Days
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-auto">
+                                                        <div className="amount">
+                                                            OT
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-auto">
+                                                        <div className="day">
+                                                            {Cart[0]?.order.days}
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-auto">
+                                                        <div className="total">
+                                                            <div>$&nbsp;
+                                                                <span>
+                                                                    {Cart[0]?.order.serviceFee * Cart[0]?.order.days * Cart[0]?.step * 10 }
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <p>
+                                            <strong>Note:</strong>
+                                            The remaining ransaction fees can be paid manually or be deducted automatically from your fund.
+                                        </p>
                                     </div>
                                 </div>
+                                <div className="col-auto">
+                                    <div className="blocks formOrder">
 
-                                <div className="blocks itemOrder">
-                                    <div className="title">
-                                        Order Information
-                                    </div>
-                                    <div className="table">
-
-                                        <div className="tableItem tableTitle">
+                                        <a href={Cart[0]?.url} className="itemProduct d-block">
                                             <div className="row">
-                                                <div className="col">
-                                                    <div className="productTitle">
-                                                        Service/Product
-                                                    </div>
-                                                </div>
-                                                <div className="col">
-                                                    <div className="price">
-                                                        Price
-                                                    </div>
-                                                </div>
                                                 <div className="col-auto">
-                                                    <div className="amount">
-                                                        Amount
+                                                    <div  style={{width: '14rem'}} className="img">
+                                                        <img src={Cart[0]?.Img} alt=""/>
                                                     </div>
                                                 </div>
-                                                <div className="col-auto">
-                                                    <div className="day">
-                                                        Days
-                                                    </div>
-                                                </div>
-                                                <div className="col-auto">
-                                                    <div className="total">
-                                                        Total
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="tableItem">
-                                            <div className="row">
-                                                <div className="col">
-                                                    <div className="productTitle">
+                                                <div className="col d-flex flex-column justify-content-center">
+                                                    <div className="cat">
                                                         {Cart[0]?.category.nodes?.map( (item, index) => (
                                                             <>
                                                                 {
                                                                     item.name === 'Cloud mining' ? '' : item.name
                                                                 }
                                                             </>
-                                                        ))}&nbsp;
+                                                        ))}
+                                                    </div>
+                                                    <div className="title">
                                                         {Cart[0]?.title}
                                                     </div>
                                                 </div>
-                                                <div className="col">
-                                                    <div className="price">
-                                                        $ {Cart[0]?.order.hashrateFee}/T/Days
-                                                    </div>
-                                                </div>
-                                                <div className="col-auto">
-                                                    <div className="amount">
-                                                        <span onClick={() => ClickAmount('min')}>-</span>
-                                                        <div>
-                                                            {
-                                                                Cart[0].step * 10 + 'T'
-                                                            }
-                                                            {
-                                                                console.log('-->', Cart[0])
-                                                            }
-                                                        </div>
-                                                        <span onClick={() => ClickAmount('plus')}>+</span>
-                                                    </div>
-                                                </div>
-                                                <div className="col-auto">
-                                                    <div className="day">
-                                                        {Cart[0]?.order.days}
-                                                    </div>
-                                                </div>
-                                                <div className="col-auto">
-                                                    <div className="total">
-                                                        <div>$&nbsp;
-                                                            <span>{ (Cart[0]?.order.hashrateFee * Cart[0]?.order.days * Cart[0]?.step * 10).toFixed(2) }</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="tableItem">
+                                        </a>
+
+                                        <div className="WrapOrder">
                                             <div className="row">
                                                 <div className="col">
-                                                    <div className="productTitle">
-                                                        Service Fee
+                                                    <div className="WrapOrderTitle">
+                                                        Hashrate Fee:
                                                     </div>
                                                 </div>
+                                                <div className="col-auto">
+                                                    <div className="WrapOrderValue">
+                                                        <strong>$ <span>{(Cart[0]?.price*Cart[0]?.step).toFixed(2)}</span></strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="WrapOrder">
+                                            <div className="row">
                                                 <div className="col">
-                                                    <div className="price">
-                                                        $ {Cart[0]?.order.serviceFee}/T/Days
+                                                    <div className="WrapOrderTitle">
+                                                        Service Fee:
                                                     </div>
                                                 </div>
                                                 <div className="col-auto">
-                                                    <div className="amount">
-                                                        OT
-                                                    </div>
-                                                </div>
-                                                <div className="col-auto">
-                                                    <div className="day">
-                                                        {Cart[0]?.order.days}
-                                                    </div>
-                                                </div>
-                                                <div className="col-auto">
-                                                    <div className="total">
-                                                        <div>$&nbsp;
-                                                            <span>
-                                                                {Cart[0]?.order.serviceFee * Cart[0]?.order.days * Cart[0]?.step * 10 }
-                                                            </span>
-                                                        </div>
+                                                    <div className="WrapOrderValue">
+                                                        <strong>$ <span>{Cart[0]?.order.serviceFee * Cart[0]?.order.days * Cart[0]?.step * 10 }</span></strong>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
-                                    </div>
-                                    <p>
-                                        <strong>Note:</strong>
-                                        The remaining ransaction fees can be paid manually or be deducted automatically from your fund.
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="col-auto">
-                                <div className="blocks formOrder">
-
-                                    <a href={Cart[0]?.url} className="itemProduct d-block">
-                                        <div className="row">
-                                            <div className="col-auto">
-                                                <div  style={{width: '14rem'}} className="img">
-                                                    <img src={Cart[0]?.Img} alt=""/>
-                                                </div>
-                                            </div>
-                                            <div className="col d-flex flex-column justify-content-center">
-                                                <div className="cat">
-                                                    {Cart[0]?.category.nodes?.map( (item, index) => (
-                                                        <>
-                                                            {
-                                                                item.name === 'Cloud mining' ? '' : item.name
-                                                            }
-                                                        </>
-                                                    ))}
-                                                </div>
-                                                <div className="title">
-                                                    {Cart[0]?.title}
-                                                </div>
-                                            </div>
+                                        <div className="WrapOrderTotalValue">
+                                            Order Total:
+                                            <strong>$&nbsp;
+                                                <span>
+                                                    {(Cart[0]?.price*Cart[0]?.step + ( Cart[0]?.order.serviceFee * Cart[0]?.order.days * Cart[0]?.step * 10 )).toFixed(2) }
+                                                </span>
+                                            </strong>
                                         </div>
-                                    </a>
 
-                                    <div className="WrapOrder">
-                                        <div className="row">
-                                            <div className="col">
-                                                <div className="WrapOrderTitle">
-                                                    Hashrate Fee:
-                                                </div>
-                                            </div>
-                                            <div className="col-auto">
-                                                <div className="WrapOrderValue">
-                                                    <strong>$ <span>{(Cart[0]?.price*Cart[0]?.step).toFixed(2)}</span></strong>
-                                                </div>
-                                            </div>
+                                        <div className="WrapBtnBuy">
+                                            <button onClick={()=>buy(choose)} className="BtnBuy btn style-3 w100">Submit</button>
                                         </div>
-                                    </div>
 
-                                    <div className="WrapOrder">
-                                        <div className="row">
-                                            <div className="col">
-                                                <div className="WrapOrderTitle">
-                                                    Service Fee:
-                                                </div>
-                                            </div>
-                                            <div className="col-auto">
-                                                <div className="WrapOrderValue">
-                                                    <strong>$ <span>{Cart[0]?.order.serviceFee * Cart[0]?.order.days * Cart[0]?.step * 10 }</span></strong>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
-
-                                    <div className="WrapOrderTotalValue">
-                                        Order Total:
-                                        <strong>$&nbsp;
-                                            <span>
-                                                {(Cart[0]?.price*Cart[0]?.step + ( Cart[0]?.order.serviceFee * Cart[0]?.order.days * Cart[0]?.step * 10 )).toFixed(2) }
-                                            </span>
-                                        </strong>
+                                    <div className="acceptList">
+                                        {list.acceptList.map( (item, index) => (
+                                            <label for={`list-item-${index}`} key={index} className="list-item">
+                                                <input required type="checkbox" id={`list-item-${index}`} />
+                                                I accept <a target="_blank" href={item.url.uri} >{item.name}</a>
+                                            </label>
+                                        ))}
                                     </div>
-                                    
-                                    <div className="WrapBtnBuy">
-                                        <button onClick={()=>buy(choose)} className="BtnBuy btn style-3 w100">Submit</button>
-                                    </div>
-
                                 </div>
-                                <div className="acceptList">
-                                    {list.acceptList.map( (item, index) => (
-                                        <label for={`list-item-${index}`} key={index} className="list-item">
-                                            <input required type="checkbox" id={`list-item-${index}`} />
-                                            I accept <a target="_blank" href={item.url.uri} >{item.name}</a>
-                                        </label>
-                                    ))}
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </Section>
-            </Layout>
-        </AuthLayout>
-    );
-
+                            </form>
+                        </div>
+                    </Section>
+                </Layout>
+            </AuthLayout>
+        );
+    }
 };
 export default PageCheckout;
 // export default () => (

@@ -602,7 +602,7 @@ exports.createPages = ({graphql, actions}) => {
 
             } else {
 
-                console.log('templateName >>', item.template.templateName)
+                // console.log('templateName >>', item.template.templateName)
 
                 if ( item.template.templateName === 'Constructor') {
                     createPage({
@@ -643,8 +643,6 @@ exports.createPages = ({graphql, actions}) => {
                         context: item,
                     })
                 }
-
-
             }
 
         });
