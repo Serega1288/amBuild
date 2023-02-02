@@ -6,9 +6,6 @@ import {AuthLayout} from "../function/AuthLayout";
 
 
 const LoginAccount = () => {
-
-
-
     return (
         <AuthLayout logIn={false} page='account' go='sign-in'>
             <Layout title="Account" desc="desc">

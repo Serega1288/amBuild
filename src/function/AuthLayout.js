@@ -17,12 +17,14 @@ export const AuthLayout = ({children, page, go, logIn, redirectGoLogIn, href}) =
 
     if ( instanceAuthService.isLogined() === logIn ) {
 
-          if ( redirectGoLogIn ) {
-              navigate('/' + go + '/?r=' + redirectGoLogIn)
-          } else {
-              navigate('/' + go + '/')
-          }
-          return null
+        if ( typeof window !== "undefined" ) {
+            if ( redirectGoLogIn ) {
+                navigate('/' + go + '/?r=' + redirectGoLogIn)
+            } else {
+                navigate('/' + go + '/')
+            }
+        }
+        return null
     }
 
     // if ( page === 'account' ) {

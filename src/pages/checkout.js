@@ -208,7 +208,6 @@ const PageCheckout = (props) => {
                                             Order Information
                                         </div>
                                         <div className="table">
-
                                             <div className="tableItem tableTitle">
                                                 <div className="row">
                                                     <div className="col">
