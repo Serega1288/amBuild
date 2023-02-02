@@ -90,12 +90,12 @@ const PageCheckout = (props) => {
         // console.log('ClickAmount start >>', op, Cart )
 
         if ( op === 'min' ) {
-            step = Cart[0].step - 1
+            step = Cart[0]?.step - 1
             // setStep(step - 1)
             // Cart[0].step = step
         }
         if ( op === 'plus' ) {
-            step = Cart[0].step + 1
+            step = Cart[0]?.step + 1
             // setStep(step + 1)
             // Cart[0].step = step
         }
@@ -262,7 +262,7 @@ const PageCheckout = (props) => {
                                                             <span onClick={() => ClickAmount('min')}>-</span>
                                                             <div>
                                                                 {
-                                                                    Cart[0].step * 10 + 'T'
+                                                                    Cart[0]?.step * 10 + 'T'
                                                                 }
                                                                 {/*{*/}
                                                                 {/*    console.log('-->', Cart[0])*/}
