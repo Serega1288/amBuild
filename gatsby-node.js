@@ -1,4 +1,5 @@
 const path = require('path');
+const fetch = require('cross-fetch');
 
 
 const pageCheckout = path.resolve(`./src/templates/PageCheckout.js`)
@@ -6,6 +7,10 @@ const pageTemplate = path.resolve(`./src/templates/Page.js`)
 const pageTemplateConstructor = path.resolve(`./src/templates/PageConstructor.js`)
 const categoriesProduct = path.resolve(`./src/templates/Categories.js`)
 const pageProduct = path.resolve(`./src/templates/pageProduct.js`)
+const Blog = path.resolve(`./src/templates/Blog.js`)
+const BlogCategory = path.resolve(`./src/templates/BlogCategory.js`)
+const pagePost = path.resolve(`./src/templates/pagePost.js`)
+
 
 // const SignUp = path.resolve(`./src/templates/PageSignUp.js`)
 // const SignIn = path.resolve(`./src/templates/PageSignIn.js`)
@@ -37,6 +42,49 @@ const pageProduct = path.resolve(`./src/templates/pageProduct.js`)
 //         })
 //     })
 // }
+
+
+exports.createSchemaCustomization = ({ actions }) => {
+    const { createTypes } = actions
+    const typeDefs = `
+    type WpPost implements Node {
+      related_posts: WpNodePost!
+    }
+
+    type WpNodePost implements Node {
+      nodes: [WpPost]
+    }
+  `
+    createTypes(typeDefs)
+}
+
+const WORDPRESS_BASE = process.env.WORDPRESS_BASE
+
+exports.createResolvers = ({ createResolvers, schema }) =>
+    createResolvers({
+        WpPost: {
+            related_posts: {
+                resolve: async (source, args, context, info) => {
+                    const { databaseId } = source
+
+                    const response = await fetch(
+                        `${WORDPRESS_BASE}/wp-json/yarpp/v1/related/${databaseId}`
+                    ).then(res => res.json())
+
+                    if (response && response.length) {
+                        const result = await context.nodeModel.runQuery({
+                            query: {
+                                filter: { databaseId: { in: response.map(({ id }) => id) } },
+                            },
+                            type: 'WpPost',
+                        })
+                        return { nodes: result }
+                    } else return { nodes: [] }
+                },
+            },
+        },
+    })
+
 
 exports.createPages = ({graphql, actions}) => {
     const {createPage} = actions;
@@ -528,6 +576,59 @@ exports.createPages = ({graphql, actions}) => {
               } 
             }
           }
+          
+          post:allWpPost {
+            nodes {
+              uri
+              title 
+              id
+              databaseId
+              content
+              author {
+                node {
+                  ACFuser {
+                    avatar {
+                      localFile {
+                        publicURL
+                      }
+                    }
+                    nickname 
+                  }
+                }
+              }
+              date(formatString: "MMMM DD, Y")
+              ACFpost {
+                helpfulYes
+                helpfulNo
+              } 
+              related_posts {
+                  nodes {
+                    title
+                    slug
+                    uri
+                  }
+              }
+            }
+          }
+          
+          BlogCategory:allWpCategory {
+            nodes {
+              id
+              uri
+              name
+              posts {
+                nodes {
+                  title 
+                  uri 
+                  ACFpost {
+                    helpfulYes
+                    helpfulNo
+                    briefDescription
+                  }
+                } 
+              }
+            }
+          }
         } 
     `).then(results => {
         if (results.error) {
@@ -559,6 +660,20 @@ exports.createPages = ({graphql, actions}) => {
 
 
         // categoty  categoryTemplate
+
+        // results.data?.post.nodes.forEach(product => {
+        //
+        //     createPage({
+        //         path: product.uri,
+        //         component: pageProduct,
+        //         context: product,
+        //     })
+        //
+        // });
+
+
+
+
 
         results.data?.products.nodes.forEach(product => {
 
@@ -617,12 +732,13 @@ exports.createPages = ({graphql, actions}) => {
                         context: item,
                     })
                 }
-                // else if ( item.template.templateName === 'Sign-up') {
-                //     createPage({
-                //         path: `${item.slug}`,
-                //         component: SignUp,
-                //         context: item,
-                //     })
+                else if ( item.template.templateName === 'Page Blog') {
+                    createPage({
+                        path: `${item.slug}`,
+                        component: Blog,
+                        context: item,
+                    })
+                }
                 // } else if ( item.template.templateName === 'Sign-in') {
                 //     createPage({
                 //         path: `${item.slug}`,
@@ -648,7 +764,51 @@ exports.createPages = ({graphql, actions}) => {
         });
 
 
+        results.data?.BlogCategory.nodes.forEach(category => {
+
+            createPage({
+                path: category.uri,
+                component: BlogCategory,
+                context: category,
+            })
+
+        });
+
+        results.data?.post.nodes.forEach(post => {
+            // console.log('post.uri', post.uri)
+            createPage({
+                path: post.uri,
+                component: pagePost,
+                context: post,
+            })
+
+        });
+
 
 
     });
 };
+
+//
+// exports.createSchemaCustomization = ({ actions }) => {
+//     const { createTypes } = actions
+//     const typeDefs = `
+//     type WpPost implements Node {
+//       post_id: ID!
+//       post_title: String!
+//       slug: String!
+//       related_posts: WpNodePost!
+//     }
+//
+//     type Post implements Node {
+//       post_id: ID!
+//       post_title: String!
+//       slug: String!
+//     }
+//
+//     type WpNodePost implements Node {
+//       nodes: [Post]
+//     }
+//   `
+//     createTypes(typeDefs)
+// }

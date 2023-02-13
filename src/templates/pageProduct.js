@@ -315,11 +315,11 @@ const PageProduct = (props) => {
                                         <div className="col-12">
                                             <div className="categoryProduct">
                                                 {props.pageContext.productCategories.nodes?.map( (item, index) => (
-                                                    <>
+                                                    <span key={`productCategories-${index}`}>
                                                         {
                                                             item.name === 'Cloud mining' ? '' : item.name
                                                         }
-                                                    </>
+                                                    </span>
                                                 ))}
                                             </div>
                                         </div>
@@ -340,7 +340,7 @@ const PageProduct = (props) => {
 
                                     <div className="WrapTopDescriptionList">
                                         {ACFpageProductsTopDetails?.wraptopdescriptionlist?.map( (item, index) => (
-                                            <div className="descWrap d-flex align-items-center">
+                                            <div key={`ACFpageProductsTopDetails-${index}`} className="descWrap d-flex align-items-center">
                                                 <div className="WrapDescTitle">{item.title}:</div>
                                                 <div className="WrapDescValue">
                                                     {
@@ -391,7 +391,7 @@ const PageProduct = (props) => {
                                     <div className="WrapBoxProductOption">
                                         <div className="row">
                                             {ACFpageProductsTopDetails.options?.map( (item, index) => (
-                                                <div className="col-4">
+                                                <div key={`ACFpageProductsTopDetails-${index}`} className="col-4">
                                                     <div className="item">
                                                         <div className="title">{item.title}</div>
                                                         <div className="text"><strong>{item.valuevalue}</strong></div>
@@ -424,7 +424,7 @@ const PageProduct = (props) => {
                             <h2 className="title">{ACFdescription.descriptionTitle}</h2>
                             <div className="row">
                                 {ACFdescription.descriptionList?.map( (item, index) => (
-                                    <div className="col-6 col-md-3">
+                                    <div key={`ACFdescription-${index}`} className="col-6 col-md-3">
                                         <div className="descWrap">
                                             <div className="WrapDescTitle">{item.title}</div>
                                             <div className="WrapDescValue">

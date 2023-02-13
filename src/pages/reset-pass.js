@@ -89,16 +89,16 @@ const ResetPass = (props) => {
                                                         In</Link>
                                                 </div>
                                                 <h3 className={` statusInfo text-center 
-                                            ${error || message ? ' active ' : ''}
-                                            ${error ? ' error ' : ''}
-                                            ${
-                                                    message?.result === '01' ||
-                                                    message?.result === '02' ||
-                                                    message?.result === '03' ||
-                                                    message?.result?.status === 400 ||
-                                                    message?.result === '04' ? 'error' : 'done'
-                                                }
-                                            `}>
+                                                ${error || message ? ' active ' : ''}
+                                                ${error ? ' error ' : ''}
+                                                ${
+                                                        message?.result === '01' ||
+                                                        message?.result === '02' ||
+                                                        message?.result === '03' ||
+                                                        message?.result?.status === 400 ||
+                                                        message?.result === '04' ? 'error' : 'done'
+                                                    }
+                                                `}>
                                                     {error ? error : ''}
                                                     {message ? message?.message : ''}
                                                 </h3>

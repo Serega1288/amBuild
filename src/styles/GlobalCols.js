@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import {minCol} from "../function/SizeCol";
+import {maxCol, minCol} from "../function/SizeCol";
 
 
 const GlobalCols = createGlobalStyle` 
@@ -52,16 +52,26 @@ const GlobalCols = createGlobalStyle`
     display:flex;
     flex-wrap:wrap;
     margin-top:calc(-1 * var(--bs-gutter-y));
-    margin-right:calc(-.5 * var(--bs-gutter-x));
-    margin-left:calc(-.5 * var(--bs-gutter-x)) 
+    
+      margin-right:calc( -1 * var(--bs-gutter-x));
+      margin-left:calc( -1 * var(--bs-gutter-x));
+      @media(max-width: ${maxCol.sm}) {
+         margin-right:calc(-.5 * var(--bs-gutter-x));
+         margin-left:calc(-.5 * var(--bs-gutter-x)) 
+      } 
 }
 .row>* {
     box-sizing:border-box;
     flex-shrink:0;
     width:100%;
     max-width:100%;
-    padding-right:calc(var(--bs-gutter-x) * .5);
-    padding-left:calc(var(--bs-gutter-x) * .5);
+    
+    padding-right:calc(var(--bs-gutter-x) ); 
+    padding-left:calc(var(--bs-gutter-x) );
+    @media(max-width: ${maxCol.sm}) {
+      padding-right:calc(var(--bs-gutter-x) * .5);
+      padding-left:calc(var(--bs-gutter-x) * .5);
+    }
     margin-top:var(--bs-gutter-y)
 }
 .col{flex:1 0 0}

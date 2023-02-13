@@ -1,7 +1,7 @@
 import {Link} from "gatsby";
 import React from "react";
 
-const FooterMenuUL = ({menu}) => {
+const FooterMenuUL = ({menu, t}) => {
     return (
         <>
             <ul className="ul-clear box-menu-ul">
@@ -20,9 +20,7 @@ const FooterMenuUL = ({menu}) => {
                             </>
                         ) : null }
                     </li>
-
-                ))
-                }
+                ))}
             </ul>
         </>
 

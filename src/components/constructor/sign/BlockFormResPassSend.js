@@ -1,6 +1,6 @@
 import React from "react"
 import {Link} from "gatsby"
-import userFormResPass from "../../../function/userFormResPass"
+import userFormResPass from "../../../function/useFormResPass"
 
 const BlockFormSend = (d, email, type, location) => {
     const { values, captureInput, submitForm, isLoading, error, message} = userFormResPass(d, email, type);

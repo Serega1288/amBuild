@@ -1,7 +1,41 @@
 import styled from "styled-components";
 import {maxCol, minCol} from "../function/SizeCol";
 
-const Section = styled.section`
+const Section = styled.section` 
+         &.black {
+           .item {
+             background: #000000;
+           }
+           .title {
+             color: #fff;
+           }
+         }
+         &.post {
+           padding-top: 8rem;
+           padding-bottom: 7rem;
+           + .post {
+             padding-top: 0;
+           }
+           .swiper-slide {
+             width: 31.3rem;
+           }
+           .item {
+             padding: 4rem 3rem;
+             max-width: 31.3rem;
+             min-height: 24rem;
+             .title {
+               font-weight: 600;
+               font-size: 2.8rem;
+             }
+           }
+           .block-title {
+             font-size: 2.8rem;
+             font-weight: 500;
+           }
+           .text {
+             padding-top: 0rem !important;
+           }
+         }
          .icon-img {
             border-radius: 50%;
             overflow: hidden; 

@@ -151,7 +151,7 @@ ul {
         }
     }
 }
-.anim, a, .btn, .btn:before, .btn:after , input, a:after, a:before, a div {
+.anim, a, .a, .btn, .btn svg, .btn path, .btn:before, .btn:after , input, a:after, a:before, a div {
     transition: all 0.5s ease;  
 }
   
@@ -213,7 +213,7 @@ ul {
             color: #000;
         }
     }
-      &.style-4 {
+      &.style-4, &.style-5 {
         font-size: 1.6rem;
         border: 1px solid #000;
         color: #000;
@@ -221,9 +221,22 @@ ul {
         border-radius: 5rem;
         padding: 1.6rem 2.4rem;
         background-color: rgba(0,0,0,0);
-        &:hover, &:focus, &.active {
+        &:hover, &:focus, &.active { 
           color: #fff;
           background-color: #000;
+          svg path { 
+            fill: #fff;
+          }
+        }
+      }
+
+      &.style-5 {
+        display: inline-flex;
+        align-items: center;
+        padding: 2rem 3.4rem;
+        strong {
+          margin-left: 1.2rem;
+          font-size: 1.6rem;
         }
       }
 } 
@@ -349,6 +362,109 @@ ul {
         .visBlock {
             display: block;
         }
+    }
+    
+    .pop {
+      overflow: auto;
+      position: fixed;
+      padding-top: 10rem;
+      padding-bottom: 10rem;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      &.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .exit {
+        position: absolute;
+        top: 2.5rem;
+        right: 2.5rem;
+        z-index: 2;
+        cursor: pointer;
+      }
+      .shadow {
+        cursor: pointer;
+        background-color: rgba(0,0,0,0.78);
+        z-index: 1;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+      .boxForm {
+        position: relative;
+        color: black;
+        z-index: 2;
+        background-color: #ffff;
+        padding: 8rem 12rem 6rem;
+        border-radius: 1.8rem;
+        box-shadow: 3px 4px 12px rgba(0, 0, 0, 0.05), 0px 1px 8px rgba(0, 0, 0, 0.05), 6px 4px 18px rgba(0, 0, 0, 0.08);
+      }
+      .WrapForm {
+        max-width: 56rem;
+        width: 100%;
+      }
+      .title {
+        font-weight: 700;
+        font-size: 6.4rem;
+        margin-bottom: 6rem;
+      }
+    }
+    
+    .maxTextError {
+      color: darkred !important;
+    }
+    
+    .styleFormNorm {
+      .input {
+        font-weight: 400;
+        font-size: 1.6rem;
+        border: 1px solid #000000;
+        border-radius: 5rem;
+        padding: 0 3rem;
+        height: 5.6rem;
+        width: 100%;
+      }
+      .WrapInput {
+        margin-bottom: 1.6rem;
+      }
+      label {
+        margin-top: 3.2rem;
+        margin-bottom: 1.8rem;
+        display: block;
+        font-size: 1.6rem;
+        line-height: 1;
+        strong {
+          font-weight: 700;
+          font-size: 1.8rem;
+        }
+        p { 
+          color: #AEAEAE;
+          margin: 0.8rem 0 0;
+          font-size: 1.6rem;
+          line-height: 1;
+        }
+      }
+      textarea {
+        font-size: 1.6rem !important;
+        padding: 2.4rem !important;
+        min-height: 16rem;
+        border-radius: 1.8rem !important;
+      }
+      button {
+        height: 5.6rem;
+        margin-top: 2.5rem;
+        max-width: 18rem;
+      }
     }
 `;
 

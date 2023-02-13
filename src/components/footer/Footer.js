@@ -122,10 +122,14 @@ const WrapFooter = styled.footer`
         li {
             padding-bottom: 1.2rem;
         }
-        a {
+        a, .a {
             font-size: 1.6rem;
             line-height: 2.4rem;
             white-space: nowrap;
+            cursor: pointer;
+        }
+        .a:hover {
+          color: #6357FF;
         }
     }
     .box-row {
