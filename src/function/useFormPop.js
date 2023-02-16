@@ -1,7 +1,7 @@
 import {useState} from "react";
 // import {navigate} from "gatsby";
 
-const useForm = (ArrField) => {
+const useForm = (ArrField, setPopBox, setPopBoxThanks) => {
     const [values, setValues] = useState(ArrField);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -52,9 +52,16 @@ const useForm = (ArrField) => {
             });
             setMessage(responseText);
 
+            if( responseText.result === '1_' ) {
+                setPopBox(false)
+                setPopBoxThanks(true)
+            }
+
         }
 
-        //console.log(' values >>>', values);
+        // setPopBox(!popBox)
+
+        // console.log(' values >>>', responseText);
     }
 
     //console.log('error', error);

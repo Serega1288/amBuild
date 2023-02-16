@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components'
 import {minCol, maxCol} from "../function/SizeCol"
 import imgBtn2 from "../assets/img/svg/imgBtn2.svg"
 import imgBtn2W from "../assets/img/svg/imgBtn2W.svg"
+import svgSelect from "../assets/img/svg/select.svg"
 
 const GlobalStyles = createGlobalStyle`  
 .ovh {
@@ -151,7 +152,7 @@ ul {
         }
     }
 }
-.anim, a, .a, .btn, .btn svg, .btn path, .btn:before, .btn:after , input, a:after, a:before, a div {
+.anim, a, .a, .btn, .btn svg, .btn path, .btn:before, .btn:after , input, a:after, a:before, a div, .WrapSelect .list, .WrapSelect .input:before {
     transition: all 0.5s ease;  
 }
   
@@ -373,6 +374,10 @@ ul {
       bottom: 0;
       left: 0;
       right: 0;
+      @media (max-width: ${maxCol.md}) {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
       z-index: 100;
       display: flex;
       align-items: flex-start;
@@ -408,6 +413,9 @@ ul {
         padding: 8rem 12rem 6rem;
         border-radius: 1.8rem;
         box-shadow: 3px 4px 12px rgba(0, 0, 0, 0.05), 0px 1px 8px rgba(0, 0, 0, 0.05), 6px 4px 18px rgba(0, 0, 0, 0.08);
+        @media (max-width: ${maxCol.md}) {
+          padding: 4rem 3rem 4rem;
+        }
       }
       .WrapForm {
         max-width: 56rem;
@@ -417,14 +425,144 @@ ul {
         font-weight: 700;
         font-size: 6.4rem;
         margin-bottom: 6rem;
+        @media (max-width: ${maxCol.md}) {
+          font-size: 4rem;
+          margin-bottom: 3rem;
+        }
       }
     }
     
     .maxTextError {
       color: darkred !important;
     }
-    
+    .PopThanks {
+      .title {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+    }
     .styleFormNorm {
+      .WrapRadio {
+        position: relative;
+        input {
+          position: absolute;
+          border: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 2;
+          border: none;
+          padding: 0;
+          height: 1px;
+          width: 1px;
+          margin: auto;
+        }
+        .list {
+          .item {
+            cursor: pointer;
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center; 
+            span {
+              display: inline-block;
+              border-radius: 0.4rem;
+              width: 1.8rem;
+              height: 1.8rem;
+              border: 2px solid #000;
+              margin-right: 1.3rem;
+              background-color: rgba(0,0,0,0);
+              transition: all 0.5s ease;
+            }
+            &.active {
+              span {
+                background-color: black;
+              }
+            }
+          }
+        }
+      } 
+      
+      .WrapSelect {
+        position: relative;
+        input {
+          position: absolute;
+          border: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 2; 
+          border: none;
+          padding: 0;
+          height: 1px;
+          width: 1px; 
+          margin: auto;
+        }
+        .BoxSelect {
+          
+        }
+        .input {
+          position: relative;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          &:before {
+            content: '';
+            position: absolute;
+            width: 1.38rem;
+            top: 0;
+            bottom: 0;
+            right: 2.45rem;
+            height: 0.8rem;
+            background-image: url(${svgSelect});
+            background-repeat: no-repeat;
+            background-position: center center;
+            transform: rotate(0deg);
+            background-size: cover;
+            margin: auto;
+          }
+        }
+        .list {
+          opacity: 0;
+          visibility: hidden;
+          position: absolute;
+          top: calc(100% + 1rem);
+          left: 0;
+          right: 0;
+          z-index: 3;
+          font-size: 1.4rem;
+          border: 1px solid #000000;
+          border-radius: 2rem;
+          background-color: #fff;
+          div {
+            padding: 1rem 2rem;
+            cursor: pointer;
+            &:first-child {
+              padding-top: 1.5rem;
+              border-radius: 2rem 2rem 0 0;
+            }
+            &:last-child {
+              padding-bottom: 1.5rem;
+              border-radius: 0 0 2rem 2rem;
+            }
+            &:hover, &.active {
+              background-color: black;
+              color: #fff;
+            }
+          }
+        }
+        &.open-true {
+          .input {
+            &:before {
+              transform: rotate(180deg);
+            }
+          }
+          .list {
+            opacity: 1;
+            visibility: visible;
+          }
+        }
+      }
       .input {
         font-weight: 400;
         font-size: 1.6rem;
