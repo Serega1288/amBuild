@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Layout from '../components/Layout';
 import {graphql, useStaticQuery} from "gatsby";
 import styled from "styled-components";
 import SliderPost from "../components/Blog/SliderPost";
 import ClientSend from "../components/Blog/ClientSend";
 import {maxCol} from "../function/SizeCol";
+import { useQuery, gql } from '@apollo/client';
 
 // import BannerLite from '../components/constructor/banner/BannerLite'
 // import ProductList from '../components/constructor/products/ProductList'
@@ -12,10 +13,22 @@ import {maxCol} from "../function/SizeCol";
 // import ViewLastProducts from "../components/CategoryProduct/ViewLastProducts";
 // import {localStoreService} from "../function/hook";
 
+const WEATHER_QUERY = gql`
+        query NewQuery($search: String! ) {
+            posts(where: {search: $search}) {
+                nodes {
+                    id
+                    title
+                    content
+                    uri
+                }
+            }
+        }
+`;
 
 const Blog = (props) => {
 
-    const data = useStaticQuery(graphql`
+    const data2 = useStaticQuery(graphql`
         {
             wp {
                 allSettings {
@@ -39,24 +52,45 @@ const Blog = (props) => {
     `);
 
     const title = props.pageContext.title;
-    const generalTitle = data.wp.allSettings.generalSettingsTitle;
-    const allWpPost = data.allWpPost;
-    const allWpCategory = data.allWpCategory;
+    const generalTitle = data2.wp.allSettings.generalSettingsTitle;
+    const allWpPost = data2.allWpPost;
+    const allWpCategory = data2.allWpCategory;
 
     // console.log('page category >>>', props.pageContext)
     // const products = localStoreService.getLocal('ProductSave');
+
+    // (where: {search: "output rate of hashrate"})
+
+    const [handle, setHandle] = useState(false);
+    function handleChange(event) {
+        console.log(event.target.value);
+        setHandle(event.target.value)
+    }
+
+    const { loading, error, data } = useQuery(WEATHER_QUERY, {
+        variables: { search : handle },
+    });
+
+    // console.log('WEATHER_QUERY > data', data?.posts );
+    // console.log('WEATHER_QUERY > allWpPost', allWpPost );
+
     return (
         <>
             <Layout customClass="section-pad-left" title={ title } desc={ generalTitle } >
                 <Section1>
                     <div className="container">
+
+                        {/*<div>*/}
+
+                        {/*</div>*/}
+
                         <h1 className="title">
                             How can we
                             help you?
                         </h1>
                         <form className="WrapForm">
                             <div className="WrapInput">
-                                <input name="search" type="text" placeholder='Search' />
+                                <input name="search" type="text" placeholder='Search' onChange={handleChange} />
                                 <button>
                                     <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M9 0C13.968 0 18 4.032 18 9C18 13.968 13.968 18 9 18C4.032 18 0 13.968 0 9C0 4.032 4.032 0 9 0ZM9 16C12.867 16 16 12.867 16 9C16 5.132 12.867 2 9 2C5.132 2 2 5.132 2 9C2 12.867 5.132 16 9 16ZM17.485 16.071L20.314 18.899L18.899 20.314L16.071 17.485L17.485 16.071Z" fill="black"/>
@@ -69,7 +103,14 @@ const Blog = (props) => {
 
                 <Section2>
                     <div className="container">
-                        <SliderPost s='white' title="Frequently Read Articles" item={allWpPost} />
+                        {
+                            !handle ? (
+                                <SliderPost s='white' title="Frequently Read Articles" item={allWpPost} />
+                            ) : (
+                                <SliderPost s='white' title="Frequently Read Articles" item={data?.posts} />
+                            )
+                        }
+                        {/*<SliderPost s='white' title="Frequently Read Articles" item={allWpPost} />*/}
                         <SliderPost s='black' title="Browse All Categories" item={allWpCategory} />
                     </div>
                     <ClientSend />

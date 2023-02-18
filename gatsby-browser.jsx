@@ -11,26 +11,19 @@ exports.wrapRootElement = ({ element }) => {
     )
 }
 
-// import React from "react";
-// import 'lazysizes';
 
-// const addScript = url => {
-//     const script = document.createElement("script")
-//     script.src = url
-//     script.async = true
-//     document.body.appendChild(script)
-// }
+
+// const React = require("react");
+// const { ApolloProvider } = require("@apollo/client");
+// const client = require("./src/apollo/client");
+// const GlobalFonts = require("./src/styles/GlobalFonts").default;
 //
-// export const onClientEntry = () => {
-//     window.onload = () => {
-//         addScript("https://assets.pinterest.com/js/pinit.js")
-//     }
+// exports.wrapRootElement = ({ element }) => {
+//     // return <Layout {...props}>{element}</Layout>
+//     return (
+//         <ApolloProvider client={client}>
+//             <GlobalFonts />
+//             {element}
+//         </ApolloProvider>
+//     )
 // }
-
-//
-// export const onRenderBody = ({ setHeadComponents }) => {
-//     setHeadComponents([
-//         <script src="https://assets.pinterest.com/js/pinit.js" />
-//     ])
-// }
-

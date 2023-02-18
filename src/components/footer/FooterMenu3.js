@@ -49,7 +49,7 @@ const FooterMenu = () => {
     const optionLang = Menu.wp.themeGeneralSettings.ACFoptionThemes.language;
     const optionLike = Menu.wp.themeGeneralSettings.ACFoptionThemes.like;
 
-    console.log('optionBusType', Menu.wp.themeGeneralSettings.ACFoptionThemes );
+    // console.log('optionBusType', Menu.wp.themeGeneralSettings.ACFoptionThemes );
     // menu.themeGeneralSettings.ACFoptionThemes.bustypeOption optionBusType
 
 

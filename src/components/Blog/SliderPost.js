@@ -62,7 +62,7 @@ const SliderPost = ( { item, title, s } ) => {
                     </div>
 
 
-                    {item.nodes.map( (item, index) => (
+                    {item?.nodes?.map( (item, index) => (
                         <SwiperSlide key={index}>
                             <Link to={item.uri} className="item d-flex flex-column">
                                 {/*{ item.icon ? (*/}
