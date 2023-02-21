@@ -98,12 +98,12 @@ const GlobalFonts = createGlobalStyle`
 
 
 
-const GlobalFontsWrap  = memo(() => {
-    console.log('>>')
-    return <GlobalFonts />
-})
+// const GlobalFontsWrap  = memo(() => {
+//     console.log('>>')
+//     return <GlobalFonts />
+// })
 
-export default GlobalFontsWrap;
-// export default GlobalFonts;
+//export default GlobalFontsWrap;
+export default GlobalFonts;
 
 
