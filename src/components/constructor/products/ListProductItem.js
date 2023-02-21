@@ -42,7 +42,7 @@ const ListProductItem = ( {item} ) => {
                             </div>
                             <InfoIcon className="pos d-flex align-items-center">
                                 <span className="WrapIconInfo d-flex align-items-center">
-                                    <IconInfo position="left" s="2" text={item.ACFstat?.desc2} />
+                                    <IconInfo position="left" style="2" text={item.ACFstat?.desc2} />
                                     <span>Static Output Ratio</span>
                                 </span>
                             </InfoIcon>

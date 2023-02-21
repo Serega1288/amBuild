@@ -7,7 +7,7 @@ import {AuthLayout} from "../function/AuthLayout";
 
 const LoginAccount = () => {
     return (
-        // <AuthLayout logIn={false} page='account' go='sign-in'>
+        <AuthLayout logIn={false} page='account' go='sign-in'>
             <Layout title="Account" desc="desc">
                 <Section className="pageLogin d-flex align-items-center">
                     <div className="Login container">
@@ -19,7 +19,7 @@ const LoginAccount = () => {
                     </div>
                 </Section>
             </Layout>
-        // </AuthLayout>
+        </AuthLayout>
     );
 };
 export default LoginAccount;

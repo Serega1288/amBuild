@@ -1,6 +1,6 @@
 import React from 'react';
 import BlockProducts from "../constructor/products/BlockProducts";
-// import {localStoreService} from "../../function/hook";
+import {localStoreService} from "../../function/hook";
 import styled from "styled-components";
 
 

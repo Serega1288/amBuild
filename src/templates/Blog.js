@@ -28,33 +28,33 @@ import {maxCol} from "../function/SizeCol";
 
 const Blog = (props) => {
 
-    // const data2 = useStaticQuery(graphql`
-    //     {
-    //         wp {
-    //             allSettings {
-    //                 generalSettingsTitle
-    //                 generalSettingsDescription
-    //             }
-    //         }
-    //         allWpPost {
-    //             nodes {
-    //                 title
-    //                 uri
-    //             }
-    //         }
-    //         allWpCategory {
-    //             nodes {
-    //                 title:name
-    //                 uri
-    //             }
-    //         }
-    //     }
-    // `);
+    const data2 = useStaticQuery(graphql`
+        {
+            wp {
+                allSettings {
+                    generalSettingsTitle
+                    generalSettingsDescription
+                }
+            }
+            allWpPost {
+                nodes {
+                    title
+                    uri
+                }
+            }
+            allWpCategory {
+                nodes {
+                    title:name
+                    uri
+                }
+            }
+        }
+    `);
 
     const title = props.pageContext.title;
-    // const generalTitle = data2.wp.allSettings.generalSettingsTitle;
-    // const allWpPost = data2.allWpPost;
-    // const allWpCategory = data2.allWpCategory;
+    const generalTitle = data2.wp.allSettings.generalSettingsTitle;
+    const allWpPost = data2.allWpPost;
+    const allWpCategory = data2.allWpCategory;
 
     // console.log('page category >>>', props.pageContext)
     // const products = localStoreService.getLocal('ProductSave');
@@ -76,10 +76,7 @@ const Blog = (props) => {
 
     return (
         <>
-            <Layout customClass="section-pad-left" title={ title }
-                    // desc={ generalTitle }
-                    desc='1'
-            >
+            <Layout customClass="section-pad-left" title={ title } desc={ generalTitle } >
                 <Section1>
                     <div className="container">
 
@@ -90,9 +87,7 @@ const Blog = (props) => {
                         </h1>
                         <form className="WrapForm">
                             <div className="WrapInput">
-                                <input name="search" type="text" placeholder='Search'
-                                       // onChange={handleChange}
-                                />
+                                {/*<input name="search" type="text" placeholder='Search' onChange={handleChange} />*/}
                                 <button>
                                     <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M9 0C13.968 0 18 4.032 18 9C18 13.968 13.968 18 9 18C4.032 18 0 13.968 0 9C0 4.032 4.032 0 9 0ZM9 16C12.867 16 16 12.867 16 9C16 5.132 12.867 2 9 2C5.132 2 2 5.132 2 9C2 12.867 5.132 16 9 16ZM17.485 16.071L20.314 18.899L18.899 20.314L16.071 17.485L17.485 16.071Z" fill="black"/>
@@ -114,7 +109,7 @@ const Blog = (props) => {
                         {/*    )*/}
                         {/*}*/}
                         {/*<SliderPost s='white' title="Frequently Read Articles" item={allWpPost} />*/}
-                        {/*<SliderPost s='black' title="Browse All Categories" item={allWpCategory} />*/}
+                        <SliderPost s='black' title="Browse All Categories" item={allWpCategory} />
                     </div>
                     <ClientSend />
                 </Section2>

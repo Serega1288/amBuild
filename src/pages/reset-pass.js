@@ -28,7 +28,7 @@ const ResetPass = (props) => {
 
 
     return (
-        // <AuthLayout logIn={true} page='reset-pass' go='account'>
+        <AuthLayout logIn={true} page='reset-pass' go='account'>
             <Layout title="Reset password" desc="desc">
                 <Section className="pageLogin d-flex align-items-center">
                     <div className="Login container">
@@ -110,7 +110,7 @@ const ResetPass = (props) => {
                     </div>
                 </Section>
             </Layout>
-        // </AuthLayout>
+        </AuthLayout>
     )
 }
 export default ResetPass;

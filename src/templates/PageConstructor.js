@@ -26,12 +26,9 @@ const FrontPage = (props) => {
 
     return (
         <>
-            1111111111111111111111111111
-            22222222222222
-            33333333333
-            {/*<Layout customClass="section-pad-left" title={ title === 'home' ? generalTitle : title } desc={ title === 'home' ? generalDescription : generalTitle } >*/}
-            {/*    <Const type='page' href={props.location.href} props={list} />*/}
-            {/*</Layout>*/}
+            <Layout customClass="section-pad-left" title={ title === 'home' ? generalTitle : title } desc={ title === 'home' ? generalDescription : generalTitle } >
+                <Const type='page' href={props.location.href} props={list} />
+            </Layout>
 
         </>
     );

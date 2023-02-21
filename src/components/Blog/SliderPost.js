@@ -7,7 +7,7 @@ import Section from '../../styles/Slider.js'
 import {Link} from "gatsby";
 
 const SliderPost = ( { item, title, s , loading, error } ) => {
-    // console.log('Slider >>>', loading, error, item?.nodes?.length );
+    console.log('Slider >>>', loading, error, item?.nodes?.length );
     // <h2 className="block-title text h1">Sorry, but no search results were found. Try something else...</h2>
     return (
         <Section className={`slider post ${s}`}>

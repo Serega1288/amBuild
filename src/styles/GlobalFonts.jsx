@@ -77,7 +77,7 @@ const GlobalFonts = createGlobalStyle`
             line-height: 3rem;
             margin-top: 1rem;
             margin-bottom: 1rem;
-            @media (max-width: ${maxCol.sm}) { 
+            @media (max-width: ${maxCol.sm}) {
                 font-size: 1.8rem;
                 line-height: 2.6rem;
             }
@@ -98,12 +98,12 @@ const GlobalFonts = createGlobalStyle`
 
 
 
-// const GlobalFontsWrap  = memo(() => {
-//     console.log('>>')
-//     return <GlobalFonts />
-// })
+const GlobalFontsWrap  = memo(() => {
+    console.log('>>')
+    return <GlobalFonts />
+})
 
-//export default GlobalFontsWrap;
-export default GlobalFonts;
+export default GlobalFontsWrap;
+// export default GlobalFonts;
 
 

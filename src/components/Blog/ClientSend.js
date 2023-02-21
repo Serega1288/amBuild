@@ -1,173 +1,173 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from "styled-components";
 import IconMan from './../../assets/img/svg/men.svg'
 import {maxCol} from "../../function/SizeCol";
-// import useFormPop from "../../function/useFormPop";
+import useFormPop from "../../function/useFormPop";
 
 const CliendSend = () => {
 
-    // const [popBox, setPopBox] = useState(false);
-    // const [popBoxThanks, setPopBoxThanks] = useState(false);
-    //
-    // const PopThanks = () => {
-    //     setPopBoxThanks(!popBoxThanks)
-    //     if (popBoxThanks === false) {
-    //         document.body.classList.add(
-    //             'ovh',
-    //         );
-    //     }
-    //     if (popBoxThanks === true) {
-    //         document.body.classList.remove(
-    //             'ovh',
-    //         );
-    //     }
-    // }
+    const [popBox, setPopBox] = useState(false);
+    const [popBoxThanks, setPopBoxThanks] = useState(false);
 
-    // const Pop = () => {
-    //     setPopBox(!popBox)
-    //     if (popBox === false) {
-    //         document.body.classList.add(
-    //             'ovh',
-    //         );
-    //     }
-    //     if (popBox === true) {
-    //         document.body.classList.remove(
-    //             'ovh',
-    //         );
-    //     }
-    // }
+    const PopThanks = () => {
+        setPopBoxThanks(!popBoxThanks)
+        if (popBoxThanks === false) {
+            document.body.classList.add(
+                'ovh',
+            );
+        }
+        if (popBoxThanks === true) {
+            document.body.classList.remove(
+                'ovh',
+            );
+        }
+    }
 
-    // const ArrField = {garbage: '', firstName: '', lastName: '', workEmail: '', textarea: ''  };
-    // const { values, captureInput, submitForm, isLoading, error, message, setMessage} = useFormPop(ArrField, setPopBox, setPopBoxThanks);
+    const Pop = () => {
+        setPopBox(!popBox)
+        if (popBox === false) {
+            document.body.classList.add(
+                'ovh',
+            );
+        }
+        if (popBox === true) {
+            document.body.classList.remove(
+                'ovh',
+            );
+        }
+    }
+
+    const ArrField = {garbage: '', firstName: '', lastName: '', workEmail: '', textarea: ''  };
+    const { values, captureInput, submitForm, isLoading, error, message, setMessage} = useFormPop(ArrField, setPopBox, setPopBoxThanks);
 
     return (
         <Block>
 
-            {/*<div className={`pop anim PopThanks ${popBoxThanks ? 'active' : '' }`}>*/}
-            {/*    <div className="boxForm">*/}
-            {/*        <span onClick={()=>PopThanks()} className="exit">*/}
-            {/*            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">*/}
-            {/*                <path d="M6.99974 5.58599L11.9497 0.635986L13.3637 2.04999L8.41374 6.99999L13.3637 11.95L11.9497 13.364L6.99974 8.41399L2.04974 13.364L0.635742 11.95L5.58574 6.99999L0.635742 2.04999L2.04974 0.635986L6.99974 5.58599Z" fill="black"/>*/}
-            {/*            </svg>*/}
-            {/*        </span>*/}
-            {/*        <div className="title">*/}
-            {/*            Your message has been sent. <br />*/}
-            {/*            We will contact you shortly. 2*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*    <div onClick={()=>PopThanks()} className="shadow"></div>*/}
-            {/*</div>*/}
+            <div className={`pop anim PopThanks ${popBoxThanks ? 'active' : '' }`}>
+                <div className="boxForm">
+                    <span onClick={()=>PopThanks()} className="exit">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <path d="M6.99974 5.58599L11.9497 0.635986L13.3637 2.04999L8.41374 6.99999L13.3637 11.95L11.9497 13.364L6.99974 8.41399L2.04974 13.364L0.635742 11.95L5.58574 6.99999L0.635742 2.04999L2.04974 0.635986L6.99974 5.58599Z" fill="black"/>
+                        </svg>
+                    </span>
+                    <div className="title">
+                        Your message has been sent. <br />
+                        We will contact you shortly. 2
+                    </div>
+                </div>
+                <div onClick={()=>PopThanks()} className="shadow"></div>
+            </div>
 
-            {/*<div className={`pop anim ${popBox ? 'active' : '' }`}>*/}
-            {/*    <div className="boxForm">*/}
-            {/*        <span onClick={()=>Pop()} className="exit">*/}
-            {/*            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">*/}
-            {/*                <path d="M6.99974 5.58599L11.9497 0.635986L13.3637 2.04999L8.41374 6.99999L13.3637 11.95L11.9497 13.364L6.99974 8.41399L2.04974 13.364L0.635742 11.95L5.58574 6.99999L0.635742 2.04999L2.04974 0.635986L6.99974 5.58599Z" fill="black"/>*/}
-            {/*            </svg>*/}
-            {/*        </span>*/}
-            {/*        <div className="title">Contact Us</div>*/}
-            {/*        <div className="WrapForm">*/}
-            {/*            <form className="input styleFormNorm" onSubmit={submitForm}>*/}
-            {/*                <input type="garbage"*/}
-            {/*                       name="garbage"*/}
-            {/*                       autoComplete="off"*/}
-            {/*                       disabled={isLoading}*/}
-            {/*                       value={values.garbage}*/}
-            {/*                       onChange={captureInput}*/}
-            {/*                       className="garbage"*/}
-            {/*                />*/}
-            {/*                <div className="row">*/}
-            {/*                    <div className="col-12 col-sm-6">*/}
-            {/*                        <div className="WrapInput">*/}
-            {/*                            <input type="name"*/}
-            {/*                                   required="required"*/}
-            {/*                                   name="firstName"*/}
-            {/*                                   disabled={isLoading}*/}
-            {/*                                   value={values.firstName}*/}
-            {/*                                   onChange={captureInput}*/}
-            {/*                                   placeholder="First name"*/}
-            {/*                                   className="input"*/}
-            {/*                            />*/}
-            {/*                        </div>*/}
-            {/*                    </div>*/}
-            {/*                    <div className="col-12 col-sm-6">*/}
-            {/*                        <div className="WrapInput">*/}
-            {/*                            <input type="text"*/}
-            {/*                                   required="required"*/}
-            {/*                                   name="lastName"*/}
-            {/*                                   disabled={isLoading}*/}
-            {/*                                   value={values.lastName}*/}
-            {/*                                   onChange={captureInput}*/}
-            {/*                                   placeholder="Last name"*/}
-            {/*                                   className="input"*/}
-            {/*                            />*/}
-            {/*                        </div>*/}
-            {/*                    </div>*/}
-            {/*                </div>*/}
-            {/*                <div className="WrapInput">*/}
-            {/*                    <input type="text"*/}
-            {/*                           required="required"*/}
-            {/*                           name="workEmail"*/}
-            {/*                           disabled={isLoading}*/}
-            {/*                           value={values.workEmail}*/}
-            {/*                           onChange={captureInput}*/}
-            {/*                           placeholder="Work Email"*/}
-            {/*                           className="input"*/}
-            {/*                    />*/}
-            {/*                </div>*/}
-            {/*                <div className="WrapInput">*/}
-            {/*                    <label>*/}
-            {/*                        <div className="row">*/}
-            {/*                            <div className="col">*/}
-            {/*                                <strong>Message:</strong>*/}
-            {/*                            </div>*/}
-            {/*                            <div className="col-auto">*/}
-            {/*                                <span className={`${values?.textarea?.length > 1000 ? 'maxTextError' : null }`}>*/}
-            {/*                                    {values?.textarea?.length}/1000*/}
-            {/*                                </span>*/}
-            {/*                            </div>*/}
-            {/*                        </div>*/}
-            {/*                    </label>*/}
-            {/*                    <textarea*/}
-            {/*                        maxLength='1000'*/}
-            {/*                        placeholder="Your text"*/}
-            {/*                        required="required"*/}
-            {/*                        name="textarea"*/}
-            {/*                        disabled={isLoading}*/}
-            {/*                        value={values.textarea}*/}
-            {/*                        onChange={captureInput}*/}
-            {/*                        className="input"*/}
-            {/*                    />*/}
-            {/*                </div>*/}
+            <div className={`pop anim ${popBox ? 'active' : '' }`}>
+                <div className="boxForm">
+                    <span onClick={()=>Pop()} className="exit">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <path d="M6.99974 5.58599L11.9497 0.635986L13.3637 2.04999L8.41374 6.99999L13.3637 11.95L11.9497 13.364L6.99974 8.41399L2.04974 13.364L0.635742 11.95L5.58574 6.99999L0.635742 2.04999L2.04974 0.635986L6.99974 5.58599Z" fill="black"/>
+                        </svg>
+                    </span>
+                    <div className="title">Contact Us</div>
+                    <div className="WrapForm">
+                        <form className="input styleFormNorm" onSubmit={submitForm}>
+                            <input type="garbage"
+                                   name="garbage"
+                                   autoComplete="off"
+                                   disabled={isLoading}
+                                   value={values.garbage}
+                                   onChange={captureInput}
+                                   className="garbage"
+                            />
+                            <div className="row">
+                                <div className="col-12 col-sm-6">
+                                    <div className="WrapInput">
+                                        <input type="name"
+                                               required="required"
+                                               name="firstName"
+                                               disabled={isLoading}
+                                               value={values.firstName}
+                                               onChange={captureInput}
+                                               placeholder="First name"
+                                               className="input"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="col-12 col-sm-6">
+                                    <div className="WrapInput">
+                                        <input type="text"
+                                               required="required"
+                                               name="lastName"
+                                               disabled={isLoading}
+                                               value={values.lastName}
+                                               onChange={captureInput}
+                                               placeholder="Last name"
+                                               className="input"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="WrapInput">
+                                <input type="text"
+                                       required="required"
+                                       name="workEmail"
+                                       disabled={isLoading}
+                                       value={values.workEmail}
+                                       onChange={captureInput}
+                                       placeholder="Work Email"
+                                       className="input"
+                                />
+                            </div>
+                            <div className="WrapInput">
+                                <label>
+                                    <div className="row">
+                                        <div className="col">
+                                            <strong>Message:</strong>
+                                        </div>
+                                        <div className="col-auto">
+                                            <span className={`${values?.textarea?.length > 1000 ? 'maxTextError' : null }`}>
+                                                {values?.textarea?.length}/1000
+                                            </span>
+                                        </div>
+                                    </div>
+                                </label>
+                                <textarea
+                                    maxLength='1000'
+                                    placeholder="Your text"
+                                    required="required"
+                                    name="textarea"
+                                    disabled={isLoading}
+                                    value={values.textarea}
+                                    onChange={captureInput}
+                                    className="input"
+                                />
+                            </div>
 
-            {/*                <div className="text-right">*/}
-            {/*                    <button disabled={isLoading} type="submit"*/}
-            {/*                            className="style-3 btn w100">*/}
-            {/*                        {isLoading ? 'Submit...' : 'Submit'}*/}
-            {/*                    </button>*/}
-            {/*                </div>*/}
-            {/*                /!*{console.log('message', message)}*!/*/}
-            {/*                /!*<h3 className={` statusInfo text-center *!/*/}
-            {/*                /!*    ${error || message ? ' active ' : ''}*!/*/}
-            {/*                /!*    ${error ? ' error ' : ''} *!/*/}
-            {/*                /!*    *!/*/}
-            {/*                /!*    ${*!/*/}
-            {/*                /!*    message?.result === '01' ||*!/*/}
-            {/*                /!*    message?.result === '02' ||*!/*/}
-            {/*                /!*    message?.result === '03' || *!/*/}
-            {/*                /!*    message?.result?.status === 400 ||*!/*/}
-            {/*                /!*    message?.result === '04' ? 'error' : 'done'*!/*/}
-            {/*                /!*    }*!/*/}
-            {/*                /!*    `}>*!/*/}
-            {/*                /!*    {error ? error : ''}*!/*/}
-            {/*                /!*    {message ? message?.message : ''}*!/*/}
-            {/*                /!*</h3>*!/*/}
+                            <div className="text-right">
+                                <button disabled={isLoading} type="submit"
+                                        className="style-3 btn w100">
+                                    {isLoading ? 'Submit...' : 'Submit'}
+                                </button>
+                            </div>
+                            {/*{console.log('message', message)}*/}
+                            {/*<h3 className={` statusInfo text-center */}
+                            {/*    ${error || message ? ' active ' : ''}*/}
+                            {/*    ${error ? ' error ' : ''} */}
+                            {/*    */}
+                            {/*    ${*/}
+                            {/*    message?.result === '01' ||*/}
+                            {/*    message?.result === '02' ||*/}
+                            {/*    message?.result === '03' || */}
+                            {/*    message?.result?.status === 400 ||*/}
+                            {/*    message?.result === '04' ? 'error' : 'done'*/}
+                            {/*    }*/}
+                            {/*    `}>*/}
+                            {/*    {error ? error : ''}*/}
+                            {/*    {message ? message?.message : ''}*/}
+                            {/*</h3>*/}
 
-            {/*            </form>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*    <div onClick={()=>Pop()} className="shadow"></div>*/}
-            {/*</div>*/}
+                        </form>
+                    </div>
+                </div>
+                <div onClick={()=>Pop()} className="shadow"></div>
+            </div>
 
             <div className="Box">
                 <div className='icon'>
@@ -186,9 +186,7 @@ const CliendSend = () => {
                 </div>
                 <div className="WrapBtn">
 
-                    <span
-                        // onClick={()=>Pop()}
-                          className="btn style-5">
+                    <span onClick={()=>Pop()} className="btn style-5">
                         <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1 0H19C19.2652 0 19.5196 0.105357 19.7071 0.292893C19.8946 0.48043 20 0.734784 20 1V17C20 17.2652 19.8946 17.5196 19.7071 17.7071C19.5196 17.8946 19.2652 18 19 18H1C0.734784 18 0.48043 17.8946 0.292893 17.7071C0.105357 17.5196 0 17.2652 0 17V1C0 0.734784 0.105357 0.48043 0.292893 0.292893C0.48043 0.105357 0.734784 0 1 0ZM18 4.238L10.072 11.338L2 4.216V16H18V4.238ZM2.511 2L10.061 8.662L17.502 2H2.511Z" fill="black"/>
                         </svg>

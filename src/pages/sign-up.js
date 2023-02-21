@@ -39,7 +39,7 @@ const RegPage = (props) => {
 
 
     return (
-        // <AuthLayout logIn={true} page='sign-up' go='account'>
+        <AuthLayout logIn={true} page='sign-up' go='account'>
             <Layout title="Sign Up" desc="desc">
             <Section className="pageLogin d-flex align-items-center">
                 <div className="Login container">
@@ -123,7 +123,7 @@ const RegPage = (props) => {
                 </div>
             </Section>
         </Layout>
-        // </AuthLayout>
+        </AuthLayout>
     );
 };
 export default RegPage;
