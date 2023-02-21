@@ -29,8 +29,8 @@ const Footer = () => {
     `);
 
     const {footerLogo, footerDescription, footercopyright} = data.wp.themeGeneralSettings.ACFoptionThemes;
-    const [ first, firstOpen ] = useState(false);
-    const [open, setOpen ] = useState(false);
+    // const [ first, firstOpen ] = useState(false);
+    // const [open, setOpen ] = useState(false);
 
     //console.log('>>', data.wp.themeGeneralSettings.ACFoptionThemes)
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import GlobalFonts from '../styles/GlobalFonts';
+// import GlobalFonts from '../styles/GlobalFonts';
 import GlobalCols from '../styles/GlobalCols';
 import  GlobalStyles from '../styles/GlobalStyles';
 import  Header from './header/Header';
