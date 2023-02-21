@@ -80,9 +80,6 @@ const Blog = (props) => {
                 <Section1>
                     <div className="container">
 
-                        {/*<div>*/}
-
-                        {/*</div>*/}
 
                         <h1 className="title">
                             How can we
@@ -104,10 +101,11 @@ const Blog = (props) => {
                 <Section2>
                     <div className="container">
                         {
+
                             !handle ? (
                                 <SliderPost s='white' title="Frequently Read Articles" item={allWpPost} />
                             ) : (
-                                <SliderPost s='white' title="Frequently Read Articles" item={data?.posts} />
+                                <SliderPost s='white' title="Frequently Read Articles" item={data?.posts} loading={loading} error={error} />
                             )
                         }
                         {/*<SliderPost s='white' title="Frequently Read Articles" item={allWpPost} />*/}

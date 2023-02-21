@@ -9,21 +9,29 @@ import StarOk from './../assets/img/svg/starOk.svg'
 import ClientSend from "../components/Blog/ClientSend";
 import {minCol} from "../function/SizeCol";
 import {gql, useQuery} from "@apollo/client";
+import BlogItemPost from "../components/Blog/BlogItemPost";
+// import SliderPost from "../components/Blog/SliderPost";
 
-const WEATHER_QUERY = gql`
-    query NewQuery($search: String! ) {
-        posts(where: {search: $search}) {
-            nodes {
-                id
-                title
-                content
-                uri
-            }
-        }
-    }
-`;
 
 const Blog = (props) => {
+
+    const WEATHER_QUERY = gql`
+        query NewQuery($search: String, $categoryName: String ) {
+            posts(where: {search: $search, categoryName: $categoryName}) {
+                nodes {
+                    id
+                    title
+                    content
+                    uri
+                    ACFpost {
+                        helpfulYes
+                        helpfulNo
+                        briefDescription
+                    }
+                }
+            }
+        }
+    `;
 
     const data2 = useStaticQuery(graphql`
         {
@@ -47,7 +55,7 @@ const Blog = (props) => {
     const post = props.pageContext.posts;
     const categories = data2.allWpCategory;
 
-    // console.log('page category >>>', props.pageContext.posts )
+    // console.log('page category >>>', props.pageContext )
 
     // const products = localStoreService.getLocal('ProductSave');
 
@@ -58,7 +66,7 @@ const Blog = (props) => {
     }
 
     const { loading, error, data } = useQuery(WEATHER_QUERY, {
-        variables: { search : handle },
+        variables: { search : handle, categoryName : props.pageContext.name },
     });
 
     return (
@@ -105,51 +113,13 @@ const Blog = (props) => {
                                             Articles on:<strong>{title}</strong>
                                         </div>
                                         <div className="category-post">
-                                            {post.nodes.map( (item, index) => {
-                                                const no = item.ACFpost.helpfulNo;
-                                                const yes = item.ACFpost.helpfulYes;
-                                                // const no = 10;
-                                                // const yes = 5;
-                                                const full = no + yes;
-                                                const yesR = (yes*100)/full;
-
-                                                let StarTitle='';
-                                                if (full === 0) {
-                                                    StarTitle = 'No readers yet';
-                                                } else {
-                                                    if(full < 10) {
-                                                        StarTitle = 'Few readers';
-                                                    } else {
-                                                        StarTitle = 'Some readers';
-                                                    }
-                                                }
-
-
-
-                                                // console.log('helpful >>>', full, yes, no, yesR )
-
-                                                return (
-                                                <Link to={item.uri} key={`allWpPost-${index}`} className="item-post">
-                                                    <div className="title">
-                                                        <strong>{item.title}</strong>
-                                                    </div>
-                                                    <div className="row">
-                                                        <div className="col-12 col-sm">
-                                                            <div className="desc">
-                                                                {item.ACFpost.briefDescription}
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-12 col-sm-auto">
-                                                            <div className="star-title">
-                                                                {StarTitle}
-                                                            </div>
-                                                            <div className="star">
-                                                                <span style={{width: `${yesR}%`}}></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </Link>
-                                            )})}
+                                            {
+                                                !handle ? (
+                                                    <BlogItemPost post={post} />
+                                                ) : (
+                                                    <BlogItemPost post={data?.posts} loading={loading} error={error} />
+                                                )
+                                            }
                                         </div>
                                     </div>
                                 </div>

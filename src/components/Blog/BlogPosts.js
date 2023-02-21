@@ -31,9 +31,11 @@ const  BlogPosts = (props) => {
         <section className="section">
             <BlogPost className="container">
                 <div className="row row-cols-1 row-cols-sm-3 box-blog-item">
-                    {/*{  posts.map((post, index) => (*/}
-                    {/*    <BlogItem key={post.id} step={index} post={post} />*/}
-                    {/*) ) }*/}
+                    {  posts.map((post, index) => (
+                        <>
+                            <BlogItem key={post.id} step={index} post={post} />
+                        </>
+                    ) ) }
                 </div>
             </BlogPost>
         </section>

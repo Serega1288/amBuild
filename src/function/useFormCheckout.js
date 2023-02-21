@@ -2,8 +2,8 @@ import {useState} from "react";
 // import {instanceAuthService} from "./auth";
 // import {navigate} from "gatsby";
 
-const useFormCheckout = (d, t, cart) => {
-    const [values, setValues] = useState({pool: '', garbage: '', cart  });
+const useFormCheckout = () => {
+    const [values, setValues] = useState({pool: '', garbage: '', cart: ''  });
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [message, setMessage] = useState(null);

@@ -1,15 +1,13 @@
 import React, {useState} from 'react'
 import Layout from '../components/Layout'
-import {graphql, Link, navigate, useStaticQuery} from "gatsby"
+import {graphql, useStaticQuery} from "gatsby"
 import {localStoreService} from "../function/hook"
 import BannerLite from '../components/constructor/banner/BannerLite'
 import styled from "styled-components";
 import {AuthLayout} from "../function/AuthLayout";
-// import RegPage from "../pages/sign-up";
-// import useForm from "../function/useFormCheckout";
+import useFormCheckout from "../function/useFormCheckout";
 
 const PageCheckout = (props) => {
-    // const isBrowser = typeof window !== "undefined"
 
     const data = useStaticQuery(graphql`
         {
@@ -120,8 +118,7 @@ const PageCheckout = (props) => {
         // console.log('step end >>' , step)
     }
 
-    // const { values, captureInput, submitForm, isLoading, error, message} = useForm(Cart);
-
+        const { values, captureInput, submitForm, isLoading, error, message} = useFormCheckout();
 
         return (
             <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout'>
@@ -130,32 +127,39 @@ const PageCheckout = (props) => {
                     <Section>
                         <div className="container">
 
-                            {/*<h3 className={` statusInfo text-center */}
-                            {/*        ${error || message ?  ' active '  : ''}*/}
-                            {/*        ${error ?  ' error '  : ''}*/}
-                            {/*        ${*/}
-                            {/*    message?.result === '01' ||*/}
-                            {/*    message?.result === '02' ||*/}
-                            {/*    message?.result === '03' ||*/}
-                            {/*    message?.result?.status === 400 ||*/}
-                            {/*    message?.result === '04' ?  'error'  : 'done'*/}
-                            {/*} */}
-                            {/*    `}>*/}
-                            {/*    {error ?  error  : ''}*/}
-                            {/*    {message ? message?.message  : ''}*/}
-                            {/*</h3>*/}
+                            <h3 className={` statusInfo text-center 
+                                    ${error || message ?  ' active '  : ''}
+                                    ${error ?  ' error '  : ''}
+                                    ${ 
+                                message?.result === '01' ||
+                                message?.result === '02' ||
+                                message?.result === '03' ||
+                                message?.result?.status === 400 ||
+                                message?.result === '04' ?  'error'  : 'done'
+                            } 
+                                `}>
+                                {error ?  error  : ''}
+                                {message ? message?.message  : ''}
+                            </h3>
 
                             <form
-                                // onSubmit={submitForm}
+                                onSubmit={submitForm}
                                    className="form-checkout row">
                                 <input type="garbage"
                                        name="garbage"
-                                       // disabled={isLoading}
-                                       // value={values.garbage}
-                                       // onChange={captureInput}
-                                       // isLoading={isLoading}
+                                       disabled={isLoading}
+                                       value={values.garbage}
+                                       onChange={captureInput}
                                        className="garbage"
                                 />
+                                <input type="text"
+                                       name="cart"
+                                       disabled={isLoading}
+                                       value={values.cart === Cart}
+                                       onChange={captureInput}
+                                       className="garbage"
+                                />
+
                                 <div className="col">
 
                                     <div className="blocks itemOrder">
@@ -176,10 +180,9 @@ const PageCheckout = (props) => {
                                                             <input required name="chooseMiningPool"
                                                                    id={`chooseMiningPool-${index}`}
                                                                    type="radio"
-                                                                   // disabled={isLoading}
-                                                                   // value={values.pool}
-                                                                   // onChange={captureInput}
-                                                                   // isLoading={isLoading}
+                                                                   disabled={isLoading}
+                                                                   value={values.pool}
+                                                                   onChange={captureInput}
                                                                    className="hidden-radio" />
                                                             <label for={`chooseMiningPool-${index}`} onClick={() => chooseMiningPool(item.option) }
                                                                   className={`btn style-4 ${ choose === item.option ? 'active' : '' }`}>

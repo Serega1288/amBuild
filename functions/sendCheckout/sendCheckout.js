@@ -1,19 +1,5 @@
 //const nodemailer = require('nodemailer');
 const axios = require('axios')
-getCode = (d) => {
-    if (d) {
-        const ms = (Date.parse( new Date(d) )).toString()
-        const m = ms[9] + ms[7] + ms[8] + ms[6]
-        return m
-        //console.log( ms, m )
-    } else {
-        const ms = (Date.parse( new Date() )).toString()
-        const m = ms[9] + ms[7] + ms[8] + ms[6]
-        return m
-        //console.log( ms, m )
-    }
-
-}
 
 // const transporter = nodemailer.createTransport({
 //   host: process.env.MAIL_HOST,
@@ -77,7 +63,7 @@ exports.handler = async (event, context) => {
 
     //console.log('!!!>> s', body)
 
-    const fieldsRequired = ['email','code'];
+    const fieldsRequired = ['pool','code', 'cart'];
 
     // Email - обязательное поле
     for (const field of fieldsRequired) {
@@ -90,21 +76,6 @@ exports.handler = async (event, context) => {
             };
         }
     }
-
-    console.log('>>>>>', body.code, body, getCode(body.d.d) )
-
-    if ( body.code === getCode(body.d.d) ) {
-
-    } else {
-        return {
-            statusCode: 400,
-            body: JSON.stringify({
-                message: `The code is invalid`,
-            }),
-        };
-    }
-
-
 
     let msg = ''
 
@@ -135,7 +106,7 @@ exports.handler = async (event, context) => {
     // axios({
     //   method: 'POST',
     //   responseType: 'json',
-    //   url: `${process.env.URL_AJAX}?action=authLogin&token=${process.env.AUTH_TOKEN}`,
+    //   url: `${process.env.URL_AJAX}?action=onCheckout&token=${process.env.AUTH_TOKEN}&token=${}`,
     //   headers: {
     //     'Content-Type': 'application/json'
     //   }
@@ -157,7 +128,7 @@ exports.handler = async (event, context) => {
 
     axios({
         method: 'get',
-        url: `${process.env.URL_AJAX}?action=resetPass&token=${process.env.AUTH_TOKEN}&email=${body.d.email}&type=${body.d.type}`,
+        url: `${process.env.URL_AJAX}?action=onCheckout&token=${process.env.AUTH_TOKEN}&cart=${body?.d?.email}`,
     })
         .then(function (response) {
             date = response.data.split('{')[1].split('}')[0];
