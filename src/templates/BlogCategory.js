@@ -8,8 +8,8 @@ import Star from './../assets/img/svg/star.svg'
 import StarOk from './../assets/img/svg/starOk.svg'
 import ClientSend from "../components/Blog/ClientSend";
 import {minCol} from "../function/SizeCol";
-import {gql, useQuery} from "@apollo/client";
-import BlogItemPost from "../components/Blog/BlogItemPost";
+// import {gql, useQuery} from "@apollo/client";
+// import BlogItemPost from "../components/Blog/BlogItemPost";
 // import SliderPost from "../components/Blog/SliderPost";
 
 
