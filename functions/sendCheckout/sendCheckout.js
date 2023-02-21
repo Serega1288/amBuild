@@ -1,45 +1,6 @@
 //const nodemailer = require('nodemailer');
 const axios = require('axios')
 
-// const transporter = nodemailer.createTransport({
-//   host: process.env.MAIL_HOST,
-//   port: process.env.MAIL_PORT,
-//   auth: {
-//     user: process.env.MAIL_USER,
-//     pass: process.env.MAIL_PASS,
-//   },
-// });
-
-// var transporter = nodemailer.createTransport({
-//   host: "smtp.gmail.com",
-//   port: 587,
-//   auth: {
-//     user: "victoriasoprano.com",
-//     pass: "U7=3rZ*q8"
-//   }
-// });
-
-// var transporter = nodemailer.createTransport({
-//   service: 'gmail',
-//   auth: {
-//     user: 'info@victoriasoprano.com',
-//     pass: 'U7=3rZ*q8'
-//   }
-// });
-
-// var transporter = nodemailer.createTransport({
-//   host: "smtp.gmail.com",
-//   port: 465,
-//   auth: {
-//     user: "info@victoriasoprano.com",
-//     pass: "U7=3rZ*q8",
-//   },
-// });
-
-
-
-
-
 function pause() {
     return new Promise((resolve, reject) => {
         setTimeout(resolve, 1000);
@@ -61,9 +22,9 @@ exports.handler = async (event, context) => {
         };
     }
 
-    //console.log('!!!>> s', body)
+    console.log('!!!>> s', body)
 
-    const fieldsRequired = ['pool','code', 'cart'];
+    const fieldsRequired = ['pool', 'cart', 't'];
 
     // Email - обязательное поле
     for (const field of fieldsRequired) {
@@ -121,26 +82,28 @@ exports.handler = async (event, context) => {
     //       console.error(error, 'error >>')
     //     })
 
-    console.log('body >>', body);
+    // console.log('body >>', body  );
+
+    // user_id
+
+
 
     let date = '';
     let m='';
 
     axios({
         method: 'get',
-        url: `${process.env.URL_AJAX}?action=onCheckout&token=${process.env.AUTH_TOKEN}&cart=${body?.d?.email}`,
+        url: `${process.env.URL_AJAX}?action=onCheckout&token=${process.env.AUTH_TOKEN}&body=${body}&user_id=${body.t.name}&email=${body.t.email}`,
     })
         .then(function (response) {
             date = response.data.split('{')[1].split('}')[0];
             console.log('fine >>>',  date)
 
-
-
             if ( date === '01' || date === '02' ) {
                 m = `Sorry, but an error has occurred, please contact technical support. Error code: ${date}`;
             }
 
-            if ( date === '03_1' || date === '03_2' ) {
+            if ( date === '03' || date === '04' ) {
                 m = `Sorry, but an error has occurred, please contact technical support. Error code: ${date}`;
             }
 
@@ -149,7 +112,7 @@ exports.handler = async (event, context) => {
             // }
 
             if ( date[0] + date[1] === '1_' ) {
-                m = 'You are successfully registered, your password has been sent to your mail.';
+                m = 'The order has been created.';
             }
 
             console.log('Mail >>', m);

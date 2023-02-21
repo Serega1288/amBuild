@@ -253,7 +253,7 @@ const PageProduct = (props) => {
     const price = hashrateFee * days * 10;
 
     //console.log('GlobalConst', list, GlobalConst)
-    // console.log('product', props.pageContext.ACForderDateProduct)
+    console.log('product', props.pageContext)
 
     const [step, setStep ] = useState(1);
     const [result, setResult ] = useState(1);
@@ -276,13 +276,14 @@ const PageProduct = (props) => {
         setResult(result + s)
     };
 
-    const onBuy = (step, Img, category, title) => {
+    const onBuy = (step, Img, category, title, id) => {
         const Arr = [
             {
                 Img: Img,
                 title: title,
                 category: category,
                 step: step,
+                id: id,
                 price: +price,
                 url: props.uri,
                 order: props.pageContext.ACForderDateProduct
@@ -402,7 +403,7 @@ const PageProduct = (props) => {
                                     </div>
                                     <div className="row WrapButtonBuy">
                                         <div className="col-6">
-                                            <span onClick={() => onBuy(result, Img, props.pageContext.productCategories, props.pageContext.title)} className="btn w100 style-3">
+                                            <span onClick={() => onBuy(result, Img, props.pageContext.productCategories, props.pageContext.title, props.pageContext.databaseId)} className="btn w100 style-3">
                                                 Buy Now
                                             </span>
                                         </div>

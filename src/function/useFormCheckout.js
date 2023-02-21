@@ -1,14 +1,13 @@
 import {useState} from "react";
+import {localStoreService} from "./hook";
 // import {instanceAuthService} from "./auth";
 // import {navigate} from "gatsby";
 
 const useFormCheckout = () => {
-    const [values, setValues] = useState({pool: '', garbage: '', cart: ''  });
+    const [values, setValues] = useState({pool: '', garbage: '', cart: '', t: localStoreService.getLocal(process.env.LOCAL_TOKEN)  });
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [message, setMessage] = useState(null);
-
-
 
 
     const captureInput = e => {
@@ -25,9 +24,6 @@ const useFormCheckout = () => {
         setIsLoading(true);
         setMessage(null);
         setError(null);
-
-
-        console.log('useFormCheckout !!!', values );
 
         const res = await fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendCheckout`, {
             method: 'POST',
@@ -50,7 +46,7 @@ const useFormCheckout = () => {
         //     navigate('/search')
         // }
 
-        // console.log('responseText >>>', responseText );
+        // console.log('responseText >>> qqq', values );
 
         // 2. перевіряємо відповідь від сервера
         if ( responseText.result >= 400 && responseText.result < 600 ) {
@@ -68,7 +64,7 @@ const useFormCheckout = () => {
             });
             setMessage(responseText);
 
-            // console.log('ddd', responseText.result.message )
+            // console.log('ddd', responseText.result, responseText.result.message )
 
             // if ( responseText.result[0] + responseText?.result[1] === '1_' ) {
 

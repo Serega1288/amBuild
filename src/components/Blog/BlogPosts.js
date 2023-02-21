@@ -32,9 +32,7 @@ const  BlogPosts = (props) => {
             <BlogPost className="container">
                 <div className="row row-cols-1 row-cols-sm-3 box-blog-item">
                     {  posts.map((post, index) => (
-                        <>
-                            <BlogItem key={post.id} step={index} post={post} />
-                        </>
+                        <BlogItem key={post.id} step={index} post={post} />
                     ) ) }
                 </div>
             </BlogPost>

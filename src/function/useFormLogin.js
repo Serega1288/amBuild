@@ -61,6 +61,18 @@ const useForm = (RedirectPage) => {
 
         } else {
             // 3. емайл успішно відправлений
+
+            if ( responseText.result[0] + responseText?.result[1] === '1_' ) {
+
+                const user = {
+                    name: responseText?.result,
+                    email: values.email
+                }
+                instanceAuthService.saveUser(user)
+                navigate(RedirectPage)
+
+            }
+
             setIsLoading(false);
             setValues({
                 ...values,
@@ -69,18 +81,6 @@ const useForm = (RedirectPage) => {
                 garbage: ''
             });
             setMessage(responseText);
-
-            // console.log('ddd', responseText.result.message )
-
-            if ( responseText.result[0] + responseText?.result[1] === '1_' ) {
-
-                const user = {
-                    name: responseText?.result
-                }
-                instanceAuthService.saveUser(user)
-                navigate(RedirectPage)
-
-            }
 
 
         }

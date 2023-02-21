@@ -6,6 +6,7 @@ import BannerLite from '../components/constructor/banner/BannerLite'
 import styled from "styled-components";
 import {AuthLayout} from "../function/AuthLayout";
 import useFormCheckout from "../function/useFormCheckout";
+import {instanceAuthService} from "../function/auth";
 
 const PageCheckout = (props) => {
 
@@ -43,7 +44,7 @@ const PageCheckout = (props) => {
 
 
     const CartBuy = localStoreService.getLocal('CartBuy');
-    // console.log('Cart >>', Cart)
+    console.log('Cart >>', CartBuy)
 
     // if ( Cart === null ) {
     //     navigate('/shop');
@@ -55,7 +56,7 @@ const PageCheckout = (props) => {
     // const [poolValid, setPoolValid ] = useState(null);
     const chooseMiningPool = (s) => {
         setChoose(s)
-        // console.log('setChoose >>', s)
+        console.log('setChoose >>', s)
     };
 
 
@@ -77,7 +78,7 @@ const PageCheckout = (props) => {
     }
     // localStoreService.getLocal('Cart');
     // const Cart = localStoreService.getLocal('Cart')[0];
-    const [Cart, setCart ] = useState(CartBuy);
+    const [cart, setCart ] = useState(CartBuy);
     // const [step, setStep ] = useState(Cart[0].step);
 
     // console.log('ClickAmount >>', Cart, step )
@@ -88,12 +89,12 @@ const PageCheckout = (props) => {
         // console.log('ClickAmount start >>', op, Cart )
 
         if ( op === 'min' ) {
-            step = Cart[0]?.step - 1
+            step = cart[0]?.step - 1
             // setStep(step - 1)
             // Cart[0].step = step
         }
         if ( op === 'plus' ) {
-            step = Cart[0]?.step + 1
+            step = cart[0]?.step + 1
             // setStep(step + 1)
             // Cart[0].step = step
         }
@@ -102,13 +103,14 @@ const PageCheckout = (props) => {
 
         const Arr = [
             {
-                Img: Cart[0].Img,
-                title: Cart[0].title,
-                category: Cart[0].category,
+                Img: cart[0].Img,
+                title: cart[0].title,
+                category: cart[0].category,
+                id: cart[0].id,
                 step,
-                price: Cart[0].price,
-                url: Cart[0].url,
-                order: Cart[0].order
+                price: cart[0].price,
+                url: cart[0].url,
+                order: cart[0].order
             },
         ];
         setCart(Arr)
@@ -118,7 +120,7 @@ const PageCheckout = (props) => {
         // console.log('step end >>' , step)
     }
 
-        const { values, captureInput, submitForm, isLoading, error, message} = useFormCheckout();
+    const { values, captureInput, submitForm, isLoading, error, message} = useFormCheckout();
 
         return (
             <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout'>
@@ -152,10 +154,11 @@ const PageCheckout = (props) => {
                                        onChange={captureInput}
                                        className="garbage"
                                 />
+                                {/*{console.log('Cart', cart)}*/}
                                 <input type="text"
                                        name="cart"
                                        disabled={isLoading}
-                                       value={values.cart === Cart}
+                                       value={values.cart = cart}
                                        onChange={captureInput}
                                        className="garbage"
                                 />
@@ -175,16 +178,20 @@ const PageCheckout = (props) => {
                                             </div>
                                             <div className="col-auto">
                                                 <div className="WrapPoolBtn">
-                                                    {Cart[0]?.order.chooseMiningPool?.map( (item, index) => (
+                                                    <input required name="chooseMiningPool"
+                                                           id={`chooseMiningPool`}
+                                                           type="text"
+                                                           disabled={isLoading}
+                                                           value={values.pool = choose}
+                                                           onChange={captureInput}
+                                                           className="hidden-radio"
+                                                           style={{border: `none`}}
+                                                           autoComplete="off"
+                                                    />
+
+                                                    {cart[0]?.order.chooseMiningPool?.map( (item, index) => (
                                                         <span key={index}>
-                                                            <input required name="chooseMiningPool"
-                                                                   id={`chooseMiningPool-${index}`}
-                                                                   type="radio"
-                                                                   disabled={isLoading}
-                                                                   value={values.pool}
-                                                                   onChange={captureInput}
-                                                                   className="hidden-radio" />
-                                                            <label for={`chooseMiningPool-${index}`} onClick={() => chooseMiningPool(item.option) }
+                                                            <label onClick={() => chooseMiningPool(item.option) }
                                                                   className={`btn style-4 ${ choose === item.option ? 'active' : '' }`}>
                                                                 { item.title }
                                                             </label>
@@ -198,8 +205,8 @@ const PageCheckout = (props) => {
                                             <strong>Attention:</strong>
                                         </div>
                                         <div className="attentions">
-                                            {Cart[0]?.order.attention?.map( (item, index) => (
-                                                <div className="attention">
+                                            {cart[0]?.order.attention?.map( (item, index) => (
+                                                <div key={`attentions-${index}`} className="attention">
                                                     { item.text }
                                                 </div>
                                             ))}
@@ -244,19 +251,19 @@ const PageCheckout = (props) => {
                                                 <div className="row">
                                                     <div className="col">
                                                         <div className="productTitle">
-                                                            {Cart[0]?.category.nodes?.map( (item, index) => (
-                                                                <>
+                                                            {cart[0]?.category.nodes?.map( (item, index) => (
+                                                                <span className={`productTitle-${index}`}>
                                                                     {
                                                                         item.name === 'Cloud mining' ? '' : item.name
                                                                     }
-                                                                </>
+                                                                </span>
                                                             ))}&nbsp;
-                                                            {Cart[0]?.title}
+                                                            {cart[0]?.title}
                                                         </div>
                                                     </div>
                                                     <div className="col">
                                                         <div className="price">
-                                                            $ {Cart[0]?.order.hashrateFee}/T/Days
+                                                            $ {cart[0]?.order.hashrateFee}/T/Days
                                                         </div>
                                                     </div>
                                                     <div className="col-auto">
@@ -264,7 +271,7 @@ const PageCheckout = (props) => {
                                                             <span onClick={() => ClickAmount('min')}>-</span>
                                                             <div>
                                                                 {
-                                                                    Cart[0]?.step * 10 + 'T'
+                                                                    cart[0]?.step * 10 + 'T'
                                                                 }
                                                                 {/*{*/}
                                                                 {/*    console.log('-->', Cart[0])*/}
@@ -275,13 +282,13 @@ const PageCheckout = (props) => {
                                                     </div>
                                                     <div className="col-auto">
                                                         <div className="day">
-                                                            {Cart[0]?.order.days}
+                                                            {cart[0]?.order.days}
                                                         </div>
                                                     </div>
                                                     <div className="col-auto">
                                                         <div className="total">
                                                             <div>$&nbsp;
-                                                                <span>{ (Cart[0]?.order.hashrateFee * Cart[0]?.order.days * Cart[0]?.step * 10).toFixed(2) }</span>
+                                                                <span>{ (cart[0]?.order.hashrateFee * cart[0]?.order.days * cart[0]?.step * 10).toFixed(2) }</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -296,7 +303,7 @@ const PageCheckout = (props) => {
                                                     </div>
                                                     <div className="col">
                                                         <div className="price">
-                                                            $ {Cart[0]?.order.serviceFee}/T/Days
+                                                            $ {cart[0]?.order.serviceFee}/T/Days
                                                         </div>
                                                     </div>
                                                     <div className="col-auto">
@@ -306,14 +313,14 @@ const PageCheckout = (props) => {
                                                     </div>
                                                     <div className="col-auto">
                                                         <div className="day">
-                                                            {Cart[0]?.order.days}
+                                                            {cart[0]?.order.days}
                                                         </div>
                                                     </div>
                                                     <div className="col-auto">
                                                         <div className="total">
                                                             <div>$&nbsp;
                                                                 <span>
-                                                                    {Cart[0]?.order.serviceFee * Cart[0]?.order.days * Cart[0]?.step * 10 }
+                                                                    {cart[0]?.order.serviceFee * cart[0]?.order.days * cart[0]?.step * 10 }
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -331,25 +338,25 @@ const PageCheckout = (props) => {
                                 <div className="col-auto">
                                     <div className="blocks formOrder">
 
-                                        <a href={Cart[0]?.url} className="itemProduct d-block">
+                                        <a href={cart[0]?.url} className="itemProduct d-block">
                                             <div className="row">
                                                 <div className="col-auto">
                                                     <div  style={{width: '14rem'}} className="img">
-                                                        <img src={Cart[0]?.Img} alt=""/>
+                                                        <img src={cart[0]?.Img} alt=""/>
                                                     </div>
                                                 </div>
                                                 <div className="col d-flex flex-column justify-content-center">
                                                     <div className="cat">
-                                                        {Cart[0]?.category.nodes?.map( (item, index) => (
-                                                            <>
+                                                        {cart[0]?.category.nodes?.map( (item, index) => (
+                                                            <span key={`cartCategory-${index}`} className={`cat=${index}`}>
                                                                 {
                                                                     item.name === 'Cloud mining' ? '' : item.name
                                                                 }
-                                                            </>
+                                                            </span>
                                                         ))}
                                                     </div>
                                                     <div className="title">
-                                                        {Cart[0]?.title}
+                                                        {cart[0]?.title}
                                                     </div>
                                                 </div>
                                             </div>
@@ -364,7 +371,7 @@ const PageCheckout = (props) => {
                                                 </div>
                                                 <div className="col-auto">
                                                     <div className="WrapOrderValue">
-                                                        <strong>$ <span>{(Cart[0]?.price*Cart[0]?.step).toFixed(2)}</span></strong>
+                                                        <strong>$ <span>{(cart[0]?.price*cart[0]?.step).toFixed(2)}</span></strong>
                                                     </div>
                                                 </div>
                                             </div>
@@ -379,7 +386,7 @@ const PageCheckout = (props) => {
                                                 </div>
                                                 <div className="col-auto">
                                                     <div className="WrapOrderValue">
-                                                        <strong>$ <span>{Cart[0]?.order.serviceFee * Cart[0]?.order.days * Cart[0]?.step * 10 }</span></strong>
+                                                        <strong>$ <span>{cart[0]?.order.serviceFee * cart[0]?.order.days * cart[0]?.step * 10 }</span></strong>
                                                     </div>
                                                 </div>
                                             </div>
@@ -389,7 +396,7 @@ const PageCheckout = (props) => {
                                             Order Total:
                                             <strong>$&nbsp;
                                                 <span>
-                                                    {(Cart[0]?.price*Cart[0]?.step + ( Cart[0]?.order.serviceFee * Cart[0]?.order.days * Cart[0]?.step * 10 )).toFixed(2) }
+                                                    {(cart[0]?.price*cart[0]?.step + ( cart[0]?.order.serviceFee * cart[0]?.order.days * cart[0]?.step * 10 )).toFixed(2) }
                                                 </span>
                                             </strong>
                                         </div>
@@ -401,7 +408,7 @@ const PageCheckout = (props) => {
                                     </div>
                                     <div className="acceptList">
                                         {list.acceptList.map( (item, index) => (
-                                            <label for={`list-item-${index}`} key={index} className="list-item">
+                                            <label htmlFor={`list-item-${index}`} key={`acceptList-${index}`} className="list-item">
                                                 <input required type="checkbox" id={`list-item-${index}`} />
                                                 I accept <a target="_blank" href={item.url.uri} >{item.name}</a>
                                             </label>

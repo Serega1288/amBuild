@@ -9,12 +9,9 @@ const ListProduct = ({item}) => {
         <Section className="ListProduct">
             <div className="container">
                 <div className="row row-cols-2 row-cols-sm-3">
-                    {item.map( (item, index) => {
-                        //console.log('categoryItem', item);
-                        return (
-                            <ProductItem key={index} item={item} />
-                        )
-                    })}
+                    {item.map( (item, index) => (
+                        <ProductItem key={index} item={item} />
+                    ))}
                 </div>
             </div>
         </Section>

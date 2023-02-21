@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react"
+import React, {useState} from "react"
 import Layout from "../components/Layout"
 import useFormCode from "../function/userFormCode"
 // import styled from 'styled-components'
@@ -53,8 +53,11 @@ const RegPage = (props) => {
                             {
                                 message?.result === '1_' ?
                                     <>
-                                                <span className="link-form sendcode anim text-center"
-                                                      style={{display: 'block'}} onClick={() => SendCode()}> &lt; Resend the code</span>
+                                        <span
+                                            className="link-form sendcode anim text-center"
+                                            style={{display: 'block'}}
+                                            onClick={() => SendCode()}
+                                        > &lt; Resend the code </span>
                                         <BlockFormSend location={location} d={d} email={values.email} type={t}/>
                                     </>
                                     :

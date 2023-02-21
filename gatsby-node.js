@@ -92,10 +92,10 @@ exports.createPages = ({graphql, actions}) => {
     return graphql(`
         { 
            
-          
           products:allWpProductD {
             nodes {
               id
+              databaseId
               title
               uri
               featuredImage {

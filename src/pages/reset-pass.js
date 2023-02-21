@@ -7,6 +7,9 @@ import BlockFormResPassSend from "../components/constructor/sign/BlockFormResPas
 import {Link} from "gatsby"
 
 const ResetPass = (props) => {
+
+
+
     // const isBrowser = typeof window !== "undefined"
 
     const maxTime = 20;
@@ -25,7 +28,7 @@ const ResetPass = (props) => {
     }
     const location = props.location.search?.split('=');
 
-
+    console.log('location >> 1', location )
 
     return (
         <AuthLayout logIn={true} page='reset-pass' go='account'>
@@ -43,7 +46,7 @@ const ResetPass = (props) => {
                                         <>
                                                 <span className="link-form sendcode anim text-center"
                                                       style={{display: 'block'}} onClick={() => SendCode()}> &lt; Resend the code</span>
-                                            <BlockFormResPassSend location={location} d={d} email={values.email}
+                                            <BlockFormResPassSend props={props} location={location} d={d} email={values.email}
                                                                   type={t}/>
                                         </>
                                         :

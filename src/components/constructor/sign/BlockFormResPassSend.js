@@ -4,6 +4,7 @@ import userFormResPass from "../../../function/useFormResPass"
 
 const BlockFormSend = (d, email, type, location) => {
     const { values, captureInput, submitForm, isLoading, error, message} = userFormResPass(d, email, type);
+
     return (
         <form onSubmit={submitForm}>
             {/*{console.log('ee', email, d)}*/}
@@ -36,7 +37,14 @@ const BlockFormSend = (d, email, type, location) => {
             ) : ''}
             <div className="Boxlink">
                 <span>Already have an account?</span>
-                <Link to={`/sign-in/${location[0] === '?r' ? ( `?r=` + location[1]) : '' }`}>Sign In</Link>
+                {
+                    location ? (
+                        <Link to={`/sign-in/${location[0] === '?r' ? ( `?r=` + location[1]) : '' }`}>Sign In</Link>
+                    ) : (
+                        <Link to={`/sign-in/`}>Sign In</Link>
+                    )
+                }
+
             </div>
             <h3 className={` statusInfo text-center 
             ${error || message ?  ' active '  : ''} 
