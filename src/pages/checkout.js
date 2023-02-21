@@ -121,7 +121,7 @@ const PageCheckout = (props) => {
         // const { values, captureInput, submitForm, isLoading, error, message} = useFormCheckout();
 
         return (
-            <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout'>
+            // <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout'>
                 <Layout customClass="section-pad-min" title='checkout'  desc={ generalTitle } >
                     <BannerLite title='checkout' item={{ item: '' , title: `Confirm <br /> order`, style : 'title' }} />
                     <Section>
@@ -412,7 +412,7 @@ const PageCheckout = (props) => {
                         </div>
                     </Section>
                 </Layout>
-            </AuthLayout>
+            // </AuthLayout>
         );
 
 };

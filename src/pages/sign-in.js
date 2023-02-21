@@ -31,7 +31,7 @@ const LoginPage = (props) => {
 
 
     return (
-        <AuthLayout logIn={true} page='sign-in' go={location[0] === '?r' ? (location[1]) : 'account'}>
+        // <AuthLayout logIn={true} page='sign-in' go={location[0] === '?r' ? (location[1]) : 'account'}>
             <Layout title="Login" desc="desc">
                 <Section className="pageLogin d-flex align-items-center">
                     <div className="Login container">
@@ -108,7 +108,7 @@ const LoginPage = (props) => {
                     </div>
                 </Section>
             </Layout>
-        </AuthLayout>
+        // </AuthLayout>
     );
 };
 export default LoginPage;
