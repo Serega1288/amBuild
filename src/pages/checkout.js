@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
 import Layout from '../components/Layout'
 import {graphql, useStaticQuery} from "gatsby"
-import {localStoreService} from "../function/hook"
+// import {localStoreService} from "../function/hook"
 import BannerLite from '../components/constructor/banner/BannerLite'
 import styled from "styled-components";
 import {AuthLayout} from "../function/AuthLayout";
-import useFormCheckout from "../function/useFormCheckout";
+// import useFormCheckout from "../function/useFormCheckout";
 
 const PageCheckout = (props) => {
 
@@ -37,12 +37,12 @@ const PageCheckout = (props) => {
 
     // const title = props?.pageContext?.title;
     const generalTitle = data?.wp?.allSettings?.generalSettingsTitle;
-    const list = data?.wp?.themeGeneralSettings?.ACFoptionThemes;
+    // const list = data?.wp?.themeGeneralSettings?.ACFoptionThemes;
 
     // console.log('pageCheckout list >>>', list)
 
 
-    const CartBuy = localStoreService.getLocal('CartBuy');
+    // const CartBuy = localStoreService.getLocal('CartBuy');
     // console.log('Cart >>', Cart)
 
     // if ( Cart === null ) {
@@ -51,74 +51,74 @@ const PageCheckout = (props) => {
 
 
 
-    const [choose, setChoose ] = useState(null);
-    // const [poolValid, setPoolValid ] = useState(null);
-    const chooseMiningPool = (s) => {
-        setChoose(s)
-        // console.log('setChoose >>', s)
-    };
+    // const [choose, setChoose ] = useState(null);
+    // // const [poolValid, setPoolValid ] = useState(null);
+    // const chooseMiningPool = (s) => {
+    //     setChoose(s)
+    //     // console.log('setChoose >>', s)
+    // };
 
 
 
-    const buy = (choose) => {
-        // console.log('buy >', choose)
-        // if(choose === null) {
-        //     setPoolValid(0)
-        // } else {
-        //     setPoolValid(1)
-        // }
-
-
-
-        // if(choose === null) {
-        //     return
-        // }
-
-    }
+    // const buy = (choose) => {
+    //     // console.log('buy >', choose)
+    //     // if(choose === null) {
+    //     //     setPoolValid(0)
+    //     // } else {
+    //     //     setPoolValid(1)
+    //     // }
+    //
+    //
+    //
+    //     // if(choose === null) {
+    //     //     return
+    //     // }
+    //
+    // }
     // localStoreService.getLocal('Cart');
     // const Cart = localStoreService.getLocal('Cart')[0];
-    const [Cart, setCart ] = useState(CartBuy);
+    // const [Cart, setCart ] = useState(CartBuy);
     // const [step, setStep ] = useState(Cart[0].step);
 
     // console.log('ClickAmount >>', Cart, step )
 
-    const ClickAmount = (op) => {
+    // const ClickAmount = (op) => {
+    //
+    //     let step;
+    //     // console.log('ClickAmount start >>', op, Cart )
+    //
+    //     if ( op === 'min' ) {
+    //         step = Cart[0]?.step - 1
+    //         // setStep(step - 1)
+    //         // Cart[0].step = step
+    //     }
+    //     if ( op === 'plus' ) {
+    //         step = Cart[0]?.step + 1
+    //         // setStep(step + 1)
+    //         // Cart[0].step = step
+    //     }
+    //
+    //     console.log('ClickAmount step >>', step)
+    //
+    //     const Arr = [
+    //         {
+    //             Img: Cart[0].Img,
+    //             title: Cart[0].title,
+    //             category: Cart[0].category,
+    //             step,
+    //             price: Cart[0].price,
+    //             url: Cart[0].url,
+    //             order: Cart[0].order
+    //         },
+    //     ];
+    //     setCart(Arr)
+    //     localStoreService.saveLocal('CartBuy', Arr );
+    //
+    //     // console.log('ClickAmount end >>', op, Cart )
+    //     // console.log('step end >>' , step)
+    // }
 
-        let step;
-        // console.log('ClickAmount start >>', op, Cart )
-
-        if ( op === 'min' ) {
-            step = Cart[0]?.step - 1
-            // setStep(step - 1)
-            // Cart[0].step = step
-        }
-        if ( op === 'plus' ) {
-            step = Cart[0]?.step + 1
-            // setStep(step + 1)
-            // Cart[0].step = step
-        }
-
-        console.log('ClickAmount step >>', step)
-
-        const Arr = [
-            {
-                Img: Cart[0].Img,
-                title: Cart[0].title,
-                category: Cart[0].category,
-                step,
-                price: Cart[0].price,
-                url: Cart[0].url,
-                order: Cart[0].order
-            },
-        ];
-        setCart(Arr)
-        localStoreService.saveLocal('CartBuy', Arr );
-
-        // console.log('ClickAmount end >>', op, Cart )
-        // console.log('step end >>' , step)
-    }
-
-        const { values, captureInput, submitForm, isLoading, error, message} = useFormCheckout();
+        // const { values, captureInput, submitForm, isLoading, error, message} = useFormCheckout();
 
         return (
             <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout'>
@@ -127,288 +127,288 @@ const PageCheckout = (props) => {
                     <Section>
                         <div className="container">
 
-                            <h3 className={` statusInfo text-center 
-                                    ${error || message ?  ' active '  : ''}
-                                    ${error ?  ' error '  : ''}
-                                    ${ 
-                                message?.result === '01' ||
-                                message?.result === '02' ||
-                                message?.result === '03' ||
-                                message?.result?.status === 400 ||
-                                message?.result === '04' ?  'error'  : 'done'
-                            } 
-                                `}>
-                                {error ?  error  : ''}
-                                {message ? message?.message  : ''}
-                            </h3>
+                            {/*<h3 className={` statusInfo text-center */}
+                            {/*        ${error || message ?  ' active '  : ''}*/}
+                            {/*        ${error ?  ' error '  : ''}*/}
+                            {/*        ${ */}
+                            {/*    message?.result === '01' ||*/}
+                            {/*    message?.result === '02' ||*/}
+                            {/*    message?.result === '03' ||*/}
+                            {/*    message?.result?.status === 400 ||*/}
+                            {/*    message?.result === '04' ?  'error'  : 'done'*/}
+                            {/*} */}
+                            {/*    `}>*/}
+                            {/*    {error ?  error  : ''}*/}
+                            {/*    {message ? message?.message  : ''}*/}
+                            {/*</h3>*/}
 
-                            <form
-                                onSubmit={submitForm}
-                                   className="form-checkout row">
-                                <input type="garbage"
-                                       name="garbage"
-                                       disabled={isLoading}
-                                       value={values.garbage}
-                                       onChange={captureInput}
-                                       className="garbage"
-                                />
-                                <input type="text"
-                                       name="cart"
-                                       disabled={isLoading}
-                                       value={values.cart === Cart}
-                                       onChange={captureInput}
-                                       className="garbage"
-                                />
+                            {/*<form*/}
+                            {/*    onSubmit={submitForm}*/}
+                            {/*       className="form-checkout row">*/}
+                            {/*    <input type="garbage"*/}
+                            {/*           name="garbage"*/}
+                            {/*           disabled={isLoading}*/}
+                            {/*           value={values.garbage}*/}
+                            {/*           onChange={captureInput}*/}
+                            {/*           className="garbage"*/}
+                            {/*    />*/}
+                            {/*    <input type="text"*/}
+                            {/*           name="cart"*/}
+                            {/*           disabled={isLoading}*/}
+                            {/*           value={values.cart === Cart}*/}
+                            {/*           onChange={captureInput}*/}
+                            {/*           className="garbage"*/}
+                            {/*    />*/}
 
-                                <div className="col">
+                            {/*    <div className="col">*/}
 
-                                    <div className="blocks itemOrder">
-                                        <div className="title">
-                                            Mining Pool <br />
-                                            Payment
-                                        </div>
-                                        <div className="WrapPool row">
-                                            <div className="col d-flex align-items-center">
-                                                <strong>
-                                                    Choose Mining Pool:
-                                                </strong>
-                                            </div>
-                                            <div className="col-auto">
-                                                <div className="WrapPoolBtn">
-                                                    {Cart[0]?.order.chooseMiningPool?.map( (item, index) => (
-                                                        <span key={index}>
-                                                            <input required name="chooseMiningPool"
-                                                                   id={`chooseMiningPool-${index}`}
-                                                                   type="radio"
-                                                                   disabled={isLoading}
-                                                                   value={values.pool}
-                                                                   onChange={captureInput}
-                                                                   className="hidden-radio" />
-                                                            <label for={`chooseMiningPool-${index}`} onClick={() => chooseMiningPool(item.option) }
-                                                                  className={`btn style-4 ${ choose === item.option ? 'active' : '' }`}>
-                                                                { item.title }
-                                                            </label>
-                                                        </span>
+                            {/*        <div className="blocks itemOrder">*/}
+                            {/*            <div className="title">*/}
+                            {/*                Mining Pool <br />*/}
+                            {/*                Payment*/}
+                            {/*            </div>*/}
+                            {/*            <div className="WrapPool row">*/}
+                            {/*                <div className="col d-flex align-items-center">*/}
+                            {/*                    <strong>*/}
+                            {/*                        Choose Mining Pool:*/}
+                            {/*                    </strong>*/}
+                            {/*                </div>*/}
+                            {/*                <div className="col-auto">*/}
+                            {/*                    <div className="WrapPoolBtn">*/}
+                            {/*                        {Cart[0]?.order.chooseMiningPool?.map( (item, index) => (*/}
+                            {/*                            <span key={index}>*/}
+                            {/*                                <input required name="chooseMiningPool"*/}
+                            {/*                                       id={`chooseMiningPool-${index}`}*/}
+                            {/*                                       type="radio"*/}
+                            {/*                                       disabled={isLoading}*/}
+                            {/*                                       value={values.pool}*/}
+                            {/*                                       onChange={captureInput}*/}
+                            {/*                                       className="hidden-radio" />*/}
+                            {/*                                <label for={`chooseMiningPool-${index}`} onClick={() => chooseMiningPool(item.option) }*/}
+                            {/*                                      className={`btn style-4 ${ choose === item.option ? 'active' : '' }`}>*/}
+                            {/*                                    { item.title }*/}
+                            {/*                                </label>*/}
+                            {/*                            </span>*/}
 
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="subTitle">
-                                            <strong>Attention:</strong>
-                                        </div>
-                                        <div className="attentions">
-                                            {Cart[0]?.order.attention?.map( (item, index) => (
-                                                <div className="attention">
-                                                    { item.text }
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
+                            {/*                        ))}*/}
+                            {/*                    </div>*/}
+                            {/*                </div>*/}
+                            {/*            </div>*/}
+                            {/*            <div className="subTitle">*/}
+                            {/*                <strong>Attention:</strong>*/}
+                            {/*            </div>*/}
+                            {/*            <div className="attentions">*/}
+                            {/*                {Cart[0]?.order.attention?.map( (item, index) => (*/}
+                            {/*                    <div className="attention">*/}
+                            {/*                        { item.text }*/}
+                            {/*                    </div>*/}
+                            {/*                ))}*/}
+                            {/*            </div>*/}
+                            {/*        </div>*/}
 
-                                    <div className="blocks itemOrder">
-                                        <div className="title">
-                                            Order Information
-                                        </div>
-                                        <div className="table">
-                                            <div className="tableItem tableTitle">
-                                                <div className="row">
-                                                    <div className="col">
-                                                        <div className="productTitle">
-                                                            Service/Product
-                                                        </div>
-                                                    </div>
-                                                    <div className="col">
-                                                        <div className="price">
-                                                            Price
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-auto">
-                                                        <div className="amount">
-                                                            Amount
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-auto">
-                                                        <div className="day">
-                                                            Days
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-auto">
-                                                        <div className="total">
-                                                            Total
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="tableItem">
-                                                <div className="row">
-                                                    <div className="col">
-                                                        <div className="productTitle">
-                                                            {Cart[0]?.category.nodes?.map( (item, index) => (
-                                                                <>
-                                                                    {
-                                                                        item.name === 'Cloud mining' ? '' : item.name
-                                                                    }
-                                                                </>
-                                                            ))}&nbsp;
-                                                            {Cart[0]?.title}
-                                                        </div>
-                                                    </div>
-                                                    <div className="col">
-                                                        <div className="price">
-                                                            $ {Cart[0]?.order.hashrateFee}/T/Days
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-auto">
-                                                        <div className="amount">
-                                                            <span onClick={() => ClickAmount('min')}>-</span>
-                                                            <div>
-                                                                {
-                                                                    Cart[0]?.step * 10 + 'T'
-                                                                }
-                                                                {/*{*/}
-                                                                {/*    console.log('-->', Cart[0])*/}
-                                                                {/*}*/}
-                                                            </div>
-                                                            <span onClick={() => ClickAmount('plus')}>+</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-auto">
-                                                        <div className="day">
-                                                            {Cart[0]?.order.days}
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-auto">
-                                                        <div className="total">
-                                                            <div>$&nbsp;
-                                                                <span>{ (Cart[0]?.order.hashrateFee * Cart[0]?.order.days * Cart[0]?.step * 10).toFixed(2) }</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="tableItem">
-                                                <div className="row">
-                                                    <div className="col">
-                                                        <div className="productTitle">
-                                                            Service Fee
-                                                        </div>
-                                                    </div>
-                                                    <div className="col">
-                                                        <div className="price">
-                                                            $ {Cart[0]?.order.serviceFee}/T/Days
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-auto">
-                                                        <div className="amount">
-                                                            OT
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-auto">
-                                                        <div className="day">
-                                                            {Cart[0]?.order.days}
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-auto">
-                                                        <div className="total">
-                                                            <div>$&nbsp;
-                                                                <span>
-                                                                    {Cart[0]?.order.serviceFee * Cart[0]?.order.days * Cart[0]?.step * 10 }
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                            {/*        <div className="blocks itemOrder">*/}
+                            {/*            <div className="title">*/}
+                            {/*                Order Information*/}
+                            {/*            </div>*/}
+                            {/*            <div className="table">*/}
+                            {/*                <div className="tableItem tableTitle">*/}
+                            {/*                    <div className="row">*/}
+                            {/*                        <div className="col">*/}
+                            {/*                            <div className="productTitle">*/}
+                            {/*                                Service/Product*/}
+                            {/*                            </div>*/}
+                            {/*                        </div>*/}
+                            {/*                        <div className="col">*/}
+                            {/*                            <div className="price">*/}
+                            {/*                                Price*/}
+                            {/*                            </div>*/}
+                            {/*                        </div>*/}
+                            {/*                        <div className="col-auto">*/}
+                            {/*                            <div className="amount">*/}
+                            {/*                                Amount*/}
+                            {/*                            </div>*/}
+                            {/*                        </div>*/}
+                            {/*                        <div className="col-auto">*/}
+                            {/*                            <div className="day">*/}
+                            {/*                                Days*/}
+                            {/*                            </div>*/}
+                            {/*                        </div>*/}
+                            {/*                        <div className="col-auto">*/}
+                            {/*                            <div className="total">*/}
+                            {/*                                Total*/}
+                            {/*                            </div>*/}
+                            {/*                        </div>*/}
+                            {/*                    </div>*/}
+                            {/*                </div>*/}
+                            {/*                <div className="tableItem">*/}
+                            {/*                    <div className="row">*/}
+                            {/*                        <div className="col">*/}
+                            {/*                            <div className="productTitle">*/}
+                            {/*                                {Cart[0]?.category.nodes?.map( (item, index) => (*/}
+                            {/*                                    <>*/}
+                            {/*                                        {*/}
+                            {/*                                            item.name === 'Cloud mining' ? '' : item.name*/}
+                            {/*                                        }*/}
+                            {/*                                    </>*/}
+                            {/*                                ))}&nbsp;*/}
+                            {/*                                {Cart[0]?.title}*/}
+                            {/*                            </div>*/}
+                            {/*                        </div>*/}
+                            {/*                        <div className="col">*/}
+                            {/*                            <div className="price">*/}
+                            {/*                                $ {Cart[0]?.order.hashrateFee}/T/Days*/}
+                            {/*                            </div>*/}
+                            {/*                        </div>*/}
+                            {/*                        <div className="col-auto">*/}
+                            {/*                            <div className="amount">*/}
+                            {/*                                <span onClick={() => ClickAmount('min')}>-</span>*/}
+                            {/*                                <div>*/}
+                            {/*                                    {*/}
+                            {/*                                        Cart[0]?.step * 10 + 'T'*/}
+                            {/*                                    }*/}
+                            {/*                                    /!*{*!/*/}
+                            {/*                                    /!*    console.log('-->', Cart[0])*!/*/}
+                            {/*                                    /!*}*!/*/}
+                            {/*                                </div>*/}
+                            {/*                                <span onClick={() => ClickAmount('plus')}>+</span>*/}
+                            {/*                            </div>*/}
+                            {/*                        </div>*/}
+                            {/*                        <div className="col-auto">*/}
+                            {/*                            <div className="day">*/}
+                            {/*                                {Cart[0]?.order.days}*/}
+                            {/*                            </div>*/}
+                            {/*                        </div>*/}
+                            {/*                        <div className="col-auto">*/}
+                            {/*                            <div className="total">*/}
+                            {/*                                <div>$&nbsp;*/}
+                            {/*                                    <span>{ (Cart[0]?.order.hashrateFee * Cart[0]?.order.days * Cart[0]?.step * 10).toFixed(2) }</span>*/}
+                            {/*                                </div>*/}
+                            {/*                            </div>*/}
+                            {/*                        </div>*/}
+                            {/*                    </div>*/}
+                            {/*                </div>*/}
+                            {/*                <div className="tableItem">*/}
+                            {/*                    <div className="row">*/}
+                            {/*                        <div className="col">*/}
+                            {/*                            <div className="productTitle">*/}
+                            {/*                                Service Fee*/}
+                            {/*                            </div>*/}
+                            {/*                        </div>*/}
+                            {/*                        <div className="col">*/}
+                            {/*                            <div className="price">*/}
+                            {/*                                $ {Cart[0]?.order.serviceFee}/T/Days*/}
+                            {/*                            </div>*/}
+                            {/*                        </div>*/}
+                            {/*                        <div className="col-auto">*/}
+                            {/*                            <div className="amount">*/}
+                            {/*                                OT*/}
+                            {/*                            </div>*/}
+                            {/*                        </div>*/}
+                            {/*                        <div className="col-auto">*/}
+                            {/*                            <div className="day">*/}
+                            {/*                                {Cart[0]?.order.days}*/}
+                            {/*                            </div>*/}
+                            {/*                        </div>*/}
+                            {/*                        <div className="col-auto">*/}
+                            {/*                            <div className="total">*/}
+                            {/*                                <div>$&nbsp;*/}
+                            {/*                                    <span>*/}
+                            {/*                                        {Cart[0]?.order.serviceFee * Cart[0]?.order.days * Cart[0]?.step * 10 }*/}
+                            {/*                                    </span>*/}
+                            {/*                                </div>*/}
+                            {/*                            </div>*/}
+                            {/*                        </div>*/}
+                            {/*                    </div>*/}
+                            {/*                </div>*/}
 
-                                        </div>
-                                        <p>
-                                            <strong>Note:</strong>
-                                            The remaining ransaction fees can be paid manually or be deducted automatically from your fund.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="col-auto">
-                                    <div className="blocks formOrder">
+                            {/*            </div>*/}
+                            {/*            <p>*/}
+                            {/*                <strong>Note:</strong>*/}
+                            {/*                The remaining ransaction fees can be paid manually or be deducted automatically from your fund.*/}
+                            {/*            </p>*/}
+                            {/*        </div>*/}
+                            {/*    </div>*/}
+                            {/*    <div className="col-auto">*/}
+                            {/*        <div className="blocks formOrder">*/}
 
-                                        <a href={Cart[0]?.url} className="itemProduct d-block">
-                                            <div className="row">
-                                                <div className="col-auto">
-                                                    <div  style={{width: '14rem'}} className="img">
-                                                        <img src={Cart[0]?.Img} alt=""/>
-                                                    </div>
-                                                </div>
-                                                <div className="col d-flex flex-column justify-content-center">
-                                                    <div className="cat">
-                                                        {Cart[0]?.category.nodes?.map( (item, index) => (
-                                                            <>
-                                                                {
-                                                                    item.name === 'Cloud mining' ? '' : item.name
-                                                                }
-                                                            </>
-                                                        ))}
-                                                    </div>
-                                                    <div className="title">
-                                                        {Cart[0]?.title}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
+                            {/*            <a href={Cart[0]?.url} className="itemProduct d-block">*/}
+                            {/*                <div className="row">*/}
+                            {/*                    <div className="col-auto">*/}
+                            {/*                        <div  style={{width: '14rem'}} className="img">*/}
+                            {/*                            <img src={Cart[0]?.Img} alt=""/>*/}
+                            {/*                        </div>*/}
+                            {/*                    </div>*/}
+                            {/*                    <div className="col d-flex flex-column justify-content-center">*/}
+                            {/*                        <div className="cat">*/}
+                            {/*                            {Cart[0]?.category.nodes?.map( (item, index) => (*/}
+                            {/*                                <>*/}
+                            {/*                                    {*/}
+                            {/*                                        item.name === 'Cloud mining' ? '' : item.name*/}
+                            {/*                                    }*/}
+                            {/*                                </>*/}
+                            {/*                            ))}*/}
+                            {/*                        </div>*/}
+                            {/*                        <div className="title">*/}
+                            {/*                            {Cart[0]?.title}*/}
+                            {/*                        </div>*/}
+                            {/*                    </div>*/}
+                            {/*                </div>*/}
+                            {/*            </a>*/}
 
-                                        <div className="WrapOrder">
-                                            <div className="row">
-                                                <div className="col">
-                                                    <div className="WrapOrderTitle">
-                                                        Hashrate Fee:
-                                                    </div>
-                                                </div>
-                                                <div className="col-auto">
-                                                    <div className="WrapOrderValue">
-                                                        <strong>$ <span>{(Cart[0]?.price*Cart[0]?.step).toFixed(2)}</span></strong>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                            {/*            <div className="WrapOrder">*/}
+                            {/*                <div className="row">*/}
+                            {/*                    <div className="col">*/}
+                            {/*                        <div className="WrapOrderTitle">*/}
+                            {/*                            Hashrate Fee:*/}
+                            {/*                        </div>*/}
+                            {/*                    </div>*/}
+                            {/*                    <div className="col-auto">*/}
+                            {/*                        <div className="WrapOrderValue">*/}
+                            {/*                            <strong>$ <span>{(Cart[0]?.price*Cart[0]?.step).toFixed(2)}</span></strong>*/}
+                            {/*                        </div>*/}
+                            {/*                    </div>*/}
+                            {/*                </div>*/}
+                            {/*            </div>*/}
 
-                                        <div className="WrapOrder">
-                                            <div className="row">
-                                                <div className="col">
-                                                    <div className="WrapOrderTitle">
-                                                        Service Fee:
-                                                    </div>
-                                                </div>
-                                                <div className="col-auto">
-                                                    <div className="WrapOrderValue">
-                                                        <strong>$ <span>{Cart[0]?.order.serviceFee * Cart[0]?.order.days * Cart[0]?.step * 10 }</span></strong>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                            {/*            <div className="WrapOrder">*/}
+                            {/*                <div className="row">*/}
+                            {/*                    <div className="col">*/}
+                            {/*                        <div className="WrapOrderTitle">*/}
+                            {/*                            Service Fee:*/}
+                            {/*                        </div>*/}
+                            {/*                    </div>*/}
+                            {/*                    <div className="col-auto">*/}
+                            {/*                        <div className="WrapOrderValue">*/}
+                            {/*                            <strong>$ <span>{Cart[0]?.order.serviceFee * Cart[0]?.order.days * Cart[0]?.step * 10 }</span></strong>*/}
+                            {/*                        </div>*/}
+                            {/*                    </div>*/}
+                            {/*                </div>*/}
+                            {/*            </div>*/}
 
-                                        <div className="WrapOrderTotalValue">
-                                            Order Total:
-                                            <strong>$&nbsp;
-                                                <span>
-                                                    {(Cart[0]?.price*Cart[0]?.step + ( Cart[0]?.order.serviceFee * Cart[0]?.order.days * Cart[0]?.step * 10 )).toFixed(2) }
-                                                </span>
-                                            </strong>
-                                        </div>
+                            {/*            <div className="WrapOrderTotalValue">*/}
+                            {/*                Order Total:*/}
+                            {/*                <strong>$&nbsp;*/}
+                            {/*                    <span>*/}
+                            {/*                        {(Cart[0]?.price*Cart[0]?.step + ( Cart[0]?.order.serviceFee * Cart[0]?.order.days * Cart[0]?.step * 10 )).toFixed(2) }*/}
+                            {/*                    </span>*/}
+                            {/*                </strong>*/}
+                            {/*            </div>*/}
 
-                                        <div className="WrapBtnBuy">
-                                            <button onClick={()=>buy(choose)} className="BtnBuy btn style-3 w100">Submit</button>
-                                        </div>
+                            {/*            <div className="WrapBtnBuy">*/}
+                            {/*                <button onClick={()=>buy(choose)} className="BtnBuy btn style-3 w100">Submit</button>*/}
+                            {/*            </div>*/}
 
-                                    </div>
-                                    <div className="acceptList">
-                                        {list.acceptList.map( (item, index) => (
-                                            <label for={`list-item-${index}`} key={index} className="list-item">
-                                                <input required type="checkbox" id={`list-item-${index}`} />
-                                                I accept <a target="_blank" href={item.url.uri} >{item.name}</a>
-                                            </label>
-                                        ))}
-                                    </div>
-                                </div>
-                            </form>
+                            {/*        </div>*/}
+                            {/*        <div className="acceptList">*/}
+                            {/*            {list.acceptList.map( (item, index) => (*/}
+                            {/*                <label for={`list-item-${index}`} key={index} className="list-item">*/}
+                            {/*                    <input required type="checkbox" id={`list-item-${index}`} />*/}
+                            {/*                    I accept <a target="_blank" href={item.url.uri} >{item.name}</a>*/}
+                            {/*                </label>*/}
+                            {/*            ))}*/}
+                            {/*        </div>*/}
+                            {/*    </div>*/}
+                            {/*</form>*/}
                         </div>
                     </Section>
                 </Layout>
