@@ -67,12 +67,12 @@ module.exports = {
         },
       },
     },
-    {
-      resolve: 'gatsby-plugin-apollo',
-      options: {
-        uri: process.env.SERVER_QRAPHQL_URL
-      }
-    },
+    // {
+    //   resolve: 'gatsby-plugin-apollo',
+    //   options: {
+    //     uri: process.env.SERVER_QRAPHQL_URL
+    //   }
+    // },
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
     // {
