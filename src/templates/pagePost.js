@@ -3,7 +3,7 @@ import Layout from '../components/Layout';
 import {graphql, Link, useStaticQuery} from "gatsby";
 import styled from "styled-components";
 import ArrowLeft from './../assets/img/svg/arrowLeft.svg'
-import SliderPost from "../components/Blog/SliderPost";
+// import SliderPost from "../components/Blog/SliderPost";
 import {localStoreService} from "../function/hook";
 import {maxCol} from "../function/SizeCol";
 // import useFormStar from "../function/useFormStar";
