@@ -694,9 +694,11 @@ exports.createPages = ({graphql, actions}) => {
 
         });
 
-        console.log('item.template.templateName', item.template.templateName)
+
 
         results.data?.page.nodes.forEach(item => {
+
+            console.log('item.template.templateName', item.template.templateName)
 
             if ( item.isFrontPage === true ) {
 
