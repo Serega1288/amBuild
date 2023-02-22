@@ -44,46 +44,49 @@ const pagePost = path.resolve(`./src/templates/pagePost.js`)
 // }
 
 
-exports.createSchemaCustomization = ({ actions }) => {
-    const { createTypes } = actions
-    const typeDefs = `
-    type WpPost implements Node {
-      related_posts: WpNodePost!
-    }
 
-    type WpNodePost implements Node {
-      nodes: [WpPost]
-    }
-  `
-    createTypes(typeDefs)
-}
 
-const WORDPRESS_BASE = process.env.WORDPRESS_BASE
-
-exports.createResolvers = ({ createResolvers, schema }) =>
-    createResolvers({
-        WpPost: {
-            related_posts: {
-                resolve: async (source, args, context, info) => {
-                    const { databaseId } = source
-
-                    const response = await fetch(
-                        `${WORDPRESS_BASE}/wp-json/yarpp/v1/related/${databaseId}`
-                    ).then(res => res.json())
-
-                    if (response && response.length) {
-                        const result = await context.nodeModel.runQuery({
-                            query: {
-                                filter: { databaseId: { in: response.map(({ id }) => id) } },
-                            },
-                            type: 'WpPost',
-                        })
-                        return { nodes: result }
-                    } else return { nodes: [] }
-                },
-            },
-        },
-    })
+//
+// exports.createSchemaCustomization = ({ actions }) => {
+//     const { createTypes } = actions
+//     const typeDefs = `
+//     type WpPost implements Node {
+//       related_posts: WpNodePost!
+//     }
+//
+//     type WpNodePost implements Node {
+//       nodes: [WpPost]
+//     }
+//   `
+//     createTypes(typeDefs)
+// }
+//
+// const WORDPRESS_BASE = process.env.WORDPRESS_BASE
+//
+// exports.createResolvers = ({ createResolvers, schema }) =>
+//     createResolvers({
+//         WpPost: {
+//             related_posts: {
+//                 resolve: async (source, args, context, info) => {
+//                     const { databaseId } = source
+//
+//                     const response = await fetch(
+//                         `${WORDPRESS_BASE}/wp-json/yarpp/v1/related/${databaseId}`
+//                     ).then(res => res.json())
+//
+//                     if (response && response.length) {
+//                         const result = await context.nodeModel.runQuery({
+//                             query: {
+//                                 filter: { databaseId: { in: response.map(({ id }) => id) } },
+//                             },
+//                             type: 'WpPost',
+//                         })
+//                         return { nodes: result }
+//                     } else return { nodes: [] }
+//                 },
+//             },
+//         },
+//     })
 
 
 exports.createPages = ({graphql, actions}) => {
@@ -600,13 +603,6 @@ exports.createPages = ({graphql, actions}) => {
                 helpfulYes
                 helpfulNo
               } 
-              related_posts {
-                  nodes {
-                    title
-                    slug
-                    uri
-                  }
-              }
             }
           }
           

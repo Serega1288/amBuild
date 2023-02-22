@@ -27,7 +27,7 @@ const PagePost = (props) => {
     const generalTitle = data.wp.allSettings.generalSettingsTitle;
     const generalDescription = data.wp.allSettings.generalSettingsDescription;
     const author = props.pageContext.author.node.ACFuser;
-    const rPosts = props.pageContext.related_posts;
+    // const rPosts = props.pageContext.related_posts;
 
     const Yes = props.pageContext.ACFpost.helpfulYes;
     const No = props.pageContext.ACFpost.helpfulNo;
@@ -172,11 +172,11 @@ const PagePost = (props) => {
                         </div>
 
                         <div className="WrapBox">
-                            {
-                                rPosts ? (
-                                    <SliderPost title="Related articles" item={rPosts} />
-                                ) : ''
-                            }
+                            {/*{*/}
+                            {/*    rPosts ? (*/}
+                            {/*        <SliderPost title="Related articles" item={rPosts} />*/}
+                            {/*    ) : ''*/}
+                            {/*}*/}
 
                         </div>
 
