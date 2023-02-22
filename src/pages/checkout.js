@@ -44,7 +44,7 @@ const PageCheckout = (props) => {
 
 
     const CartBuy = localStoreService.getLocal('CartBuy');
-    console.log('Cart >>', CartBuy)
+    // console.log('Cart >>', CartBuy)
 
     // if ( Cart === null ) {
     //     navigate('/shop');
@@ -56,7 +56,7 @@ const PageCheckout = (props) => {
     // const [poolValid, setPoolValid ] = useState(null);
     const chooseMiningPool = (s) => {
         setChoose(s)
-        console.log('setChoose >>', s)
+        // console.log('setChoose >>', s)
     };
 
 
@@ -99,7 +99,7 @@ const PageCheckout = (props) => {
             // Cart[0].step = step
         }
 
-        console.log('ClickAmount step >>', step)
+        // console.log('ClickAmount step >>', step)
 
         const Arr = [
             {

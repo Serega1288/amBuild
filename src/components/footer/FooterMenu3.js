@@ -91,7 +91,7 @@ const FooterMenu = () => {
     const selectBusType = (op) => {
         setBusTypeValue(op)
         setOpenSelect_1(false)
-        console.log('setRadioValue', op)
+        // console.log('setRadioValue', op)
     }
     const clickOpenSelect_1 = () => {
         setOpenSelect_1(!openSelect_1)

@@ -91,7 +91,6 @@ exports.createPages = ({graphql, actions}) => {
 
     return graphql(`
         { 
-           
           products:allWpProductD {
             nodes {
               id
@@ -695,6 +694,7 @@ exports.createPages = ({graphql, actions}) => {
 
         });
 
+        console.log('item.template.templateName', item.template.templateName)
 
         results.data?.page.nodes.forEach(item => {
 
