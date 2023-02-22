@@ -45,7 +45,7 @@ const PagePost = (props) => {
         help.forEach((item, index) => {
             // console.log('help >>>', index, item)
             if( item['id'] === id ) {
-                //setHelpStart(item['op'])
+                setHelpStart(item['op'])
             }
         });
     }, []);
@@ -67,9 +67,9 @@ const PagePost = (props) => {
 
         if ( op2 === 0 ) {
             let ob = { id: id, baseID: baseID, op: op1 };
-            // help.push(ob);
+            help.push(ob);
             // //setHelpStart(op1)
-            // localStoreService.saveLocal('Helpful', help );
+            localStoreService.saveLocal('Helpful', help );
 
             try {
                 const responseStar = await fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendStar`, {
@@ -92,7 +92,7 @@ const PagePost = (props) => {
                     localStoreService.saveLocal('Helpful', help );
                 }
 
-                console.log('result is: ', resultStar, resultStar.result[0] + resultStar.result[1]  );
+                // console.log('result is: ', resultStar, resultStar.result[0] + resultStar.result[1]  );
 
 
 
