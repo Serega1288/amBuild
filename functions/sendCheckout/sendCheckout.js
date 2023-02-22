@@ -22,7 +22,7 @@ exports.handler = async (event, context) => {
         };
     }
 
-    console.log('!!!>> s', body)
+    //console.log('!!!>> s', body)
 
     const fieldsRequired = ['pool', 'cart', 't'];
 
@@ -82,7 +82,7 @@ exports.handler = async (event, context) => {
     //       console.error(error, 'error >>')
     //     })
 
-    // console.log('body >>', body  );
+    console.log('body >>', body  );
 
     // user_id
 
@@ -93,11 +93,11 @@ exports.handler = async (event, context) => {
 
     axios({
         method: 'get',
-        url: `${process.env.URL_AJAX}?action=onCheckout&token=${process.env.AUTH_TOKEN}&body=${body}&user_id=${body.t.name}&email=${body.t.email}`,
+        url: `${process.env.URL_AJAX}?action=onCheckout&token=${process.env.AUTH_TOKEN}&user_id=${body.t.name}&email=${body.t.email}&pool=${body.pool}&product_id=${body.cart[0].id}&product_step=${body.cart[0].step}`,
     })
         .then(function (response) {
             date = response.data.split('{')[1].split('}')[0];
-            console.log('fine >>>',  date)
+            console.log('fine >>> 1',  response.data )
 
             if ( date === '01' || date === '02' ) {
                 m = `Sorry, but an error has occurred, please contact technical support. Error code: ${date}`;
@@ -115,7 +115,7 @@ exports.handler = async (event, context) => {
                 m = 'The order has been created.';
             }
 
-            console.log('Mail >>', m);
+            //console.log('Mail >>', m);
 
         }).catch((error) => {
         date = error;
