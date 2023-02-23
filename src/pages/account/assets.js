@@ -7,7 +7,9 @@ const WrapSectionAssets = () => {
     return (
         <AuthLayout logIn={false} page='account' go='sign-in'>
             <Layout title="Account assets" desc="desc">
-                <WrapAccount content='Account assets' />
+                <WrapAccount>
+                    Account assets
+                </WrapAccount>
             </Layout>
         </AuthLayout>
     );

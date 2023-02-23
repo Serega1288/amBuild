@@ -116,8 +116,13 @@ const Section1 = styled.div`
         position: relative;
       }
       [aria-current="page"] {
-        font-weight: 700;
         border-right: 2px solid #000;
+        font-weight: 400;
+      }
+      &:not(.style-2) { 
+        [aria-current="page"] {
+          font-weight: 700;
+        }
       }
     }
   }

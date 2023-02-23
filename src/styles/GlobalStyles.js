@@ -165,10 +165,11 @@ ul {
     cursor: pointer; 
     display: inline-block;
     text-decoration: none;
+    align-items: center;
     &.w100 {
         width: 100%;
     }
-    &.style-1 {
+    &.style-1, &.style-9 {
         text-transform: uppercase;
         font-weight: 700;
         font-size: 1.2rem;
@@ -214,7 +215,7 @@ ul {
             color: #000;
         }
     }
-      &.style-4, &.style-5 {
+      &.style-4, &.style-5, &.style-6 {
         font-size: 1.6rem;
         border: 1px solid #000;
         color: #000;
@@ -240,7 +241,68 @@ ul {
           font-size: 1.6rem;
         }
       }
+
+      &.style-6 {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.9rem;
+        font-size: 1.2rem;
+        min-width: 10rem;
+        strong {
+          margin-left: 1.2rem;
+          font-size: 1.6rem;
+        }
+      }
+
+      &.style-7, &.style-8 {
+        display: inline-flex;
+        align-items: center; 
+        svg {
+          margin-right: 1rem;
+          margin-left: 0.3rem;
+        }
+        font-weight: 500;
+        font-size: 1.4rem;
+        min-height: 2.4rem;
+      }
+
+      &.style-8 {
+        font-weight: 700;
+        font-size: 1.4rem;
+        svg {
+          margin-left: 0.6rem;
+          margin-right: 0;
+        }
+      }
+
+      &.style-9 {
+         text-align: center;
+          padding: 1.7rem;
+      }
 } 
+
+.labelStatus {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem;
+  font-size: 1.2rem;
+  min-width: 10rem;
+  font-weight: 700;
+
+  border: 1px solid #000;
+  color: #000;
+  text-align: center;
+  border-radius: 5rem;
+  background-color: rgba(0,0,0,0);
+  min-width: 12rem;
+  &.active {
+    background-color: #000;
+    border: 1px solid #000;
+    color: #fff;
+  }
+}
       
 .garbage {
         position: absolute;

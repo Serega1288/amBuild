@@ -7,7 +7,9 @@ const WrapSectionHashrate = () => {
     return (
         <AuthLayout logIn={false} page='account' go='sign-in'>
             <Layout title="Account hashrate" desc="desc">
-                <WrapAccount content='Account hashrate' />
+                <WrapAccount>
+                    Account hashrate
+                </WrapAccount>
             </Layout>
         </AuthLayout>
     );
