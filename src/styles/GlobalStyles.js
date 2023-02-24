@@ -246,7 +246,7 @@ ul {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        padding: 0.9rem;
+        padding: 0.9rem 2rem;
         font-size: 1.2rem;
         min-width: 10rem;
         strong {
@@ -275,11 +275,30 @@ ul {
           margin-right: 0;
         }
       }
-
+      // ?????
       &.style-9 {
          text-align: center;
           padding: 1.7rem;
       }
+
+      &.style-10 {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem 2.4rem;
+        font-size: 1.2rem;
+        min-width: 10rem;
+        border: 1px solid #000;
+        border-radius: 5rem;
+        color: #fff; 
+        background-color: #000;
+        &:hover, &:focus, &.active {
+          color: #fff;
+          border: 1px solid #6357ff;
+          background-color: #6357ff;
+        }
+      }
+      
 } 
 
 .labelStatus {

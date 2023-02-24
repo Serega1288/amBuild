@@ -9,8 +9,8 @@ const WrapAccount = ({children}) => {
                 <div id="s-block-0" className="container">
                     <div className="WrapListCategoryPost">
                         <div className="row">
-                            <div className="col-12 col-sm-auto">
-                                <div style={{width: `18rem`}} className="WrapMenu h100">
+                            <div className="col-12 col-sm-2">
+                                <div style={{width: `100%`}} className="WrapMenu h100">
 
                                     <div className="list style-2">
 
@@ -36,7 +36,7 @@ const WrapAccount = ({children}) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-12 col-sm">
+                            <div className="col-12 col-sm-10">
                                 <WrapContentAccount>
                                     {children}
                                 </WrapContentAccount>

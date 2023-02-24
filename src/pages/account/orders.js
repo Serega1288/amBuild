@@ -6,7 +6,7 @@ import {navigate} from "gatsby";
 import OrderDetails from "../../components/account/OrderDetails";
 import {gql} from "@apollo/client";
 import {Query} from "@apollo/client/react/components";
-import restClient from '../../apollo/client'
+// import restClient from '../../apollo/client'
 
 
 
@@ -25,14 +25,15 @@ import restClient from '../../apollo/client'
 //     }
 // `;
 
-const GET_ORDER = gql`
-    query NewQuery($pathURL: String! ) {
-        person @rest(type: "Person", path: $pathURL ) {
-            id
-            date_created
-        }
-    }
-`;
+
+// const GET_ORDER = gql`
+//     query NewQuery($pathURL: String! ) {
+//         person @rest(type: "Person", path: $pathURL ) {
+//             id
+//             date_created
+//         }
+//     }
+// `;
 
 const WrapSectionOrder = () => {
 
@@ -55,10 +56,10 @@ const WrapSectionOrder = () => {
         <AuthLayout logIn={false} page='account' go='sign-in'>
             <Layout title="Account order" desc="desc">
                 <WrapAccount>
-  
-                    <Query ssr={false} query={GET_ORDER} client={restClient} variables={ {pathURL: p }  } >
-                        {({ loading, error, data }) => { console.log('>>>', data); return null }}
-                    </Query>
+
+                    {/*<Query ssr={false} query={GET_ORDER} client={restClient} variables={ {pathURL: p }  } >*/}
+                    {/*    {({ loading, error, data }) => { console.log('>>>', data); return null }}*/}
+                    {/*</Query>*/}
 
                     <div className="Wrap" id="tableList-0">
 
@@ -183,12 +184,12 @@ const WrapSectionOrder = () => {
                             ) : (
                                 <>
                                     <span className='btn style-7' onClick={()=>tableList(null, sBlock )}>
-                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                        <path d="M3.21932 6.66664L6.79532 10.2426L5.85265 11.1853L0.667318 5.99997L5.85265 0.814636L6.79532 1.7573L3.21932 5.3333L11.334 5.3333L11.334 6.66664L3.21932 6.66664Z" fill="#CBCBCB"/>
-                                    </svg>
-                                    Back
-                                </span>
-                                    <div className="Wrap">
+                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                            <path d="M3.21932 6.66664L6.79532 10.2426L5.85265 11.1853L0.667318 5.99997L5.85265 0.814636L6.79532 1.7573L3.21932 5.3333L11.334 5.3333L11.334 6.66664L3.21932 6.66664Z" fill="#CBCBCB"/>
+                                        </svg>
+                                        Back
+                                    </span>
+                                    <div className="Wrap WrapOrderDelails orderList" >
                                         <OrderDetails s={sBlock} />
                                     </div>
                                 </>
