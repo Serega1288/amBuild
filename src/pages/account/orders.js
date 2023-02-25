@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Layout from "../../components/Layout"
 import {AuthLayout} from "../../function/AuthLayout"
 import WrapAccount from "../../components/account/WrapAccount"
@@ -52,6 +52,90 @@ const WrapSectionOrder = () => {
 
     const p = `customers/1?consumer_key=ck_e73fa37550d023558c5a1676bd0e1bab9320dc46&consumer_secret=cs_cacc5a8c3bb55d734d2eb0c3f614a6f354d0ab1a`;
 
+
+    // const [data, setData] = useState(null)
+    // const [isLoading, setLoading] = useState(false)
+
+    // useEffect(()=> {
+    //
+    //     let ob = { id: '111' };
+    //
+    //     try {
+    //         const response = fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendStar`, {
+    //             method: 'POST',
+    //             headers: {
+    //                 'content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify(ob),
+    //         });
+    //         const result = response.json();
+    //
+    //         console.log('result >>>', result)
+    //
+    //     } catch (err) {
+    //         console.log('result err >>>', err)
+    //     } finally {
+    //         console.log('result finally >>>')
+    //     }
+    // })
+
+    // const OnloadData = async (op1, op2) => {
+    //
+    //     let ob = { op1, op2 };
+    //
+    //     try {
+    //         const response = fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendStar`, {
+    //             method: 'POST',
+    //             headers: {
+    //                 'content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify(ob),
+    //         });
+    //         const result = response.json();
+    //
+    //         console.log('result >>>', result)
+    //
+    //         setData(1)
+    //
+    //     } catch (err) {
+    //         console.log('result err >>>', err)
+    //         setData(2)
+    //     } finally {
+    //         console.log('result finally >>>')
+    //     }
+    //
+    //     // console.log('OnloadData >>>', op1, op2 )
+    // }
+
+
+
+
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+    //         const data = await response.json();
+    //         setData(data);
+    //     };
+    //     fetchData();
+    //
+    // }, []);
+
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        const response = await fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendGetData`);
+        const data = await response.json();
+        setData(data);
+        console.log('data >>>', data)
+    };
+
+    // const handleFetchClick = async () => {
+    //     fetchData();
+    // };
+
     return (
         <AuthLayout logIn={false} page='account' go='sign-in'>
             <Layout title="Account order" desc="desc">
@@ -60,6 +144,19 @@ const WrapSectionOrder = () => {
                     {/*<Query ssr={false} query={GET_ORDER} client={restClient} variables={ {pathURL: p }  } >*/}
                     {/*    {({ loading, error, data }) => { console.log('>>>', data); return null }}*/}
                     {/*</Query>*/}
+
+                    {/*<div onClick={ ()=>OnloadData(1,2 ) }>*/}
+                    {/*    load...*/}
+                    {/*    {data}*/}
+                    {/*</div>*/}
+                    <div>
+                        <p>--</p>
+                        {data.m}
+
+                        {/*{data.map(item => (*/}
+                        {/*    <li key={item.id}>{item.title}</li>*/}
+                        {/*))}*/}
+                    </div>
 
                     <div className="Wrap" id="tableList-0">
 
@@ -70,6 +167,8 @@ const WrapSectionOrder = () => {
                                         Order List
                                     </div>
                                     <div className="orderList">
+
+
 
                                         <div className="table">
                                             <div className="row">

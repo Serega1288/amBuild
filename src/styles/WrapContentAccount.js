@@ -353,5 +353,16 @@ const WrapContentAccount = styled.div`
       padding-top: 2.4rem !important;
     }
   }
+  .AssetsDetails {
+    padding: 4rem;
+    background: #F9F9FB;
+  }
+  .WrapAssetsDetails {
+    & > *.active {
+      &.AssetsDetails {
+        display: block !important;
+      }
+    }
+  }
 `;
 export default WrapContentAccount;

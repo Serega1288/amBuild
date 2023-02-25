@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Layout from "../../components/Layout"
 import {AuthLayout} from "../../function/AuthLayout"
 import WrapAccount from "../../components/account/WrapAccount"
@@ -7,6 +7,19 @@ import LogoLite from "../../assets/img/svg/logo-lite.svg"
 import BCH from "../../assets/img/pay/BCH.png"
 
 const WrapSectionAssets = () => {
+
+    const [bOpen, setbOpen ] = useState(null);
+    const open = (step) => {
+        console.log('open >>', step);
+        setbOpen(step)
+
+        // if ( step == null ) {
+        //     setbOpen(null)
+        // } else {
+        //     setbOpen(step)
+        // }
+    }
+
     return (
         <AuthLayout logIn={false} page='account' go='sign-in'>
             <Layout title="Account assets" desc="desc">
@@ -81,8 +94,10 @@ const WrapSectionAssets = () => {
                                     </div>
                                 </div>
 
-                                <div className="WrapList-result-1">
-                                    <div style={{minWidth: `95rem`}} className="table list-result-1">
+                                <div className="WrapList-result-1 WrapAssetsDetails">
+
+                                    <div onClick={()=>open(1)} style={{minWidth: `95rem`}}
+                                         className={`table list-result-1 ${bOpen === 1 ? 'active' : ''}`}>
                                         <div className="row">
                                             <div className="col d-flex align-items-center">
                                                 <div  style={{width: `15rem`}} className="tableTitle d-flex align-items-center">
@@ -111,8 +126,22 @@ const WrapSectionAssets = () => {
                                                 </div>
                                             </div>
                                         </div>
+                                        <div style={{display: `none`}} className="AssetsDetails">
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                            Animi aperiam asperiores consequuntur delectus dolore dolores explicabo hic libero,
+                                            nihil nobis odio porro quam quis repellendus sed. Adipisci dicta dolorum nostrum?
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                            Animi aperiam asperiores consequuntur delectus dolore dolores explicabo hic libero,
+                                            nihil nobis odio porro quam quis repellendus sed. Adipisci dicta dolorum nostrum?
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                            Animi aperiam asperiores consequuntur delectus dolore dolores explicabo hic libero,
+                                            nihil nobis odio porro quam quis repellendus sed. Adipisci dicta dolorum nostrum?
+                                        </div>
                                     </div>
-                                    <div style={{minWidth: `95rem`}} className="table list-result-1">
+
+
+                                    <div onClick={()=>open(2)} style={{minWidth: `95rem`}}
+                                         className={`table list-result-1 ${bOpen === 2 ? 'active' : ''}`}>
                                         <div className="row">
                                             <div className="col d-flex align-items-center">
                                                 <div  style={{width: `15rem`}} className="tableTitle d-flex align-items-center">
@@ -141,8 +170,21 @@ const WrapSectionAssets = () => {
                                                 </div>
                                             </div>
                                         </div>
+                                        <div style={{display: `none`}} className="AssetsDetails">
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                            Animi aperiam asperiores consequuntur delectus dolore dolores explicabo hic libero,
+                                            nihil nobis odio porro quam quis repellendus sed. Adipisci dicta dolorum nostrum?
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                            Animi aperiam asperiores consequuntur delectus dolore dolores explicabo hic libero,
+                                            nihil nobis odio porro quam quis repellendus sed. Adipisci dicta dolorum nostrum?
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                            Animi aperiam asperiores consequuntur delectus dolore dolores explicabo hic libero,
+                                            nihil nobis odio porro quam quis repellendus sed. Adipisci dicta dolorum nostrum?
+                                        </div>
                                     </div>
-                                    <div style={{minWidth: `95rem`}} className="table list-result-1">
+                                    <div onClick={()=>open(3)}
+                                         style={{minWidth: `95rem`}}
+                                         className={`table list-result-1 ${bOpen === 3 ? 'active' : ''}`}>
                                         <div className="row">
                                             <div className="col d-flex align-items-center">
                                                 <div  style={{width: `15rem`}} className="tableTitle d-flex align-items-center">
@@ -171,7 +213,19 @@ const WrapSectionAssets = () => {
                                                 </div>
                                             </div>
                                         </div>
+                                        <div style={{display: `none`}} className="AssetsDetails">
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                            Animi aperiam asperiores consequuntur delectus dolore dolores explicabo hic libero,
+                                            nihil nobis odio porro quam quis repellendus sed. Adipisci dicta dolorum nostrum?
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                            Animi aperiam asperiores consequuntur delectus dolore dolores explicabo hic libero,
+                                            nihil nobis odio porro quam quis repellendus sed. Adipisci dicta dolorum nostrum?
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                            Animi aperiam asperiores consequuntur delectus dolore dolores explicabo hic libero,
+                                            nihil nobis odio porro quam quis repellendus sed. Adipisci dicta dolorum nostrum?
+                                        </div>
                                     </div>
+
                                 </div>
 
                             </div>
