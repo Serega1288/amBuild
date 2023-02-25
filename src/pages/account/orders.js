@@ -6,6 +6,7 @@ import {navigate} from "gatsby";
 import OrderDetails from "../../components/account/OrderDetails";
 import {gql} from "@apollo/client";
 import {Query} from "@apollo/client/react/components";
+import {localStoreService} from "../../function/hook";
 // import restClient from '../../apollo/client'
 
 
@@ -126,7 +127,18 @@ const WrapSectionOrder = () => {
     }, []);
 
     const fetchData = async () => {
-        const response = await fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendGetData`);
+
+
+        // console.log('ss >>>>>>>>>', localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1] );
+
+        let ob = { get: `orders?customer=${localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1]}` };
+        const response = await fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendGetData`, {
+           method: 'POST',
+           headers: {
+               'content-Type': 'application/json',
+           },
+           body: JSON.stringify(ob),
+        });
         const data = await response.json();
         setData(data);
         console.log('data >>>', data)
@@ -149,9 +161,11 @@ const WrapSectionOrder = () => {
                     {/*    load...*/}
                     {/*    {data}*/}
                     {/*</div>*/}
+
                     <div>
-                        <p>--</p>
-                        {data.m}
+                        {/*<p>{data.m}</p>*/}
+                        {/*<p>{data.result}</p>*/}
+
 
                         {/*{data.map(item => (*/}
                         {/*    <li key={item.id}>{item.title}</li>*/}
@@ -167,8 +181,6 @@ const WrapSectionOrder = () => {
                                         Order List
                                     </div>
                                     <div className="orderList">
-
-
 
                                         <div className="table">
                                             <div className="row">
@@ -195,88 +207,52 @@ const WrapSectionOrder = () => {
                                             </div>
                                         </div>
 
-                                        {/*<div className="tableList no">*/}
-                                        {/*    <div>No Data</div>*/}
-                                        {/*</div>*/}
+                                        {
+                                            data.result ? (
 
-                                        <div className="tableList yes">
+                                                <div className="tableList yes">
+                                                    {
+                                                        data.result.map((item, index) => (
+                                                            <div
+                                                                id={`tableList-${index}`}
+                                                                onClick={()=>tableList(index, 0)}
+                                                                className="tableListItem"
+                                                            >
+                                                                {/*{console.log('tableList item >>', item.line_items[0].name)}*/}
+                                                                <div className="row">
+                                                                    <div className="col">
+                                                                        <div className="tableTitle">
+                                                                            {item.line_items[0].name}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="col">
+                                                                        <div className="tableTitle">
+                                                                            {item.date_modified}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="col">
+                                                                        <div className="tableTitle">
+                                                                            {item.number}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="col-auto">
+                                                                        <div className="tableTitle">
+                                                                            {item.status}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
-                                            <div id="tableList-1" onClick={()=>tableList(1, 0)} className="tableListItem">
-                                                <div className="row">
-                                                    <div className="col">
-                                                        <div className="tableTitle">
-                                                            Name
-                                                        </div>
-                                                    </div>
-                                                    <div className="col">
-                                                        <div className="tableTitle">
-                                                            Date
-                                                        </div>
-                                                    </div>
-                                                    <div className="col">
-                                                        <div className="tableTitle">
-                                                            ID
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-auto">
-                                                        <div className="tableTitle">
-                                                            Order Status
-                                                        </div>
-                                                    </div>
+                                                            </div>
+                                                        ))
+                                                    }
                                                 </div>
-                                            </div>
 
-                                            <div id="tableList-2" onClick={()=>tableList(2,0)} className="tableListItem">
-                                                <div className="row">
-                                                    <div className="col">
-                                                        <div className="tableTitle">
-                                                            Name
-                                                        </div>
-                                                    </div>
-                                                    <div className="col">
-                                                        <div className="tableTitle">
-                                                            Date
-                                                        </div>
-                                                    </div>
-                                                    <div className="col">
-                                                        <div className="tableTitle">
-                                                            ID
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-auto">
-                                                        <div className="tableTitle">
-                                                            Order Status
-                                                        </div>
-                                                    </div>
+                                            ) : (
+                                                <div className="tableList no">
+                                                    <div>No Data</div>
                                                 </div>
-                                            </div>
-
-                                            <div id="tableList-3" onClick={()=>tableList(3,0)} className="tableListItem">
-                                                <div className="row">
-                                                    <div className="col">
-                                                        <div className="tableTitle">
-                                                            Name
-                                                        </div>
-                                                    </div>
-                                                    <div className="col">
-                                                        <div className="tableTitle">
-                                                            Date
-                                                        </div>
-                                                    </div>
-                                                    <div className="col">
-                                                        <div className="tableTitle">
-                                                            ID
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-auto">
-                                                        <div className="tableTitle">
-                                                            Order Status
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
+                                            )
+                                        }
 
                                     </div>
                                 </>

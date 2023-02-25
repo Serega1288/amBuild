@@ -170,8 +170,8 @@ module.exports = {
         // true if using https. false otherwise.
         https: true,
         api_keys: {
-          consumer_key: `ck_e73fa37550d023558c5a1676bd0e1bab9320dc46`,
-          consumer_secret: `cs_cacc5a8c3bb55d734d2eb0c3f614a6f354d0ab1a`,
+          consumer_key: process.env.CONSUMER_KEY,
+          consumer_secret: process.env.CONSUMER_SECRET,
         },
         // Array of strings with fields you'd like to create nodes for...
         fields: ['products/attributes', 'customers', 'coupons'],

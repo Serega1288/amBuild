@@ -11,9 +11,9 @@ function pause() {
 // send the email
 exports.handler = async (event, context) => {
     // Делаем паузу - 2сек.
-
-
-    // const body = JSON.parse(event.body);
+    const body = JSON.parse(event.body);
+    // const URL = `${process.env.URL_WOO_REST_API}${body.get}`;
+    // let URL = `https://americanbuilds.awbs.dev/wp-json/wc/v3/orders`;
 
     // Проверка "мусорного" поля input
     // if (body.garbage) {
@@ -37,6 +37,8 @@ exports.handler = async (event, context) => {
     //
     // msg = encodeURI(msg)
     // console.log('body >>', body);
+    //
+
     //
     // let date = '';
     // let m='';
@@ -65,6 +67,24 @@ exports.handler = async (event, context) => {
     //     console.error(error, 'error >>>')
     // });
 
+    let m='';
+
+    axios.get(`${process.env.URL_WOO_REST_API}${body.get}`, {
+        auth: {
+            username: process.env.CONSUMER_KEY,
+            password: process.env.CONSUMER_SECRET,
+        },
+    }).then(response => {
+        m = response.data;
+        console.log(response.data);
+    }).catch(error => {
+        console.error(error);
+        return {
+            statusCode: 400,
+            body: JSON.stringify({ m: body, result: error}),
+        };
+    });
+
     console.log('send !!!!!!!!!!!!!')
 
     await pause();
@@ -72,6 +92,6 @@ exports.handler = async (event, context) => {
 
     return {
         statusCode: 200,
-        body: JSON.stringify({ m: 'test'}),
+        body: JSON.stringify({ m: body, result: m}),
     };
 };
