@@ -7,6 +7,7 @@ import OrderDetails from "../../components/account/OrderDetails";
 import {gql} from "@apollo/client";
 import {Query} from "@apollo/client/react/components";
 import {localStoreService} from "../../function/hook";
+import { format } from 'date-fns'
 // import restClient from '../../apollo/client'
 
 
@@ -127,11 +128,7 @@ const WrapSectionOrder = () => {
     }, []);
 
     const fetchData = async () => {
-
-
-        // console.log('ss >>>>>>>>>', localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1] );
-
-        let ob = { get: `orders?customer=${localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1]}` };
+        let ob = { get: `orders?customer=${localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1]}`, type : `order` };
         const response = await fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendGetData`, {
            method: 'POST',
            headers: {
@@ -141,36 +138,13 @@ const WrapSectionOrder = () => {
         });
         const data = await response.json();
         setData(data);
-        console.log('data >>>', data)
+        // console.log('data >>>', data )
     };
-
-    // const handleFetchClick = async () => {
-    //     fetchData();
-    // };
-
     return (
         <AuthLayout logIn={false} page='account' go='sign-in'>
             <Layout title="Account order" desc="desc">
                 <WrapAccount>
 
-                    {/*<Query ssr={false} query={GET_ORDER} client={restClient} variables={ {pathURL: p }  } >*/}
-                    {/*    {({ loading, error, data }) => { console.log('>>>', data); return null }}*/}
-                    {/*</Query>*/}
-
-                    {/*<div onClick={ ()=>OnloadData(1,2 ) }>*/}
-                    {/*    load...*/}
-                    {/*    {data}*/}
-                    {/*</div>*/}
-
-                    <div>
-                        {/*<p>{data.m}</p>*/}
-                        {/*<p>{data.result}</p>*/}
-
-
-                        {/*{data.map(item => (*/}
-                        {/*    <li key={item.id}>{item.title}</li>*/}
-                        {/*))}*/}
-                    </div>
 
                     <div className="Wrap" id="tableList-0">
 
@@ -227,7 +201,7 @@ const WrapSectionOrder = () => {
                                                                     </div>
                                                                     <div className="col">
                                                                         <div className="tableTitle">
-                                                                            {item.date_modified}
+                                                                            {format( new Date(item.date_created), 'yyyy-mm-dd H:mma')}
                                                                         </div>
                                                                     </div>
                                                                     <div className="col">
@@ -264,8 +238,8 @@ const WrapSectionOrder = () => {
                                         </svg>
                                         Back
                                     </span>
-                                    <div className="Wrap WrapOrderDelails orderList" >
-                                        <OrderDetails s={sBlock} />
+                                    <div className="Wrap WrapOrderDelails orderList">
+                                        <OrderDetails s={data.result[sBlock]} />
                                     </div>
                                 </>
                             )
