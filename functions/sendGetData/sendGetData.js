@@ -111,6 +111,26 @@ exports.handler = async (event, context) => {
 
     }
 
+    if ( body.type === 'coupons' ) {
+
+        axios.get(`${process.env.URL_WOO_REST_API}${body.get}`, {
+            auth: {
+                username: process.env.CONSUMER_KEY,
+                password: process.env.CONSUMER_SECRET,
+            },
+        }).then(response => {
+            m = response.data;
+            // console.log(response.data);
+        }).catch(error => {
+            //console.error(error);
+            return {
+                statusCode: 400,
+                body: JSON.stringify({ m: body, result: error}),
+            };
+        });
+
+    }
+
     // console.log('send !!!!!!!!!!!!!', m)
 
     await pause();

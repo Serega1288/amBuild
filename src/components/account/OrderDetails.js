@@ -5,30 +5,32 @@ import {format} from "date-fns";
 
 const OrderDetails = ({s}) => {
 
-    const ID = s.line_items[0].product_id;
+    // const ID = s.line_items[0].product_id;
 
-    console.log('order', s )
+    // console.log('order', s )
 
 
-    const [data, setData] = useState([]);
+    // const [data, setData] = useState([]);
 
-    useEffect(() => {
-        fetchData();
-    }, []);
+    // useEffect(() => {
+    //     fetchData();
+    // }, []);
 
-    const fetchData = async () => {
-        let ob = { get: `products/${ID}/`, type : `product` };
-        const response = await fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendGetData`, {
-            method: 'POST',
-            headers: {
-                'content-Type': 'application/json',
-            },
-            body: JSON.stringify(ob),
-        });
-        const data = await response.json();
-        setData(data);
-        console.log('data product >>>', data.result )
-    };
+    // const fetchData = async () => {
+    //     let ob = { get: `products/${ID}/`, type : `product` };
+    //     const response = await fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendGetData`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(ob),
+    //     });
+    //     const data = await response.json();
+    //     setData(data);
+    //
+    //     console.log('data product >>>', data.result )
+    // };
+
 
     return (
         <>
@@ -41,12 +43,12 @@ const OrderDetails = ({s}) => {
                     <div style={{minWidth: `95rem`}} className="table">
                         <div className="row">
                             <div className="col-auto">
-                                <div style={{width: `18.5rem`}} className="tableTitle">
+                                <div style={{width: `19rem`}} className="tableTitle">
                                     Hashrate Name
                                 </div>
                             </div>
                             <div className="col-auto">
-                                <div style={{width: `20.5rem`}} className="tableTitle">
+                                <div style={{width: `20rem`}} className="tableTitle">
                                     Type
                                 </div>
                             </div>
@@ -70,28 +72,38 @@ const OrderDetails = ({s}) => {
                     <div style={{minWidth: `95rem`}} className="table list-result-1">
                         <div className="row">
                             <div className="col-auto">
-                                <div  style={{width: `17rem`}} className="tableTitle">
-                                    {s.line_items[0].name}
+                                <div  style={{width: `19rem`}} className="tableTitle">
+                                    { s.meta_data.map((item, index) => { if (item.key === 'hashrate_name') {
+                                       return ( <span key={`hashrate_name-${index}`}>{item.value}</span> )
+                                    }})}
                                 </div>
                             </div>
                             <div className="col-auto">
-                                <div style={{width: `20.5rem`}} className="tableTitle">
-                                    ! Full Revenue
+                                <div style={{width: `20rem`}} className="tableTitle">
+                                    { s.meta_data.map((item, index) => { if (item.key === 'Type') {
+                                        return ( <span key={`Type-${index}`}>{item.value}</span> )
+                                    }})}
                                 </div>
                             </div>
                             <div className="col">
                                 <div style={{width: `12rem`}} className="tableTitle">
-                                    ! KDA
+                                    { s.meta_data.map((item, index) => { if (item.key === 'currency') {
+                                        return ( <span key={`currency-${index}`}>{item.value}</span> )
+                                    }})}
                                 </div>
                             </div>
                             <div className="col-auto">
                                 <div style={{width: `24.5rem`}} className="tableTitle">
-                                    ! AntPool
+                                    { s.meta_data.map((item, index) => { if (item.key === 'pool') {
+                                        return ( <span key={`pool-${index}`}>{item.value}</span> )
+                                    }})}
                                 </div>
                             </div>
                             <div className="col-auto">
                                 <div style={{width: `16rem`}} className="tableTitle">
-                                    ! Personal Wallet
+                                    { s.meta_data.map((item, index) => { if (item.key === 'revenue_address') {
+                                        return ( <span key={`revenue_address-${index}`}>{item.value}</span> )
+                                    }})}
                                 </div>
                             </div>
                         </div>
@@ -114,7 +126,7 @@ const OrderDetails = ({s}) => {
                                 </div>
                             </div>
                             <div className="col-auto">
-                                <div style={{width: `23rem`}} className="tableTitle">
+                                <div style={{width: `25rem`}} className="tableTitle">
                                     Time
                                 </div>
                             </div>
@@ -134,11 +146,13 @@ const OrderDetails = ({s}) => {
                         <div className="row">
                             <div className="col">
                                 <div className="tableTitle">
-                                    {s.id}
+                                    { s.meta_data.map((item, index) => { if (item.key === 'id') {
+                                        return ( <span key={`id-${index}`}>{item.value}</span> )
+                                    }})}
                                 </div>
                             </div>
                             <div className="col-auto">
-                                <div style={{width: `23rem`}} className="tableTitle">
+                                <div style={{width: `25rem`}} className="tableTitle">
                                     {format( new Date(s.date_created), 'yyyy-mm-dd H:mma')}
                                 </div>
                             </div>
@@ -194,39 +208,84 @@ const OrderDetails = ({s}) => {
                             </div>
                         </div>
 
-                        {
-                            s.line_items.map((item, index) => (
-                                <div key={`list-result-1-${index}`} style={{minWidth: `90rem`}} className="table list-result-1">
-                                    <div className="row">
-                                        <div className="col-auto">
-                                            <div style={{width: `23rem`}} className="tableTitle">
-                                                {item.name}
-                                            </div>
-                                        </div>
-                                        <div className="col-auto">
-                                            <div style={{width: `23rem`}}  className="tableTitle">
-                                                !  $ 0.2628/T/Days
-                                            </div>
-                                        </div>
-                                        <div className="col-auto">
-                                            <div style={{width: `18rem`}} className="tableTitle">
-                                                ! 10 T
-                                            </div>
-                                        </div>
-                                        <div className="col">
-                                            <div className="tableTitle">
-                                                ! 90 Days
-                                            </div>
-                                        </div>
-                                        <div className="col-auto">
-                                            <div className="tableTitle">
-                                                {item.price}
-                                            </div>
-                                        </div>
+
+
+
+
+                        <div style={{minWidth: `90rem`}} className="table list-result-1">
+
+                            <div className="row">
+                                <div className="col-auto">
+                                    <div style={{width: `23rem`}} className="tableTitle">
+                                        Hashrate Fee
                                     </div>
                                 </div>
-                            ))
-                        }
+                                <div className="col-auto">
+                                    <div style={{width: `23rem`}}  className="tableTitle">
+                                        { s.meta_data.map((item, index) => { if (item.key === 'hashrate_fee') {
+                                            return ( <span key={`hashrate_fee-${index}`}>{item.value}</span> )
+                                        }})}
+                                        /T/Days
+                                    </div>
+                                </div>
+                                <div className="col-auto">
+                                    <div style={{width: `18rem`}} className="tableTitle">
+                                        {s.line_items[0].quantity * 10} T
+                                    </div>
+                                </div>
+                                <div className="col">
+                                    <div className="tableTitle">
+                                        { s.meta_data.map((item, index) => { if (item.key === 'days') {
+                                            return ( <span key={`days-${index}`}>{item.value}</span> )
+                                        }})}
+                                        Days
+                                    </div>
+                                </div>
+                                <div className="col-auto">
+                                    <div className="tableTitle">
+                                        {s.currency_symbol} {s.line_items[0].total}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style={{minWidth: `90rem`}} className="table list-result-1">
+
+                            <div className="row">
+                                <div className="col-auto">
+                                    <div style={{width: `23rem`}} className="tableTitle">
+                                        Service Chargers
+                                    </div>
+                                </div>
+                                <div className="col-auto">
+                                    <div style={{width: `23rem`}}  className="tableTitle">
+                                        { s.meta_data.map((item, index) => { if (item.key === 'service_fee') {
+                                            return ( <span key={`service_fee-${index}`}>{item.value}</span> )
+                                        }})}
+                                        /T/Days
+                                    </div>
+                                </div>
+                                <div className="col-auto">
+                                    <div style={{width: `18rem`}} className="tableTitle">
+                                        {s.line_items[0].quantity * 10} T
+                                    </div>
+                                </div>
+                                <div className="col">
+                                    <div className="tableTitle">
+                                        {/*.toFixed(5)*/}
+                                        { s.meta_data.map((item, index) => { if (item.key === 'days') {
+                                            return ( <span key={`days-${index}`}>{item.value}</span> )
+                                        }})}
+                                        Days
+                                    </div>
+                                </div>
+                                <div className="col-auto">
+                                    <div className="tableTitle">
+                                        {s.currency_symbol} {s.line_items[1].total}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
 

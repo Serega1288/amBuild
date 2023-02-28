@@ -29,9 +29,8 @@ const LoginPage = (props) => {
     const location = props.location.search?.split('=');
     // console.log('page sign in >> 1', location );
 
-
     return (
-        <AuthLayout logIn={true} page='sign-in' go={location[0] === '?r' ? (location[1]) : 'account'}>
+        <AuthLayout logIn={true} page='sign-in' go={  location.length > 1 ? ( location[0] === '?r' ? (location[1]) : 'account') : ( 'account' )   }>
             <Layout title="Login" desc="desc">
                 <Section className="pageLogin d-flex align-items-center">
                     <div className="Login container">
@@ -75,8 +74,21 @@ const LoginPage = (props) => {
                                             //className={ message?.result === '04' ? ' error' : '' }
                                         />
                                         <span className="text-right d-block">
-                                            <Link className="link-form"
-                                                  to={`/reset-pass/${location[0] === '?r' ? (`?r=` + location[1]) : ''}`}>Lost Password?</Link>
+                                            {
+                                                location?.length > 1 ? (
+                                                    <Link
+                                                        className='link-form'
+                                                        to={`/reset-pass/${location[0] === '?r' ? (`?r=` + location[1]) : ''}`}>
+                                                        Lost Password?
+                                                    </Link>
+                                                ) : (
+                                                    <Link
+                                                        className='link-form'
+                                                        to={`/reset-pass/`}>
+                                                        Lost Password?
+                                                    </Link>
+                                                )
+                                            }
                                         </span>
 
                                     </label>
@@ -85,8 +97,19 @@ const LoginPage = (props) => {
                                     </button>
                                     <div className="Boxlink">
                                         <span>Don’t have an account?</span>
-                                        <Link to={`/sign-up/${location[0] === '?r' ? (`?r=` + location[1]) : ''}`}>Sign
-                                            Up</Link>
+                                        {
+                                            location?.length > 1 ? (
+                                                <Link
+                                                    to={`/sign-up/${location[0] === '?r' ? (`?r=` + location[1]) : ''}`}>
+                                                    Sign In
+                                                </Link>
+                                            ) : (
+                                                <Link
+                                                    to={`/sign-up/`}>
+                                                    Sign In
+                                                </Link>
+                                            )
+                                        }
                                     </div>
                                     <h3 className={` statusInfo text-center 
                                         ${error || message ? ' active ' : ''}

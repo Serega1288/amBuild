@@ -140,6 +140,7 @@ const WrapSectionOrder = () => {
         setData(data);
         // console.log('data >>>', data )
     };
+
     return (
         <AuthLayout logIn={false} page='account' go='sign-in'>
             <Layout title="Account order" desc="desc">
@@ -164,12 +165,12 @@ const WrapSectionOrder = () => {
                                                     </div>
                                                 </div>
                                                 <div className="col">
-                                                    <div className="tableTitle">
+                                                    <div  style={{paddingLeft: `2.5rem`}} className="tableTitle">
                                                         Date
                                                     </div>
                                                 </div>
                                                 <div className="col">
-                                                    <div className="tableTitle">
+                                                    <div style={{paddingLeft: `2.5rem`}} className="tableTitle">
                                                         ID
                                                     </div>
                                                 </div>
@@ -192,11 +193,14 @@ const WrapSectionOrder = () => {
                                                                 onClick={()=>tableList(index, 0)}
                                                                 className="tableListItem"
                                                             >
-                                                                {/*{console.log('tableList item >>', item.line_items[0].name)}*/}
+                                                                {/*{console.log('tableList item >>', item)}*/}
                                                                 <div className="row">
                                                                     <div className="col">
                                                                         <div className="tableTitle">
-                                                                            {item.line_items[0].name}
+                                                                            { item.meta_data.map((item, index) => { if (item.key === 'hashrate_name') {
+                                                                                return ( <span key={`hashrate_name-${index}`}>{item.value}</span> )
+                                                                            }})}
+                                                                            {/*{item.name}*/}
                                                                         </div>
                                                                     </div>
                                                                     <div className="col">
@@ -206,7 +210,9 @@ const WrapSectionOrder = () => {
                                                                     </div>
                                                                     <div className="col">
                                                                         <div className="tableTitle">
-                                                                            {item.number}
+                                                                            { item.meta_data.map((item, index) => { if (item.key === 'id') {
+                                                                                return ( <span key={`id-${index}`}>{item.value}</span> )
+                                                                            }})}
                                                                         </div>
                                                                     </div>
                                                                     <div className="col-auto">

@@ -39,7 +39,7 @@ const RegPage = (props) => {
 
 
     return (
-        <AuthLayout logIn={true} page='sign-up' go='account'>
+        <AuthLayout logIn={true} page='sign-up' go={ location.length > 1 ? ( location[0] === '?r' ? (location[1]) : 'account') : ( 'account' ) }>
             <Layout title="Sign Up" desc="desc">
             <Section className="pageLogin d-flex align-items-center">
                 <div className="Login container">
@@ -98,9 +98,21 @@ const RegPage = (props) => {
 
                                             <div className="Boxlink">
                                                 <span>Already have an account?</span>
-                                                <Link
-                                                    to={`/sign-in/${location[0] === '?r=' ? (`?r` + location[1]) : ''}`}>Sign
-                                                    In</Link>
+                                                {/*{console.log('location >>>', location.length, location )}*/}
+                                                {
+                                                    location?.length === 1 ? (
+                                                        <Link
+                                                            to={`/sign-in/`}>
+                                                            Sign In
+                                                        </Link>
+                                                    ) : (
+                                                        <Link
+                                                            to={`/sign-in/${location[0] === '?r' ? (`?r=` + location[1]) : ''}`}>
+                                                            Sign In
+                                                        </Link>
+                                                    )
+                                                }
+
                                             </div>
                                             <h3 className={` statusInfo text-center 
                                             ${error || message ? ' active ' : ''}

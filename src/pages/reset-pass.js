@@ -28,7 +28,7 @@ const ResetPass = (props) => {
     }
     const location = props.location.search?.split('=');
 
-    console.log('location >> 1', location )
+    // console.log('location >> 1', location )
 
     return (
         <AuthLayout logIn={true} page='reset-pass' go='account'>
@@ -44,10 +44,14 @@ const ResetPass = (props) => {
                                 {
                                     message?.result === '1_' ?
                                         <>
-                                                <span className="link-form sendcode anim text-center"
+                                            <span className="link-form sendcode anim text-center"
                                                       style={{display: 'block'}} onClick={() => SendCode()}> &lt; Resend the code</span>
-                                            <BlockFormResPassSend props={props} location={location} d={d} email={values.email}
-                                                                  type={t}/>
+                                            <BlockFormResPassSend
+                                                props={props}
+                                                location={location}
+                                                d={d} email={values.email}
+                                                type={t}
+                                            />
                                         </>
                                         :
                                         <>
@@ -87,9 +91,21 @@ const ResetPass = (props) => {
 
                                                 <div className="Boxlink">
                                                     <span>Already have an account?</span>
-                                                    <Link
-                                                        to={`/sign-in/${location[0] === '?r' ? (`?r=` + location[1]) : ''}`}>Sign
-                                                        In</Link>
+                                                    {
+                                                        location?.length > 1 ? (
+                                                            <Link
+                                                                className='link-form'
+                                                                to={`/sign-in/${location[0] === '?r' ? (`?r=` + location[1]) : ''}`}>
+                                                                Sign In
+                                                            </Link>
+                                                        ) : (
+                                                            <Link
+                                                                className='link-form'
+                                                                to={`/sign-in/`}>
+                                                                Sign In
+                                                            </Link>
+                                                        )
+                                                    }
                                                 </div>
                                                 <h3 className={` statusInfo text-center 
                                                 ${error || message ? ' active ' : ''}

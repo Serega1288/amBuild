@@ -82,7 +82,7 @@ exports.handler = async (event, context) => {
     //       console.error(error, 'error >>')
     //     })
 
-    console.log('body >>', body  );
+    // console.log('body >>', body  );
 
     // user_id
 

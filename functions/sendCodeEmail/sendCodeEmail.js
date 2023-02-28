@@ -172,7 +172,7 @@ exports.handler = async (event, context) => {
             // }
 
             if ( date[0] + date[1] === '1_' ) {
-                m = 'Message sent...';
+                m = 'Code sent...';
             }
 
             console.log('Mail >>', m);

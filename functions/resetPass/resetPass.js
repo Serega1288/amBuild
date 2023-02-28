@@ -178,7 +178,7 @@ exports.handler = async (event, context) => {
             // }
 
             if ( date[0] + date[1] === '1_' ) {
-                m = 'You are successfully registered, your password has been sent to your mail.';
+                m = 'A new password has been sent to your email.';
             }
 
             console.log('Mail >>', m);

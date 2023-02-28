@@ -334,6 +334,19 @@ const PageCheckout = (props) => {
                                             The remaining ransaction fees can be paid manually or be deducted automatically from your fund.
                                         </p>
                                     </div>
+
+
+                                    <div className="blocks itemOrder">
+                                        <div className="title">
+                                            Choose a Coupon
+                                        </div>
+                                        <p>
+                                            <strong>Note:</strong>
+                                            The remaining ransaction fees can be paid manually or be deducted automatically from your fund.
+                                        </p>
+                                    </div>
+
+
                                 </div>
                                 <div className="col-auto">
                                     <div className="blocks formOrder">
