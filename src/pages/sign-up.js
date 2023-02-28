@@ -117,7 +117,7 @@ const RegPage = (props) => {
                                             <h3 className={` statusInfo text-center 
                                             ${error || message ? ' active ' : ''}
                                             ${error ? ' error ' : ''}
-                                            ${
+                                            ${ 
                                                 message?.result === '01' ||
                                                 message?.result === '02' ||
                                                 message?.result === '03' ||
@@ -127,6 +127,7 @@ const RegPage = (props) => {
                                             `}>
                                                 {error ? error : ''}
                                                 {message ? message?.message : ''}
+                                                {console.log('result >>>>>', message)}
                                             </h3>
                                         </form>
                                     </>
