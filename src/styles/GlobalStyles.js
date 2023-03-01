@@ -182,7 +182,7 @@ ul {
         & +  &.style-1 { 
             margin-left:1.2rem;
         } 
-        &:hover, &:focus, &[aria-current="page"] { 
+        &:hover, &:focus, &[aria-current="page"], &.active { 
             background-color: #FFFFFF;
             color: #000;
         }

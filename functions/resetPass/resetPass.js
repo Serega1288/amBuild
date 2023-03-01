@@ -169,12 +169,12 @@ exports.handler = async (event, context) => {
                 m = `Sorry, but an error has occurred, please contact technical support. Error code: ${date}`;
             }
 
-            if ( date === '03_1' || date === '03_2' ) {
+            if ( date === '04' || date === '03' || date === '03_1' || date === '03_2' ) {
                 m = `Sorry, but an error has occurred, please contact technical support. Error code: ${date}`;
             }
 
-            // if ( date === '04' ) {
-            //     m = 'Invalid password.';
+            //  if ( date === '03' ) {
+            //      m = 'Your mail is missing. Try something else.';
             // }
 
             if ( date[0] + date[1] === '1_' ) {
@@ -186,6 +186,9 @@ exports.handler = async (event, context) => {
         }).catch((error) => {
         date = error;
         console.error(error, 'error >>>')
+
+
+
     });
 
 

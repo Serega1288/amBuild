@@ -161,7 +161,7 @@ exports.handler = async (event, context) => {
                 if ( body.type === 'sing-up') {
                     m = 'Email is already registered, please log in.';
                 }
-                if ( body.type === '') {
+                if ( body.type === 'rest-pass') {
                     m = 'Password recovery is not possible, e-mail is missing.';
                 }
             }

@@ -8,9 +8,8 @@ import {format} from "date-fns";
 const WrapSectionCoupon = () => {
 
     const [data, setData] = useState([]);
-    useEffect(() => {
-        fetchData();
-    }, []);
+    const [dataAccount, setDataAccount] = useState([]);
+
 
     const fetchData = async () => {
         let ob = { get: `coupons`, type : `coupons` };
@@ -24,8 +23,60 @@ const WrapSectionCoupon = () => {
         const data = await response.json();
         setData(data);
 
-        console.log('Сoupon >>>', data.result )
+        // console.log('Сoupon >>>', data.result )
     };
+
+    const fetchDataAccount = async () => {
+        let ob = { get: `customers/${localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1]}`, type : `account` };
+        const response = await fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendGetData`, {
+            method: 'POST',
+            headers: {
+                'content-Type': 'application/json',
+            },
+            body: JSON.stringify(ob),
+        });
+        const data = await response.json();
+
+
+        data.result.meta_data.forEach((element) => {
+            if(element.key === 'active_coupon' ) {
+                // console.log('Account >>> for', element.value);
+                setDataAccount( Number(element.value) );
+            }
+        });
+
+        // console.log('Account >>>', data.result.meta_data )
+    };
+    
+    const statusCoupon = async (coupons, setCoupons) => {
+        console.log('on click >>>', localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1] , coupons, setCoupons)
+        let set = coupons;
+        if (coupons === setCoupons) {
+            set = 0
+        }
+
+        let ob = { set: set, ud: localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1], type : `setDataAccount` };
+        const response = await fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendGetData`, {
+            method: 'POST',
+            headers: {
+                'content-Type': 'application/json',
+            },
+            body: JSON.stringify(ob),
+        });
+        const data = await response.json();
+        setData(data);
+
+        console.log('Сoupon >>>', data.result )
+        // if (setCoupon === coupon) {
+        //
+        // } setDataAccount
+
+    }
+
+    useEffect(() => {
+        fetchData();
+        fetchDataAccount();
+    }, []);
 
     return (
         <AuthLayout logIn={false} page='account' go='sign-in'>
@@ -75,9 +126,23 @@ const WrapSectionCoupon = () => {
                                             <p className="CouponData">
                                                 {format( new Date( item.date_expires_gmt ), 'yyyy.mm.dd')}
                                             </p>
-                                            <span style={{marginTop: `auto`}} className="btn style-9 w100">
-                                                Buy Now
-                                            </span>
+
+                                            {
+                                                item.id === dataAccount ? (
+                                                    <span
+                                                        onClick={()=>statusCoupon(item.id, dataAccount)}
+                                                        style={{marginTop: `auto`}} className="btn style-9 w100 active">
+                                                        Activated
+                                                    </span>
+                                                ) : (
+                                                    <span
+                                                        onClick={()=>statusCoupon(item.id, dataAccount)}
+                                                        style={{marginTop: `auto`}} className="btn style-9 w100">
+                                                        Activate
+                                                    </span>
+                                                )
+                                            }
+
                                         </div>
                                     </div>
                                 </div>

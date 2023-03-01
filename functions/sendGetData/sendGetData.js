@@ -69,7 +69,7 @@ exports.handler = async (event, context) => {
 
     let m='';
 
-    if ( body.type === 'order' ) {
+    if ( body.type === 'order' || body.type === 'product' || body.type === 'coupons' || body.type === 'account' ) {
 
         axios.get(`${process.env.URL_WOO_REST_API}${body.get}`, {
             auth: {
@@ -90,46 +90,43 @@ exports.handler = async (event, context) => {
 
     }
 
+    if ( body.type === 'setDataAccount' ) {
 
-    if ( body.type === 'product' ) {
+        let date = '';
+        let m='';
 
-        axios.get(`${process.env.URL_WOO_REST_API}${body.get}`, {
-            auth: {
-                username: process.env.CONSUMER_KEY,
-                password: process.env.CONSUMER_SECRET,
-            },
-        }).then(response => {
-            m = response.data;
-            // console.log(response.data);
-        }).catch(error => {
-            //console.error(error);
-            return {
-                statusCode: 400,
-                body: JSON.stringify({ m: body, result: error}),
-            };
+        axios({
+            method: 'get',
+            url: `${process.env.URL_AJAX}?action=setDataAccount&token=${process.env.AUTH_TOKEN}&set=${body.set}&ud=${body.ud}&type=${body.type}`,
+        })
+            .then(function (response) {
+                date = response.data.split('{')[1].split('}')[0];
+                console.log('fine >>>',  date)
+
+
+
+                if ( date === '01' || date === '02' || date === '03' ) {
+                    m = `Sorry, but an error has occurred, please contact technical support. Error code: ${date}`;
+                }
+
+
+                // if ( date === '04' ) {
+                //     m = 'Invalid password.';
+                // }
+
+                if ( date[0] + date[1] === '1_' ) {
+                    m = 'Code sent...';
+                }
+
+                console.log('Mail >>', m);
+
+            }).catch((error) => {
+            date = error;
+            console.error(error, 'error >>>')
         });
 
     }
 
-    if ( body.type === 'coupons' ) {
-
-        axios.get(`${process.env.URL_WOO_REST_API}${body.get}`, {
-            auth: {
-                username: process.env.CONSUMER_KEY,
-                password: process.env.CONSUMER_SECRET,
-            },
-        }).then(response => {
-            m = response.data;
-            // console.log(response.data);
-        }).catch(error => {
-            //console.error(error);
-            return {
-                statusCode: 400,
-                body: JSON.stringify({ m: body, result: error}),
-            };
-        });
-
-    }
 
     // console.log('send !!!!!!!!!!!!!', m)
 
