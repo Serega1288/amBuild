@@ -66,16 +66,16 @@ exports.handler = async (event, context) => {
   const fieldsRequired = ['email','password'];
 
   // Email - обязательное поле
-  for (const field of fieldsRequired) {
-    if (!body[field]) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({
-          message: `Введите ${field}!`,
-        }),
-      };
-    }
-  }
+  // for (const field of fieldsRequired) {
+  //   if (!body[field]) {
+  //     return {
+  //       statusCode: 400,
+  //       body: JSON.stringify({
+  //         message: `Введите ${field}!`,
+  //       }),
+  //     };
+  //   }
+  // }
 
 
 
