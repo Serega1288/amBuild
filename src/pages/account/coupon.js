@@ -127,22 +127,11 @@ const WrapSectionCoupon = () => {
                                                 {format( new Date( item.date_expires_gmt ), 'yyyy.mm.dd')}
                                             </p>
 
-                                            {
-                                                item.id === dataAccount ? (
-                                                    <span
-                                                        onClick={()=>statusCoupon(item.id, dataAccount)}
-                                                        style={{marginTop: `auto`}} className="btn style-9 w100 active">
-                                                        Activated
-                                                    </span>
-                                                ) : (
-                                                    <span
-                                                        onClick={()=>statusCoupon(item.id, dataAccount)}
-                                                        style={{marginTop: `auto`}} className="btn style-9 w100">
-                                                        Activate
-                                                    </span>
-                                                )
-                                            }
-
+                                            <span
+                                                onClick={()=>statusCoupon(item.id, dataAccount)}
+                                                style={{marginTop: `auto`}} className={`btn style-9 w100 ${ item.id === dataAccount ? 'active' : '' }`}>
+                                                        { item.id === dataAccount ? 'Activated' : 'Activate' }
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
