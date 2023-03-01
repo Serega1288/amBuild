@@ -20,11 +20,12 @@ const WrapSectionCoupon = () => {
             },
             body: JSON.stringify(ob),
         });
-        const data = await response.json();
-        setData(data);
+        const d = await response.json();
+        setData(d);
 
         // console.log('Сoupon >>>', data.result )
     };
+    fetchData();
 
     const fetchDataAccount = async () => {
         let ob = { get: `customers/${localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1]}`, type : `account` };
@@ -35,10 +36,10 @@ const WrapSectionCoupon = () => {
             },
             body: JSON.stringify(ob),
         });
-        const data = await response.json();
+        const d = await response.json();
 
 
-        data.result.meta_data.forEach((element) => {
+        d.result.meta_data.forEach((element) => {
             if(element.key === 'active_coupon' ) {
                 // console.log('Account >>> for', element.value);
                 setDataAccount( Number(element.value) );
@@ -63,10 +64,10 @@ const WrapSectionCoupon = () => {
             },
             body: JSON.stringify(ob),
         });
-        const data = await response.json();
-        setData(data);
+        const d = await response.json();
+        setData(d);
 
-        console.log('Сoupon >>>', data.result )
+        console.log('Сoupon >>>', d.result )
         // if (setCoupon === coupon) {
         //
         // } setDataAccount
@@ -74,7 +75,7 @@ const WrapSectionCoupon = () => {
     }
 
     useEffect(() => {
-        fetchData();
+        // fetchData();
         fetchDataAccount();
     }, []);
 
