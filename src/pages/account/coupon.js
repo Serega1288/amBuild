@@ -25,7 +25,6 @@ const WrapSectionCoupon = () => {
 
         // console.log('Сoupon >>>', data.result )
     };
-    fetchData();
 
     const fetchDataAccount = async () => {
         let ob = { get: `customers/${localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1]}`, type : `account` };
@@ -75,7 +74,7 @@ const WrapSectionCoupon = () => {
     }
 
     useEffect(() => {
-        // fetchData();
+        fetchData();
         fetchDataAccount();
     }, []);
 
