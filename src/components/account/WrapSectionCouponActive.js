@@ -23,7 +23,7 @@ const WrapSectionCouponActive = ({data}) => {
         const d = await response.json();
         setDataCouponActive( d.result );
 
-        console.log('setDataCouponActive >>> 11111111', d.result )
+        // console.log('setDataCouponActive >>> 11111111', d.result )
     };
 
     return (

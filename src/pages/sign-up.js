@@ -127,7 +127,7 @@ const RegPage = (props) => {
                                             `}>
                                                 {error ? error : ''}
                                                 {message ? message?.message : ''}
-                                                {console.log('result >>>>>', message)}
+                                                {/*{console.log('result >>>>>', message)}*/}
                                             </h3>
                                         </form>
                                     </>

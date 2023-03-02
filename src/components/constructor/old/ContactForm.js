@@ -15,7 +15,7 @@ const ContactForm = ( {item, href } ) => {
 
     const clickTab = (index) => {
 
-        console.log('clickTab >>>', index )
+        // console.log('clickTab >>>', index )
 
         document.querySelectorAll('.tab-title.active')[0]?.classList.remove("active")
         document.querySelectorAll('.anim.tab-item-contact.active.row.m-0')[0]?.classList.remove("active")
@@ -25,7 +25,7 @@ const ContactForm = ( {item, href } ) => {
         document.getElementById(`tab-item-contact-${index}`).classList.add("active")
 
 
-        console.log('tabs index >>>>', index)
+        // console.log('tabs index >>>>', index)
 
         //event.target.classList.add("active")
 

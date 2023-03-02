@@ -129,30 +129,30 @@ exports.handler = async (event, context) => {
     if ( body.type === 'getCouponsActive' ) {
 
 
-        axios({
-            method: 'get',
-            url: `${process.env.URL_AJAX}?action=setDataAccount&token=${process.env.AUTH_TOKEN}&set=${body.set}&ud=${body.ud}&type=${body.type}`,
-        })
-            .then(function (response) {
-                date = response.data.split('{')[1].split('}')[0];
-                console.log('fine >>>',  date)
-                if ( date === '01' || date === '02' || date === '03' ) {
-                    m = `Sorry, but an error has occurred, please contact technical support. Error code: ${date}`;
-                }
-                if ( date[0] + date[1] === '1_' ) {
-                    m = date.split('ud=')[1];
-                }
-                console.log('getCouponsActive >> 1', m);
+        // axios({
+        //     method: 'get',
+        //     url: `${process.env.URL_AJAX}?action=setDataAccount&token=${process.env.AUTH_TOKEN}&set=${body.set}&ud=${body.ud}&type=${body.type}`,
+        // })
+        //     .then(function (response) {
+        //         date = response.data.split('{')[1].split('}')[0];
+        //         console.log('fine >>>',  date)
+        //         if ( date === '01' || date === '02' || date === '03' ) {
+        //             m = `Sorry, but an error has occurred, please contact technical support. Error code: ${date}`;
+        //         }
+        //         if ( date[0] + date[1] === '1_' ) {
+        //             m = date.split('ud=')[1];
+        //         }
+        //         console.log('getCouponsActive >> 1', m);
+        //
+        //
+        //
+        //     }).catch((error) => {
+        //     date = error;
+        //     console.error(error, 'error >>>')
+        // });
 
 
-
-            }).catch((error) => {
-            date = error;
-            console.error(error, 'error >>>')
-        });
-
-
-        axios.get(`${process.env.URL_WOO_REST_API}coupons/${m}`, {
+        axios.get(`${process.env.URL_WOO_REST_API}coupons/${body.get}`, {
             auth: {
                 username: process.env.CONSUMER_KEY,
                 password: process.env.CONSUMER_SECRET,

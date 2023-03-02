@@ -99,7 +99,7 @@ const GlobalFonts = createGlobalStyle`
 
 
 const GlobalFontsWrap  = memo(() => {
-    console.log('>>')
+    // console.log('>>')
     return <GlobalFonts />
 })
 

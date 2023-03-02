@@ -10,7 +10,7 @@ const WrapSectionAssets = () => {
 
     const [bOpen, setbOpen ] = useState(null);
     const open = (step) => {
-        console.log('open >>', step);
+        // console.log('open >>', step);
         setbOpen(step)
 
         // if ( step == null ) {

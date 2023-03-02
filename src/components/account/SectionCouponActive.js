@@ -4,7 +4,7 @@ import WrapСoupon from "../../styles/WrapСoupon";
 
 
 const SectionCouponActive = ({data}) => {
-    console.log('setDataCouponActive >>> 2222222', data)
+    // console.log('setDataCouponActive >>> 2222222', data)
 
     return (
         <WrapСoupon className="WrapСoupon">

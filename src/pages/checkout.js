@@ -124,8 +124,11 @@ const PageCheckout = (props) => {
     const { values, captureInput, submitForm, isLoading, error, message} = useFormCheckout();
 
     const [dataCouponActive, setDataCouponActive] = useState([]);
+
+
+
     const fetchData = async () => {
-        let ob = { get: `coupons`, type : `getCouponsActive`, ud: localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1] };
+        let ob = { get: 685, type : `getCouponsActive` };
         const response = await fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendGetData`, {
             method: 'POST',
             headers: {
@@ -139,9 +142,12 @@ const PageCheckout = (props) => {
         console.log('setDataCouponActive >>>', d.result )
     };
 
+
     useEffect(() => {
         fetchData();
     }, []);
+
+
 
         return (
             <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout'>
@@ -364,7 +370,7 @@ const PageCheckout = (props) => {
 
                                         <div className="WrapСoupon">
                                             {
-                                                dataCouponActive?.id ? (
+                                                dataCouponActive ? (
                                                     <>
                                                         {
                                                             dataCouponActive?.map((item, index) => (

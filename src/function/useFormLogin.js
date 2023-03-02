@@ -50,7 +50,7 @@ const useForm = (RedirectPage) => {
         //     navigate('/search')
         // }
 
-        console.log('responseText >>>', responseText );
+        // console.log('responseText >>>', responseText );
 
         // 2. перевіряємо відповідь від сервера
         if ( responseText.result >= 400 && responseText.result < 600 ) {

@@ -19,7 +19,7 @@ const ListCoupon = ({listCoupon}) => {
         const d = await response.json();
         d?.result?.meta_data?.forEach((element) => {
             if(element.key === 'active_coupon' ) {
-                console.log('Account >>> for', element.value);
+                // console.log('Account >>> for', element.value);
                 setDataAccount( Number(element.value) );
             }
         });
@@ -29,7 +29,7 @@ const ListCoupon = ({listCoupon}) => {
     }, []);
 
     const statusCoupon = async (coupons, setCoupons) => {
-        console.log('on click >>>', localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1] , coupons, setCoupons)
+        // console.log('on click >>>', localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1] , coupons, setCoupons)
         let set = coupons;
         if (coupons === setCoupons) {
             set = 0
@@ -46,7 +46,7 @@ const ListCoupon = ({listCoupon}) => {
         const d = await response.json();
         setDataAccount( Number(d.result) );
 
-        console.log('Сoupon >>>', d.result )
+        // console.log('Сoupon >>>', d.result )
 
 
     }
