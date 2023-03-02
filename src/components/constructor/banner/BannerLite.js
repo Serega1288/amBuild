@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {maxCol} from "../../../function/SizeCol";
 import {Link} from "gatsby";
-//import {Link} from "gatsby";
+import Bg from "../../../assets/img/gradient.jpg";
 
 const BannerLite = ( {item, title} ) => {
 
@@ -55,7 +55,7 @@ const BannerLite = ( {item, title} ) => {
             }
         }
       &.order {
-          background-image: url(/static/gradient-f0c75c7f2fad95511aee63e5fcfe09ee.jpg);
+          background-image: url(${Bg});
           width: 100%;
           h1 {
             color: #fff;
