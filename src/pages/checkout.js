@@ -1,15 +1,15 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Layout from '../components/Layout'
-import {graphql, useStaticQuery} from "gatsby"
+import {graphql, Link, useStaticQuery} from "gatsby"
 import {localStoreService} from "../function/hook"
 import BannerLite from '../components/constructor/banner/BannerLite'
 import styled from "styled-components";
 import {AuthLayout} from "../function/AuthLayout";
 import useFormCheckout from "../function/useFormCheckout";
-import {instanceAuthService} from "../function/auth";
+import SectionCouponActive from "../components/account/SectionCouponActive"
 
 const PageCheckout = (props) => {
-
+    const CartLocal = localStoreService.getLocal('CartBuy')
     const data = useStaticQuery(graphql`
         {
             wp {
@@ -36,45 +36,26 @@ const PageCheckout = (props) => {
         }
     `);
 
+
+    // console.log('!!!!!!!!!!!!!!!get', get)
+    // if (get === null) {
+    //     if ( typeof window !== "undefined" ) {
+    //         navigate('/shop/cloud-mining/')
+    //     }
+    // }
+
     // const title = props?.pageContext?.title;
     const generalTitle = data?.wp?.allSettings?.generalSettingsTitle;
     const list = data?.wp?.themeGeneralSettings?.ACFoptionThemes;
-
-    // console.log('pageCheckout list >>>', list)
-
-
     const CartBuy = localStoreService.getLocal('CartBuy');
-    // console.log('Cart >>', CartBuy)
-
-    // if ( Cart === null ) {
-    //     navigate('/shop');
-    // }
-
-
-
     const [choose, setChoose ] = useState(null);
     // const [poolValid, setPoolValid ] = useState(null);
     const chooseMiningPool = (s) => {
         setChoose(s)
         // console.log('setChoose >>', s)
     };
-
-
-
     const buy = (choose) => {
         // console.log('buy >', choose)
-        // if(choose === null) {
-        //     setPoolValid(0)
-        // } else {
-        //     setPoolValid(1)
-        // }
-
-
-
-        // if(choose === null) {
-        //     return
-        // }
-
     }
     // localStoreService.getLocal('Cart');
     // const Cart = localStoreService.getLocal('Cart')[0];
@@ -122,8 +103,49 @@ const PageCheckout = (props) => {
 
     const { values, captureInput, submitForm, isLoading, error, message} = useFormCheckout();
 
+    const [dataCouponActive, setDataCouponActive] = useState([]);
+
+
+
+    const fetchData = async () => {
+        let ob = { get: `coupons`, type : `getCouponsActive`, ud: localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1] };
+        const response = await fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendGetData`, {
+            method: 'POST',
+            headers: {
+                'content-Type': 'application/json',
+            },
+            body: JSON.stringify(ob),
+        });
+        const d = await response.json();
+        setDataCouponActive( d.result );
+
+        // console.log('setDataCouponActive >>>', d.result )
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    if (CartLocal === null || CartLocal === undefined ) {
         return (
-            <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout'>
+            <AuthLayout logIn={false} page='sign-up' go='sign-in' triger="checkout" redirectGoLogIn='checkout' >
+                <Layout customClass="section-pad-min" title='checkout'  desc={ generalTitle } >
+                    <BannerLite title='checkout' item={{ item: '' , title: `Confirm <br /> order`, style : 'title' }} />
+                    <Section>
+                        <div className="container text-center">
+                            <h2>
+                                You have not added any products for checkout.
+                            </h2>
+                            <Link className='btn style-3' to='/shop/cloud-mining/'>Go to catalog</Link>
+                        </div>
+                    </Section>
+                </Layout>
+            </AuthLayout>
+        )
+    }
+
+        return (
+            <AuthLayout logIn={false} page='sign-up' go='sign-in' ifpageGo="checkout" redirectGoLogIn='checkout'>
                 <Layout customClass="section-pad-min" title='checkout'  desc={ generalTitle } >
                     <BannerLite title='checkout' item={{ item: '' , title: `Confirm <br /> order`, style : 'title' }} />
                     <Section>
@@ -137,7 +159,8 @@ const PageCheckout = (props) => {
                                 message?.result === '02' ||
                                 message?.result === '03' ||
                                 message?.result?.status === 400 ||
-                                message?.result === '04' ?  'error'  : 'done'
+                                message?.result === '04' ||
+                                message?.result === '05' ?  'error'  : 'done'
                             } 
                                 `}>
                                 {error ?  error  : ''}
@@ -336,15 +359,22 @@ const PageCheckout = (props) => {
                                     </div>
 
 
-                                    <div className="blocks itemOrder">
-                                        <div className="title">
-                                            Choose a Coupon
-                                        </div>
-                                        <p>
-                                            <strong>Note:</strong>
-                                            The remaining ransaction fees can be paid manually or be deducted automatically from your fund.
-                                        </p>
-                                    </div>
+                                    {
+                                        dataCouponActive?.id ? (
+                                            <div className="blocks itemOrder">
+                                                <div className="title">
+                                                    Active coupon
+                                                </div>
+
+                                                <div className="WrapСoupon">
+                                                    <SectionCouponActive dataCouponActive={dataCouponActive} />
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            ''
+                                        )
+                                    }
+
 
 
                                 </div>
@@ -405,11 +435,32 @@ const PageCheckout = (props) => {
                                             </div>
                                         </div>
 
+                                        {/*{console.log('dataCouponActive', dataCouponActive)}*/}
+
+                                        {
+                                            dataCouponActive?.amount ? (
+                                                <div className="WrapOrder">
+                                                    <div className="row">
+                                                        <div className="col">
+                                                            <div className="WrapOrderTitle">
+                                                                Coupon:
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-auto">
+                                                            <div className="WrapOrderValue">
+                                                                <strong>-$ <span>{ dataCouponActive?.amount }</span></strong>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ) : ('')
+                                        }
+
                                         <div className="WrapOrderTotalValue">
                                             Order Total:
                                             <strong>$&nbsp;
                                                 <span>
-                                                    {(cart[0]?.price*cart[0]?.step + ( cart[0]?.order.serviceFee * cart[0]?.order.days * cart[0]?.step * 10 )).toFixed(2) }
+                                                    {(cart[0]?.price*cart[0]?.step + ( cart[0]?.order.serviceFee * cart[0]?.order.days * cart[0]?.step * 10 ) - ( dataCouponActive?.amount ? (dataCouponActive?.amount) : (0) ) ).toFixed(2) }
                                                 </span>
                                             </strong>
                                         </div>

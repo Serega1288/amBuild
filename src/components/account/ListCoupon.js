@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {localStoreService} from "../../function/hook";
 import {format} from "date-fns";
-
+import WrapСoupon from "../../styles/WrapСoupon"
 
 const ListCoupon = ({listCoupon}) => {
-    console.log("listCoupon", listCoupon)
+    // console.log("listCoupon", listCoupon)
     const [dataAccount, setDataAccount] = useState([]);
 
     const fetchDataAccount = async () => {
@@ -19,7 +19,7 @@ const ListCoupon = ({listCoupon}) => {
         const d = await response.json();
         d.result.meta_data.forEach((element) => {
             if(element.key === 'active_coupon' ) {
-                // console.log('Account >>> for', element.value);
+                console.log('Account >>> for', element.value);
                 setDataAccount( Number(element.value) );
             }
         });
@@ -44,7 +44,7 @@ const ListCoupon = ({listCoupon}) => {
             body: JSON.stringify(ob),
         });
         const d = await response.json();
-        // setData(d);
+        setDataAccount( Number(d.result) );
 
         console.log('Сoupon >>>', d.result )
 
@@ -52,7 +52,7 @@ const ListCoupon = ({listCoupon}) => {
     }
 
     return (
-        <div className="WrapСoupon">
+        <WrapСoupon>
             {
                 listCoupon?.result?.map((item, index) => (
                     <div key={`Сoupon-${index}`} className="BlockCoupon">
@@ -98,14 +98,15 @@ const ListCoupon = ({listCoupon}) => {
                                         onClick={()=>statusCoupon(item.id, dataAccount)}
                                         style={{marginTop: `auto`}} className={`btn style-9 w100 ${ item.id === dataAccount ? 'active' : '' }`}>
                                                         { item.id === dataAccount ? 'Activated' : 'Activate' }
-                                            </span>
+                                    </span>
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 ))
             }
-        </div>
+        </WrapСoupon>
     );
 };
 export default ListCoupon;

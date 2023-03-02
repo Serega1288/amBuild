@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {maxCol} from "../../../function/SizeCol";
+import {Link} from "gatsby";
 //import {Link} from "gatsby";
 
 const BannerLite = ( {item, title} ) => {
@@ -53,6 +54,20 @@ const BannerLite = ( {item, title} ) => {
                 margin-top: 4rem;
             }
         }
+      &.order {
+          background-image: url(/static/gradient-f0c75c7f2fad95511aee63e5fcfe09ee.jpg);
+          width: 100%;
+          h1 {
+            color: #fff;
+            font-size: 4rem;
+            line-height: 1.2;
+          }
+          p {
+             color: #fff;
+             font-size: 2rem;
+             line-height: 1.2;
+          }
+      }
     `;
 
     return (
@@ -60,11 +75,22 @@ const BannerLite = ( {item, title} ) => {
             <Section className={`banner-lite d-flex align-items-center ${item.style}`}>
                 <div className={`container`}>
                     <div className="row">
-                        <div className="col-12 col-sm-6 d-block d-sm-flex align-items-center">
-                            <h1
-                                style={{textAlign: item.alignhor}}
-                                className="BannerTitle"
-                                dangerouslySetInnerHTML={{__html: item.title ? item.title : title }} />
+                        <div className={ item.style === 'order' ? (` col-12 d-block d-sm-flex flex-column align-items-center justify-content-center`) : (` col-12 col-sm-6 d-block d-sm-flex align-items-center`)}>
+
+                            {item.style === 'order' ? (
+                                <>
+                                    <h1
+                                        style={{textAlign: item.alignhor}}
+                                        className="BannerTitle text-center"
+                                        dangerouslySetInnerHTML={{__html: item.title ? item.title : title }} />
+                                    <p className="d-flex align-items-center">To complete checkout, go <Link style={{marginLeft: `1rem`}} className="btn style-1" to="/account/settings/">here.</Link></p>
+                                </>
+                            ) : (
+                                <h1
+                                    style={{textAlign: item.alignhor}}
+                                    className="BannerTitle"
+                                    dangerouslySetInnerHTML={{__html: item.title ? item.title : title }} />
+                            )}
                         </div>
                         {item.style === "titleImg" ? (
                             item.banner ? (

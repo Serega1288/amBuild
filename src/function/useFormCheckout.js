@@ -1,9 +1,14 @@
 import {useState} from "react";
 import {localStoreService} from "./hook";
+import {navigate} from "gatsby";
 // import {instanceAuthService} from "./auth";
-// import {navigate} from "gatsby";
+
+
 
 const useFormCheckout = () => {
+
+    // console.log('localStoreService.getLocal(process.env.LOCAL_TOKEN)', localStoreService.getLocal(process.env.LOCAL_TOKEN))
+
     const [values, setValues] = useState({pool: '', garbage: '', cart: '', t: localStoreService.getLocal(process.env.LOCAL_TOKEN)  });
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -66,15 +71,24 @@ const useFormCheckout = () => {
 
             // console.log('ddd', responseText.result, responseText.result.message )
 
-            // if ( responseText.result[0] + responseText?.result[1] === '1_' ) {
+            if ( responseText?.result[0] + responseText?.result[1] === '1_' ) {
+                navigate('/order/')
+                // /account/settings/
+                setTimeout(() => {
+                    localStoreService.saveLocal('CartBuy', null)
+                }, 3000);
+                // const get = localStoreService.getLocal('CartBuy');
+                // console.log('get ProductSave', get)
 
+
+                // navigate('/account/settings/')
             // const user = {
             //     name: responseText?.result
             // }
             // instanceAuthService.saveUser(user)
             // navigate(RedirectPage)
 
-            // }
+            }
 
 
         }
