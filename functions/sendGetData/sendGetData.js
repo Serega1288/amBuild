@@ -4,7 +4,7 @@ const axios = require('axios')
 
 function pause() {
     return new Promise((resolve, reject) => {
-        setTimeout(resolve, 500);
+        setTimeout(resolve, 1000);
     });
 }
 
@@ -144,6 +144,22 @@ exports.handler = async (event, context) => {
                 }
                 console.log('getCouponsActive >> 1', m);
 
+                axios.get(`${process.env.URL_WOO_REST_API}coupons/${m}`, {
+                    auth: {
+                        username: process.env.CONSUMER_KEY,
+                        password: process.env.CONSUMER_SECRET,
+                    },
+                }).then(response => {
+                    m = response.data;
+                    console.log('>>> 2', response.data );
+                }).catch(error => {
+                    console.error(error);
+                    return {
+                        statusCode: 400,
+                        body: JSON.stringify({ m: body, result: error}),
+                    };
+                });
+
             }).catch((error) => {
             date = error;
             console.error(error, 'error >>>')
@@ -155,24 +171,6 @@ exports.handler = async (event, context) => {
 
 
 
-    }
-
-    if ( body.type === 'getCouponsForID' ) {
-        axios.get(`${process.env.URL_WOO_REST_API}coupons/${body.ud}`, {
-            auth: {
-                username: process.env.CONSUMER_KEY,
-                password: process.env.CONSUMER_SECRET,
-            },
-        }).then(response => {
-            m = response.data;
-            console.log('>>> 2', response.data );
-        }).catch(error => {
-            console.error(error);
-            return {
-                statusCode: 400,
-                body: JSON.stringify({ m: body, result: error}),
-            };
-        });
     }
 
 

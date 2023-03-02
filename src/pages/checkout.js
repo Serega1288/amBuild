@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from 'react'
 import Layout from '../components/Layout'
-import {graphql, Link, useStaticQuery} from "gatsby"
+import {graphql, useStaticQuery} from "gatsby"
 import {localStoreService} from "../function/hook"
 import BannerLite from '../components/constructor/banner/BannerLite'
 import styled from "styled-components";
 import {AuthLayout} from "../function/AuthLayout";
 import useFormCheckout from "../function/useFormCheckout";
-import WrapSectionCouponActive from "../components/account/WrapSectionCouponActive"
-
+// import {instanceAuthService} from "../function/auth";
+import {format} from "date-fns";
 
 const PageCheckout = (props) => {
-    const CartLocal = localStoreService.getLocal('CartBuy')
+
     const data = useStaticQuery(graphql`
         {
             wp {
@@ -37,28 +37,45 @@ const PageCheckout = (props) => {
         }
     `);
 
-
-
-
-    // console.log('!!!!!!!!!!!!!!!get', get)
-    // if (get === null) {
-    //     if ( typeof window !== "undefined" ) {
-    //         navigate('/shop/cloud-mining/')
-    //     }
-    // }
-
     // const title = props?.pageContext?.title;
     const generalTitle = data?.wp?.allSettings?.generalSettingsTitle;
     const list = data?.wp?.themeGeneralSettings?.ACFoptionThemes;
+
+    // console.log('pageCheckout list >>>', list)
+
+
     const CartBuy = localStoreService.getLocal('CartBuy');
+    // console.log('Cart >>', CartBuy)
+
+    // if ( Cart === null ) {
+    //     navigate('/shop');
+    // }
+
+
+
     const [choose, setChoose ] = useState(null);
     // const [poolValid, setPoolValid ] = useState(null);
     const chooseMiningPool = (s) => {
         setChoose(s)
         // console.log('setChoose >>', s)
     };
+
+
+
     const buy = (choose) => {
         // console.log('buy >', choose)
+        // if(choose === null) {
+        //     setPoolValid(0)
+        // } else {
+        //     setPoolValid(1)
+        // }
+
+
+
+        // if(choose === null) {
+        //     return
+        // }
+
     }
     // localStoreService.getLocal('Cart');
     // const Cart = localStoreService.getLocal('Cart')[0];
@@ -106,11 +123,6 @@ const PageCheckout = (props) => {
 
     const { values, captureInput, submitForm, isLoading, error, message} = useFormCheckout();
 
-
-    useEffect(() => {
-        fetchData();
-    }, []);
-
     const [dataCouponActive, setDataCouponActive] = useState([]);
     const fetchData = async () => {
         let ob = { get: `coupons`, type : `getCouponsActive`, ud: localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1] };
@@ -124,32 +136,15 @@ const PageCheckout = (props) => {
         const d = await response.json();
         setDataCouponActive( d.result );
 
-        console.log('setDataCouponActive >>>', d )
+        console.log('setDataCouponActive >>>', d.result )
     };
 
-
-
-
-    if (CartLocal === null || CartLocal === undefined ) {
-        return (
-            <AuthLayout logIn={false} page='sign-up' go='sign-in' triger="checkout" redirectGoLogIn='checkout' >
-                <Layout customClass="section-pad-min" title='checkout'  desc={ generalTitle } >
-                    <BannerLite title='checkout' item={{ item: '' , title: `Confirm <br /> order`, style : 'title' }} />
-                    <Section>
-                        <div className="container text-center">
-                            <h2>
-                                You have not added any products for checkout.
-                            </h2>
-                            <Link className='btn style-3' to='/shop/cloud-mining/'>Go to catalog</Link>
-                        </div>
-                    </Section>
-                </Layout>
-            </AuthLayout>
-        )
-    }
+    useEffect(() => {
+        fetchData();
+    }, []);
 
         return (
-            <AuthLayout logIn={false} page='sign-up' go='sign-in' ifpageGo="checkout" redirectGoLogIn='checkout'>
+            <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout'>
                 <Layout customClass="section-pad-min" title='checkout'  desc={ generalTitle } >
                     <BannerLite title='checkout' item={{ item: '' , title: `Confirm <br /> order`, style : 'title' }} />
                     <Section>
@@ -163,8 +158,7 @@ const PageCheckout = (props) => {
                                 message?.result === '02' ||
                                 message?.result === '03' ||
                                 message?.result?.status === 400 ||
-                                message?.result === '04' ||
-                                message?.result === '05' ?  'error'  : 'done'
+                                message?.result === '04' ?  'error'  : 'done'
                             } 
                                 `}>
                                 {error ?  error  : ''}
@@ -362,11 +356,70 @@ const PageCheckout = (props) => {
                                         </p>
                                     </div>
 
-                                    {
-                                        console.log('dataCouponActive?.id', dataCouponActive)
-                                    }
 
-                                    <WrapSectionCouponActive data={dataCouponActive} />
+                                    <div className="blocks itemOrder">
+                                        <div className="title">
+                                            Choose a Coupon
+                                        </div>
+
+                                        <div className="WrapСoupon">
+                                            {/*{*/}
+                                            {/*    dataCouponActive?.amount ? (*/}
+                                            {/*        <>*/}
+                                            {/*            dataCouponActive?.map((item, index) => (*/}
+                                            {/*            <div key={`Сoupon-${index}`} className="BlockCoupon">*/}
+                                            {/*                <div className="row">*/}
+                                            {/*                    <div className="col-5">*/}
+                                            {/*                        <div className="CouponBlock pos h100 d-flex flex-column">*/}
+                                            {/*                            <div className="CouponPrice">*/}
+                                            {/*                                ${item.amount}*/}
+                                            {/*                            </div>*/}
+                                            {/*                            <div style={{marginTop: `auto`}} className="CouponDetails">*/}
+                                            {/*                                {item.description}*/}
+                                            {/*                            </div>*/}
+                                            {/*                            <div className="obTop"></div>*/}
+                                            {/*                            <div className="obDots"></div>*/}
+                                            {/*                            <div className="obBottom"></div>*/}
+                                            {/*                        </div>*/}
+                                            {/*                    </div>*/}
+                                            {/*                    <div className="col-7">*/}
+                                            {/*                        <div className="CouponBlock right pos">*/}
+                                            {/*                            <div className="obCircl"></div>*/}
+                                            {/*                            <div className="row">*/}
+                                            {/*                                <div className="col">*/}
+                                            {/*                                    <div className="CouponTitle">*/}
+                                            {/*                                        Coupon*/}
+                                            {/*                                    </div>*/}
+                                            {/*                                </div>*/}
+                                            {/*                                <div className="col-auto">*/}
+                                            {/*                                <span className="btn style-8">*/}
+                                            {/*                                    Rules*/}
+                                            {/*                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">*/}
+                                            {/*                                        <path d="M8.78068 5.33336L5.20468 1.75736L6.14735 0.814697L11.3327 6.00003L6.14735 11.1854L5.20468 10.2427L8.78068 6.6667H0.666016V5.33336H8.78068Z" fill="white"/>*/}
+                                            {/*                                    </svg>*/}
+                                            {/*                                </span>*/}
+                                            {/*                                </div>*/}
+                                            {/*                            </div>*/}
+                                            {/*                            <p className="CouponID">ID: <strong>{item.code}</strong></p>*/}
+
+                                            {/*                            <p className="CouponData">*/}
+                                            {/*                                {format( new Date( item.date_expires_gmt ), 'yyyy.mm.dd')}*/}
+                                            {/*                            </p>*/}
+
+                                            {/*                        </div>*/}
+                                            {/*                    </div>*/}
+                                            {/*                </div>*/}
+                                            {/*            </div>*/}
+                                            {/*            ))*/}
+                                            {/*        </>*/}
+                                            {/*    ) : (*/}
+                                            {/*        ''*/}
+                                            {/*    )*/}
+                                            {/*}*/}
+                                        </div>
+
+                                    </div>
+
 
                                 </div>
                                 <div className="col-auto">
@@ -426,7 +479,14 @@ const PageCheckout = (props) => {
                                             </div>
                                         </div>
 
-                                        {/*{console.log('dataCouponActive', dataCouponActive)}*/}
+                                        {/*<div className="WrapOrderTotalValue">*/}
+                                        {/*    Order Total:*/}
+                                        {/*    <strong>$&nbsp;*/}
+                                        {/*        <span>*/}
+                                        {/*            {(cart[0]?.price*cart[0]?.step + ( cart[0]?.order.serviceFee * cart[0]?.order.days * cart[0]?.step * 10 )).toFixed(2) }*/}
+                                        {/*        </span>*/}
+                                        {/*    </strong>*/}
+                                        {/*</div>*/}
 
                                         {
                                             dataCouponActive?.amount ? (
