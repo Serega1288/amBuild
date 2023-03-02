@@ -6,7 +6,8 @@ import BannerLite from '../components/constructor/banner/BannerLite'
 import styled from "styled-components";
 import {AuthLayout} from "../function/AuthLayout";
 import useFormCheckout from "../function/useFormCheckout";
-import SectionCouponActive from "../components/account/SectionCouponActive"
+import WrapSectionCouponActive from "../components/account/WrapSectionCouponActive"
+
 
 const PageCheckout = (props) => {
     const CartLocal = localStoreService.getLocal('CartBuy')
@@ -37,9 +38,7 @@ const PageCheckout = (props) => {
     `);
 
 
-    useEffect(() => {
-        fetchData();
-    }, []);
+
 
     // console.log('!!!!!!!!!!!!!!!get', get)
     // if (get === null) {
@@ -107,10 +106,12 @@ const PageCheckout = (props) => {
 
     const { values, captureInput, submitForm, isLoading, error, message} = useFormCheckout();
 
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
     const [dataCouponActive, setDataCouponActive] = useState([]);
-
-
-
     const fetchData = async () => {
         let ob = { get: `coupons`, type : `getCouponsActive`, ud: localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1] };
         const response = await fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendGetData`, {
@@ -364,23 +365,8 @@ const PageCheckout = (props) => {
                                     {
                                         console.log('dataCouponActive?.id', dataCouponActive)
                                     }
-                                    {
-                                        dataCouponActive?.id ? (
-                                            <div className="blocks itemOrder">
-                                                <div className="title">
-                                                    Active coupon
-                                                </div>
 
-                                                <div className="WrapСoupon">
-                                                    <SectionCouponActive dataCouponActive={dataCouponActive} />
-                                                </div>
-                                            </div>
-                                        ) : (
-                                            ''
-                                        )
-                                    }
-
-
+                                    <WrapSectionCouponActive data={dataCouponActive} />
 
                                 </div>
                                 <div className="col-auto">

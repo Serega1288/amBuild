@@ -144,22 +144,6 @@ exports.handler = async (event, context) => {
                 }
                 console.log('getCouponsActive >> 1', m);
 
-                axios.get(`${process.env.URL_WOO_REST_API}coupons/${m}`, {
-                    auth: {
-                        username: process.env.CONSUMER_KEY,
-                        password: process.env.CONSUMER_SECRET,
-                    },
-                }).then(response => {
-                    m = response.data;
-                    console.log('>>> 2', response.data.result );
-                }).catch(error => {
-                    console.error(error);
-                    return {
-                        statusCode: 400,
-                        body: JSON.stringify({ m: body, result: error}),
-                    };
-                });
-
             }).catch((error) => {
             date = error;
             console.error(error, 'error >>>')
@@ -173,10 +157,28 @@ exports.handler = async (event, context) => {
 
     }
 
+    if ( body.type === 'getCouponsForID' ) {
+        axios.get(`${process.env.URL_WOO_REST_API}coupons/${body.ud}`, {
+            auth: {
+                username: process.env.CONSUMER_KEY,
+                password: process.env.CONSUMER_SECRET,
+            },
+        }).then(response => {
+            m = response.data;
+            console.log('>>> 2', response.data );
+        }).catch(error => {
+            console.error(error);
+            return {
+                statusCode: 400,
+                body: JSON.stringify({ m: body, result: error}),
+            };
+        });
+    }
+
 
     // console.log('send !!!!!!!!!!!!!', m)
 
-    await pause();
+    // await pause();
 
 
     return {

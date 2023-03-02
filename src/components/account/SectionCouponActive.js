@@ -1,10 +1,10 @@
 import React from 'react'
-import {format} from "date-fns";
+// import {format} from "date-fns";
 import WrapСoupon from "../../styles/WrapСoupon";
 
 
-const SectionCouponActive = ({dataCouponActive}) => {
-    // console.log('dataCouponActive', dataCouponActive)
+const SectionCouponActive = ({data}) => {
+    console.log('setDataCouponActive >>> 2222222', data)
 
     return (
         <WrapСoupon className="WrapСoupon">
@@ -15,10 +15,10 @@ const SectionCouponActive = ({dataCouponActive}) => {
                             <div className="col-5">
                                 <div className="CouponBlock pos h100 d-flex flex-column">
                                     <div className="CouponPrice">
-                                        ${dataCouponActive.amount}
+                                        ${data.amount}
                                     </div>
                                     <div style={{marginTop: `auto`}} className="CouponDetails">
-                                        {dataCouponActive.description}
+                                        {data.description}
                                     </div>
                                     <div className="obTop"></div>
                                     <div className="obDots"></div>
@@ -35,18 +35,18 @@ const SectionCouponActive = ({dataCouponActive}) => {
                                             </div>
                                         </div>
                                         <div className="col-auto">
-                                                                            <span className="btn style-8">
-                                                                                Rules
-                                                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                                                                    <path d="M8.78068 5.33336L5.20468 1.75736L6.14735 0.814697L11.3327 6.00003L6.14735 11.1854L5.20468 10.2427L8.78068 6.6667H0.666016V5.33336H8.78068Z" fill="white"/>
-                                                                                </svg>
-                                                                            </span>
+                                             <span className="btn style-8">
+                                                  Rules
+                                                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                                        <path d="M8.78068 5.33336L5.20468 1.75736L6.14735 0.814697L11.3327 6.00003L6.14735 11.1854L5.20468 10.2427L8.78068 6.6667H0.666016V5.33336H8.78068Z" fill="white"/>
+                                                  </svg>
+                                             </span>
                                         </div>
                                     </div>
-                                    <p className="CouponID">ID: <strong>{dataCouponActive.code}</strong></p>
+                                    <p className="CouponID">ID: <strong>{data.code}</strong></p>
 
                                     <p className="CouponData">
-                                        {format( new Date( dataCouponActive.date_expires_gmt ), 'yyyy.mm.dd')}
+                                        {/*{format( new Date( data.date_expires_gmt ), 'yyyy.mm.dd')}*/}
                                     </p>
 
                                 </div>
