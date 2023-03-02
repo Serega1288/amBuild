@@ -11,6 +11,9 @@ const WrapSectionCoupon = () => {
 
     // const [dataAccount, setDataAccount] = useState([]);
 
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     const fetchData = async () => {
         let ob = { get: `coupons`, type : `coupons` };
@@ -27,9 +30,7 @@ const WrapSectionCoupon = () => {
         // console.log('Сoupon >>>', data.result )
     };
 
-    useEffect(() => {
-        fetchData();
-    }, []);
+
 
     // const response = fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendGetData`, {
     //     method: 'POST',
