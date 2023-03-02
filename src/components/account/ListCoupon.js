@@ -17,7 +17,7 @@ const ListCoupon = ({listCoupon}) => {
             body: JSON.stringify(ob),
         });
         const d = await response.json();
-        d.result.meta_data.forEach((element) => {
+        d?.result?.meta_data?.forEach((element) => {
             if(element.key === 'active_coupon' ) {
                 console.log('Account >>> for', element.value);
                 setDataAccount( Number(element.value) );
