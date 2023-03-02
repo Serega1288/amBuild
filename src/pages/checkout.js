@@ -119,7 +119,7 @@ const PageCheckout = (props) => {
         const d = await response.json();
         setDataCouponActive( d.result );
 
-        // console.log('setDataCouponActive >>>', d.result )
+        console.log('setDataCouponActive >>>', d )
     };
 
     useEffect(() => {
