@@ -358,7 +358,9 @@ const PageCheckout = (props) => {
                                         </p>
                                     </div>
 
-
+                                    {
+                                        console.log('dataCouponActive?.id', dataCouponActive)
+                                    }
                                     {
                                         dataCouponActive?.id ? (
                                             <div className="blocks itemOrder">
