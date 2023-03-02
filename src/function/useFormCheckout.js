@@ -76,7 +76,8 @@ const useFormCheckout = () => {
                 // /account/settings/
                 setTimeout(() => {
                     localStoreService.saveLocal('CartBuy', null)
-                }, 3000);
+                    localStoreService.saveLocal('CouponIDSave', null )
+                }, 2000);
                 // const get = localStoreService.getLocal('CartBuy');
                 // console.log('get ProductSave', get)
 

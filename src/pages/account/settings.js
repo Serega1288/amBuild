@@ -1,12 +1,17 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {navigate} from "gatsby"
 import Layout from "../../components/Layout"
 import {AuthLayout} from "../../function/AuthLayout"
 import WrapAccount from "../../components/account/WrapAccount"
 import ItemBlock from "../../components/account/ItemBlock"
+import AccountData from "../../function/accountData";
 
 const WrapSectionSettings = () => {
 
+    const { dataAccountStatus, dataAccount, fetchDataAccount } = AccountData();
+    useEffect(() => {
+        fetchDataAccount()
+    }, []);
 
     const [sBlock, setSBlock ] = useState(null);
     const settingBlock = (style, scroll) => {
@@ -16,9 +21,9 @@ const WrapSectionSettings = () => {
     }
 
     return (
-        <AuthLayout logIn={false} page='account' go='sign-in'>
+        <AuthLayout logIn={false} statusAccount={dataAccountStatus} page='account/settings' go='sign-in'>
             <Layout title="Account settings" desc="desc">
-                <WrapAccount>
+                <WrapAccount status={dataAccountStatus} >
                     {
                         sBlock === null ? (
                             <>
@@ -215,50 +220,50 @@ const WrapSectionSettings = () => {
                                     </div>
 
                                 </div>
-                                <div className="Wrap">
-                                    <div className="title">
-                                        Security Setting
-                                    </div>
+                                {/*<div className="Wrap">*/}
+                                {/*    <div className="title">*/}
+                                {/*        Security Setting*/}
+                                {/*    </div>*/}
 
-                                    <div id="s-block-6" className="block">
-                                        <div className="row">
-                                            <div className="col">
-                                                <div className="title" style={{padding: 0}}>
-                                                    <strong>Password</strong>
-                                                </div>
-                                                <div className="text-2">Protect your account</div>
-                                                <div className="text-1">
-                                                    <strong>Not Set</strong>
-                                                </div>
-                                            </div>
-                                            <div className="col-auto">
-                                                <span onClick={()=>settingBlock(6, 0)} className="btn style-6">
-                                                    Change
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                {/*    <div id="s-block-6" className="block">*/}
+                                {/*        <div className="row">*/}
+                                {/*            <div className="col">*/}
+                                {/*                <div className="title" style={{padding: 0}}>*/}
+                                {/*                    <strong>Password</strong>*/}
+                                {/*                </div>*/}
+                                {/*                <div className="text-2">Protect your account</div>*/}
+                                {/*                <div className="text-1">*/}
+                                {/*                    <strong>Not Set</strong>*/}
+                                {/*                </div>*/}
+                                {/*            </div>*/}
+                                {/*            <div className="col-auto">*/}
+                                {/*                <span onClick={()=>settingBlock(6, 0)} className="btn style-6">*/}
+                                {/*                    Change*/}
+                                {/*                </span>*/}
+                                {/*            </div>*/}
+                                {/*        </div>*/}
+                                {/*    </div>*/}
 
-                                    <div  id="s-block-7" className="block">
-                                        <div className="row">
-                                            <div className="col">
-                                                <div className="title" style={{padding: 0}}>
-                                                    <strong>Fund Password</strong>
-                                                </div>
-                                                <div className="text-2">Protect your asset pin</div>
-                                                <div className="text-1">
-                                                    <strong>Not Set</strong>
-                                                </div>
-                                            </div>
-                                            <div className="col-auto">
-                                                <span onClick={()=>settingBlock(7, 0)} className="btn style-6">
-                                                    Change
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                {/*    <div  id="s-block-7" className="block">*/}
+                                {/*        <div className="row">*/}
+                                {/*            <div className="col">*/}
+                                {/*                <div className="title" style={{padding: 0}}>*/}
+                                {/*                    <strong>Fund Password</strong>*/}
+                                {/*                </div>*/}
+                                {/*                <div className="text-2">Protect your asset pin</div>*/}
+                                {/*                <div className="text-1">*/}
+                                {/*                    <strong>Not Set</strong>*/}
+                                {/*                </div>*/}
+                                {/*            </div>*/}
+                                {/*            <div className="col-auto">*/}
+                                {/*                <span onClick={()=>settingBlock(7, 0)} className="btn style-6">*/}
+                                {/*                    Change*/}
+                                {/*                </span>*/}
+                                {/*            </div>*/}
+                                {/*        </div>*/}
+                                {/*    </div>*/}
 
-                                </div>
+                                {/*</div>*/}
                                 <div className="Wrap">
                                     <div className="title">
                                         Personal Setting

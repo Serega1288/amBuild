@@ -1,19 +1,28 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Layout from "../components/Layout"
 import {AuthLayout} from "../function/AuthLayout"
 import WrapAccount from "../components/account/WrapAccount"
 import IconInfo from "../function/IconInfo";
 import BTC from "../assets/img/pay/BTC.png"
-import BCH from "../assets/img/pay/BCH.png"
-import ETH from "../assets/img/pay/ETH.png"
-import USDT from "../assets/img/pay/USDT.png"
+// import BCH from "../assets/img/pay/BCH.png"
+// import ETH from "../assets/img/pay/ETH.png"
+// import USDT from "../assets/img/pay/USDT.png"
 import KDA from "../assets/img/pay/KDA.png"
+import {localStoreService} from "../function/hook";
+import AccountData from "../function/accountData";
 
 const WrapSectionAccount = () => {
+
+
+    const { dataAccountStatus, dataAccount, fetchDataAccount } = AccountData();
+    useEffect(() => {
+        fetchDataAccount()
+    }, []);
+
     return (
-        <AuthLayout logIn={false} page='account' go='sign-in'>
+        <AuthLayout logIn={false} statusAccount={dataAccountStatus} page='account' go='sign-in'>
             <Layout title="Account dashboard" desc="desc">
-                <WrapAccount>
+                <WrapAccount status={dataAccountStatus}>
 
                     <div className="WrapTextTitle">
                         <div className="title">

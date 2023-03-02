@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import SectionCouponActive from "../../components/account/SectionCouponActive"
 // import {localStoreService} from "../../function/hook";
 
 
 const WrapSectionCouponActive = ({data}) => {
-    console.log('WrapSectionCouponActive', data)
+    // console.log('WrapSectionCouponActive', data)
 
     // const [dataCouponActive, setDataCouponActive] = useState([]);
     // useEffect(() => {

@@ -7,7 +7,7 @@ import styled from "styled-components";
 import {AuthLayout} from "../function/AuthLayout";
 import useFormCheckout from "../function/useFormCheckout";
 // import {instanceAuthService} from "../function/auth";
-import {format} from "date-fns";
+// import {format} from "date-fns";
 import WrapSectionCouponActive from "../components/account/WrapSectionCouponActive";
 
 const PageCheckout = (props) => {
@@ -127,9 +127,12 @@ const PageCheckout = (props) => {
     const [dataCouponActive, setDataCouponActive] = useState([]);
 
 
+    const CouponIDSave = localStoreService.getLocal('CouponIDSave');
+
+    console.log('CouponIDSave', CouponIDSave)
 
     const fetchData = async () => {
-        let ob = { get: 685, type : `getCouponsActive` };
+        let ob = { get: CouponIDSave, type : `getCouponsActive` };
         const response = await fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendGetData`, {
             method: 'POST',
             headers: {
@@ -145,7 +148,9 @@ const PageCheckout = (props) => {
 
 
     useEffect(() => {
-        fetchData();
+        if ( CouponIDSave !== null) {
+            fetchData();
+        }
     }, []);
 
 

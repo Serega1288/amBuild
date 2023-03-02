@@ -102,7 +102,11 @@ const Section1 = styled.div`
       margin-bottom: 1.6rem;
     }
     .list {
-      a { 
+      span.a {
+        //opacity: 0.4;
+        color: #CBCBCB;
+      }
+      .a { 
         font-weight: 400;
         font-size: 1.4rem;
         line-height: 2.4rem;

@@ -3,15 +3,20 @@ import Layout from "../../components/Layout"
 import {AuthLayout} from "../../function/AuthLayout"
 import WrapAccount from "../../components/account/WrapAccount"
 import ListCoupon from "../../components/account/ListCoupon"
+import AccountData from "../../function/accountData";
 
 
 const WrapSectionCoupon = () => {
 
     const [data, setData] = useState([]);
 
+    const { dataAccountStatus, dataAccount, fetchDataAccount } = AccountData();
+
+
     // const [dataAccount, setDataAccount] = useState([]);
 
     useEffect(() => {
+        fetchDataAccount()
         fetchData();
     }, []);
 
@@ -45,9 +50,9 @@ const WrapSectionCoupon = () => {
 
 
     return (
-        <AuthLayout logIn={false} page='account' go='sign-in'>
+        <AuthLayout logIn={false} statusAccount={dataAccountStatus} page='account/coupon' go='sign-in'>
             <Layout title="Account coupon" desc="desc">
-                <WrapAccount>
+                <WrapAccount status={dataAccountStatus}>
                     <div className="title">
                         Сoupon
                     </div>

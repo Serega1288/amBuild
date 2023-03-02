@@ -2,7 +2,7 @@ import { instanceAuthService } from './auth'
 import { navigate } from 'gatsby'
 import {localStoreService} from "./hook";
 
-export const AuthLayout = ({children, page, go, logIn, redirectGoLogIn, href, triger}) => {
+export const AuthLayout = ({children, page, go, logIn, redirectGoLogIn, href, triger, statusAccount}) => {
 
     // console.log('isLogined', instanceAuthService.isLogined(), page, go, redirectGoLogIn );
 
@@ -17,7 +17,25 @@ export const AuthLayout = ({children, page, go, logIn, redirectGoLogIn, href, tr
     // console.log('url', )
 
     // const get = localStoreService.getLocal('CartBuy')
-    // console.log('!!!!!!!!!!!!!!!get', get)
+
+
+    // console.log('!!!!!!!!!!!!!!!get', statusAccount)
+
+    if ( statusAccount === 0 ) {
+
+        if (
+           page === 'account/assets'
+        || page === 'account/coupon'
+        || page === 'account/hashrate'
+        || page === 'account/orders'
+        || page === 'account') {
+            if ( typeof window !== "undefined" ) {
+                navigate('/account/settings/')
+            }
+        }
+
+
+    }
 
     if ( instanceAuthService.isLogined() === logIn ) {
 

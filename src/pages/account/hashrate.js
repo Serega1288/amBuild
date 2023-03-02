@@ -1,15 +1,22 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Layout from "../../components/Layout"
 import {AuthLayout} from "../../function/AuthLayout"
 import WrapAccount from "../../components/account/WrapAccount"
 import IconInfo from "../../function/IconInfo";
 import KDA from "../../assets/img/pay/KDA.png";
+import AccountData from "../../function/accountData";
 
 const WrapSectionHashrate = () => {
+
+    const { dataAccountStatus, dataAccount, fetchDataAccount } = AccountData();
+    useEffect(() => {
+        fetchDataAccount()
+    }, []);
+
     return (
-        <AuthLayout logIn={false} page='account' go='sign-in'>
+        <AuthLayout logIn={false} statusAccount={dataAccountStatus} page='account/hashrate' go='sign-in'>
             <Layout title="Account hashrate" desc="desc">
-                <WrapAccount>
+                <WrapAccount status={dataAccountStatus}>
 
                     <div className="WrapTextTitle">
                         <div className="title">

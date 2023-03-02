@@ -4,10 +4,11 @@ import {AuthLayout} from "../../function/AuthLayout"
 import WrapAccount from "../../components/account/WrapAccount"
 import {navigate} from "gatsby";
 import OrderDetails from "../../components/account/OrderDetails";
-import {gql} from "@apollo/client";
-import {Query} from "@apollo/client/react/components";
+// import {gql} from "@apollo/client";
+// import {Query} from "@apollo/client/react/components";
 import {localStoreService} from "../../function/hook";
 import { format } from 'date-fns'
+import AccountData from "../../function/accountData";
 // import restClient from '../../apollo/client'
 
 
@@ -39,11 +40,8 @@ import { format } from 'date-fns'
 
 const WrapSectionOrder = () => {
 
-    // const { loading, error, data } = useQuery(WEATHER_QUERY, {
-    //     variables: { search : '' },
-    // });
+    const { dataAccountStatus, dataAccount, fetchDataAccount } = AccountData();
 
-    // console.log('data >>', data)
 
     const [sBlock, setSBlock ] = useState(null);
     const tableList = (style, scroll) => {
@@ -52,78 +50,10 @@ const WrapSectionOrder = () => {
         navigate(`#tableList-${scroll}`)
     }
 
-    const p = `customers/1?consumer_key=ck_e73fa37550d023558c5a1676bd0e1bab9320dc46&consumer_secret=cs_cacc5a8c3bb55d734d2eb0c3f614a6f354d0ab1a`;
-
-
-    // const [data, setData] = useState(null)
-    // const [isLoading, setLoading] = useState(false)
-
-    // useEffect(()=> {
-    //
-    //     let ob = { id: '111' };
-    //
-    //     try {
-    //         const response = fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendStar`, {
-    //             method: 'POST',
-    //             headers: {
-    //                 'content-Type': 'application/json',
-    //             },
-    //             body: JSON.stringify(ob),
-    //         });
-    //         const result = response.json();
-    //
-    //         console.log('result >>>', result)
-    //
-    //     } catch (err) {
-    //         console.log('result err >>>', err)
-    //     } finally {
-    //         console.log('result finally >>>')
-    //     }
-    // })
-
-    // const OnloadData = async (op1, op2) => {
-    //
-    //     let ob = { op1, op2 };
-    //
-    //     try {
-    //         const response = fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendStar`, {
-    //             method: 'POST',
-    //             headers: {
-    //                 'content-Type': 'application/json',
-    //             },
-    //             body: JSON.stringify(ob),
-    //         });
-    //         const result = response.json();
-    //
-    //         console.log('result >>>', result)
-    //
-    //         setData(1)
-    //
-    //     } catch (err) {
-    //         console.log('result err >>>', err)
-    //         setData(2)
-    //     } finally {
-    //         console.log('result finally >>>')
-    //     }
-    //
-    //     // console.log('OnloadData >>>', op1, op2 )
-    // }
-
-
-
-
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-    //         const data = await response.json();
-    //         setData(data);
-    //     };
-    //     fetchData();
-    //
-    // }, []);
-
     const [data, setData] = useState([]);
+
     useEffect(() => {
+        fetchDataAccount()
         fetchData();
     }, []);
 
@@ -142,9 +72,9 @@ const WrapSectionOrder = () => {
     };
 
     return (
-        <AuthLayout logIn={false} page='account' go='sign-in'>
+        <AuthLayout logIn={false} statusAccount={dataAccountStatus} page='account/orders' go='sign-in'>
             <Layout title="Account order" desc="desc">
-                <WrapAccount>
+                <WrapAccount status={dataAccountStatus} >
 
 
                     <div className="Wrap" id="tableList-0">

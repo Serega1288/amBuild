@@ -1,12 +1,18 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Layout from "../../components/Layout"
 import {AuthLayout} from "../../function/AuthLayout"
 import WrapAccount from "../../components/account/WrapAccount"
 import IconInfo from "../../function/IconInfo";
 import LogoLite from "../../assets/img/svg/logo-lite.svg"
 import BCH from "../../assets/img/pay/BCH.png"
+import AccountData from "../../function/accountData";
 
 const WrapSectionAssets = () => {
+
+    const { dataAccountStatus, dataAccount, fetchDataAccount } = AccountData();
+    useEffect(() => {
+        fetchDataAccount()
+    }, []);
 
     const [bOpen, setbOpen ] = useState(null);
     const open = (step) => {
@@ -21,9 +27,9 @@ const WrapSectionAssets = () => {
     }
 
     return (
-        <AuthLayout logIn={false} page='account' go='sign-in'>
+        <AuthLayout logIn={false} statusAccount={dataAccountStatus} page='account/assets' go='sign-in'>
             <Layout title="Account assets" desc="desc">
-                <WrapAccount>
+                <WrapAccount status={dataAccountStatus} >
                     <div className="WrapTextTitle orderList ">
 
                         <div className="title">

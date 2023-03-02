@@ -4,7 +4,7 @@ const axios = require('axios')
 
 function pause() {
     return new Promise((resolve, reject) => {
-        setTimeout(resolve, 1000);
+        setTimeout(resolve, 500);
     });
 }
 
@@ -177,6 +177,11 @@ exports.handler = async (event, context) => {
     }
 
 
+    if ( body.type === 'getCouponsActive' ) {
+
+
+
+    }
     // console.log('send !!!!!!!!!!!!!', m)
 
     await pause();

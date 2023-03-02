@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Link} from "gatsby";
 import Section1 from "../../styles/boxNav";
 import WrapContentAccount from "../../styles/WrapContentAccount";
+import AccountData from "../../function/accountData";
 
-const WrapAccount = ({children}) => {
+const WrapAccount = ({children, status}) => {
+
     return (
        <Section1 style={{paddingTop: `5rem`}}>
                 <div id="s-block-0" className="container">
@@ -14,24 +16,53 @@ const WrapAccount = ({children}) => {
 
                                     <div className="list style-2">
 
-                                        <Link to='/account/'>
-                                            <strong>Dashboard</strong>
-                                        </Link>
-                                        <Link to='/account/assets/'>
-                                            Assets
-                                        </Link>
-                                        <Link to='/account/hashrate/'>
-                                            Hashrate
-                                        </Link>
-                                        <Link to='/account/orders/'>
-                                            <strong>Orders</strong>
-                                        </Link>
-                                        <Link to='/account/coupon/'>
-                                            <strong>Coupon</strong>
-                                        </Link>
-                                        <Link to='/account/settings/'>
-                                            <strong>Settings</strong>
-                                        </Link>
+                                        {
+                                            status === 0 ? (
+                                                <>
+                                                    <span className='a'>
+                                                        <strong>Dashboard</strong>
+                                                    </span>
+                                                    <span className='a'>
+                                                        Assets
+                                                    </span>
+                                                    <span className='a'>
+                                                        Hashrate
+                                                    </span>
+                                                    <span className='a'>
+                                                        <strong>Orders</strong>
+                                                    </span>
+                                                    <span className='a'>
+                                                        <strong>Coupon</strong>
+                                                    </span>
+                                                    <Link className='a' to='/account/settings/'>
+                                                        <strong>Settings</strong>
+                                                    </Link>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Link className='a' to='/account/'>
+                                                        <strong>Dashboard</strong>
+                                                    </Link>
+                                                    <Link className='a' to='/account/assets/'>
+                                                        Assets
+                                                    </Link>
+                                                    <Link className='a' to='/account/hashrate/'>
+                                                        Hashrate
+                                                    </Link>
+                                                    <Link className='a' to='/account/orders/'>
+                                                        <strong>Orders</strong>
+                                                    </Link>
+                                                    <Link className='a' to='/account/coupon/'>
+                                                        <strong>Coupon</strong>
+                                                    </Link>
+                                                    <Link className='a' to='/account/settings/'>
+                                                        <strong>Settings</strong>
+                                                    </Link>
+                                                </>
+                                            )
+                                        }
+
+
 
                                     </div>
                                 </div>
