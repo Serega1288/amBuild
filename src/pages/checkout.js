@@ -37,6 +37,10 @@ const PageCheckout = (props) => {
     `);
 
 
+    useEffect(() => {
+        fetchData();
+    }, []);
+
     // console.log('!!!!!!!!!!!!!!!get', get)
     // if (get === null) {
     //     if ( typeof window !== "undefined" ) {
@@ -122,11 +126,8 @@ const PageCheckout = (props) => {
         console.log('setDataCouponActive >>>', d )
     };
 
-    fetchData();
 
-    useEffect(() => {
-        fetchData();
-    }, []);
+
 
     if (CartLocal === null || CartLocal === undefined ) {
         return (
