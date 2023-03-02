@@ -142,7 +142,7 @@ exports.handler = async (event, context) => {
                 if ( date[0] + date[1] === '1_' ) {
                     m = date.split('ud=')[1];
                 }
-                console.log('getCouponsActive >>', m);
+                console.log('getCouponsActive >> 1', m);
 
                 axios.get(`${process.env.URL_WOO_REST_API}coupons/${m}`, {
                     auth: {
@@ -151,7 +151,7 @@ exports.handler = async (event, context) => {
                     },
                 }).then(response => {
                     m = response.data;
-                    console.log('>>>', response.data.result );
+                    console.log('>>> 2', response.data.result );
                 }).catch(error => {
                     console.error(error);
                     return {
