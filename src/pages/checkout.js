@@ -122,6 +122,8 @@ const PageCheckout = (props) => {
         console.log('setDataCouponActive >>>', d )
     };
 
+    fetchData();
+
     useEffect(() => {
         fetchData();
     }, []);
