@@ -121,7 +121,7 @@ const WrapSectionOrder = () => {
                                         </div>
 
                                         {
-                                            isLoadingData ===false ? (
+                                            isLoadingData === false ? (
 
                                                 <div className="tableList yes">
                                                     {

@@ -9,7 +9,7 @@ import AccountData from "../../function/accountData";
 const WrapSectionCoupon = () => {
 
     const [data, setData] = useState([]);
-
+    const [isLoadingData, setIsLoadingData] = useState(true);
     // const { dataAccountStatus, dataAccount, fetchDataAccount } = AccountData();
 
 
@@ -30,7 +30,12 @@ const WrapSectionCoupon = () => {
             body: JSON.stringify(ob),
         });
         const d = await response.json();
-        setData(d);
+        if (d) {
+            setData(d);
+            setIsLoadingData(false)
+        }
+
+
 
         // console.log('Сoupon >>>', data.result )
     };
@@ -58,7 +63,14 @@ const WrapSectionCoupon = () => {
                     <div className="title">
                         Сoupon
                     </div>
-                    <ListCoupon  listCoupon={data} />
+                    {
+                        isLoadingData === false ? (
+                            <ListCoupon  listCoupon={data} />
+                        ) : (
+                            'loading...'
+                        )
+                    }
+
                 </WrapAccount>
             </Layout>
         </AuthLayout>
