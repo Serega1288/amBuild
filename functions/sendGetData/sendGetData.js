@@ -4,7 +4,7 @@ const axios = require('axios')
 
 function pause() {
     return new Promise((resolve, reject) => {
-        setTimeout(resolve, 1000);
+        setTimeout(resolve, 500);
     });
 }
 
@@ -71,7 +71,7 @@ exports.handler = async (event, context) => {
     let date = '';
 
 
-    if ( body.type === 'order' || body.type === 'product' || body.type === 'coupons' || body.type === 'account' ) {
+    if ( body.type === 'order' || body.type === 'product' || body.type === 'coupons' || body.type === 'account' || body.type === 'coupon' ) {
 
         axios.get(`${process.env.URL_WOO_REST_API}${body.get}`, {
             auth: {
@@ -129,44 +129,34 @@ exports.handler = async (event, context) => {
     if ( body.type === 'getCouponsActive' ) {
 
 
-        // axios({
-        //     method: 'get',
-        //     url: `${process.env.URL_AJAX}?action=setDataAccount&token=${process.env.AUTH_TOKEN}&set=${body.set}&ud=${body.ud}&type=${body.type}`,
-        // })
-        //     .then(function (response) {
-        //         date = response.data.split('{')[1].split('}')[0];
-        //         console.log('fine >>>',  date)
-        //         if ( date === '01' || date === '02' || date === '03' ) {
-        //             m = `Sorry, but an error has occurred, please contact technical support. Error code: ${date}`;
-        //         }
-        //         if ( date[0] + date[1] === '1_' ) {
-        //             m = date.split('ud=')[1];
-        //         }
-        //         console.log('getCouponsActive >> 1', m);
-        //
-        //
-        //
-        //     }).catch((error) => {
-        //     date = error;
-        //     console.error(error, 'error >>>')
-        // });
+        axios({
+            method: 'get',
+            url: `${process.env.URL_AJAX}?action=setDataAccount&token=${process.env.AUTH_TOKEN}&set=${body.set}&ud=${body.ud}&type=${body.type}`,
+        })
+            .then(function (response) {
+                if (response) {
+                    date = response.data.split('{')[1].split('}')[0];
+                    console.log('fine >>>',  date)
+                    if ( date === '01' || date === '02' || date === '03' ) {
+                        m = `Sorry, but an error has occurred, please contact technical support. Error code: ${date}`;
+                    }
+                    if ( date[0] + date[1] === '1_' ) {
+                        m = date.split('ud=')[1];
+                    }
+                    console.log('getCouponsActive >>', m);
+
+                }
 
 
-        axios.get(`${process.env.URL_WOO_REST_API}coupons/${body.get}`, {
-            auth: {
-                username: process.env.CONSUMER_KEY,
-                password: process.env.CONSUMER_SECRET,
-            },
-        }).then(response => {
-            m = response.data;
-            console.log('>>> 2', response.data );
-        }).catch(error => {
-            console.error(error);
-            return {
-                statusCode: 400,
-                body: JSON.stringify({ m: body, result: error}),
-            };
+
+
+            }).catch((error) => {
+            date = error;
+            console.error(error, 'error >>>')
         });
+
+
+
 
         // let activeCoupotID = m;
 

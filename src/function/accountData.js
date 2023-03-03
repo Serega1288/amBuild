@@ -16,16 +16,20 @@ const AccountData = () => {
             body: JSON.stringify(ob),
         });
         const d = await response.json();
-        setDataAccount(d);
 
-        console.log('Account >>>', d.result )
+        if (d) {
+            setDataAccount(d);
 
-        d?.result?.meta_data?.forEach((element) => {
-            if(element.key === 'accoont_active' ) {
-                // console.log('Account >>> for', element.value);
-                setDataAccountStatus( Number(element.value) );
-            }
-        });
+            console.log('Account >>>', d.result )
+
+            d?.result?.meta_data?.forEach((element) => {
+                if(element.key === 'accoont_active' ) {
+                    // console.log('Account >>> for', element.value);
+                    setDataAccountStatus( Number(element.value) );
+                }
+            });
+        }
+
 
     };
 

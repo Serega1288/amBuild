@@ -125,14 +125,17 @@ const PageCheckout = (props) => {
     const { values, captureInput, submitForm, isLoading, error, message} = useFormCheckout();
 
     const [dataCouponActive, setDataCouponActive] = useState([]);
+    const [isLoadingDataCouponActive, isLoadingSetDataCouponActive] = useState(true);
+    const [isLoadingDataCoupon, isLoadingSetDataCoupon] = useState(true);
 
 
-    const CouponIDSave = localStoreService.getLocal('CouponIDSave');
+    // const CouponIDSave = localStoreService.getLocal('CouponIDSave');
 
-    console.log('CouponIDSave', CouponIDSave)
+    // console.log('CouponIDSave', CouponIDSave)
 
-    const fetchData = async () => {
-        let ob = { get: CouponIDSave, type : `getCouponsActive` };
+    const fetchData1 = async () => {
+        // let ob = { get: CouponIDSave, type : `getCouponsActive` };
+        let ob = { get: `coupons`, type : `getCouponsActive`, ud: localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1] };
         const response = await fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendGetData`, {
             method: 'POST',
             headers: {
@@ -140,17 +143,50 @@ const PageCheckout = (props) => {
             },
             body: JSON.stringify(ob),
         });
-        const d = await response.json();
-        setDataCouponActive( d.result );
+        const d1 = await response.json();
+        if (d1) {
+            setDataCouponActive( d1.result );
+            isLoadingSetDataCouponActive(false)
+            fetchData2(d1.result);
+            console.log('fetchData2')
+            console.log('setDataCouponActive >>>', d1.result )
+        }
 
-        console.log('setDataCouponActive >>>', d.result )
     };
 
+    const fetchData2 = async (CouponIDSave) => {
+        console.log('fetchData2 >>>', CouponIDSave)
+        let ob = { get: `coupons/${CouponIDSave}`, type : `coupon` };
+        // let ob = { get: `coupons`, type : `getCouponsActive`, ud: localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1] };
+        const response = await fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendGetData`, {
+            method: 'POST',
+            headers: {
+                'content-Type': 'application/json',
+            },
+            body: JSON.stringify(ob),
+        });
+        const d2 = await response.json();
+        if (d2) {
+            setDataCouponActive( d2.result );
+            isLoadingSetDataCoupon(false)
+            console.log('setDataCoupon >>>', d2.result )
+        }
+
+    };
+
+    // useEffect(() => {
+    //     if ( CouponIDSave !== null) {
+    //         fetchData();
+    //     }
+    // }, []);
 
     useEffect(() => {
-        if ( CouponIDSave !== null) {
-            fetchData();
-        }
+        fetchData1();
+        console.log('fetchData1')
+        // if (isLoadingDataCouponActive === false) {
+        //
+        //     console.log('fetchData2')
+        // }
     }, []);
 
 
@@ -368,8 +404,12 @@ const PageCheckout = (props) => {
                                         </p>
                                     </div>
 
+                                    {
+                                        isLoadingDataCouponActive === false ?  (
+                                            <WrapSectionCouponActive data={dataCouponActive} />
+                                        ) : ('')
+                                    }
 
-                                    <WrapSectionCouponActive data={dataCouponActive} />
 
 
                                 </div>
@@ -440,29 +480,39 @@ const PageCheckout = (props) => {
                                         {/*</div>*/}
 
                                         {
-                                            dataCouponActive?.amount ? (
-                                                <div className="WrapOrder">
-                                                    <div className="row">
-                                                        <div className="col">
-                                                            <div className="WrapOrderTitle">
-                                                                Coupon:
+                                            isLoadingDataCouponActive === false ? (
+                                                dataCouponActive?.amount ? (
+                                                    <div className="WrapOrder">
+                                                        <div className="row">
+                                                            <div className="col">
+                                                                <div className="WrapOrderTitle">
+                                                                    Coupon:
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div className="col-auto">
-                                                            <div className="WrapOrderValue">
-                                                                <strong>-$ <span>{ dataCouponActive?.amount }</span></strong>
+                                                            <div className="col-auto">
+                                                                <div className="WrapOrderValue">
+                                                                    <strong>-$ <span>{ dataCouponActive?.amount }</span></strong>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                ) : ('')
                                             ) : ('')
+
                                         }
 
                                         <div className="WrapOrderTotalValue">
                                             Order Total:
                                             <strong>$&nbsp;
                                                 <span>
-                                                    {(cart[0]?.price*cart[0]?.step + ( cart[0]?.order.serviceFee * cart[0]?.order.days * cart[0]?.step * 10 ) - ( dataCouponActive?.amount ? (dataCouponActive?.amount) : (0) ) ).toFixed(2) }
+                                                    {
+                                                        isLoadingDataCouponActive === false ? (
+                                                            (cart[0]?.price*cart[0]?.step + ( cart[0]?.order.serviceFee * cart[0]?.order.days * cart[0]?.step * 10 ) - ( dataCouponActive?.amount ? (dataCouponActive?.amount) : (0) ) ).toFixed(2)
+                                                        ) : (
+                                                            (cart[0]?.price*cart[0]?.step + ( cart[0]?.order.serviceFee * cart[0]?.order.days * cart[0]?.step * 10 ) ).toFixed(2)
+                                                        )
+
+                                                    }
                                                 </span>
                                             </strong>
                                         </div>
