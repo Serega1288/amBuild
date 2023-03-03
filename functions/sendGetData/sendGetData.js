@@ -4,7 +4,7 @@ const axios = require('axios')
 
 function pause() {
     return new Promise((resolve, reject) => {
-        setTimeout(resolve, 500);
+        setTimeout(resolve, 1000);
     });
 }
 
