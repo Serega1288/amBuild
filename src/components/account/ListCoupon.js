@@ -3,10 +3,10 @@ import {localStoreService} from "../../function/hook";
 import {format} from "date-fns";
 import WrapСoupon from "../../styles/WrapСoupon"
 
-const ListCoupon = ({listCoupon}) => {
+const ListCoupon = ({list}) => {
     // console.log("listCoupon", listCoupon)
     const [dataAccount, setDataAccount] = useState([]);
-    const [isLoadingDataAccount, isLoadingSetDataAccount] = useState(true);
+    const [isLoadingDataAccount, isLoadingSetDataAccount] = useState(false);
 
     const fetchDataAccount = async () => {
         let ob = { get: `customers/${localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1]}`, type : `account` };
@@ -63,7 +63,7 @@ const ListCoupon = ({listCoupon}) => {
         <WrapСoupon>
             {
                 isLoadingDataAccount == false ? (
-                    Object.values(listCoupon?.map((item, index) => (
+                    list?.result?.map((item, index) => (
                         <div key={`Сoupon-${index}`} className="BlockCoupon">
                             <div className="row">
                                 <div className="col-5">
@@ -113,7 +113,7 @@ const ListCoupon = ({listCoupon}) => {
                                 </div>
                             </div>
                         </div>
-                    )))
+                    ))
                 ) : ('loadding ...')
 
             }
