@@ -8,7 +8,7 @@ import OrderDetails from "../../components/account/OrderDetails";
 // import {Query} from "@apollo/client/react/components";
 import {localStoreService} from "../../function/hook";
 import { format } from 'date-fns'
-import AccountData from "../../function/accountData";
+// import AccountData from "../../function/accountData";
 // import restClient from '../../apollo/client'
 
 
@@ -43,12 +43,12 @@ const WrapSectionOrder = () => {
     // const { dataAccountStatus, dataAccount, fetchDataAccount } = AccountData();
     //
     //
-    // const [sBlock, setSBlock ] = useState(null);
-    // const tableList = (style, scroll) => {
-    //     setSBlock(style)
-    //     console.log('settingBlock', style, scroll)
-    //     navigate(`#tableList-${scroll}`)
-    // }
+    const [sBlock, setSBlock ] = useState(null);
+    const tableList = (style, scroll) => {
+        setSBlock(style)
+        console.log('settingBlock', style, scroll)
+        navigate(`#tableList-${scroll}`)
+    }
 
     const [data, setData] = useState([]);
 
@@ -72,9 +72,9 @@ const WrapSectionOrder = () => {
     };
 
     return (
-        <AuthLayout logIn={false} statusAccount={dataAccountStatus} page='account/orders' go='sign-in'>
+        <AuthLayout logIn={false}  page='account/orders' go='sign-in'>
             <Layout title="Account order" desc="desc">
-                <WrapAccount status={dataAccountStatus} >
+                <WrapAccount  >
 
 
                     <div className="Wrap" id="tableList-0">
