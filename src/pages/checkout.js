@@ -405,7 +405,7 @@ const PageCheckout = (props) => {
                                     </div>
 
                                     {
-                                        isLoadingDataCouponActive === false ?  (
+                                        isLoadingDataCoupon === false ?  (
                                             <WrapSectionCouponActive data={dataCouponActive} />
                                         ) : ('')
                                     }
@@ -480,7 +480,7 @@ const PageCheckout = (props) => {
                                         {/*</div>*/}
 
                                         {
-                                            isLoadingDataCouponActive === false ? (
+                                            isLoadingDataCoupon === false ? (
                                                 dataCouponActive?.amount ? (
                                                     <div className="WrapOrder">
                                                         <div className="row">
@@ -506,7 +506,7 @@ const PageCheckout = (props) => {
                                             <strong>$&nbsp;
                                                 <span>
                                                     {
-                                                        isLoadingDataCouponActive === false ? (
+                                                        isLoadingDataCoupon === false ? (
                                                             (cart[0]?.price*cart[0]?.step + ( cart[0]?.order.serviceFee * cart[0]?.order.days * cart[0]?.step * 10 ) - ( dataCouponActive?.amount ? (dataCouponActive?.amount) : (0) ) ).toFixed(2)
                                                         ) : (
                                                             (cart[0]?.price*cart[0]?.step + ( cart[0]?.order.serviceFee * cart[0]?.order.days * cart[0]?.step * 10 ) ).toFixed(2)
