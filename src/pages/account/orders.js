@@ -56,7 +56,7 @@ const WrapSectionOrder = () => {
     useEffect(() => {
         // fetchDataAccount()
         fetchData();
-        setIsLoadingData(false)
+
     }, []);
 
     const fetchData = async () => {
@@ -69,9 +69,15 @@ const WrapSectionOrder = () => {
            body: JSON.stringify(ob),
         });
         const data = await response.json();
-        setData(data);
-        console.log('data >>>', localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1], data )
+        if (data) {
+            setData(data);
+            setIsLoadingData(false)
+            console.log('data >>>', localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1], data )
+        }
+
     };
+
+
 
     return (
         <AuthLayout logIn={false}  page='account/orders' go='sign-in'>
@@ -115,7 +121,7 @@ const WrapSectionOrder = () => {
                                         </div>
 
                                         {
-                                            !isLoadingData ? (
+                                            isLoadingData ===false ? (
 
                                                 <div className="tableList yes">
                                                     {

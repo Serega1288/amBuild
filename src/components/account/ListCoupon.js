@@ -27,7 +27,6 @@ const ListCoupon = ({listCoupon}) => {
     };
     useEffect(() => {
         fetchDataAccount();
-        setIsLoadingDataAccount(false)
     }, []);
 
     const statusCoupon = async (coupons, setCoupons) => {
@@ -46,10 +45,11 @@ const ListCoupon = ({listCoupon}) => {
             body: JSON.stringify(ob),
         });
         const d = await response.json();
-        setDataAccount( Number(d.result) );
-
-        localStoreService.saveLocal('CouponIDSave', Number(d.result) )
-
+        if (d) {
+            setDataAccount( Number(d.result) );
+            localStoreService.saveLocal('CouponIDSave', Number(d.result) )
+            setIsLoadingDataAccount(false)
+        }
         // console.log('Сoupon >>>', d.result )
 
 
@@ -58,7 +58,7 @@ const ListCoupon = ({listCoupon}) => {
     return (
         <WrapСoupon>
             {
-                ! isLoadingDataAccount ? (
+                isLoadingDataAccount === false ? (
 
 
                 listCoupon?.result?.map((item, index) => (
