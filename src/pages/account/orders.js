@@ -40,20 +40,20 @@ import AccountData from "../../function/accountData";
 
 const WrapSectionOrder = () => {
 
-    const { dataAccountStatus, dataAccount, fetchDataAccount } = AccountData();
-
-
-    const [sBlock, setSBlock ] = useState(null);
-    const tableList = (style, scroll) => {
-        setSBlock(style)
-        console.log('settingBlock', style, scroll)
-        navigate(`#tableList-${scroll}`)
-    }
+    // const { dataAccountStatus, dataAccount, fetchDataAccount } = AccountData();
+    //
+    //
+    // const [sBlock, setSBlock ] = useState(null);
+    // const tableList = (style, scroll) => {
+    //     setSBlock(style)
+    //     console.log('settingBlock', style, scroll)
+    //     navigate(`#tableList-${scroll}`)
+    // }
 
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetchDataAccount()
+        // fetchDataAccount()
         fetchData();
     }, []);
 
