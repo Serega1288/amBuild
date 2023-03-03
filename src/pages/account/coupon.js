@@ -67,8 +67,7 @@ const WrapSectionCoupon = () => {
 
                     {
                         isLoadingData === false ? (
-                            <>done</>
-                            // <ListCoupon  list={data} />
+                            <ListCoupon  list={data} />
                         ) : (
                             'loading...'
                         )
