@@ -6,7 +6,7 @@ import WrapСoupon from "../../styles/WrapСoupon"
 const ListCoupon = ({listCoupon}) => {
     // console.log("listCoupon", listCoupon)
     const [dataAccount, setDataAccount] = useState([]);
-    const [isLoadingDataAccount, isLoadingSetDataAccount] = useState([]);
+    const [isLoadingDataAccount, isLoadingSetDataAccount] = useState(true);
 
     const fetchDataAccount = async () => {
         let ob = { get: `customers/${localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1]}`, type : `account` };
