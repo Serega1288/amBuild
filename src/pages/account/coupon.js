@@ -31,7 +31,7 @@ const WrapSectionCoupon = () => {
         });
         const d = await response.json();
         if (d) {
-            setData(d);
+            setData(d.result);
             setIsLoadingData(false)
         }
 

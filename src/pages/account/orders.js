@@ -70,7 +70,7 @@ const WrapSectionOrder = () => {
         });
         const data = await response.json();
         if (data) {
-            setData(data);
+            setData(data.result);
             setIsLoadingData(false)
             console.log('data >>>', localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1], data )
         }
@@ -125,7 +125,7 @@ const WrapSectionOrder = () => {
 
                                                 <div className="tableList yes">
                                                     {
-                                                        data?.result.map((item, index) => (
+                                                        data?.map((item, index) => (
                                                             <div
                                                                 key={`tableList-${index}`}
                                                                 id={`tableList-${index}`}
@@ -184,7 +184,7 @@ const WrapSectionOrder = () => {
                                         Back
                                     </span>
                                     <div className="Wrap WrapOrderDelails orderList">
-                                        <OrderDetails s={data.result[sBlock]} />
+                                        <OrderDetails s={data[sBlock]} />
                                     </div>
                                 </>
                             )

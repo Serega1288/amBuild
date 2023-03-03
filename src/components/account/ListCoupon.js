@@ -63,7 +63,7 @@ const ListCoupon = ({listCoupon}) => {
         <WrapСoupon>
             {
                 isLoadingDataAccount == false ? (
-                    listCoupon?.result?.map((item, index) => (
+                    listCoupon?.map((item, index) => (
                         <div key={`Сoupon-${index}`} className="BlockCoupon">
                             <div className="row">
                                 <div className="col-5">
