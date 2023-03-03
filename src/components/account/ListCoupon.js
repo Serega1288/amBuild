@@ -63,7 +63,7 @@ const ListCoupon = ({listCoupon}) => {
         <WrapСoupon>
             {
                 isLoadingDataAccount == false ? (
-                    listCoupon?.map((item, index) => (
+                    Object.values(listCoupon?.map((item, index) => (
                         <div key={`Сoupon-${index}`} className="BlockCoupon">
                             <div className="row">
                                 <div className="col-5">
@@ -113,7 +113,7 @@ const ListCoupon = ({listCoupon}) => {
                                 </div>
                             </div>
                         </div>
-                    ))
+                    )))
                 ) : ('loadding ...')
 
             }
