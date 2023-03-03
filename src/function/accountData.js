@@ -5,6 +5,7 @@ import {localStoreService} from "./hook";
 const AccountData = () => {
     const [dataAccountStatus, setDataAccountStatus] = useState([]);
     const [dataAccount, setDataAccount] = useState([]);
+    const [isLoadingDataAccount, isLoadingSetDataAccount] = useState(true);
 
     const fetchDataAccount = async () => {
         let ob = { get: `customers/${localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1]}`, type : `account` };
@@ -28,6 +29,8 @@ const AccountData = () => {
                     setDataAccountStatus( Number(element.value) );
                 }
             });
+
+            isLoadingSetDataAccount(false)
         }
 
 
@@ -37,6 +40,7 @@ const AccountData = () => {
         dataAccountStatus,
         dataAccount,
         fetchDataAccount,
+        isLoadingDataAccount
     }
 
 }
