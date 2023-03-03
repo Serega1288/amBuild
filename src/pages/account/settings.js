@@ -33,7 +33,8 @@ const WrapSectionSettings = () => {
                                     </div>
                                     <div className="WrapAccountList">
                                         <div className="row">
-                                            <div className="col-12 col-sm-6 col-md-4">
+
+                                            <div className="col-12 col-sm-6 col-md-6">
                                                 <div className="item text-1 d-flex flex-column">
                                                         <div className="row">
                                                             <div className="col">
@@ -58,26 +59,8 @@ const WrapSectionSettings = () => {
                                                         </div>
                                                 </div>
                                             </div>
-                                            <div className="col-12 col-sm-6 col-md-4">
-                                                <div className="item text-1 d-flex flex-column">
-                                                    <div className="row">
-                                                        <div className="col">
-                                                            <strong>KYC</strong>
-                                                        </div>
-                                                        <div className="col-auto">
-                                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                                                <path d="M12.172 7L6.808 1.636L8.222 0.222L16 8L8.222 15.778L6.808 14.364L12.172 9H0V7H12.172Z" fill="black"/>
-                                                            </svg>
-                                                        </div>
-                                                    </div>
-                                                    <div className="row" style={{marginTop: `auto`}}>
-                                                        <div className="col">
-                                                            Not verified yet
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-12 col-sm-6 col-md-4">
+
+                                            <div className="col-12 col-sm-6 col-md-6">
                                                 <div className="item text-1 d-flex flex-column">
                                                     <div className="row">
                                                         <div className="col">
@@ -200,24 +183,25 @@ const WrapSectionSettings = () => {
                                         </div>
                                     </div>
 
-                                    <div  id="s-block-5" className="block">
-                                        <div className="row">
-                                            <div className="col">
-                                                <div className="title" style={{padding: 0}}>
-                                                    <strong>Fund Password</strong>
-                                                </div>
-                                                <div className="text-2">Protect your asset pin</div>
-                                                <div className="text-1">
-                                                    <strong>Not Set</strong>
-                                                </div>
-                                            </div>
-                                            <div className="col-auto">
-                                                <span onClick={()=>settingBlock(5, 0)} className="btn style-6">
-                                                    Change
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {/*<div  id="s-block-5" className="block">*/}
+                                    {/*    <div className="row">*/}
+                                    {/*        <div className="col">*/}
+                                    {/*            <div className="title" style={{padding: 0}}>*/}
+                                    {/*                <strong>Fund Password</strong>*/}
+                                    {/*            </div>*/}
+                                    {/*            <div className="text-2">Protect your asset pin</div>*/}
+                                    {/*            <div className="text-1">*/}
+                                    {/*                <strong>Not Set</strong>*/}
+                                    {/*            </div>*/}
+                                    {/*        </div>*/}
+                                    {/*        <div className="col-auto">*/}
+                                    {/*            <span onClick={()=>settingBlock(5, 0)} className="btn style-6">*/}
+                                    {/*                Change*/}
+                                    {/*            </span>*/}
+                                    {/*        </div>*/}
+                                    {/*    </div>*/}
+                                    {/*</div>*/}
+
 
                                 </div>
                                 {/*<div className="Wrap">*/}
@@ -288,24 +272,24 @@ const WrapSectionSettings = () => {
                                         </div>
                                     </div>
 
-                                    <div id="s-block-9" className="block">
-                                        <div className="row">
-                                            <div className="col">
-                                                <div className="title" style={{padding: 0}}>
-                                                    <strong>Marketing Emails</strong>
-                                                </div>
-                                                <div className="text-2">Select whether you want to receive marketing emails from us</div>
-                                                <div className="text-1">
-                                                    <strong>On</strong>
-                                                </div>
-                                            </div>
-                                            <div className="col-auto">
-                                                <span onClick={()=>settingBlock(9, 0)} className="btn style-6">
-                                                    Set
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {/*<div id="s-block-9" className="block">*/}
+                                    {/*    <div className="row">*/}
+                                    {/*        <div className="col">*/}
+                                    {/*            <div className="title" style={{padding: 0}}>*/}
+                                    {/*                <strong>Marketing Emails</strong>*/}
+                                    {/*            </div>*/}
+                                    {/*            <div className="text-2">Select whether you want to receive marketing emails from us</div>*/}
+                                    {/*            <div className="text-1">*/}
+                                    {/*                <strong>On</strong>*/}
+                                    {/*            </div>*/}
+                                    {/*        </div>*/}
+                                    {/*        <div className="col-auto">*/}
+                                    {/*            <span onClick={()=>settingBlock(9, 0)} className="btn style-6">*/}
+                                    {/*                Set*/}
+                                    {/*            </span>*/}
+                                    {/*        </div>*/}
+                                    {/*    </div>*/}
+                                    {/*</div>*/}
 
                                 </div>
                             </>

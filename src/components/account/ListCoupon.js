@@ -51,7 +51,7 @@ const ListCoupon = ({listCoupon}) => {
         const d = await response.json();
         if (d) {
             setDataAccount( Number(d.result) );
-            localStoreService.saveLocal('CouponIDSave', Number(d.result) )
+            // localStoreService.saveLocal('CouponIDSave', Number(d.result) )
         }
 
         // console.log('Сoupon >>>', d.result )
