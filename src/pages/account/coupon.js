@@ -10,13 +10,13 @@ const WrapSectionCoupon = () => {
 
     const [data, setData] = useState([]);
 
-    const { dataAccountStatus, dataAccount, fetchDataAccount } = AccountData();
+    // const { dataAccountStatus, dataAccount, fetchDataAccount } = AccountData();
 
 
     // const [dataAccount, setDataAccount] = useState([]);
 
     useEffect(() => {
-        fetchDataAccount()
+        // fetchDataAccount()
         fetchData();
     }, []);
 
@@ -50,9 +50,11 @@ const WrapSectionCoupon = () => {
 
 
     return (
-        <AuthLayout logIn={false} statusAccount={dataAccountStatus} page='account/coupon' go='sign-in'>
+        // <AuthLayout logIn={false} statusAccount={dataAccountStatus} page='account/coupon' go='sign-in'>
+        <AuthLayout logIn={false}  page='account/coupon' go='sign-in'>
             <Layout title="Account coupon" desc="desc">
-                <WrapAccount status={dataAccountStatus}>
+                {/*<WrapAccount status={dataAccountStatus}>*/}
+                <WrapAccount>
                     <div className="title">
                         Сoupon
                     </div>
