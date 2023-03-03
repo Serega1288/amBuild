@@ -51,10 +51,12 @@ const WrapSectionOrder = () => {
     }
 
     const [data, setData] = useState([]);
+    const [isLoadingData, setIsLoadingData] = useState(true);
 
     useEffect(() => {
         // fetchDataAccount()
         fetchData();
+        setIsLoadingData(false)
     }, []);
 
     const fetchData = async () => {
@@ -68,7 +70,7 @@ const WrapSectionOrder = () => {
         });
         const data = await response.json();
         setData(data);
-        console.log('data >>>', data )
+        console.log('data >>>', localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1], data )
     };
 
     return (
@@ -113,12 +115,13 @@ const WrapSectionOrder = () => {
                                         </div>
 
                                         {
-                                            data.result ? (
+                                            !isLoadingData ? (
 
                                                 <div className="tableList yes">
                                                     {
-                                                        data.result.map((item, index) => (
+                                                        data?.result.map((item, index) => (
                                                             <div
+                                                                key={`tableList-${index}`}
                                                                 id={`tableList-${index}`}
                                                                 onClick={()=>tableList(index, 0)}
                                                                 className="tableListItem"

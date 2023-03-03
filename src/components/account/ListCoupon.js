@@ -6,6 +6,7 @@ import WrapСoupon from "../../styles/WrapСoupon"
 const ListCoupon = ({listCoupon}) => {
     // console.log("listCoupon", listCoupon)
     const [dataAccount, setDataAccount] = useState([]);
+    const [isLoadingDataAccount, setIsLoadingDataAccount] = useState(true);
 
     const fetchDataAccount = async () => {
         let ob = { get: `customers/${localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1]}`, type : `account` };
@@ -26,6 +27,7 @@ const ListCoupon = ({listCoupon}) => {
     };
     useEffect(() => {
         fetchDataAccount();
+        setIsLoadingDataAccount(false)
     }, []);
 
     const statusCoupon = async (coupons, setCoupons) => {
@@ -56,6 +58,9 @@ const ListCoupon = ({listCoupon}) => {
     return (
         <WrapСoupon>
             {
+                ! isLoadingDataAccount ? (
+
+
                 listCoupon?.result?.map((item, index) => (
                     <div key={`Сoupon-${index}`} className="BlockCoupon">
                         <div className="row">
@@ -107,6 +112,8 @@ const ListCoupon = ({listCoupon}) => {
                         </div>
                     </div>
                 ))
+
+                ) : ('')
             }
         </WrapСoupon>
     );
