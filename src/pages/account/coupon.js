@@ -51,7 +51,7 @@ const WrapSectionCoupon = () => {
     //     body: JSON.stringify({ get: `coupons`, type : `coupons` }),
     // });
     // const d = response.json();
-    // setData(d);
+    // setData(d); dsd
 
 
 
