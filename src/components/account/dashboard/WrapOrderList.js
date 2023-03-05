@@ -43,21 +43,21 @@ const WrapOrderList = () => {
 
                       data.map((item, index)=>{
 
-                          console.log('------ item 0 >>>',
-                              new Date( item.date_created ),
-                          )
-
-                          console.log('------ item 1 >>>',
-                              format( new Date( item.date_created ), 'yyyy-MM-dd HH:mm:ss zzz'),
-                          )
-
-                          console.log('------ item 2 >>>',
-                              formatInTimeZone( new Date( item.date_created ), 'America/New_York', 'yyyy-MM-dd HH:mm:ss zzz' )
-                          )
-
-                          console.log('------ item 3 >>>',
-                              formatInTimeZone( new Date( item.date_created ), 'America/New_York', 'yyyy-MM-dd HH:mm:ss zzz' )
-                          )
+                          // console.log('------ item 0 >>>',
+                          //     new Date( item.date_created )
+                          // )
+                          //
+                          // console.log('------ item 1 >>>',
+                          //     format( new Date( item.date_created ), 'yyyy-MM-dd HH:mm:ss zzz'),
+                          // )
+                          //
+                          // console.log('------ item 2 >>>',
+                          //     formatInTimeZone( new Date( item.date_created ), 'America/New_York', 'yyyy-MM-dd HH:mm:ss zzz' )
+                          // )
+                          //
+                          // console.log('------ item 3 >>>',
+                          //     formatInTimeZone( new Date( item.date_created ), 'America/New_York', 'yyyy-MM-dd HH:mm:ss zzz' )
+                          // )
 
                           // console.log('------ item 2 >>>',
                           //     format( new Date( item.date_created ).getDate(new Date( item.date_created ).getDate() + 1 ) , 'yyyy/MM/dd')
@@ -176,7 +176,7 @@ const WrapOrderList = () => {
                                                                   </div>
                                                                   <div className="col-auto">
                                                                       <div className="text-1">
-                                                                          {/*<TimerBlock timeStart={T} />*/}
+                                                                          <TimerBlock timeStart={T} />
                                                                           {/*3d : 21h : 43m : 12s*/}
                                                                       </div>
                                                                   </div>

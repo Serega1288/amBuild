@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useTimer } from 'react-timer-hook';
+import {formatInTimeZone} from "date-fns-tz";
 
 const Timer = ({timeStart}) => {
 
@@ -28,10 +29,14 @@ const Timer = ({timeStart}) => {
     //     return () => clearInterval(interval);
     // }, []);
 
+    // America/New_York
+    const t = formatInTimeZone( new Date( timeStart ), 'Europe/Kyiv', 'yyyy-MM-dd HH:mm:ss zzz' )
+
+    console.log('------ time >>>', t, new Date(t).getHours() )
 
     const { seconds, minutes, hours } = useTimer({
         autoStart: true,
-        expiryTimestamp: new Date(timeStart).setHours(new Date(timeStart).getHours() + 10 ),
+        expiryTimestamp: new Date(t).setHours(new Date(t).getHours() + (24 - new Date(t).getHours() ) ),
     });
 
     return (
