@@ -93,7 +93,7 @@ const Blog = (props) => {
                                         </div>
                                         <div className="list">
                                             {categories.nodes.map( (item, index) => (
-                                                <Link to={item.uri} key={`allWpCategory-${index}`}>
+                                                <Link className="a" to={item.uri} key={`allWpCategory-${index}`}>
                                                     {item.title}
                                                 </Link>
                                             ))}

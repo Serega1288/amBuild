@@ -153,7 +153,7 @@ const OrderDetails = ({s}) => {
                             </div>
                             <div className="col-auto">
                                 <div style={{width: `25rem`}} className="tableTitle">
-                                    {format( new Date(s.date_created), 'yyyy-mm-dd H:mma')}
+                                    {format( new Date(s.date_created), 'yyyy-MM-dd H:mma')}
                                 </div>
                             </div>
                             <div className="col-auto">

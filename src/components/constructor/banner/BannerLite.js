@@ -1,10 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import {maxCol} from "../../../function/SizeCol";
 import {Link} from "gatsby";
 import Bg from "../../../assets/img/gradient.jpg";
+import AccountData from "../../../function/accountData";
 
 const BannerLite = ( {item, title} ) => {
+
+
+    const { dataAccountStatus, dataAccount, fetchDataAccount, isLoadingDataAccount } = AccountData();
+    useEffect(() => {
+        fetchDataAccount()
+    }, []);
 
 
     const imgUrl = item?.banner?.localFile?.publicURL;
@@ -77,13 +84,42 @@ const BannerLite = ( {item, title} ) => {
                     <div className="row">
                         <div className={ item.style === 'order' ? (` col-12 d-block d-sm-flex flex-column align-items-center justify-content-center`) : (` col-12 col-sm-6 d-block d-sm-flex align-items-center`)}>
 
+                            {console.log('isLoadingDataAccount', isLoadingDataAccount)}
+
                             {item.style === 'order' ? (
                                 <>
                                     <h1
                                         style={{textAlign: item.alignhor}}
                                         className="BannerTitle text-center"
                                         dangerouslySetInnerHTML={{__html: item.title ? item.title : title }} />
-                                    <p className="d-flex align-items-center">To complete checkout, go <Link style={{marginLeft: `1rem`}} className="btn style-1" to="/account/settings/">here.</Link></p>
+
+                                        {isLoadingDataAccount === false ? (
+                                            dataAccount?.result?.meta_data?.map((item, index) => {
+                                                // console.log('item.key', item.key)
+                                                // return element.key;
+                                                if ( item.key === 'accoont_active' ) {
+                                                    if ( item.value === '1' ) {
+                                                        return (
+                                                            <>
+                                                                <p key={`GetMetaData-${item.key}`} className="d-flex align-items-center">
+                                                                    Order status can be viewed
+                                                                    <Link style={{marginLeft: `1rem`}} className="btn style-1" to="/account/hashrate/">here.</Link>
+                                                                </p>
+                                                            </>
+                                                        )
+                                                    } else {
+                                                        return (
+                                                            <>
+                                                                <p key={`GetMetaData-${item.key}`} className="d-flex align-items-center">
+                                                                    To complete checkout, go
+                                                                    <Link style={{marginLeft: `1rem`}} className="btn style-1" to="/account/settings/">here.</Link>
+                                                                </p>
+                                                            </>
+                                                        )
+                                                    }
+                                                }
+                                            })
+                                        ) : ('') }
                                 </>
                             ) : (
                                 <h1

@@ -144,7 +144,7 @@ const WrapSectionOrder = () => {
                                                                     </div>
                                                                     <div className="col">
                                                                         <div className="tableTitle">
-                                                                            {format( new Date(item.date_created), 'yyyy-mm-dd H:mma')}
+                                                                            {format( new Date(item.date_created), 'yyyy-MM-dd H:mma')}
                                                                         </div>
                                                                     </div>
                                                                     <div className="col">

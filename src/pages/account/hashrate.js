@@ -32,9 +32,9 @@ const WrapSectionHashrate = () => {
                                     <div className="col">
                                         Approximately 0 BTC
                                     </div>
-                                    <div className="col-auto">
-                                        <span className="btn style-10">Purchase Hashrate</span>
-                                    </div>
+                                    {/*<div className="col-auto">*/}
+                                    {/*    <span className="btn style-10">Purchase Hashrate</span>*/}
+                                    {/*</div>*/}
                                 </div>
                             </div>
                         </div>
@@ -77,11 +77,11 @@ const WrapSectionHashrate = () => {
                                         </div>
                                     </div>
 
-                                    <div className="text-2 WrapItem">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M5 3V19H21V21H3V3H5ZM20.293 6.293L21.707 7.707L16 13.414L13 10.415L8.707 14.707L7.293 13.293L13 7.586L16 10.585L20.293 6.293V6.293Z" fill="black"/>
-                                        </svg>
-                                    </div>
+                                    {/*<div className="text-2 WrapItem">*/}
+                                    {/*    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">*/}
+                                    {/*        <path d="M5 3V19H21V21H3V3H5ZM20.293 6.293L21.707 7.707L16 13.414L13 10.415L8.707 14.707L7.293 13.293L13 7.586L16 10.585L20.293 6.293V6.293Z" fill="black"/>*/}
+                                    {/*    </svg>*/}
+                                    {/*</div>*/}
 
                                 </div>
                             </div>

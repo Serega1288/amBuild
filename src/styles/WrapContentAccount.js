@@ -248,11 +248,12 @@ const WrapContentAccount = styled.div`
   .WrapAccountList .Timer {
       display: none;
   }
-  .TimeActive {
-    & > * {
+  .TimeActive + * {
+    & > *:not(.Timer) {
       opacity: 0.2;
     }
     .Timer {
+      opacity: 1;
       display: block;
       background: #000000;
       border-radius: 0 0 1.8rem 1.8rem;

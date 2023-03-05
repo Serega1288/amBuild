@@ -19,7 +19,7 @@ const ProductItem = styled.div`
         background: #000000;
         border-radius: 1.8rem;
         padding: 3rem;
-        padding: 3rem 1rem 3rem 3rem;
+        padding: 3rem 1rem 3rem 2rem;
         @media (max-width: ${maxCol.sm}) {
             padding: 2rem;
         }
@@ -51,8 +51,8 @@ const ProductItem = styled.div`
         font-weight: 700;
         font-size: 2.4rem;
     }
-    .BtnWrap {
-        padding: 1.5rem 2rem;
+    .BtnWrap { 
+        padding: 1.5rem 1rem;
         text-align: center;
         background: #FFFFFF;
         border-radius: 5rem;

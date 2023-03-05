@@ -685,6 +685,12 @@ ul {
         max-width: 18rem;
       }
     }
+    .TimerBlock {
+      span {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+      }
+    }
 `;
 
 export default GlobalStyles;

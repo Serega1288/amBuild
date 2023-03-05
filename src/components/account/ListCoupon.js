@@ -100,7 +100,7 @@ const ListCoupon = ({list}) => {
                                         <p className="CouponID">ID: <strong>{item.code}</strong></p>
 
                                         <p className="CouponData">
-                                            {format( new Date( item.date_expires_gmt ), 'yyyy.mm.dd')}
+                                            {format( new Date( item.date_expires_gmt ), 'yyyy.MM.dd')}
                                         </p>
 
                                         <span

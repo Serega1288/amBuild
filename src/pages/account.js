@@ -3,26 +3,32 @@ import Layout from "../components/Layout"
 import {AuthLayout} from "../function/AuthLayout"
 import WrapAccount from "../components/account/WrapAccount"
 import IconInfo from "../function/IconInfo";
-import BTC from "../assets/img/pay/BTC.png"
+// import BTC from "../assets/img/pay/BTC.png"
 // import BCH from "../assets/img/pay/BCH.png"
 // import ETH from "../assets/img/pay/ETH.png"
 // import USDT from "../assets/img/pay/USDT.png"
-import KDA from "../assets/img/pay/KDA.png"
-import {localStoreService} from "../function/hook";
+// import KDA from "../assets/img/pay/KDA.png"
+// import {localStoreService} from "../function/hook";
 import AccountData from "../function/accountData";
+import WrapOrderList from "../components/account/dashboard/WrapOrderList";
+import {Link} from "gatsby";
 
 const WrapSectionAccount = () => {
 
 
-    const { dataAccountStatus, dataAccount, fetchDataAccount } = AccountData();
+    const { dataAccountStatus, dataAccount, fetchDataAccount, isLoadingDataAccount } = AccountData();
     useEffect(() => {
         fetchDataAccount()
     }, []);
 
+    // console.log('dataAccountStatus', dataAccount.result.id )
+
     return (
         <AuthLayout logIn={false} statusAccount={dataAccountStatus} page='account' go='sign-in'>
+            {/*<AuthLayout logIn={false}   page='account' go='sign-in'>*/}
             <Layout title="Account dashboard" desc="desc">
                 <WrapAccount status={dataAccountStatus}>
+                {/*<WrapAccount>*/}
 
                     <div className="WrapTextTitle">
                         <div className="title">
@@ -47,10 +53,10 @@ const WrapSectionAccount = () => {
                                     <div className="col">
                                         Approximately 0 BTC
                                     </div>
-                                    <div className="col-auto">
-                                        <span style={{marginRight: `1.2rem`}} className="btn style-6">Details</span>
-                                        <span className="btn style-10">Deposit</span>
-                                    </div>
+                                    {/*<div className="col-auto">*/}
+                                    {/*    <span style={{marginRight: `1.2rem`}} className="btn style-6">Details</span>*/}
+                                    {/*    <span className="btn style-10">Deposit</span>*/}
+                                    {/*</div>*/}
                                 </div>
                             </div>
                         </div>
@@ -63,7 +69,7 @@ const WrapSectionAccount = () => {
                                 <div className="item d-flex flex-column">
                                     <div className="row align-items-center">
                                         <div className="col">
-                                            <img src={BTC} alt=""/>
+                                            <div className="iCurrency KDA"></div>
                                         </div>
                                         <div className="col-auto">
                                             <div className="text-3">
@@ -83,7 +89,7 @@ const WrapSectionAccount = () => {
                                 <div className="item d-flex flex-column">
                                     <div className="row align-items-center">
                                         <div className="col">
-                                            <img src={BTC} alt=""/>
+                                            <div className="iCurrency KDA"></div>
                                         </div>
                                         <div className="col-auto">
                                             <div className="text-3">
@@ -103,7 +109,7 @@ const WrapSectionAccount = () => {
                                 <div className="item d-flex flex-column">
                                     <div className="row align-items-center">
                                         <div className="col">
-                                            <img src={BTC} alt=""/>
+                                            <div className="iCurrency KDA"></div>
                                         </div>
                                         <div className="col-auto">
                                             <div className="text-3">
@@ -123,7 +129,7 @@ const WrapSectionAccount = () => {
                                 <div className="item d-flex flex-column">
                                     <div className="row align-items-center">
                                         <div className="col">
-                                            <img src={BTC} alt=""/>
+                                            <div className="iCurrency KDA"></div>
                                         </div>
                                         <div className="col-auto">
                                             <div className="text-3">
@@ -154,8 +160,8 @@ const WrapSectionAccount = () => {
                                     Approximately 0 BTC
                                 </div>
                                 <div className="col-auto">
-                                    <span style={{marginRight: `1.2rem`}} className="btn style-6">Details</span>
-                                    <span className="btn style-10">Buy</span>
+                                    <Link to="/account/hashrate/" style={{marginRight: `1.2rem`}} className="btn style-6">Details</Link>
+                                    <Link to='/shop/cloud-mining/' className="btn style-10">Buy</Link>
                                 </div>
                             </div>
                         </div>
@@ -179,142 +185,8 @@ const WrapSectionAccount = () => {
                         </div>
                     </div>
 
-                    <div style={{margin: `0`}} className="PayList WrapAccountList style-3">
-                        <div className="row">
+                    <WrapOrderList />
 
-                            <div className="col-12 col-sm-6 col-md-4">
-                                <div className="item d-flex flex-column">
-                                    <div className="row align-items-center">
-                                        <div className="col">
-                                            <img src={KDA} alt=""/>
-                                        </div>
-                                        <div className="col-auto">
-                                            <div className="text-3">
-                                                <strong>BTC</strong>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="text-1 WrapItem">
-                                        <div className="row">
-                                            <div className="col">
-                                                <strong>Hashrate</strong>
-                                            </div>
-                                            <div className="col-auto">
-                                                <strong>0 TH/s</strong>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="text-2 WrapItem">
-                                        <div className="row">
-                                            <div className="col">
-                                                Latest Output:
-                                            </div>
-                                            <div className="col-auto">
-                                                <strong>0 KDA</strong>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="text-2 WrapItem">
-                                        <div className="row">
-                                            <div className="col">
-                                                Status:
-                                            </div>
-                                            <div className="col-auto">
-                                                <strong>Active</strong>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="text-2 WrapItem">
-                                        <div className="row">
-                                            <div className="col">
-                                                Ends after:
-                                            </div>
-                                            <div className="col-auto">
-                                                <strong>3 days</strong>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div className="col-12 col-sm-6 col-md-4">
-                                <div className="item d-flex flex-column TimeActive pos">
-                                    <div className="row align-items-center">
-                                        <div className="col">
-                                            <img src={KDA} alt=""/>
-                                        </div>
-                                        <div className="col-auto">
-                                            <div className="text-3">
-                                                <strong>BTC</strong>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="text-1 WrapItem">
-                                        <div className="row">
-                                            <div className="col">
-                                                <strong>Hashrate</strong>
-                                            </div>
-                                            <div className="col-auto">
-                                                <strong>0 TH/s</strong>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="text-2 WrapItem">
-                                        <div className="row">
-                                            <div className="col">
-                                                Latest Output:
-                                            </div>
-                                            <div className="col-auto">
-                                                <strong>0 KDA</strong>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="text-2 WrapItem">
-                                        <div className="row">
-                                            <div className="col">
-                                                Status:
-                                            </div>
-                                            <div className="col-auto">
-                                                <strong>Active</strong>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="text-2 WrapItem">
-                                        <div className="row">
-                                            <div className="col">
-                                                Ends after:
-                                            </div>
-                                            <div className="col-auto">
-                                                <strong>3 days</strong>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="Timer">
-                                        <div className="row">
-                                            <div className="col">
-                                                <span className="text-3">Activates after:</span>
-                                            </div>
-                                            <div className="col-auto">
-                                                <span className="text-1">3d : 21h : 43m : 12s</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
 
                 </WrapAccount>
             </Layout>

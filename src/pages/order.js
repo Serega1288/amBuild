@@ -1,7 +1,7 @@
 import {AuthLayout} from "../function/AuthLayout";
 import Layout from "../components/Layout";
 import BannerLite from "../components/constructor/banner/BannerLite";
-import {Link} from "gatsby";
+// import {Link} from "gatsby";
 import React from "react";
 
 const PageOrder = () => {
