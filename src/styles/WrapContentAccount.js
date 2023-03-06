@@ -75,6 +75,11 @@ const WrapContentAccount = styled.div`
         min-height: 19rem;
         padding: 1.4rem 1.8rem 1.4rem;
         margin-bottom: 2rem;
+        &.active {
+          
+          background: #F5F5F7;
+          //color: #fff;
+        }
       }
       .WrapItem {
         margin: 2rem 0 0;

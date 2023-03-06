@@ -1,10 +1,14 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import Layout from "../../components/Layout"
 import {AuthLayout} from "../../function/AuthLayout"
 import WrapAccount from "../../components/account/WrapAccount"
 import IconInfo from "../../function/IconInfo";
 import KDA from "../../assets/img/pay/KDA.png";
 import AccountData from "../../function/accountData";
+import {graphql, useStaticQuery} from "gatsby";
+import {localStoreService} from "../../function/hook";
+import TimerBlock from "../../function/Timer";
+import IconCurrency from "../../styles/IconCurrency";
 
 const WrapSectionHashrate = () => {
 
@@ -12,6 +16,60 @@ const WrapSectionHashrate = () => {
     useEffect(() => {
         fetchDataAccount()
     }, []);
+
+
+    const dataOption = useStaticQuery(graphql`
+        {
+            wp {
+                themeGeneralSettings {
+                    ACFoptionThemes {
+                        hashrate {
+                            hashrateDetailsInfo
+                        }
+                    }
+                }
+            }
+        }
+    `);
+    const dPayList = dataOption.wp.themeGeneralSettings.ACFoptionThemes;
+    console.log('dPayList', dPayList )
+
+    const [data, setData] = useState([]);
+    const [isLoadingData, setIsLoadingData] = useState(true);
+
+    useEffect(() => {
+        // fetchDataAccount()
+        fetchData();
+
+    }, []);
+
+    const fetchData = async () => {
+        let ob = { get: `orders?customer=${localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1]}`, type : `order` };
+        const response = await fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendGetData`, {
+            method: 'POST',
+            headers: {
+                'content-Type': 'application/json',
+            },
+            body: JSON.stringify(ob),
+        });
+        const d = await response.json();
+        if (d) {
+            setData(d.result);
+            setIsLoadingData(false)
+
+            // console.log('data >>>', localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1], d )
+        }
+
+    };
+
+
+    const [dataOrderFilter, setDataOrderFilter] = useState(null);
+    // const [dataOrderIcon, setDataOrderIcon] = useState(null);
+    const orderFilter = (order, icon) => {
+      console.log('order', order, icon)
+        setDataOrderFilter(order)
+        // setDataOrderIcon(icon)
+    }
 
     return (
         <AuthLayout logIn={false} statusAccount={dataAccountStatus} page='account/hashrate' go='sign-in'>
@@ -22,7 +80,7 @@ const WrapSectionHashrate = () => {
                         <div className="title">
                             <div className="WrapIconInfo">
                                 <strong style={{marginRight: `0.9rem`}}>Hashrate Plans</strong>
-                                <IconInfo  position="right" style="1" text="div div div div div div div" />
+                                <IconInfo  position="right" style="1" text={dPayList.hashrate.hashrateDetailsInfo} />
                             </div>
                             <div style={{padding: `0.8rem 0 0`}} className="title up">
                                 $ 0
@@ -42,49 +100,93 @@ const WrapSectionHashrate = () => {
 
                     <div className="PayList WrapAccountList style-4">
                         <div className="row">
-                            <div className="col-12 col-sm-6 col-md-3">
-                                <div className="item d-flex flex-column">
-                                    <div className="row align-items-center">
-                                        <div className="col">
-                                            <img src={KDA} alt=""/>
-                                        </div>
-                                        <div className="col-auto">
-                                            <div className="text-3">
-                                                <strong>BTC</strong>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div className="text-2 WrapItem">
-                                        <div className="row">
-                                            <div className="col">
-                                                Latest Output:
-                                            </div>
-                                            <div className="col-auto">
-                                                <strong>0 KDA</strong>
-                                            </div>
-                                        </div>
-                                    </div>
+                            {
+                                isLoadingData === false ? (
 
-                                    <div className="text-2 WrapItem">
-                                        <div className="row">
-                                            <div className="col">
-                                                Hashrate
-                                            </div>
-                                            <div className="col-auto">
-                                                <strong>0 TH/s</strong>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    data.map((item, index)=>{
 
-                                    {/*<div className="text-2 WrapItem">*/}
-                                    {/*    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">*/}
-                                    {/*        <path d="M5 3V19H21V21H3V3H5ZM20.293 6.293L21.707 7.707L16 13.414L13 10.415L8.707 14.707L7.293 13.293L13 7.586L16 10.585L20.293 6.293V6.293Z" fill="black"/>*/}
-                                    {/*    </svg>*/}
-                                    {/*</div>*/}
+                                        // console.log('------ item 0 >>>',
+                                        //     new Date( item.date_created )
+                                        // )
+                                        //
+                                        // console.log('------ item 1 >>>',
+                                        //     format( new Date( item.date_created ), 'yyyy-MM-dd HH:mm:ss zzz'),
+                                        // )
+                                        //
+                                        // console.log('------ item 2 >>>',
+                                        //     formatInTimeZone( new Date( item.date_created ), 'America/New_York', 'yyyy-MM-dd HH:mm:ss zzz' )
+                                        // )
+                                        //
+                                        // console.log('------ item 3 >>>',
+                                        //     formatInTimeZone( new Date( item.date_created ), 'America/New_York', 'yyyy-MM-dd HH:mm:ss zzz' )
+                                        // )
 
-                                </div>
-                            </div>
+                                        // console.log('------ item 2 >>>',
+                                        //     format( new Date( item.date_created ).getDate(new Date( item.date_created ).getDate() + 1 ) , 'yyyy/MM/dd')
+                                        // )
+                                        // HH:mm:ss
+                                        const T = item.date_created;
+                                        // const iconActive = item?.meta_data?.map((item, index) => { if ( item.key === 'currency'  ) { return ( item.value ) } })
+                                        return (
+
+                                            <IconCurrency key={`PayList-${index}`} className="col-12 col-sm-6 col-md-4">
+
+                                                {/*key={`dPayList-${index}`}*/}
+                                                {/*{console.log('PayList >>>', index , item )}*/}
+
+                                                <div style={{cursor: `pointer`}} onClick={()=>orderFilter(item.id  )}
+                                                     className={`item d-flex flex-column ${ dataOrderFilter === item.id && ('active') }`}>
+                                                    <div className="row align-items-center">
+                                                        <div className="col">
+                                                            {
+                                                                item?.meta_data?.map((item, index) => {
+                                                                    if ( item.key === 'currency' ) {  return (<span className={`iCurrency ${item.value}`} key={`PayListIcon-${item.key}`} />)}
+                                                                })
+                                                            }
+                                                        </div>
+                                                        <div className="col-auto">
+                                                            <div className="text-3">
+                                                                { item?.meta_data?.map((item, index) => { if ( item.key === 'currency' ) {  return ( item.value )} }) }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="text-2 WrapItem">
+                                                        <div className="row">
+                                                            <div className="col">
+                                                                Latest Output:
+                                                            </div>
+                                                            <div className="col-auto">
+                                                                <strong>0 KDA</strong>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="text-2 WrapItem">
+                                                        <div className="row">
+                                                            <div className="col">
+                                                                Hashrate
+                                                            </div>
+                                                            <div className="col-auto">
+                                                                <strong>0 TH/s</strong>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+
+                                            </IconCurrency>
+                                        )
+                                    })
+
+                                ) : ('')
+                            }
+
+
+
+
                         </div>
                     </div>
 
@@ -92,7 +194,8 @@ const WrapSectionHashrate = () => {
                         <div className="row d-flex align-items-center">
                             <div className="col">
                                 <div className="text-3 d-flex align-items-center">
-                                    <img style={{marginRight: `1rem`}} src={KDA} alt=""/>
+                                    {/*<img style={{marginRight: `1rem`}} src={dataOrderIcon} alt=""/>*/}
+
                                     <strong>Hashrate list</strong>
                                 </div>
                             </div>

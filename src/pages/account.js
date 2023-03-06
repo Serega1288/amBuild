@@ -11,9 +11,42 @@ import IconInfo from "../function/IconInfo";
 // import {localStoreService} from "../function/hook";
 import AccountData from "../function/accountData";
 import WrapOrderList from "../components/account/dashboard/WrapOrderList";
-import {Link} from "gatsby";
+import {graphql, Link, useStaticQuery} from "gatsby";
+import {SwiperSlide} from "swiper/react";
 
 const WrapSectionAccount = () => {
+
+    const dataOption = useStaticQuery(graphql`
+        {
+            wp {
+                themeGeneralSettings {
+                    ACFoptionThemes {
+                        assets {
+                            assetsDetailsInfo
+                            listOfAvailableCurrencies {
+                                currency
+                                exchangeRate
+                                fieldGroupName
+                                icon {
+                                    localFile {
+                                        publicURL
+                                    }
+                                }
+                            }
+                        }
+                        hashrate {
+                            hashrateDetailsInfo
+                        }
+                        totalAssets {
+                            totalAssetsDetailsInfo
+                        }
+                    }
+                }
+            }
+        }
+    `);
+    const dPayList = dataOption.wp.themeGeneralSettings.ACFoptionThemes;
+    console.log('dPayList', dPayList )
 
 
     const { dataAccountStatus, dataAccount, fetchDataAccount, isLoadingDataAccount } = AccountData();
@@ -22,6 +55,8 @@ const WrapSectionAccount = () => {
     }, []);
 
     // console.log('dataAccountStatus', dataAccount.result.id )
+
+
 
     return (
         <AuthLayout logIn={false} statusAccount={dataAccountStatus} page='account' go='sign-in'>
@@ -34,7 +69,7 @@ const WrapSectionAccount = () => {
                         <div className="title">
                             <div  style={{marginBottom: `0.4rem`}} className="WrapIconInfo">
                                  <strong style={{marginRight: `0.9rem`}}>Total Assets</strong>
-                                 <IconInfo  position="right" style="1" text="div div div div div div div" />
+                                 <IconInfo  position="right" style="1" text={dPayList.totalAssets.totalAssetsDetailsInfo} />
                             </div>
                             <div className="text-2">
                                 Approximately 0 BTC
@@ -46,7 +81,7 @@ const WrapSectionAccount = () => {
                         <div className="title">
                             <div className="WrapIconInfo">
                                 <strong style={{marginRight: `0.9rem`}}>Assets</strong>
-                                <IconInfo  position="right" style="1" text="div div div div div div div" />
+                                <IconInfo  position="right" style="1" text={dPayList.assets.assetsDetailsInfo} />
                             </div>
                             <div className="text-2">
                                 <div className="row align-items-center">
@@ -65,86 +100,29 @@ const WrapSectionAccount = () => {
                     <div className="PayList WrapAccountList style-2">
                         <div className="row">
 
-                            <div className="col-6 col-sm-4 col-md-3">
-                                <div className="item d-flex flex-column">
-                                    <div className="row align-items-center">
-                                        <div className="col">
-                                            <div className="iCurrency KDA"></div>
-                                        </div>
-                                        <div className="col-auto">
-                                            <div className="text-3">
-                                                <strong>BTC</strong>
+                            {dPayList?.assets?.listOfAvailableCurrencies?.map( (item, index) => (
+                                <div key={`dPayList-${index}`} className="col-6 col-sm-4 col-md-3">
+                                    <div className="item d-flex flex-column">
+                                        <div className="row align-items-center">
+                                            <div className="col">
+                                                {/*<div className={`iCurrency ${item.currency}`}></div>*/}
+                                                <img src={item.icon.localFile.publicURL} alt=""/>
+                                            </div>
+                                            <div className="col-auto">
+                                                <div className="text-3">
+                                                    <strong>{item.currency}</strong>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div style={{margin: `1rem 0`}} className="text-1">
-                                        <strong>0.00000000</strong>
-                                    </div>
-                                    <div style={{marginTop: `auto`}} className="text-2">
-                                        $ 0
+                                        <div style={{margin: `1rem 0`}} className="text-1">
+                                            <strong>0.00000000</strong>
+                                        </div>
+                                        <div style={{marginTop: `auto`}} className="text-2">
+                                            $ 0
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="col-6 col-sm-4 col-md-3">
-                                <div className="item d-flex flex-column">
-                                    <div className="row align-items-center">
-                                        <div className="col">
-                                            <div className="iCurrency KDA"></div>
-                                        </div>
-                                        <div className="col-auto">
-                                            <div className="text-3">
-                                                <strong>BTC</strong>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div style={{margin: `1rem 0`}} className="text-1">
-                                        <strong>0.00000000</strong>
-                                    </div>
-                                    <div style={{marginTop: `auto`}} className="text-2">
-                                        $ 0
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-6 col-sm-4 col-md-3">
-                                <div className="item d-flex flex-column">
-                                    <div className="row align-items-center">
-                                        <div className="col">
-                                            <div className="iCurrency KDA"></div>
-                                        </div>
-                                        <div className="col-auto">
-                                            <div className="text-3">
-                                                <strong>BTC</strong>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div style={{margin: `1rem 0`}} className="text-1">
-                                        <strong>0.00000000</strong>
-                                    </div>
-                                    <div style={{marginTop: `auto`}} className="text-2">
-                                        $ 0
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-6 col-sm-4 col-md-3">
-                                <div className="item d-flex flex-column">
-                                    <div className="row align-items-center">
-                                        <div className="col">
-                                            <div className="iCurrency KDA"></div>
-                                        </div>
-                                        <div className="col-auto">
-                                            <div className="text-3">
-                                                <strong>BTC</strong>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div style={{margin: `1rem 0`}} className="text-1">
-                                        <strong>0.00000000</strong>
-                                    </div>
-                                    <div style={{marginTop: `auto`}} className="text-2">
-                                        $ 0
-                                    </div>
-                                </div>
-                            </div>
+                            ))}
 
                         </div>
                     </div>
@@ -152,7 +130,7 @@ const WrapSectionAccount = () => {
                     <div className="title">
                         <div className="WrapIconInfo">
                             <strong style={{marginRight: `0.9rem`}}>Hashrate Plans</strong>
-                            <IconInfo  position="right" style="1" text="div div div div div div div" />
+                            <IconInfo  position="right" style="1" text={dPayList.hashrate.hashrateDetailsInfo} />
                         </div>
                         <div className="text-2">
                             <div className="row align-items-center">

@@ -32,7 +32,7 @@ const Timer = ({timeStart}) => {
     // America/New_York
     const t = formatInTimeZone( new Date( timeStart ), 'Europe/Kyiv', 'yyyy-MM-dd HH:mm:ss zzz' )
 
-    console.log('------ time >>>', t, new Date(t).getHours() )
+    // console.log('------ time >>>', t, new Date(t).getDate() )
 
     const { seconds, minutes, hours } = useTimer({
         autoStart: true,
