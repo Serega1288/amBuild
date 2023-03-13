@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {localStoreService} from "../../function/hook";
+import {localStoreService} from "../../../function/hook";
 import {format} from "date-fns";
-import WrapСoupon from "../../styles/WrapСoupon"
+import WrapСoupon from "../../../styles/WrapСoupon"
 
 const ListCoupon = ({list}) => {
     // console.log("listCoupon", listCoupon)

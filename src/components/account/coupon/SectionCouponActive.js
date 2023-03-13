@@ -1,6 +1,6 @@
 import React from 'react'
 // import {format} from "date-fns";
-import WrapСoupon from "../../styles/WrapСoupon";
+import WrapСoupon from "../../../styles/WrapСoupon";
 
 
 const SectionCouponActive = ({data}) => {

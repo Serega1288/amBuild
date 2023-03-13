@@ -123,52 +123,63 @@ const WrapSectionOrder = () => {
                                         {
                                             isLoadingData === false ? (
 
-                                                <div className="tableList yes">
+                                                <>
                                                     {
-                                                        data?.map((item, index) => (
-                                                            <div
-                                                                key={`tableList-${index}`}
-                                                                id={`tableList-${index}`}
-                                                                onClick={()=>tableList(index, 0)}
-                                                                className="tableListItem"
-                                                            >
-                                                                {/*{console.log('tableList item >>', item)}*/}
-                                                                <div className="row">
-                                                                    <div className="col">
-                                                                        <div className="tableTitle">
-                                                                            { item.meta_data.map((item, index) => { if (item.key === 'hashrate_name') {
-                                                                                return ( <span key={`hashrate_name-${index}`}>{item.value}</span> )
-                                                                            }})}
-                                                                            {/*{item.name}*/}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="col">
-                                                                        <div className="tableTitle">
-                                                                            {format( new Date(item.date_created), 'yyyy-MM-dd H:mma')}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="col">
-                                                                        <div className="tableTitle">
-                                                                            { item.meta_data.map((item, index) => { if (item.key === 'id') {
-                                                                                return ( <span key={`id-${index}`}>{item.value}</span> )
-                                                                            }})}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="col-auto">
-                                                                        <div className="tableTitle">
-                                                                            {item.status}
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                        data.length ? (
+                                                            <div className="tableList yes">
+                                                                {
+                                                                    data?.map((item, index) => (
+                                                                        <div
+                                                                            key={`tableList-${index}`}
+                                                                            id={`tableList-${index}`}
+                                                                            onClick={()=>tableList(index, 0)}
+                                                                            className="tableListItem"
+                                                                        >
+                                                                            {/*{console.log('tableList item >>', item)}*/}
+                                                                            <div className="row">
+                                                                                <div className="col">
+                                                                                    <div className="tableTitle">
+                                                                                        { item.meta_data.map((item, index) => { if (item.key === 'hashrate_name') {
+                                                                                            return ( <span key={`hashrate_name-${index}`}>{item.value}</span> )
+                                                                                        }})}
+                                                                                        {/*{item.name}*/}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="col">
+                                                                                    <div className="tableTitle">
+                                                                                        {format( new Date(item.date_created), 'yyyy-MM-dd H:mma')}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="col">
+                                                                                    <div className="tableTitle">
+                                                                                        { item.meta_data.map((item, index) => { if (item.key === 'id') {
+                                                                                            return ( <span key={`id-${index}`}>{item.value}</span> )
+                                                                                        }})}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="col-auto">
+                                                                                    <div className="tableTitle">
+                                                                                        {item.status}
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
 
+                                                                        </div>
+                                                                    ))
+                                                                }
                                                             </div>
-                                                        ))
+                                                        ) : (
+                                                            <div className="tableList no">
+                                                                <div>No Data</div>
+                                                            </div>
+                                                        )
+
                                                     }
-                                                </div>
+                                                </>
 
                                             ) : (
                                                 <div className="tableList no">
-                                                    <div>No Data</div>
+                                                    <div>Loading ... </div>
                                                 </div>
                                             )
                                         }

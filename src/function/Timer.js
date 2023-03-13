@@ -1,11 +1,12 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 import { useTimer } from 'react-timer-hook';
-import {formatInTimeZone} from "date-fns-tz";
+// import {formatInTimeZone} from "date-fns-tz";
+import moment from 'moment-timezone';
 
-const Timer = ({timeStart}) => {
+const Timer = () => {
 
-    console.log('timeStart', timeStart)
+    // console.log('timeStart', timeStart)
 
     // const [days, setDays] = useState(0);
     // const [hours, setHours] = useState(0);
@@ -15,7 +16,7 @@ const Timer = ({timeStart}) => {
     // const deadline = "3/05/2023";
     //
     // const getTime = () => {
-    //     const time = Date.parse(timeStart ) - Date.now();
+    //     const time = Date.parse( timeStart ) - Date.now();
     //
     //     setDays(Math.floor(time / (1000 * 60 * 60 * 24)));
     //     setHours(Math.floor((time / (1000 * 60 * 60)) % 24));
@@ -30,13 +31,20 @@ const Timer = ({timeStart}) => {
     // }, []);
 
     // America/New_York
-    const t = formatInTimeZone( new Date( timeStart ), 'Europe/Kyiv', 'yyyy-MM-dd HH:mm:ss zzz' )
+    // const t = formatInTimeZone( new Date( timeStart ), 'Europe/Kyiv', 'yyyy-MM-dd HH:mm:ss zzz' )
 
     // console.log('------ time >>>', t, new Date(t).getDate() )
 
+    // const { seconds, minutes, hours } = useTimer({
+    //     autoStart: true,
+    //     expiryTimestamp: new Date(t).setHours(new Date(t).getHours() + (24 - new Date(t).getHours() ) ),
+    // });
+
+    const expiryTime = moment.tz('America/New_York').endOf('day');
+
     const { seconds, minutes, hours } = useTimer({
         autoStart: true,
-        expiryTimestamp: new Date(t).setHours(new Date(t).getHours() + (24 - new Date(t).getHours() ) ),
+        expiryTimestamp: expiryTime,
     });
 
     return (

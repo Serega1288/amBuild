@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Layout from "../../components/Layout"
 import {AuthLayout} from "../../function/AuthLayout"
 import WrapAccount from "../../components/account/WrapAccount"
-import ListCoupon from "../../components/account/ListCoupon"
+import ListCoupon from "../../components/account/coupon/ListCoupon"
 import AccountData from "../../function/accountData";
 
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import SectionCouponActive from "../../components/account/SectionCouponActive"
+import SectionCouponActive from "./SectionCouponActive"
 // import {localStoreService} from "../../function/hook";
 
 
