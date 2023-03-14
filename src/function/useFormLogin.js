@@ -35,7 +35,7 @@ const useForm = (RedirectPage) => {
             body: JSON.stringify(values),
         });
 
-        const responseText = JSON.parse(await res.text() );
+        const responseText = JSON.parse( await res.text() );
 
 
 

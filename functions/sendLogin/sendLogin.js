@@ -42,7 +42,7 @@ const axios = require('axios')
 
 function pause() {
   return new Promise((resolve, reject) => {
-    setTimeout(resolve, 1000);
+    setTimeout(resolve, 2000);
   });
 }
 
@@ -128,7 +128,7 @@ exports.handler = async (event, context) => {
       let date = '';
       let m='';
 
-      axios({
+     await axios({
         method: 'get',
         url: `${process.env.URL_AJAX}?action=authLogin&token=${process.env.AUTH_TOKEN}&user=${body.email}&pass=${body.password}`,
       })
@@ -211,7 +211,7 @@ exports.handler = async (event, context) => {
 
 
 
-  await pause();
+  // await pause();
 
 
   //let emailHtml='';
