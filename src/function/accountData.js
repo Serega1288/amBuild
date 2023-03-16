@@ -21,7 +21,7 @@ const AccountData = () => {
         if (d) {
             setDataAccount(d);
 
-            console.log('Account >>>', d.result )
+            // console.log('Account >>>', d.result )
 
             d?.result?.meta_data?.forEach((element) => {
                 if(element.key === 'accoont_active' ) {

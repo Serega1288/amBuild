@@ -1,6 +1,16 @@
 import React, {useState} from 'react'
 import useFormPop from "../../../function/useFormPop";
+
+import {useForm} from 'react-hook-form';
+import * as yup from 'yup';
+import {yupResolver} from '@hookform/resolvers/yup';
+import {useDropzone} from 'react-dropzone';
 import axios from 'axios';
+
+const schema = yup.object().shape({
+    firstName: yup.string().required(),
+    lastName: yup.string().required(),
+});
 
 const ItemBlock_1 = ({style}) => {
 
@@ -37,25 +47,52 @@ const ItemBlock_1 = ({style}) => {
     }
 
 
-    const ArrField = {garbage: '', firstName: '', lastName: ''  };
-    const { values, captureInput, submitForm, isLoading, error, message, setMessage} = useFormPop(ArrField, setPopBox, setPopBoxThanks);
+    // const ArrField = {garbage: '', firstName: '', lastName: ''  };
+    // const { values, captureInput, submitForm, isLoading, error, message, setMessage} = useFormPop(ArrField, setPopBox, setPopBoxThanks);
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.target);
-        axios.post('/api/upload', data)
-            .then(response => console.log(response))
-            .catch(error => console.log(error));
-    }
+    /********************************/
+
+
+    const {register, handleSubmit, formState: {errors}} = useForm({
+        resolver: yupResolver(schema),
+    });
+
+    const [file, setFile] = useState(null);
+
+    const {acceptedFiles, getRootProps, getInputProps} = useDropzone({
+        accept: 'image/*',
+        maxFiles: 1,
+        onDrop: acceptedFiles => {
+            setFile(acceptedFiles[0]);
+        },
+    });
+
+    const onSubmit = async data => {
+        const formData = new FormData();
+        formData.append('firstName', data.firstName);
+        formData.append('lastName', data.lastName);
+        formData.append('file', file);
+        formData.append('type', 'file');
+
+        try {
+            const response = await axios.post(
+                `${process.env.GATSBY_SERVERLESS_URL}/sendEmailFile`,
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                },
+            );
+            console.log('done >>>', response);
+        } catch (error) {
+            console.error('error >>>', error);
+        }
+    };
+
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <input type="text" name="name" placeholder="Your name" />
-                <input type="email" name="email" placeholder="Your email" />
-                <input type="file" name="attachment" />
-                <button type="submit">Submit</button>
-            </form>
 
 
             <div className="Wrap">
@@ -116,72 +153,95 @@ const ItemBlock_1 = ({style}) => {
                     </span>
                     <div className="title">Contact Us</div>
                     <div className="WrapForm">
-                        <form className="input styleFormNorm" onSubmit={submitForm}>
-                            <input type="garbage"
-                                   name="garbage"
-                                   autoComplete="off"
-                                   disabled={isLoading}
-                                   value={values.garbage}
-                                   onChange={captureInput}
-                                   className="garbage"
-                            />
-                            <div className="row">
-                                <div className="col-12 col-sm-6">
-                                    <div className="WrapInput">
-                                        <input type="name"
-                                               required="required"
-                                               name="firstName"
-                                               disabled={isLoading}
-                                               value={values.firstName}
-                                               onChange={captureInput}
-                                            // isLoading={isLoading}
-                                               placeholder="First name"
-                                               className="input"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="col-12 col-sm-6">
-                                    <div className="WrapInput">
-                                        <input type="text"
-                                               required="required"
-                                               name="lastName"
-                                               disabled={isLoading}
-                                               value={values.lastName}
-                                               onChange={captureInput}
-                                            // isLoading={isLoading}
-                                               placeholder="Last name"
-                                               className="input"
-                                        />
-                                    </div>
-                                </div>
+
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            <div>
+                                <label htmlFor="firstName">First Name</label>
+                                <input id="firstName" {...register('firstName')} />
+                                {errors.firstName && <span>This field is required</span>}
                             </div>
-
-
-
-                            <div className="text-right">
-                                <button disabled={isLoading} type="submit"
-                                        className="style-3 btn w100">
-                                    {isLoading ? 'Submit...' : 'Submit'}
-                                </button>
+                            <div>
+                                <label htmlFor="lastName">Last Name</label>
+                                <input id="lastName" {...register('lastName')} />
+                                {errors.lastName && <span>This field is required</span>}
                             </div>
-                            {/*{console.log('message', message)}*/}
-                            {/*<h3 className={` statusInfo text-center */}
-                            {/*    ${error || message ? ' active ' : ''}*/}
-                            {/*    ${error ? ' error ' : ''} */}
-                            {/*    */}
-                            {/*    ${*/}
-                            {/*    message?.result === '01' ||*/}
-                            {/*    message?.result === '02' ||*/}
-                            {/*    message?.result === '03' || */}
-                            {/*    message?.result?.status === 400 ||*/}
-                            {/*    message?.result === '04' ? 'error' : 'done'*/}
-                            {/*    }*/}
-                            {/*    `}>*/}
-                            {/*    {error ? error : ''}*/}
-                            {/*    {message ? message?.message : ''}*/}
-                            {/*</h3>*/}
-
+                            <div {...getRootProps()}>
+                                <input {...getInputProps()} />
+                                {file ? (
+                                    <p>Selected file: {file.name}</p>
+                                ) : (
+                                    <p>Drag and drop a file here, or click to select a file</p>
+                                )}
+                            </div>
+                            <button type="submit">Submit</button>
                         </form>
+
+                        {/*<form className="input styleFormNorm" onSubmit={submitForm}>*/}
+                        {/*    <input type="garbage"*/}
+                        {/*           name="garbage"*/}
+                        {/*           autoComplete="off"*/}
+                        {/*           disabled={isLoading}*/}
+                        {/*           value={values.garbage}*/}
+                        {/*           onChange={captureInput}*/}
+                        {/*           className="garbage"*/}
+                        {/*    />*/}
+                        {/*    <div className="row">*/}
+                        {/*        <div className="col-12 col-sm-6">*/}
+                        {/*            <div className="WrapInput">*/}
+                        {/*                <input type="name"*/}
+                        {/*                       required="required"*/}
+                        {/*                       name="firstName"*/}
+                        {/*                       disabled={isLoading}*/}
+                        {/*                       value={values.firstName}*/}
+                        {/*                       onChange={captureInput}*/}
+                        {/*                    // isLoading={isLoading}*/}
+                        {/*                       placeholder="First name"*/}
+                        {/*                       className="input"*/}
+                        {/*                />*/}
+                        {/*            </div>*/}
+                        {/*        </div>*/}
+                        {/*        <div className="col-12 col-sm-6">*/}
+                        {/*            <div className="WrapInput">*/}
+                        {/*                <input type="text"*/}
+                        {/*                       required="required"*/}
+                        {/*                       name="lastName"*/}
+                        {/*                       disabled={isLoading}*/}
+                        {/*                       value={values.lastName}*/}
+                        {/*                       onChange={captureInput}*/}
+                        {/*                    // isLoading={isLoading}*/}
+                        {/*                       placeholder="Last name"*/}
+                        {/*                       className="input"*/}
+                        {/*                />*/}
+                        {/*            </div>*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
+
+
+
+                        {/*    <div className="text-right">*/}
+                        {/*        <button disabled={isLoading} type="submit"*/}
+                        {/*                className="style-3 btn w100">*/}
+                        {/*            {isLoading ? 'Submit...' : 'Submit'}*/}
+                        {/*        </button>*/}
+                        {/*    </div>*/}
+                        {/*    /!*{console.log('message', message)}*!/*/}
+                        {/*    /!*<h3 className={` statusInfo text-center *!/*/}
+                        {/*    /!*    ${error || message ? ' active ' : ''}*!/*/}
+                        {/*    /!*    ${error ? ' error ' : ''} *!/*/}
+                        {/*    /!*    *!/*/}
+                        {/*    /!*    ${*!/*/}
+                        {/*    /!*    message?.result === '01' ||*!/*/}
+                        {/*    /!*    message?.result === '02' ||*!/*/}
+                        {/*    /!*    message?.result === '03' || *!/*/}
+                        {/*    /!*    message?.result?.status === 400 ||*!/*/}
+                        {/*    /!*    message?.result === '04' ? 'error' : 'done'*!/*/}
+                        {/*    /!*    }*!/*/}
+                        {/*    /!*    `}>*!/*/}
+                        {/*    /!*    {error ? error : ''}*!/*/}
+                        {/*    /!*    {message ? message?.message : ''}*!/*/}
+                        {/*    /!*</h3>*!/*/}
+
+                        {/*</form>*/}
                     </div>
                 </div>
                 <div onClick={()=>Pop()} className="shadow"></div>

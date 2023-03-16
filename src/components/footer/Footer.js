@@ -34,43 +34,64 @@ const Footer = () => {
 
     //console.log('>>', data.wp.themeGeneralSettings.ACFoptionThemes)
 
+    const popOFF = () => {
+        document.body.classList.remove('ovh');
+        document.getElementById('pop').classList.remove('active');
+    }
+
     return (
-        <WrapFooter>
-            <div className="container">
-                <div className="row">
-                    <div className="col-sm-6 col-md-7 col-lg-6 col-xl-8">
-                        <Link className="a-style-clear logo a-style-clen " to='/'>
-                            <img className="footerLogo" src={footerLogo.localFile.publicURL} />
-                        </Link>
-                        <div className="desc" dangerouslySetInnerHTML={{__html: footerDescription}} />
-                    </div>
-                    <div className="col-sm-6 col-md-5 col-lg-6 col-xl-4">
-                        <div className="row">
-                            <div className="col-6 col-sm">
-                                <FooterMenu1 />
-                            </div>
-                            <div className="col-6 col-sm">
-                                <FooterMenu2 />
-                            </div>
-                            <div className="col-12 col-sm-auto">
-                                <FooterMenu3 />
+        <>
+            <WrapFooter>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-sm-6 col-md-7 col-lg-6 col-xl-8">
+                            <Link className="a-style-clear logo a-style-clen " to='/'>
+                                <img className="footerLogo" src={footerLogo.localFile.publicURL} />
+                            </Link>
+                            <div className="desc" dangerouslySetInnerHTML={{__html: footerDescription}} />
+                        </div>
+                        <div className="col-sm-6 col-md-5 col-lg-6 col-xl-4">
+                            <div className="row">
+                                <div className="col-6 col-sm">
+                                    <FooterMenu1 />
+                                </div>
+                                <div className="col-6 col-sm">
+                                    <FooterMenu2 />
+                                </div>
+                                <div className="col-12 col-sm-auto">
+                                    <FooterMenu3 />
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="box-row"></div>
+                        </div>
+                        <div className="col-12 col-sm">
+                            <div className="copyright" dangerouslySetInnerHTML={{__html: footercopyright}} />
+                        </div>
+                        <div className="col-12 col-sm-auto">
+                            <FooterMenu4 />
+                        </div>
+                    </div>
                 </div>
-                <div className="row">
-                    <div className="col-12">
-                        <div className="box-row"></div>
-                    </div>
-                    <div className="col-12 col-sm">
-                        <div className="copyright" dangerouslySetInnerHTML={{__html: footercopyright}} />
-                    </div>
-                    <div className="col-12 col-sm-auto">
-                        <FooterMenu4 />
+            </WrapFooter>
+
+            <div id="pop" className="pop anim">
+                <div className="boxForm style-2">
+                    <span onClick={()=>popOFF()} className="exit"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path
+                        d="M6.99974 5.58599L11.9497 0.635986L13.3637 2.04999L8.41374 6.99999L13.3637 11.95L11.9497 13.364L6.99974 8.41399L2.04974 13.364L0.635742 11.95L5.58574 6.99999L0.635742 2.04999L2.04974 0.635986L6.99974 5.58599Z"
+                        fill="black"></path></svg>
+                    </span>
+                    <div id="boxForm">
+                        resss
                     </div>
                 </div>
+                <div onClick={()=>popOFF()} className="shadow" />
             </div>
-        </WrapFooter>
+        </>
+
     )
 };
 

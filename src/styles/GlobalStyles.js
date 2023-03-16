@@ -497,6 +497,13 @@ ul {
         @media (max-width: ${maxCol.md}) {
           padding: 4rem 3rem 4rem;
         }
+        &.style-2 {
+          max-width: 60rem;
+          padding: 6rem 6rem 4rem;
+          @media (max-width: ${maxCol.md}) {
+            padding: 2rem 2rem 2rem;
+          }
+        }
       }
       .WrapForm {
         max-width: 56rem;
@@ -702,6 +709,8 @@ ul {
         margin-right: 0.5rem;
       }
     }
+    
+    
 `;
 
 export default GlobalStyles;

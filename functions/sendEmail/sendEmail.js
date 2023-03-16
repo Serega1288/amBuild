@@ -27,14 +27,14 @@ const axios = require('axios')
 //   }
 // });
 
-var transporter = nodemailer.createTransport({
-  host: process.env.MAIL_HOST,
-  port: process.env.MAIL_PORT,
-  auth: {
-    user: process.env.MAIL_USER,
-    pass: process.env.MAIL_PASS,
-  },
-});
+// var transporter = nodemailer.createTransport({
+//   host: process.env.MAIL_HOST,
+//   port: process.env.MAIL_PORT,
+//   auth: {
+//     user: process.env.MAIL_USER,
+//     pass: process.env.MAIL_PASS,
+//   },
+// });
 
 
 
@@ -48,6 +48,12 @@ function pause() {
 exports.handler = async (event, context) => {
   // Делаем паузу - 2сек.
 
+  // if(){
+  //
+  // }
+
+
+  // console.log('body >>>>>>>>>>>>>>>>', event.body, context)
 
   const body = JSON.parse(event.body);
 
@@ -134,18 +140,18 @@ exports.handler = async (event, context) => {
   //   console.log(key, obj[key]);
   // });
 
-  const mailOptions = {
-    from: `Victoria Soprano Group <${process.env.MAIL_USER}>`,
-    to: `<${process.env.SEND_EMAIL_TO}>`,
-    subject: body.title,
-    html: emailHtml,
-  };
-  await transporter.sendMail(mailOptions, function (err, info) {
-    if(err)
-      console.log(err)
-    else
-      console.log(info);
-  })
+  // const mailOptions = {
+  //   from: `Victoria Soprano Group <${process.env.MAIL_USER}>`,
+  //   to: `<${process.env.SEND_EMAIL_TO}>`,
+  //   subject: body.title,
+  //   html: emailHtml,
+  // };
+  // await transporter.sendMail(mailOptions, function (err, info) {
+  //   if(err)
+  //     console.log(err)
+  //   else
+  //     console.log(info);
+  // })
 
 
 

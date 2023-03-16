@@ -22,14 +22,7 @@ const PageCheckout = (props) => {
                 themeGeneralSettings {
                   ACFoptionThemes {
                     acceptList { 
-                      url {
-                        ... on WpPage {
-                          uri
-                        }
-                        ... on WpPost {
-                          uri
-                        }
-                      }
+                      text
                       name
                     }
                   }
@@ -91,9 +84,15 @@ const PageCheckout = (props) => {
         // console.log('ClickAmount start >>', op, Cart )
 
         if ( op === 'min' ) {
-            step = cart[0]?.step - 1
+            if( cart[0]?.step - 1 === 0 ) {
+                step = cart[0]?.step
+            } else {
+                step = cart[0]?.step - 1
+            }
+
             // setStep(step - 1)
             // Cart[0].step = step
+            // console.log('111', cart[0]?.step )
         }
         if ( op === 'plus' ) {
             step = cart[0]?.step + 1
@@ -131,7 +130,7 @@ const PageCheckout = (props) => {
 
     // const CouponIDSave = localStoreService.getLocal('CouponIDSave');
 
-    // console.log('CouponIDSave', CouponIDSave)
+    console.log('dataCouponActive', dataCouponActive)
 
     const fetchData1 = async () => {
         // let ob = { get: CouponIDSave, type : `getCouponsActive` };
@@ -190,6 +189,12 @@ const PageCheckout = (props) => {
     }, []);
 
 
+
+    const pop = (i) => {
+        document.body.classList.add('ovh');
+        document.getElementById('pop').classList.add('active');
+        document.getElementById('boxForm').innerHTML=i;
+    }
 
         return (
             <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout'>
@@ -530,7 +535,7 @@ const PageCheckout = (props) => {
                                         {list.acceptList.map( (item, index) => (
                                             <label htmlFor={`list-item-${index}`} key={`acceptList-${index}`} className="list-item">
                                                 <input required type="checkbox" id={`list-item-${index}`} />
-                                                I accept <a target="_blank" href={item.url.uri} >{item.name}</a>
+                                                I accept <span className='a' onClick={()=>pop(item.text)} >{item.name}</span>
                                             </label>
                                         ))}
                                     </div>
@@ -718,7 +723,7 @@ const Section = styled.section`
       margin-bottom: 1rem;
       cursor: pointer;
     }
-    a {
+    .a {
       color: #000000;
       display: inline-block;
       margin-left: 0.4rem;

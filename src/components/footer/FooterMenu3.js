@@ -122,7 +122,6 @@ const FooterMenu = () => {
         // console.log('setRadioValue', op, likeValue)
     }
 
-
     const ArrField = {garbage: '', firstName: '', lastName: '', workEmail: '', busType: '', like: '', lang: '', textarea: ''  };
     const { values, captureInput, submitForm, isLoading, error, message, setMessage} = useFormPop(ArrField, setPopBox, setPopBoxThanks);
 
