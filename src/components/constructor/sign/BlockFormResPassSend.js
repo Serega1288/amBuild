@@ -8,7 +8,7 @@ const BlockFormSend = (d, email, type, location) => {
     return (
         <form onSubmit={submitForm}>
             {/*{console.log('ee', email, d)}*/}
-            { message?.result !== '1_' ? (
+            { message?.result !== '1_' && isLoading === false ? (
                 <>
                     <input type="garbage"
                            name="garbage"
@@ -46,21 +46,26 @@ const BlockFormSend = (d, email, type, location) => {
                 }
 
             </div>
-            <h3 className={` statusInfo text-center 
-            ${error || message ?  ' active '  : ''} 
-            ${error ?  ' error '  : ''}
-            ${
-                message?.result === '01' ||
-                message?.result === '02' ||
-                message?.result === '03_1' ||
-                message?.result === '03_2' ||
-                message?.result?.status === 400 ||
-                message?.result === '04' ?  'error'  : 'done'
-            } 
-            `}>
-                {error ?  error  : ''}
-                {message ? message?.message  : ''}
-            </h3>
+            {
+                isLoading === false ? (
+                    <h3 className={` statusInfo text-center 
+                    ${error || message ?  ' active '  : ''} 
+                    ${error ?  ' error '  : ''}
+                    ${
+                                message?.result === '01' ||
+                                message?.result === '02' ||
+                                message?.result === '03_1' ||
+                                message?.result === '03_2' ||
+                                message?.result?.status === 400 ||
+                                message?.result === '04' ?  'error'  : 'done'
+                            } 
+                    `}>
+                        {error ?  error  : ''}
+                        {message ? message?.message  : ''}
+                    </h3>
+                ) : ('')
+            }
+
         </form>
     )
 }

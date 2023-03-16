@@ -85,7 +85,7 @@ exports.handler = async (event, context) => {
   })
 
   msg = encodeURI(msg)
-  axios
+  await axios
       .post(`https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/sendMessage?chat_id=${process.env.TELEGRAM_CHOP}&parse_mode=html&text=${msg}`, {
         todo: 'Buy the milk',
       })
@@ -99,7 +99,7 @@ exports.handler = async (event, context) => {
 
 
 
-  await pause();
+  // await pause();
 
 
   let emailHtml='';

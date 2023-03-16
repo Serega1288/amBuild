@@ -34,7 +34,6 @@ class Auth {
             typeof window !== 'undefined' && localStorage.removeItem(LOCAL_STORAGE_KEY)
             navigate('/')
         }
-
     }
 
     localStoreClear = () => {

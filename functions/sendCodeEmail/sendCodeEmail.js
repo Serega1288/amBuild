@@ -143,7 +143,7 @@ exports.handler = async (event, context) => {
     let date = '';
     let m='';
 
-    axios({
+    await axios({
         method: 'get',
         url: `${process.env.URL_AJAX}?action=sendCodeEmail&token=${process.env.AUTH_TOKEN}&email=${body.email}&code=${getCode(body.date)}&type=${body.type}`,
     })
@@ -231,7 +231,7 @@ exports.handler = async (event, context) => {
 
 
 
-    await pause();
+    // await pause();
 
 
     //let emailHtml='';

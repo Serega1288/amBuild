@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Layout from "../components/Layout";
 //import React, {useEffect} from 'react';
 //import Layout from '../components/Layout';
@@ -11,7 +11,7 @@ import useForm from "../function/useFormLogin";
 import {Link} from "gatsby";
 import {AuthLayout} from "../function/AuthLayout";
 import { BoxForm, Section } from '../styles/formSign'
-
+import EYE from "../styles/EyeStyle"
 
 const LoginPage = (props) => {
     // const isBrowser = typeof window !== "undefined"
@@ -24,6 +24,12 @@ const LoginPage = (props) => {
     //     //message?.result[0] + message?.result[1] ? handleLogin() : ''
     //     console.log('instanceAuthService', message?.result[0], instanceAuthService.isLogined );
     // },[])
+
+
+    const [pCurrent, setPCurrent] = useState(false);
+    const ClickEye = () => {
+        setPCurrent(!pCurrent)
+    }
 
  
     const location = props.location.search?.split('=');
@@ -63,16 +69,22 @@ const LoginPage = (props) => {
                                         />
                                     </label>
                                     <label>
-                                        <input type="password"
-                                               required="required"
-                                               name="password"
-                                               disabled={isLoading}
-                                               value={values.password}
-                                               onChange={captureInput}
-                                               // isLoading={isLoading}
-                                               placeholder="Password"
-                                            //className={ message?.result === '04' ? ' error' : '' }
-                                        />
+                                        <EYE>
+                                            <div className="WrapPassword">
+                                                <span className={pCurrent && 'active'} onClick={()=>ClickEye()}></span>
+                                                <input type={pCurrent ? 'text' : 'password'}
+                                                       required="required"
+                                                       name="password"
+                                                       disabled={isLoading}
+                                                       value={values.password}
+                                                       onChange={captureInput}
+                                                    // isLoading={isLoading}
+                                                       placeholder="Password"
+                                                    //className={ message?.result === '04' ? ' error' : '' }
+                                                />
+                                            </div>
+                                        </EYE>
+
                                         <span className="text-right d-block">
                                             {
                                                 location?.length > 1 ? (
@@ -118,12 +130,12 @@ const LoginPage = (props) => {
                                                     ${error || message ? ' active ' : ''}
                                                     ${error ? ' error ' : ''}
                                                     ${
-                                                                message?.result === '01' ||
-                                                                message?.result === '02' ||
-                                                                message?.result === '03' ||
-                                                                message?.result?.status === 400 ||
-                                                                message?.result === '04' ? 'error' : 'done'
-                                                            }
+                                                      message?.result === '01' ||
+                                                      message?.result === '02' ||
+                                                      message?.result === '03' ||
+                                                      message?.result?.status === 400 ||
+                                                      message?.result === '04' ? 'error' : 'done'
+                                                    }
                                                 `}>
                                                     {error ? error : ''}
                                                     {message ? message?.message : ''}

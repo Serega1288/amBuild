@@ -91,7 +91,7 @@ exports.handler = async (event, context) => {
     let date = '';
     let m='';
 
-    axios({
+    await axios({
         method: 'get',
         url: `${process.env.URL_AJAX}?action=onCheckout&token=${process.env.AUTH_TOKEN}&user_id=${body.t.name}&email=${body.t.email}&pool=${body.pool}&product_id=${body.cart[0].id}&product_step=${body.cart[0].step}`,
     })
@@ -168,7 +168,7 @@ exports.handler = async (event, context) => {
 
 
 
-    await pause();
+    // await pause();
 
 
     //let emailHtml='';

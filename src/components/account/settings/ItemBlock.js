@@ -13,9 +13,9 @@ const ItemBlock = ({style}) => {
     console.log('style', style)
     return (
         <div className="ItemBlock">
-            { style === 1 ? (<ItemBlock_1/>) : '' }
-            { style === 2 ? (<ItemBlock_2/>) : '' }
-            { style === 3 ? (<ItemBlock_3/>) : '' }
+            { style === 2 ? (<ItemBlock_1/>) : '' }
+            { style === 3 ? (<ItemBlock_2/>) : '' }
+            { style === 4 ? (<ItemBlock_3/>) : '' }
             {/*{ style === 4 ? (<ItemBlock_4/>) : '' }*/}
             {/*{ style === 5 ? (<ItemBlock_5/>) : '' }*/}
             {/*{ style === 6 ? (<ItemBlock_6/>) : '' }*/}

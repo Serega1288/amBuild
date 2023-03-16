@@ -51,7 +51,7 @@ const RegPage = (props) => {
                             {/*{ typeof window !== 'undefined' && localStorage.getItem('user') }*/}
                             {/*{console.log('-->', timeSend, message?.result)}*/}
                             {
-                                message?.result === '1_' ?
+                                message?.result === '1_' && isLoading === false ?
                                     <>
                                         <span
                                             className="link-form sendcode anim text-center"
@@ -114,21 +114,28 @@ const RegPage = (props) => {
                                                 }
 
                                             </div>
-                                            <h3 className={` statusInfo text-center 
-                                            ${error || message ? ' active ' : ''}
-                                            ${error ? ' error ' : ''}
-                                            ${ 
-                                                message?.result === '01' ||
-                                                message?.result === '02' ||
-                                                message?.result === '03' ||
-                                                message?.result?.status === 400 ||
-                                                message?.result === '04' ? 'error' : 'done'
+
+                                            {
+                                                isLoading === false ? (
+                                                    <h3 className={` statusInfo text-center
+                                                        ${error || message ? ' active ' : ''}
+                                                        ${error ? ' error ' : ''}
+                                                        ${
+                                                        message?.result === '01' ||
+                                                        message?.result === '02' ||
+                                                        message?.result === '03' ||
+                                                        message?.result?.status === 400 ||
+                                                        message?.result === '04' ? 'error' : 'done'
+                                                    }
+                                                        `}>
+                                                        {error ? error : ''}
+                                                        {message ? message?.message : ''}
+                                                        {/*{console.log('result >>>>>', message)}*/}
+                                                    </h3>
+                                                ) : ('')
                                             }
-                                            `}>
-                                                {error ? error : ''}
-                                                {message ? message?.message : ''}
-                                                {/*{console.log('result >>>>>', message)}*/}
-                                            </h3>
+
+
                                         </form>
                                     </>
                             }

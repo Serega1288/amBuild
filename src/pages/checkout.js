@@ -197,21 +197,25 @@ const PageCheckout = (props) => {
                     <BannerLite title='checkout' item={{ item: '' , title: `Confirm <br /> order`, style : 'title' }} />
                     <Section>
                         <div className="container">
+                            {
+                                isLoading === false ? (
+                                    <h3 className={` statusInfo text-center 
+                                        ${error || message ?  ' active '  : ''}
+                                        ${error ?  ' error '  : ''}
+                                        ${
+                                            message?.result === '01' ||
+                                            message?.result === '02' ||
+                                            message?.result === '03' ||
+                                            message?.result?.status === 400 ||
+                                            message?.result === '04' ?  'error'  : 'done'
+                                        } 
+                                    `}>
+                                        {error ?  error  : ''}
+                                        {message ? message?.message  : ''}
+                                    </h3>
+                                ) : ''
+                            }
 
-                            <h3 className={` statusInfo text-center 
-                                    ${error || message ?  ' active '  : ''}
-                                    ${error ?  ' error '  : ''}
-                                    ${ 
-                                message?.result === '01' ||
-                                message?.result === '02' ||
-                                message?.result === '03' ||
-                                message?.result?.status === 400 ||
-                                message?.result === '04' ?  'error'  : 'done'
-                            } 
-                                `}>
-                                {error ?  error  : ''}
-                                {message ? message?.message  : ''}
-                            </h3>
 
                             <form
                                 onSubmit={submitForm}

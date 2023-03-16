@@ -63,9 +63,11 @@ const WrapSectionSettings = () => {
     // })
 
     const uid = dataAccount?.result?.meta_data?.filter(element => element.key === 'uid')[0].value
-    const withdrawalVerification = isLoadingDataAccount === false && ( dataAccount?.result?.meta_data?.filter(element => element.key === 'withdrawal_verification') )
+    const withdrawalVerification = isLoadingDataAccount === false && ( dataAccount?.result?.meta_data?.filter(element => element.key === 'withdrawal_verification')?.slice(0, 1)[0] )
+    const PasswordSet = isLoadingDataAccount === false && ( dataAccount?.result?.meta_data?.filter(element => element.key === 'Password-set')?.slice(0, 1)[0] )
+    const DefLang = isLoadingDataAccount === false && ( dataAccount?.result?.meta_data?.filter(element => element.key === 'notification_language')?.slice(0, 1)[0] )
 
-    // console.log('data ACCOUNT', uid, withdrawalVerification, withdrawalVerification.length )
+    // console.log('data ACCOUNT', uid, withdrawalVerification, PasswordSet , dataAccount?.result?.meta_data )
 
     return (
         <AuthLayout logIn={false} statusAccount={dataAccountStatus} page='account/settings' go='sign-in'>
@@ -85,14 +87,14 @@ const WrapSectionSettings = () => {
                                                 <div className="item text-1 d-flex flex-column">
                                                         <div className="row">
                                                             <div className="col">
-                                                                <strong  style={{cursor: "pointer"}} onClick={()=>scroll('2-3') }>
+                                                                <strong  style={{cursor: "pointer"}} onClick={()=>scroll('3Wrap') }>
                                                                     {isLoadingDataAccount === false ? (
                                                                         dataAccount.result.email
                                                                     ) : ('Loading...') }
                                                                 </strong>
                                                             </div>
                                                             <div className="col-auto">
-                                                                <svg  style={{cursor: "pointer"}} onClick={()=>scroll('2-3') } width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                                <svg  style={{cursor: "pointer"}} onClick={()=>scroll('3Wrap') } width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                                     <path d="M12.172 7L6.808 1.636L8.222 0.222L16 8L8.222 15.778L6.808 14.364L12.172 9H0V7H12.172Z" fill="black"/>
                                                                 </svg>
                                                             </div>
@@ -131,10 +133,10 @@ const WrapSectionSettings = () => {
                                                 <div className="item text-1 d-flex flex-column">
                                                     <div style={{cursor: `pointer`}} className="row">
                                                         <div className="col">
-                                                            <strong onClick={()=>scroll('1-2') } >Withdrawal Verification</strong>
+                                                            <strong onClick={()=>scroll('1Wrap') } >Withdrawal Verification</strong>
                                                         </div>
                                                         <div className="col-auto">
-                                                            <svg onClick={()=>scroll('1-2') }  width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                            <svg onClick={()=>scroll('1Wrap') }  width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                                 <path d="M12.172 7L6.808 1.636L8.222 0.222L16 8L8.222 15.778L6.808 14.364L12.172 9H0V7H12.172Z" fill="black"/>
                                                             </svg>
                                                         </div>
@@ -142,32 +144,19 @@ const WrapSectionSettings = () => {
                                                     <div className="row" style={{marginTop: `auto`}}>
                                                         <div className="col">
                                                             <div className="icon-list">
+
                                                                 <div onClick={()=>scroll(1) } className="icon active">
                                                                     <svg width="16" height="14" viewBox="0 0 16 14" fill="none">
                                                                         <path d="M1.25 0.25H14.75C14.9489 0.25 15.1397 0.329018 15.2803 0.46967C15.421 0.610322 15.5 0.801088 15.5 1V13C15.5 13.1989 15.421 13.3897 15.2803 13.5303C15.1397 13.671 14.9489 13.75 14.75 13.75H1.25C1.05109 13.75 0.860322 13.671 0.71967 13.5303C0.579018 13.3897 0.5 13.1989 0.5 13V1C0.5 0.801088 0.579018 0.610322 0.71967 0.46967C0.860322 0.329018 1.05109 0.25 1.25 0.25ZM14 3.4285L8.054 8.7535L2 3.412V12.25H14V3.4285ZM2.38325 1.75L8.04575 6.7465L13.6265 1.75H2.38325Z" fill="white"/>
                                                                     </svg>
                                                                 </div>
 
-                                                                {isLoadingDataAccount === false ? (
-                                                                    <>
-                                                                        {
-                                                                            withdrawalVerification ? (
-                                                                                <div onClick={()=>scroll(2) } className={`icon ${withdrawalVerification.value === '1' ? ('active') : ('')}` } >
-                                                                                    <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                                        <path d="M7 0.75L13.1627 2.1195C13.3293 2.15652 13.4782 2.24922 13.585 2.3823C13.6918 2.51538 13.75 2.68089 13.75 2.8515V10.3417C13.7499 11.0826 13.567 11.8119 13.2174 12.465C12.8678 13.1181 12.3624 13.6749 11.746 14.0858L7 17.25L2.254 14.0858C1.63771 13.6749 1.13235 13.1183 0.782761 12.4653C0.433177 11.8124 0.250177 11.0832 0.25 10.3425V2.8515C0.250029 2.68089 0.308228 2.51538 0.414992 2.3823C0.521756 2.24922 0.670703 2.15652 0.83725 2.1195L7 0.75ZM7 2.28675L1.75 3.453V10.3417C1.75001 10.8356 1.87193 11.3218 2.10495 11.7572C2.33796 12.1926 2.67486 12.5638 3.08575 12.8378L7 15.4478L10.9142 12.8378C11.325 12.5639 11.6619 12.1928 11.8949 11.7575C12.1279 11.3223 12.2499 10.8362 12.25 10.3425V3.453L7 2.2875V2.28675ZM7 5.25C7.33025 5.24985 7.65133 5.35869 7.9134 5.55965C8.17548 5.7606 8.36392 6.04243 8.44947 6.3614C8.53503 6.68038 8.51293 7.01868 8.38659 7.32381C8.26025 7.62895 8.03675 7.88386 7.75075 8.049L7.75 11.25H6.25V8.049C5.96406 7.88389 5.74058 7.62905 5.61423 7.32399C5.48788 7.01893 5.46572 6.6807 5.55118 6.36177C5.63664 6.04283 5.82495 5.761 6.0869 5.55999C6.34885 5.35898 6.66981 5.25001 7 5.25Z" fill="white"/>
-                                                                                    </svg>
-                                                                                </div>
-                                                                            ) : (
-                                                                                <div onClick={()=>scroll(2) } className={`icon`} >
-                                                                                    <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                                        <path d="M7 0.75L13.1627 2.1195C13.3293 2.15652 13.4782 2.24922 13.585 2.3823C13.6918 2.51538 13.75 2.68089 13.75 2.8515V10.3417C13.7499 11.0826 13.567 11.8119 13.2174 12.465C12.8678 13.1181 12.3624 13.6749 11.746 14.0858L7 17.25L2.254 14.0858C1.63771 13.6749 1.13235 13.1183 0.782761 12.4653C0.433177 11.8124 0.250177 11.0832 0.25 10.3425V2.8515C0.250029 2.68089 0.308228 2.51538 0.414992 2.3823C0.521756 2.24922 0.670703 2.15652 0.83725 2.1195L7 0.75ZM7 2.28675L1.75 3.453V10.3417C1.75001 10.8356 1.87193 11.3218 2.10495 11.7572C2.33796 12.1926 2.67486 12.5638 3.08575 12.8378L7 15.4478L10.9142 12.8378C11.325 12.5639 11.6619 12.1928 11.8949 11.7575C12.1279 11.3223 12.2499 10.8362 12.25 10.3425V3.453L7 2.2875V2.28675ZM7 5.25C7.33025 5.24985 7.65133 5.35869 7.9134 5.55965C8.17548 5.7606 8.36392 6.04243 8.44947 6.3614C8.53503 6.68038 8.51293 7.01868 8.38659 7.32381C8.26025 7.62895 8.03675 7.88386 7.75075 8.049L7.75 11.25H6.25V8.049C5.96406 7.88389 5.74058 7.62905 5.61423 7.32399C5.48788 7.01893 5.46572 6.6807 5.55118 6.36177C5.63664 6.04283 5.82495 5.761 6.0869 5.55999C6.34885 5.35898 6.66981 5.25001 7 5.25Z" fill="white"/>
-                                                                                    </svg>
-                                                                                </div>
-                                                                            )
-                                                                        }
-                                                                    </>
-                                                                ) : ('Loading...') }
 
+                                                                <div onClick={()=>scroll(2) } className={`icon ${  withdrawalVerification?.value === '1' && ('active') }` } >
+                                                                    <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path d="M7 0.75L13.1627 2.1195C13.3293 2.15652 13.4782 2.24922 13.585 2.3823C13.6918 2.51538 13.75 2.68089 13.75 2.8515V10.3417C13.7499 11.0826 13.567 11.8119 13.2174 12.465C12.8678 13.1181 12.3624 13.6749 11.746 14.0858L7 17.25L2.254 14.0858C1.63771 13.6749 1.13235 13.1183 0.782761 12.4653C0.433177 11.8124 0.250177 11.0832 0.25 10.3425V2.8515C0.250029 2.68089 0.308228 2.51538 0.414992 2.3823C0.521756 2.24922 0.670703 2.15652 0.83725 2.1195L7 0.75ZM7 2.28675L1.75 3.453V10.3417C1.75001 10.8356 1.87193 11.3218 2.10495 11.7572C2.33796 12.1926 2.67486 12.5638 3.08575 12.8378L7 15.4478L10.9142 12.8378C11.325 12.5639 11.6619 12.1928 11.8949 11.7575C12.1279 11.3223 12.2499 10.8362 12.25 10.3425V3.453L7 2.2875V2.28675ZM7 5.25C7.33025 5.24985 7.65133 5.35869 7.9134 5.55965C8.17548 5.7606 8.36392 6.04243 8.44947 6.3614C8.53503 6.68038 8.51293 7.01868 8.38659 7.32381C8.26025 7.62895 8.03675 7.88386 7.75075 8.049L7.75 11.25H6.25V8.049C5.96406 7.88389 5.74058 7.62905 5.61423 7.32399C5.48788 7.01893 5.46572 6.6807 5.55118 6.36177C5.63664 6.04283 5.82495 5.761 6.0869 5.55999C6.34885 5.35898 6.66981 5.25001 7 5.25Z" fill="white"/>
+                                                                    </svg>
+                                                                </div>
 
                                                             </div>
                                                         </div>
@@ -177,7 +166,7 @@ const WrapSectionSettings = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div id="s-block-1-2" className="Wrap">
+                                <div id="s-block-1Wrap" className="Wrap">
                                     <div className="title">
                                         Verification Settings
                                     </div>
@@ -213,45 +202,38 @@ const WrapSectionSettings = () => {
                                                     <strong>Withdrawal Verification</strong>
                                                 </div>
                                                 <div className="text-2">For the security verification when withdrawing currency, at least 2 verification methods need to be enabled.</div>
-
-                                                {isLoadingDataAccount === false ? (
-                                                    <>
-                                                        {
-                                                            withdrawalVerification ? (
-                                                                <div className="text-1">
-                                                                    <strong>Set</strong>
-                                                                </div>
-                                                            ) : (
-                                                                <div className="text-1">
-                                                                    <strong>Not Set</strong>
-                                                                </div>
-                                                            )
-                                                        }
-                                                    </>
-                                                ) : ('Loading...') }
-
-
+                                                <div className="text-1">
+                                                    <strong>
+                                                        {isLoadingDataAccount === false ? (
+                                                            <>
+                                                                {
+                                                                    withdrawalVerification?.value === '1' ? ('Set') : ('Not Set')
+                                                                }
+                                                            </>
+                                                        ) : ('Loading...') }
+                                                    </strong>
+                                                </div>
 
                                             </div>
                                             <div className="col-auto">
-                                                {isLoadingDataAccount === false ? (
+                                                {isLoadingDataAccount === false && (
                                                     <>
                                                         {
-                                                            withdrawalVerification ? ('') : (
-                                                                <span onClick={()=>settingBlock(3, 0)} className="btn style-6">
-                                                            Set
-                                                        </span>
+                                                            withdrawalVerification?.value === '1' ? ('') : (
+                                                                <span onClick={()=>settingBlock(2, 0)} className="btn style-6">
+                                                                    Set
+                                                                </span>
                                                             )
                                                         }
                                                     </>
-                                                ) : ('Loading...') }
+                                                ) }
                                             </div>
 
 
                                         </div>
                                     </div>
                                 </div>
-                                <div id="s-block-2-3" className="Wrap">
+                                <div id="s-block-3Wrap" className="Wrap">
                                     <div className="title">
                                         Security Setting
                                     </div>
@@ -264,13 +246,25 @@ const WrapSectionSettings = () => {
                                                 </div>
                                                 <div className="text-2">Protect your account</div>
                                                 <div className="text-1">
-                                                    <strong>Not Set</strong>
+                                                    <strong>
+                                                        {isLoadingDataAccount === false ? (
+                                                            <>
+                                                                {
+                                                                    PasswordSet?.value === '1' ? ('Set') : ('Not Set')
+                                                                }
+                                                            </>
+                                                        ) : ('Loading...') }
+                                                    </strong>
                                                 </div>
                                             </div>
                                             <div className="col-auto">
-                                                <span onClick={()=>settingBlock(3, 0)} className="btn style-6">
-                                                    Change
-                                                </span>
+                                                {isLoadingDataAccount === false && (
+                                                    PasswordSet?.value === '1' ? ('') : (
+                                                        <span onClick={()=>settingBlock(3, 0)} className="btn style-6">
+                                                            Change
+                                                        </span>
+                                                    )
+                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -345,7 +339,7 @@ const WrapSectionSettings = () => {
                                         Personal Setting
                                     </div>
 
-                                    <div id="s-block-8" className="block">
+                                    <div id="s-block-4" className="block">
                                         <div className="row">
                                             <div className="col">
                                                 <div className="title" style={{padding: 0}}>
@@ -353,11 +347,19 @@ const WrapSectionSettings = () => {
                                                 </div>
                                                 <div className="text-2">Email push notification language settings</div>
                                                 <div className="text-1">
-                                                    <strong>English</strong>
+                                                    <strong>
+                                                        {isLoadingDataAccount === false ? (
+                                                            <>
+                                                                {
+                                                                    DefLang?.value ? ( DefLang?.value ) : ('Not Set')
+                                                                }
+                                                            </>
+                                                        ) : ('Loading...') }
+                                                    </strong>
                                                 </div>
                                             </div>
                                             <div className="col-auto">
-                                                <span onClick={()=>settingBlock(8, 0)} className="btn style-6">
+                                                <span onClick={()=>settingBlock(4, 0)} className="btn style-6">
                                                     Change
                                                 </span>
                                             </div>

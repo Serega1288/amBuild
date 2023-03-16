@@ -523,6 +523,17 @@ ul {
       }
     }
     .styleFormNorm {
+      .massage {
+        color: #fff;
+        padding: 1rem 2rem;
+        &.error {
+          background-color: darkred;
+        }
+        &.done {
+          background-color: #000;
+        }
+      }
+      
       .WrapRadio {
         position: relative;
         input {

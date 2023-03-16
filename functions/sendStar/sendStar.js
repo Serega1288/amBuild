@@ -94,7 +94,7 @@ exports.handler = async (event, context) => {
 
     console.log('axios >>', m);
 
-    axios({
+    await axios({
         method: 'get',
         url: `${process.env.URL_AJAX}?action=sendStar&token=${process.env.AUTH_TOKEN}&baseID=${body.baseID}&op=${body.op}`,
     })
@@ -129,7 +129,7 @@ exports.handler = async (event, context) => {
 
     //  \x03
 
-    await pause();
+    // await pause();
 
     return {
         statusCode: 200,
