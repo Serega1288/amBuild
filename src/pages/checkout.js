@@ -9,6 +9,7 @@ import useFormCheckout from "../function/useFormCheckout";
 // import {instanceAuthService} from "../function/auth";
 // import {format} from "date-fns";
 import WrapSectionCouponActive from "../components/account/coupon/WrapSectionCouponActive";
+import WrapWallet from '../components/account/WrapWallet'
 
 const PageCheckout = (props) => {
 
@@ -130,7 +131,7 @@ const PageCheckout = (props) => {
 
     // const CouponIDSave = localStoreService.getLocal('CouponIDSave');
 
-    console.log('dataCouponActive', dataCouponActive)
+    // console.log('dataCouponActive', dataCouponActive)
 
     const fetchData1 = async () => {
         // let ob = { get: CouponIDSave, type : `getCouponsActive` };
@@ -147,14 +148,14 @@ const PageCheckout = (props) => {
             setDataCouponActive( d1.result );
             isLoadingSetDataCouponActive(false)
             fetchData2(d1.result);
-            console.log('fetchData2')
-            console.log('setDataCouponActive >>>', d1.result )
+            // console.log('fetchData2')
+            // console.log('setDataCouponActive >>>', d1.result )
         }
 
     };
 
     const fetchData2 = async (CouponIDSave) => {
-        console.log('fetchData2 >>>', CouponIDSave)
+        // console.log('fetchData2 >>>', CouponIDSave)
         let ob = { get: `coupons/${CouponIDSave}`, type : `coupon` };
         // let ob = { get: `coupons`, type : `getCouponsActive`, ud: localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1] };
         const response = await fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendGetData`, {
@@ -168,7 +169,7 @@ const PageCheckout = (props) => {
         if (d2) {
             setDataCouponActive( d2.result );
             isLoadingSetDataCoupon(false)
-            console.log('setDataCoupon >>>', d2.result )
+            // console.log('setDataCoupon >>>', d2.result )
         }
 
     };
@@ -181,7 +182,7 @@ const PageCheckout = (props) => {
 
     useEffect(() => {
         fetchData1();
-        console.log('fetchData1')
+        // console.log('fetchData1')
         // if (isLoadingDataCouponActive === false) {
         //
         //     console.log('fetchData2')
@@ -196,8 +197,10 @@ const PageCheckout = (props) => {
         document.getElementById('boxForm').innerHTML=i;
     }
 
-        return (
-            <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout'>
+
+
+    return (
+        <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout'>
                 <Layout customClass="section-pad-min" title='checkout'  desc={ generalTitle } >
                     <BannerLite title='checkout' item={{ item: '' , title: `Confirm <br /> order`, style : 'title' }} />
                     <Section>
@@ -279,6 +282,9 @@ const PageCheckout = (props) => {
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <WrapWallet />
+
                                         <div className="subTitle">
                                             <strong>Attention:</strong>
                                         </div>
@@ -545,7 +551,7 @@ const PageCheckout = (props) => {
                     </Section>
                 </Layout>
             </AuthLayout>
-        );
+    );
 
 };
 export default PageCheckout;
@@ -754,4 +760,61 @@ const Section = styled.section`
   .error-input-text {
     color: darkred;
   }
+  .WrapOrderList {
+    margin-top: 3rem;
+    margin-bottom: 6rem;
+    .btn {
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+    .orderList {
+      margin-top: 3rem;
+    }
+  }
+  .orderList {
+    .tableTitle {
+      padding-top: 2.4rem;
+      padding-bottom: 2.4rem;
+      font-weight: 700;
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+    .tableList {
+      background: #F9F9FB;
+      margin-bottom: 2rem;
+      color: #CBCBCB;
+      min-height: 13rem;
+      font-size: 1.6rem;
+      &.no {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      &.yes {
+        padding: 1rem;
+      }
+
+      .tableListItem {
+        background-color: #fff;
+        min-height: 2rem;
+        margin-bottom: 1rem;
+        &:last-child {
+          margin-bottom: 0;
+        }
+        cursor: pointer;
+      }
+
+      .tableTitle {
+        color: #000;
+        font-weight: 400;
+        padding: 2rem 1rem;
+        font-size: 1.4rem;
+        display: flex;
+        align-items: center;
+      }
+
+    }
+  }
+  
 `;

@@ -4,6 +4,7 @@ import Section1 from "../../styles/boxNav";
 import WrapContentAccount from "../../styles/WrapContentAccount";
 // import AccountData from "../../function/accountData";
 
+
 const WrapAccount = ({children, status}) => {
 
     return (

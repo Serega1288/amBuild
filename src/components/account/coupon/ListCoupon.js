@@ -6,8 +6,9 @@ import moment from "moment-timezone";
 
 const ListCoupon = ({list}) => {
     // console.log("listCoupon", list)
+
     const [dataAccount, setDataAccount] = useState([]);
-    const [isLoadingDataAccount, isLoadingSetDataAccount] = useState(false);
+    const [isLoadingDataAccount, isLoadingSetDataAccount] = useState(true);
 
     const fetchDataAccount = async () => {
         let ob = { get: `customers/${localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1]}`, type : `account` };

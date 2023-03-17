@@ -85,7 +85,7 @@ const Footer = () => {
                         fill="black"></path></svg>
                     </span>
                     <div id="boxForm">
-                        resss
+                        null
                     </div>
                 </div>
                 <div onClick={()=>popOFF()} className="shadow" />
