@@ -19,20 +19,20 @@ export const AuthLayout = ({children, page, go, logIn, redirectGoLogIn, href, tr
     // const get = localStoreService.getLocal('CartBuy')
 
 
-    // console.log('!!!!!!!!!!!!!!!get', statusAccount)
+    // console.log('!!!!!!!!!!!!!!!get', page, redirectGoLogIn, logIn, instanceAuthService.isLogined() )
 
     if ( statusAccount === 0 ) {
 
-        if (
-           page === 'account/assets'
-        || page === 'account/coupon'
-        || page === 'account/hashrate'
-        || page === 'account/orders'
-        || page === 'account') {
-            if ( typeof window !== "undefined" ) {
-                navigate('/account/settings/')
-            }
-        }
+        // if (
+        //    page === 'account/assets'
+        // || page === 'account/coupon'
+        // || page === 'account/hashrate'
+        // || page === 'account/orders'
+        // || page === 'account') {
+        //     if ( typeof window !== "undefined" ) {
+        //         navigate('/account/settings/')
+        //     }
+        // }
 
 
     }
@@ -40,17 +40,24 @@ export const AuthLayout = ({children, page, go, logIn, redirectGoLogIn, href, tr
     if ( instanceAuthService.isLogined() === logIn ) {
 
         if ( typeof window !== "undefined" ) {
-
-
-
-            if ( redirectGoLogIn ) {
-                navigate('/' + go + '/?r=' + redirectGoLogIn)
+            if ( page === 'sign-in' && redirectGoLogIn == 'checkout' ) {
+                navigate('/' + redirectGoLogIn + '/' )
             } else {
                 navigate('/' + go + '/')
             }
         }
         return null
     }
+
+    // if ( page === 'sign-in' ) {
+    //     if(instanceAuthService.isLogined() === false) {
+    //         if ( redirectGoLogIn ) {
+    //             navigate('/' + go + '/?r=' + redirectGoLogIn)
+    //         } else {
+    //             navigate('/' + go + '/')
+    //         }
+    //     }
+    // }
 
     // if ( triger === "checkout" ) {
     //     const CartLocal = localStoreService.getLocal('CartBuy')

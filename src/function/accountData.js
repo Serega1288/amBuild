@@ -8,7 +8,7 @@ const AccountData = () => {
     const [isLoadingDataAccount, isLoadingSetDataAccount] = useState(true);
 
     const fetchDataAccount = async () => {
-        let ob = { get: `customers/${localStoreService.getLocal(process.env.LOCAL_TOKEN).name.split('ud=')[1]}`, type : `account` };
+        let ob = { get: `customers/${localStoreService.getLocal(process.env.LOCAL_TOKEN)?.name?.split('ud=')[1]}`, type : `account` };
         const response = await fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendGetData`, {
             method: 'POST',
             headers: {

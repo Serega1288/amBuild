@@ -16,7 +16,9 @@ import EYE from "../styles/EyeStyle"
 const LoginPage = (props) => {
     // const isBrowser = typeof window !== "undefined"
 
-    const RedirectPage = '/account/';
+    const location = props.location.search?.split('=')
+
+    const RedirectPage = location.length === 2 ? ('/' + location[1] + '/') : '/account/'
 
     const { values, captureInput, submitForm, isLoading, error, message} = useForm(RedirectPage);
 
@@ -32,11 +34,18 @@ const LoginPage = (props) => {
     }
 
  
-    const location = props.location.search?.split('=');
-    // console.log('page sign in >> 1', location );
+
+
+    // if ( location.length === 2 ) {
+    //     console.log('page sign in ok >>', location.length );
+    //     const g = 'account';
+    // } else {
+    //     console.log('page sign in null >>', location.length );
+    //     const g = 'account';
+    // }
 
     return (
-        <AuthLayout logIn={true} page='sign-in' go={  location.length > 1 ? ( location[0] === '?r' ? (location[1]) : 'account') : ( 'account' )   }>
+        <AuthLayout logIn={true} page='sign-in' go={ 'account' }  redirectGoLogIn={ location.length === 2  && location[1] } >
             <Layout title="Login" desc="desc">
                 <Section className="pageLogin d-flex align-items-center">
                     <div className="Login container">

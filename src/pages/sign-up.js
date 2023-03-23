@@ -35,6 +35,7 @@ const RegPage = (props) => {
     //
     // }, []);
     const location = props.location.search?.split('=');
+    const [locationUse] = useState(location);
     // console.log('page sign up >>', props)
 
 
@@ -58,7 +59,7 @@ const RegPage = (props) => {
                                             style={{display: 'block'}}
                                             onClick={() => SendCode()}
                                         > &lt; Resend the code </span>
-                                        <BlockFormSend location={location} d={d} email={values.email} type={t}/>
+                                        <BlockFormSend url={location} d={d} email={values.email} type={t}/>
                                     </>
                                     :
                                     <>
@@ -98,9 +99,10 @@ const RegPage = (props) => {
 
                                             <div className="Boxlink">
                                                 <span>Already have an account?</span>
-                                                {/*{console.log('location >>>', location.length, location )}*/}
+                                                {console.log('location >>>', location.length, location )}
+
                                                 {
-                                                    location?.length === 1 ? (
+                                                    locationUse?.length === 1 ? (
                                                         <Link
                                                             to={`/sign-in/`}>
                                                             Sign In

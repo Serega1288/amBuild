@@ -91,9 +91,9 @@ exports.handler = async (event, context) => {
         }
     }
 
-    console.log('>>>>>', body.code, body, getCode(body.d.d) )
+    console.log('>>>>>', body.code, body, getCode(body.d) )
 
-    if ( body.code === getCode(body.d.d) ) {
+    if ( body.code === getCode(body.d) ) {
 
     } else {
         return {
@@ -157,7 +157,7 @@ exports.handler = async (event, context) => {
 
     await axios({
         method: 'get',
-        url: `${process.env.URL_AJAX}?action=sendReg&token=${process.env.AUTH_TOKEN}&email=${body.d.email}&type=${body.d.type}`,
+        url: `${process.env.URL_AJAX}?action=sendReg&token=${process.env.AUTH_TOKEN}&email=${body.email}&type=${body.type}`,
     })
         .then(function (response) {
             date = response.data.split('{')[1].split('}')[0];

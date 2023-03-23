@@ -1,16 +1,18 @@
 import {useState} from "react";
+import {localStoreService} from "./hook";
+import {navigate} from "gatsby";
 // import {instanceAuthService} from "./auth";
-// import {navigate} from "gatsby";
 
 
-const useForm = (d, email, type) => {
-    const [values, setValues] = useState({code: '', email: email, garbage: '', d: d, type: type});
+
+const useFormCheckout = () => {
+
+    // console.log('localStoreService.getLocal(process.env.LOCAL_TOKEN)', localStoreService.getLocal(process.env.LOCAL_TOKEN))
+
+    const [values, setValues] = useState({garbage: '', currency: '', wallet: '', t: localStoreService.getLocal(process.env.LOCAL_TOKEN)  });
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [message, setMessage] = useState(null);
-
-
-    console.log('user values code >>>>>>> !!!', values.code, values.email);
 
 
     const captureInput = e => {
@@ -25,10 +27,10 @@ const useForm = (d, email, type) => {
     const submitForm = async e => {
         e.preventDefault();
         setIsLoading(true);
-        setMessage(null); 
+        setMessage(null);
         setError(null);
 
-        const res = await fetch( `${process.env.GATSBY_SERVERLESS_URL}/sendReg`, {
+        const res = await fetch(`${process.env.GATSBY_SERVERLESS_URL}/sendGetData`, {
             method: 'POST',
             headers: {
                 'content-Type': 'application/json',
@@ -49,12 +51,12 @@ const useForm = (d, email, type) => {
         //     navigate('/search')
         // }
 
-        // console.log('responseText >>>', responseText.result.status );
+        // console.log('responseText >>> qqq', values );
 
         // 2. перевіряємо відповідь від сервера
         if ( responseText.result >= 400 && responseText.result < 600 ) {
             setIsLoading(false);
-            setError( responseText?.result );
+            setError( responseText?.result?.message );
             // setMessage( responseText?.result?.message );
             // console.log('setError', responseText?.result?.message )
 
@@ -63,22 +65,30 @@ const useForm = (d, email, type) => {
             setIsLoading(false);
             setValues({
                 ...values,
-                code: '',
-                garbage: ''
+                garbage: '',
+                wallet: '',
+                currency: ''
             });
             setMessage(responseText);
 
-            // console.log('ddd', responseText.result.message )
+            // console.log('ddd', responseText.result, responseText.result.message )
 
-            // if ( responseText.result[0] + responseText?.result[1] === '1_' ) {
-            //
-            //     const user = {
-            //         name: responseText?.result
-            //     }
-            //     //instanceAuthService.saveUser(user)
-            //     //navigate(RedirectPage)
-            //
-            // }
+            if ( responseText?.result[0] + responseText?.result[1] === '1_' ) {
+                // navigate('/order/')
+                // /account/settings/
+
+                // const get = localStoreService.getLocal('CartBuy');
+                // console.log('get ProductSave', get)
+
+
+                // navigate('/account/settings/')
+                // const user = {
+                //     name: responseText?.result
+                // }
+                // instanceAuthService.saveUser(user)
+                // navigate(RedirectPage)
+
+            }
 
 
         }
@@ -88,14 +98,31 @@ const useForm = (d, email, type) => {
 
     //console.log('error', error);
 
+    // const valuesCode = values,
+    //     captureInputCode = captureInput,
+    //     submitFormCode = submitForm,
+    //     isLoadingCode = isLoading,
+    //     errorCode = error,
+    //     messageCode = message
+    //
+    // return {
+    //     valuesCode,
+    //     captureInputCode,
+    //     submitFormCode,
+    //     isLoadingCode,
+    //     errorCode,
+    //     messageCode
+    // }
+
     return {
         values,
         captureInput,
         submitForm,
         isLoading,
         error,
-        message
+        message,
+        setMessage,
     }
 }
 
-export default useForm;
+export default useFormCheckout;

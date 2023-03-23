@@ -2,12 +2,13 @@ import React from "react"
 import {Link} from "gatsby"
 import useFormReg from "../../../function/useFormReg"
 
-const BlockFormSend = (d, email, type, location) => {
+const BlockFormSend = ({url,  d, email, type}) => {
+
     const { values, captureInput, submitForm, isLoading, error, message} = useFormReg(d, email, type);
 
+    // console.log('location 11', d, email, type, url)
     return (
         <form onSubmit={submitForm}>
-            {/*{console.log('ee', email, d)}*/}
             { message?.result !== '1_' ? (
             <>
                 <input type="garbage"
@@ -38,9 +39,9 @@ const BlockFormSend = (d, email, type, location) => {
             <div className="Boxlink">
                 <span>Already have an account?</span>
                 {
-                    location?.length > 1 ? (
+                    url?.length > 1 ? (
                         <Link
-                            to={`/sign-in/${location[0] === '?r' ? (`?r=` + location[1]) : ''}`}>
+                            to={`/sign-in/${url[0] === '?r' ? (`?r=` + url[1]) : ''}`}>
                             Sign In
                         </Link>
                     ) : (

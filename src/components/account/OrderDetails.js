@@ -7,7 +7,7 @@ const OrderDetails = ({s}) => {
 
     // const ID = s.line_items[0].product_id;
 
-    // console.log('order', s )
+    console.log('order', s )
 
 
     // const [data, setData] = useState([]);

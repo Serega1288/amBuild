@@ -94,6 +94,75 @@ exports.handler = async (event, context) => {
 
     }
 
+
+    if ( body.type === 'waledItemRemove' ) {
+
+        await axios({
+            method: 'get',
+            url: `${process.env.URL_AJAX}?action=setDataWaledItemRemove&token=${process.env.AUTH_TOKEN}&idUser=${body.idUser}&item=${body.item}&email=${body.emailUser}&type=${body.type}`,
+        })
+            .then(function (response) {
+                date = response.data.split('{')[1].split('}')[0];
+                console.log('fine >>>',  date)
+
+
+
+                if ( date === '01' || date === '02' || date === '03' || date === '04' ) {
+                    m = `Sorry, but an error has occurred, please contact technical support. Error code: ${date}`;
+                }
+
+
+                // if ( date === '04' ) {
+                //     m = 'Invalid password.';
+                // }
+
+                if ( date[0] + date[1] === '1_' ) {
+                    m = 'set';
+                }
+
+                console.log('Mail >>', m);
+
+            }).catch((error) => {
+                date = error;
+                console.error(error, 'error >>>')
+            });
+
+    }
+
+    if ( body.type === 'waled' ) {
+
+        await axios({
+            method: 'get',
+            url: `${process.env.URL_AJAX}?action=setDataWaled&token=${process.env.AUTH_TOKEN}&idUser=${body.idUser}&currency=${body.currency}&wallet=${body.wallet}&email=${body.email}&type=${body.type}`,
+        })
+            .then(function (response) {
+                date = response.data.split('{')[1].split('}')[0];
+                console.log('fine >>>',  date)
+
+
+
+                if ( date === '01' || date === '02' || date === '03' || date === '04' ) {
+                    m = `Sorry, but an error has occurred, please contact technical support. Error code: ${date}`;
+                }
+
+
+                // if ( date === '04' ) {
+                //     m = 'Invalid password.';
+                // }
+
+                if ( date[0] + date[1] === '1_' ) {
+                    m = 'set';
+                }
+
+                console.log('Mail >>', m);
+
+            }).catch((error) => {
+                date = error;
+                console.error(error, 'error >>>')
+            });
+
+    }
+
     if ( body.type === 'setDataAccount' ) {
 
         await axios({

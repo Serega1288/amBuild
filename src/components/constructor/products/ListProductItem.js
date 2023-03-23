@@ -28,9 +28,15 @@ const ListProductItem = ( {item} ) => {
                 </Link>
 
                     <div className="category">
-                        {item.productCategories.nodes.map((item, index) => (
-                            <span key={index}>{item.name}</span>
-                        ))}
+                        {/*{item.productCategories.nodes.map((item, index) => (*/}
+                        {/*    <span key={index}>{item.name}</span>*/}
+                        {/*))}*/}
+                        {/*{*/}
+                        {/*    console.log('item.productCategories[0].name', item.productCategories.nodes[1])*/}
+                        {/*}*/}
+                        <span>
+                            {item.productCategories.nodes[1].name}
+                        </span>
                     </div>
                     <div className="title">
                         {item.title}

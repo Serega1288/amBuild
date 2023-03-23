@@ -710,6 +710,36 @@ ul {
       }
     }
     
+    .exit {
+      &.style-1 {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        background-color: black;
+        position: relative;
+        display: block;
+        &:before, &:after {
+          transform: rotate(45deg);
+          content: '';
+          display: block;
+          width: 60%;
+          height: 1px;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          margin: auto;
+          background-color: #fff;
+        }
+        &:after {
+          transform: rotate(-45deg);
+        }
+      }
+    }
+    .hide {
+      display: none;
+    }
     
 `;
 

@@ -9,7 +9,7 @@ const useFormCode = (d, t) => {
     const [message, setMessage] = useState(null);
 
 
-    // console.log('user !!!', localStoreService.getCode(d) );
+   console.log('values.email >>>> !!!', values.email );
 
 
     const captureInput = e => {
@@ -51,24 +51,26 @@ const useFormCode = (d, t) => {
         // console.log('responseText >>>', responseText );
 
         // 2. перевіряємо відповідь від сервера
-        if ( responseText.result >= 400 && responseText.result < 600 ) {
-            setIsLoading(false);
-            setError( responseText?.result?.message );
-            // setMessage( responseText?.result?.message );
-            // console.log('setError', responseText?.result?.message )
+        if (responseText) {
 
-        } else {
-            // 3. емайл успішно відправлений
-            setIsLoading(false);
-            setValues({
-                ...values,
-                garbage: ''
-            });
-            setMessage(responseText);
+            if ( responseText.result >= 400 && responseText.result < 600 ) {
+                setIsLoading(false);
+                setError( responseText?.result?.message );
+                // setMessage( responseText?.result?.message );
+                // console.log('setError', responseText?.result?.message )
 
-            // console.log('ddd', responseText.result.message )
+            } else {
+                // 3. емайл успішно відправлений
+                setIsLoading(false);
+                setValues({
+                    ...values,
+                    garbage: ''
+                });
+                setMessage(responseText);
 
-            // if ( responseText.result[0] + responseText?.result[1] === '1_' ) {
+                // console.log('ddd', responseText.result.message )
+
+                // if ( responseText.result[0] + responseText?.result[1] === '1_' ) {
 
                 // const user = {
                 //     name: responseText?.result
@@ -76,10 +78,14 @@ const useFormCode = (d, t) => {
                 // instanceAuthService.saveUser(user)
                 // navigate(RedirectPage)
 
-            // }
+                // }
 
+
+            }
 
         }
+
+
 
         //console.log(' values >>>', values);
     }

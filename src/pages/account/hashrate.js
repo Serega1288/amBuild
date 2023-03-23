@@ -32,7 +32,7 @@ const WrapSectionHashrate = () => {
         }
     `);
     const dPayList = dataOption.wp.themeGeneralSettings.ACFoptionThemes;
-    console.log('dPayList', dPayList )
+    // console.log('dPayList', dPayList )
 
     const [data, setData] = useState([]);
     const [isLoadingData, setIsLoadingData] = useState(true);

@@ -197,8 +197,6 @@ const PageCheckout = (props) => {
         document.getElementById('boxForm').innerHTML=i;
     }
 
-
-
     return (
         <AuthLayout logIn={false} page='sign-up' go='sign-in' redirectGoLogIn='checkout'>
                 <Layout customClass="section-pad-min" title='checkout'  desc={ generalTitle } >
@@ -304,27 +302,27 @@ const PageCheckout = (props) => {
                                         <div className="table">
                                             <div className="tableItem tableTitle">
                                                 <div className="row">
-                                                    <div className="col">
+                                                    <div className="col-3">
                                                         <div className="productTitle">
                                                             Service/Product
                                                         </div>
                                                     </div>
-                                                    <div className="col">
+                                                    <div className="col-3">
                                                         <div className="price">
                                                             Price
                                                         </div>
                                                     </div>
-                                                    <div className="col-auto">
+                                                    <div className="col-2 d-flex justify-content-center">
                                                         <div className="amount">
                                                             Amount
                                                         </div>
                                                     </div>
-                                                    <div className="col-auto">
+                                                    <div className="col-2 d-flex justify-content-center">
                                                         <div className="day">
                                                             Days
                                                         </div>
                                                     </div>
-                                                    <div className="col-auto">
+                                                    <div className="col-2">
                                                         <div className="total">
                                                             Total
                                                         </div>
@@ -333,7 +331,7 @@ const PageCheckout = (props) => {
                                             </div>
                                             <div className="tableItem">
                                                 <div className="row">
-                                                    <div className="col">
+                                                    <div className="col-3">
                                                         <div className="productTitle">
                                                             {cart[0]?.category.nodes?.map( (item, index) => (
                                                                 <span className={`productTitle-${index}`}>
@@ -345,12 +343,12 @@ const PageCheckout = (props) => {
                                                             {cart[0]?.title}
                                                         </div>
                                                     </div>
-                                                    <div className="col">
+                                                    <div className="col-3">
                                                         <div className="price">
                                                             $ {cart[0]?.order.hashrateFee}/T/Days
                                                         </div>
                                                     </div>
-                                                    <div className="col-auto">
+                                                    <div className="col-2 d-flex justify-content-center">
                                                         <div className="amount">
                                                             <span onClick={() => ClickAmount('min')}>-</span>
                                                             <div>
@@ -364,12 +362,12 @@ const PageCheckout = (props) => {
                                                             <span onClick={() => ClickAmount('plus')}>+</span>
                                                         </div>
                                                     </div>
-                                                    <div className="col-auto">
+                                                    <div className="col-2 d-flex justify-content-center">
                                                         <div className="day">
                                                             {cart[0]?.order.days}
                                                         </div>
                                                     </div>
-                                                    <div className="col-auto">
+                                                    <div className="col-2">
                                                         <div className="total">
                                                             <div>$&nbsp;
                                                                 <span>{ (cart[0]?.order.hashrateFee * cart[0]?.order.days * cart[0]?.step * 10).toFixed(2) }</span>
@@ -380,27 +378,27 @@ const PageCheckout = (props) => {
                                             </div>
                                             <div className="tableItem">
                                                 <div className="row">
-                                                    <div className="col">
+                                                    <div className="col-3">
                                                         <div className="productTitle">
                                                             Service Fee
                                                         </div>
                                                     </div>
-                                                    <div className="col">
+                                                    <div className="col-3">
                                                         <div className="price">
                                                             $ {cart[0]?.order.serviceFee}/T/Days
                                                         </div>
                                                     </div>
-                                                    <div className="col-auto">
+                                                    <div className="col-2 d-flex justify-content-center">
                                                         <div className="amount">
                                                             OT
                                                         </div>
                                                     </div>
-                                                    <div className="col-auto">
+                                                    <div className="col-2 d-flex justify-content-center">
                                                         <div className="day">
                                                             {cart[0]?.order.days}
                                                         </div>
                                                     </div>
-                                                    <div className="col-auto">
+                                                    <div className="col-2">
                                                         <div className="total">
                                                             <div>$&nbsp;
                                                                 <span>
@@ -597,12 +595,13 @@ const Section = styled.section`
         
       }
       .price {
-        min-width: 16rem;
+        //min-width: 16rem;
       }
       .amount {
-        min-width: 18rem;
+        //min-width: 18rem;
         text-align: center; 
         display: inline-flex;
+        text-align: center;
         align-items: center;
         justify-content: center;
         div {
@@ -620,10 +619,10 @@ const Section = styled.section`
         }
       }
       .day {
-        min-width: 9rem;
+        //min-width: 9rem;
       }
       .total {
-        min-width: 11rem;
+        //min-width: 11rem;
       }
     }
     .tableTitle {
@@ -763,6 +762,39 @@ const Section = styled.section`
   .WrapOrderList {
     margin-top: 3rem;
     margin-bottom: 6rem;
+    .WrapInput {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    button {
+      border: none;
+      background-color: rgba(0,0,0,0);
+    }
+    .WrapInputFirst {
+      padding-right: 0;
+      .WrapInput {
+        padding-left: 1rem;
+      }
+    }
+    .WrapInputLast {
+      .WrapInput {
+        padding-right: 1rem;
+      }
+    }
+    input {
+      min-height: 4rem;
+      padding: 1rem;
+      width: 100%;
+      border: none;
+      background-color: #F9F9FB;
+      &.error {
+        //background: darkred;
+        //border-bottom: 0.5rem solid darkred;
+        &::placeholder {
+          color: darkred;
+        }
+      }
+    }
     .btn {
       font-size: 1.6rem;
       font-weight: 700;

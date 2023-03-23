@@ -46,7 +46,7 @@ const WrapSectionAccount = () => {
         }
     `);
     const dPayList = dataOption.wp.themeGeneralSettings.ACFoptionThemes;
-    console.log('dPayList', dPayList )
+    // console.log('dPayList', dPayList )
 
 
     const { dataAccountStatus, dataAccount, fetchDataAccount, isLoadingDataAccount } = AccountData();
